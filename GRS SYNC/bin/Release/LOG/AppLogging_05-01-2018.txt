@@ -1,0 +1,6 @@
+Message   :- 05/01/2018 8:40:14 PM :: Fecthing Ticketing data Reception
+Message   :- 05/01/2018 8:41:02 PM :: Fetching Rental data Swimwear
+Message   :- 05/01/2018 8:44:40 PM :: Fecthing Ticketing data Reception
+Message   :- 05/01/2018 8:44:45 PM :: Fetching Rental data Swimwear
+Message   :- 05/01/2018 8:46:33 PM :: Fecthing Ticketing data Reception
+Message   :- 05/01/2018 8:46:37 PM :: Fetching Rental data Swimwear

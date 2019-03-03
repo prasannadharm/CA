@@ -1,0 +1,6 @@
+G:\PROJ\GRS SYNC\GRS SYNC\bin\Release\GRS SYNC.exe.config
+G:\PROJ\GRS SYNC\GRS SYNC\bin\Release\GRS SYNC.exe
+G:\PROJ\GRS SYNC\GRS SYNC\bin\Release\GRS SYNC.pdb
+G:\PROJ\GRS SYNC\GRS SYNC\obj\Release\GRS SYNC.csprojResolveAssemblyReference.cache
+G:\PROJ\GRS SYNC\GRS SYNC\obj\Release\GRS SYNC.exe
+G:\PROJ\GRS SYNC\GRS SYNC\obj\Release\GRS SYNC.pdb

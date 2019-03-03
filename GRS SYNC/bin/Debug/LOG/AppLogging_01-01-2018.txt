@@ -1,0 +1,171 @@
+Message   :- 01/01/2018 8:28:39 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 8:28:39 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 8:28:39 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 8:28:41 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 8:28:42 PM :: Fetching Billing Data From Resturant
+Exception :- 01/01/2018 8:28:42 PM :: Error on while taking total values from database (rst 0) :Cannot open database "RESTURANT" requested by the login. The login failed.
+Login failed for user 'DHARM\Dharm'.
+Exception :- 01/01/2018 8:28:42 PM :: Error on while taking values from database (Resturant 0):Cannot open database "RESTURANT" requested by the login. The login failed.
+Login failed for user 'DHARM\Dharm'.
+Message   :- 01/01/2018 8:28:42 PM :: Fetching Billing Data From Resturant1
+Exception :- 01/01/2018 8:28:42 PM :: Error on while taking total values from database (rst 1) :Cannot open database "RESTURANT1" requested by the login. The login failed.
+Login failed for user 'DHARM\Dharm'.
+Exception :- 01/01/2018 8:28:42 PM :: Error on while taking values from database (Resturant 1):Cannot open database "RESTURANT1" requested by the login. The login failed.
+Login failed for user 'DHARM\Dharm'.
+Message   :- 01/01/2018 8:28:42 PM :: Syncing Data to Cloud
+Exception :- 01/01/2018 8:28:46 PM :: Error on while Syncing Data to Cloud : The procedure "SYNCDB" has no parameter named "@RX1".
+Message   :- 01/01/2018 8:30:37 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 8:30:37 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 8:30:37 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 8:30:38 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 8:30:39 PM :: Fetching Billing Data From Resturant
+Exception :- 01/01/2018 8:30:39 PM :: Error on while taking total values from database (rst 0) :Cannot open database "RESTURANT" requested by the login. The login failed.
+Login failed for user 'DHARM\Dharm'.
+Exception :- 01/01/2018 8:30:40 PM :: Error on while taking values from database (Resturant 0):Cannot open database "RESTURANT" requested by the login. The login failed.
+Login failed for user 'DHARM\Dharm'.
+Message   :- 01/01/2018 8:30:40 PM :: Fetching Billing Data From Resturant1
+Exception :- 01/01/2018 8:30:40 PM :: Error on while taking total values from database (rst 1) :Cannot open database "RESTURANT1" requested by the login. The login failed.
+Login failed for user 'DHARM\Dharm'.
+Exception :- 01/01/2018 8:30:40 PM :: Error on while taking values from database (Resturant 1):Cannot open database "RESTURANT1" requested by the login. The login failed.
+Login failed for user 'DHARM\Dharm'.
+Message   :- 01/01/2018 8:30:40 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 8:30:46 PM :: Sync Completed
+Message   :- 01/01/2018 8:33:15 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 8:33:15 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 8:33:15 PM :: Fetching Billing Data From GiftShop
+Exception :- 01/01/2018 8:33:30 PM :: Error on while taking total values from database (rx 0) :Connection Timeout Expired.  The timeout period elapsed during the post-login phase.  The connection could have timed out while waiting for server to complete the login process and respond; Or it could have timed out while attempting to create multiple active connections.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=4047; handshake=1; [Login] initialization=0; authentication=1; [Post-Login] complete=10000; 
+Exception :- 01/01/2018 8:33:30 PM :: Error on while taking values from database (GiftShop 0) :Connection Timeout Expired.  The timeout period elapsed during the post-login phase.  The connection could have timed out while waiting for server to complete the login process and respond; Or it could have timed out while attempting to create multiple active connections.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=4047; handshake=1; [Login] initialization=0; authentication=1; [Post-Login] complete=10000; 
+Message   :- 01/01/2018 8:33:30 PM :: Fetching Billing Data From GiftShop Kiosk
+Exception :- 01/01/2018 8:33:44 PM :: Error on while taking total values from database (rx 1) :Connection Timeout Expired.  The timeout period elapsed during the post-login phase.  The connection could have timed out while waiting for server to complete the login process and respond; Or it could have timed out while attempting to create multiple active connections.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=4003; handshake=0; [Login] initialization=0; authentication=1; [Post-Login] complete=9998; 
+Exception :- 01/01/2018 8:33:44 PM :: Error on while taking values from database (GiftShop 1) :Connection Timeout Expired.  The timeout period elapsed during the post-login phase.  The connection could have timed out while waiting for server to complete the login process and respond; Or it could have timed out while attempting to create multiple active connections.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=4003; handshake=0; [Login] initialization=0; authentication=1; [Post-Login] complete=9998; 
+Message   :- 01/01/2018 8:33:44 PM :: Fetching Billing Data From Resturant
+Exception :- 01/01/2018 8:34:25 PM :: Error on while taking total values from database (rst 0) :Connection Timeout Expired.  The timeout period elapsed during the post-login phase.  The connection could have timed out while waiting for server to complete the login process and respond; Or it could have timed out while attempting to create multiple active connections.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=4012; handshake=0; [Login] initialization=0; authentication=0; [Post-Login] complete=9998; 
+Message   :- 01/01/2018 8:35:38 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 8:35:38 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 8:35:38 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 8:35:42 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 8:35:46 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 8:36:20 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 8:36:24 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 8:36:27 PM :: Sync Completed
+Message   :- 01/01/2018 8:40:13 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 8:40:13 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 8:40:13 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 8:40:54 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 8:41:01 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 8:42:37 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 8:43:11 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 8:43:14 PM :: Sync Completed
+Message   :- 01/01/2018 8:45:24 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 8:45:24 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 8:45:24 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 8:45:30 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 8:45:36 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 8:45:42 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 8:45:46 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 8:45:50 PM :: Sync Completed
+Message   :- 01/01/2018 8:47:31 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 8:47:31 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 8:47:31 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 8:47:40 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 8:47:44 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 8:47:48 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 8:47:52 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 8:47:55 PM :: Sync Completed
+Message   :- 01/01/2018 8:49:15 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 8:49:15 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 8:49:15 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 8:49:19 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 8:49:23 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 8:49:27 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 8:49:31 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 8:49:34 PM :: Sync Completed
+Message   :- 01/01/2018 8:51:42 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 8:51:42 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 8:51:42 PM :: Fetching Billing Data From GiftShop
+Exception :- 01/01/2018 8:52:11 PM :: Error on while taking total values from database (rx 0) :A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Exception :- 01/01/2018 8:52:27 PM :: Error on while taking values from database (GiftShop 0) :A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Message   :- 01/01/2018 8:52:45 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 8:52:49 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 8:52:53 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 8:52:57 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 8:52:59 PM :: Sync Completed
+Message   :- 01/01/2018 8:53:32 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 8:53:32 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 8:53:32 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 8:53:40 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 8:53:44 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 8:53:48 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 8:53:52 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 8:53:55 PM :: Sync Completed
+Message   :- 01/01/2018 9:43:08 PM :: Fecthing Ticketing data Reception
+Exception :- 01/01/2018 9:43:12 PM :: Error on while taking values from database (Reception) :Invalid column name 'A_QTY'.
+Invalid column name 'C_QTY'.
+Invalid column name 'SRC_QTY'.
+Invalid column name 'PCK_NAME'.
+Invalid column name 'PCK_NAME'.
+Invalid column name 'PCK_NAME'.
+Invalid object name 'INT_CREATOR'.
+Message   :- 01/01/2018 9:43:12 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 9:43:12 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 9:43:16 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 9:43:20 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 9:43:24 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 9:43:24 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 9:43:28 PM :: Sync Completed
+Message   :- 01/01/2018 9:44:06 PM :: Fecthing Ticketing data Reception
+Exception :- 01/01/2018 9:44:10 PM :: Error on while taking values from database (Reception) :Invalid column name 'A_QTY'.
+Invalid column name 'C_QTY'.
+Invalid column name 'SRC_QTY'.
+Invalid column name 'PCK_NAME'.
+Invalid column name 'PCK_NAME'.
+Invalid column name 'PCK_NAME'.
+Invalid object name 'INT_CREATOR'.
+Message   :- 01/01/2018 9:44:10 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 9:44:10 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 9:44:15 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 9:44:19 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 9:44:23 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 9:44:23 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 9:44:26 PM :: Sync Completed
+Message   :- 01/01/2018 9:44:44 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 9:49:40 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 9:49:44 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 9:49:44 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 9:49:48 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 9:49:52 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 9:49:57 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 9:50:01 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 9:50:04 PM :: Sync Completed
+Message   :- 01/01/2018 10:13:58 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 10:14:02 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 10:14:02 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 10:14:06 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 10:14:10 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 10:14:14 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 10:14:18 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 10:14:22 PM :: Sync Completed
+Message   :- 01/01/2018 10:19:46 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 10:19:51 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 10:19:51 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 10:19:55 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 10:19:59 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 10:20:03 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 10:20:07 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 10:20:10 PM :: Sync Completed
+Message   :- 01/01/2018 10:26:34 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 10:26:39 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 10:26:39 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 10:26:43 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 10:26:47 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 10:26:51 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 10:26:55 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 10:26:57 PM :: Sync Completed
+Message   :- 01/01/2018 10:29:05 PM :: Fecthing Ticketing data Reception
+Message   :- 01/01/2018 10:29:09 PM :: Fetching Rental data Swimwear
+Message   :- 01/01/2018 10:29:09 PM :: Fetching Billing Data From GiftShop
+Message   :- 01/01/2018 10:29:13 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 01/01/2018 10:29:17 PM :: Fetching Billing Data From Resturant
+Message   :- 01/01/2018 10:29:21 PM :: Fetching Billing Data From Resturant1
+Message   :- 01/01/2018 10:29:25 PM :: Syncing Data to Cloud
+Message   :- 01/01/2018 10:29:27 PM :: Sync Completed

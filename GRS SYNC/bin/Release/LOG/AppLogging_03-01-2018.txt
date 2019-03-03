@@ -1,0 +1,193 @@
+Message   :- 03/01/2018 5:21:15 AM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 5:21:18 AM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 5:21:18 AM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 5:21:20 AM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 5:21:22 AM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 5:21:24 AM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 5:21:26 AM :: Syncing Data to Cloud
+Exception :- 03/01/2018 5:21:40 AM :: Error on while Syncing Data to Cloud : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Message   :- 03/01/2018 5:21:40 AM :: Sync Completed
+Message   :- 03/01/2018 5:25:00 AM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 5:25:04 AM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 5:25:04 AM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 5:25:08 AM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 5:25:12 AM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 5:25:16 AM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 5:25:21 AM :: Syncing Data to Cloud
+Message   :- 03/01/2018 5:25:24 AM :: Sync Completed
+Message   :- 03/01/2018 6:08:07 AM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 6:08:12 AM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 6:08:12 AM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 6:08:16 AM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 6:08:20 AM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 6:08:24 AM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 6:08:28 AM :: Syncing Data to Cloud
+Message   :- 03/01/2018 6:08:31 AM :: Sync Completed
+Message   :- 03/01/2018 6:47:32 AM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 6:47:38 AM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 6:47:42 AM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 6:47:46 AM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 6:47:50 AM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 6:47:54 AM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 6:47:58 AM :: Syncing Data to Cloud
+Message   :- 03/01/2018 6:48:01 AM :: Sync Completed
+Message   :- 03/01/2018 6:59:06 AM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 6:59:13 AM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 6:59:40 AM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 6:59:44 AM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 6:59:48 AM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 6:59:52 AM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 6:59:57 AM :: Syncing Data to Cloud
+Message   :- 03/01/2018 6:59:59 AM :: Sync Completed
+Message   :- 03/01/2018 7:00:10 AM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 7:00:16 AM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 7:00:21 AM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 7:00:25 AM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 7:00:29 AM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 7:00:33 AM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 7:00:37 AM :: Syncing Data to Cloud
+Message   :- 03/01/2018 7:00:39 AM :: Sync Completed
+Message   :- 03/01/2018 8:44:52 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 8:44:56 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 8:45:01 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 8:45:05 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 8:45:09 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 8:45:13 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 8:45:17 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 8:45:19 PM :: Sync Completed
+Message   :- 03/01/2018 8:46:38 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 8:46:42 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 8:46:55 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 8:46:59 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 8:47:03 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 8:47:07 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 8:47:11 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 8:47:14 PM :: Sync Completed
+Message   :- 03/01/2018 8:51:37 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:00:09 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:00:13 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:00:18 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:00:22 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:00:26 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:00:30 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:00:34 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:00:36 PM :: Sync Completed
+Message   :- 03/01/2018 9:02:50 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:02:55 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:02:59 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:03:03 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:03:07 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:03:11 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:03:15 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:03:17 PM :: Sync Completed
+Message   :- 03/01/2018 9:06:04 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:06:08 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:06:12 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:06:16 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:06:20 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:06:24 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:06:28 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:06:30 PM :: Sync Completed
+Message   :- 03/01/2018 9:07:17 PM :: Fecthing Ticketing data Reception
+Exception :- 03/01/2018 9:07:21 PM :: Error on while taking values from database (Reception) :The ORDER BY clause is invalid in views, inline functions, derived tables, and subqueries, unless TOP is also specified.
+Message   :- 03/01/2018 9:07:21 PM :: Fetching Rental data Swimwear
+Exception :- 03/01/2018 9:07:25 PM :: Error on while taking values from database (Reception) :Line 1: Incorrect syntax near ')'.
+Line 1: Incorrect syntax near ')'.
+Line 1: Incorrect syntax near ')'.
+Message   :- 03/01/2018 9:07:25 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:07:29 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:07:33 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:07:37 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:07:41 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:07:43 PM :: Sync Completed
+Message   :- 03/01/2018 9:08:43 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:09:17 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:09:52 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:11:20 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:11:24 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:11:47 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:11:51 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:11:55 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:11:59 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:12:03 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:12:05 PM :: Sync Completed
+Message   :- 03/01/2018 9:20:30 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:20:34 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:20:38 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:20:42 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:20:46 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:20:50 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:20:54 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:20:57 PM :: Sync Completed
+Message   :- 03/01/2018 9:22:00 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:22:05 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:22:09 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:22:13 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:22:17 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:22:21 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:22:25 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:22:27 PM :: Sync Completed
+Message   :- 03/01/2018 9:24:15 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:24:19 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:24:23 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:24:27 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:24:31 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:24:35 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:24:39 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:24:42 PM :: Sync Completed
+Message   :- 03/01/2018 9:25:15 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:25:19 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:25:23 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:25:27 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:25:31 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:25:35 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:25:39 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:25:42 PM :: Sync Completed
+Message   :- 03/01/2018 9:27:37 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:27:42 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:27:46 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:27:50 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:27:54 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:27:58 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:28:02 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:28:04 PM :: Sync Completed
+Message   :- 03/01/2018 9:28:53 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:28:57 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:29:01 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:29:05 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:29:09 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:29:13 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:29:17 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:29:19 PM :: Sync Completed
+Message   :- 03/01/2018 9:30:40 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:30:44 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:30:48 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:30:52 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:30:56 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:31:00 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:31:04 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:31:07 PM :: Sync Completed
+Message   :- 03/01/2018 9:32:05 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:32:09 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:32:13 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:32:17 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:32:21 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:32:25 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:32:29 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:32:31 PM :: Sync Completed
+Message   :- 03/01/2018 9:33:23 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:33:27 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:33:31 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:33:35 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:33:39 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:33:43 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:33:47 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:33:49 PM :: Sync Completed
+Message   :- 03/01/2018 9:45:48 PM :: Fecthing Ticketing data Reception
+Message   :- 03/01/2018 9:45:52 PM :: Fetching Rental data Swimwear
+Message   :- 03/01/2018 9:45:56 PM :: Fetching Billing Data From GiftShop
+Message   :- 03/01/2018 9:46:00 PM :: Fetching Billing Data From GiftShop Kiosk
+Message   :- 03/01/2018 9:46:04 PM :: Fetching Billing Data From Resturant
+Message   :- 03/01/2018 9:46:08 PM :: Fetching Billing Data From Resturant1
+Message   :- 03/01/2018 9:46:12 PM :: Syncing Data to Cloud
+Message   :- 03/01/2018 9:46:15 PM :: Sync Completed

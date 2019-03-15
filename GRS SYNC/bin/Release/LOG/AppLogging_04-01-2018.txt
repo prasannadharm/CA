@@ -1,7 +1,0 @@
-Message   :- 04/01/2018 8:37:01 PM :: Fecthing Ticketing data Reception
-Message   :- 04/01/2018 8:37:06 PM :: Fetching Rental data Swimwear
-Message   :- 04/01/2018 8:37:10 PM :: Fetching Billing Data From GiftShop
-Message   :- 04/01/2018 8:37:14 PM :: Fetching Billing Data From GiftShop Kiosk
-Message   :- 04/01/2018 8:37:46 PM :: Fecthing Ticketing data Reception
-Message   :- 04/01/2018 8:38:26 PM :: Fecthing Ticketing data Reception
-Message   :- 04/01/2018 8:38:53 PM :: Fecthing Ticketing data Reception

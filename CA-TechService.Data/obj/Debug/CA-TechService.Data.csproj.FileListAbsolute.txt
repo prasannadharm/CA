@@ -1,0 +1,5 @@
+C:\Users\Chethan\documents\visual studio 2015\Projects\CA-TechServices\CA-TechService.Data\bin\Debug\CA-TechService.Data.dll
+C:\Users\Chethan\documents\visual studio 2015\Projects\CA-TechServices\CA-TechService.Data\bin\Debug\CA-TechService.Data.pdb
+C:\Users\Chethan\documents\visual studio 2015\Projects\CA-TechServices\CA-TechService.Data\obj\Debug\CA-TechService.Data.csprojResolveAssemblyReference.cache
+C:\Users\Chethan\documents\visual studio 2015\Projects\CA-TechServices\CA-TechService.Data\obj\Debug\CA-TechService.Data.dll
+C:\Users\Chethan\documents\visual studio 2015\Projects\CA-TechServices\CA-TechService.Data\obj\Debug\CA-TechService.Data.pdb

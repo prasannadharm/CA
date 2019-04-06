@@ -13,5 +13,10 @@ namespace CA_TechServices.Pages.Login
         {
 
         }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

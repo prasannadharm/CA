@@ -48,6 +48,7 @@
     <Compile Include="Transport\Login\LoginEntity.cs" />
     <Compile Include="Transport\Roles\Roles.cs" />
     <Compile Include="Transport\Rules\Rules.cs" />
+    <Compile Include="Transport\Rules\UserMenuEntity.cs" />
     <Compile Include="Transport\TaskMaster\TaskMaster.cs" />
     <Compile Include="Transport\User\User.cs" />
   </ItemGroup>

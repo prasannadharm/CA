@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CA_TechService.Common.Transport.Login;
 using CA_TechService.Common.Security.Encryption;
+using CA_TechService.Common.Transport.Rules;
 using System.Configuration;
 using System.Data;
 
@@ -54,6 +55,35 @@ namespace CA_TechService.Data.DataSource.Login
                 }               
             }
             return objLogin;
+        }
+
+        public List<UserMenuEntity> GetMenuForUser(int UserID)
+        {
+            List<UserMenuEntity> objlst = new List<UserMenuEntity>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("USP_GetMenuForUser", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.Parameters.AddWithValue("@USER_ID", UserID);
+                adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(ds);
+
+                for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                {
+                    UserMenuEntity obj = new UserMenuEntity();
+                    obj.USER_ID = UserID;
+                    obj.MENU_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["MENU_ID"].ToString());
+                    obj.PARENT_MENU_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["PARENT_MENU_ID"].ToString());
+                    obj.TITLE = ds.Tables[0].Rows[i]["TITLE"].ToString();
+                    obj.URL = ds.Tables[0].Rows[i]["URL"].ToString();
+                    objlst.Add(obj);                    
+                }
+            }
+            return objlst;
         }
     }
 }

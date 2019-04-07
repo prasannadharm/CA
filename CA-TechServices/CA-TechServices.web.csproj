@@ -83,6 +83,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Images\CA Logo.png" />
     <Content Include="packages.config" />
+    <Content Include="Pages\Dashboard\UserDashboard.aspx" />
     <Content Include="Pages\Login\UserLogin.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -144,6 +145,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\Dashboard\UserDashboard.aspx.cs">
+      <DependentUpon>UserDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Dashboard\UserDashboard.aspx.designer.cs">
+      <DependentUpon>UserDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Login\UserLogin.aspx.cs">
       <DependentUpon>UserLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -170,6 +178,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CA-TechService.Common\CA-TechService.Common.csproj">
+      <Project>{098af134-6396-4d0c-8d98-d7741192b88c}</Project>
+      <Name>CA-TechService.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CA-TechService.Data\CA-TechService.Data.csproj">
+      <Project>{55f58588-8227-41f4-8a73-1542e0176d47}</Project>
+      <Name>CA-TechService.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

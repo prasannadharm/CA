@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSource\Login\LoginDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\ClientMaster\ClientMasterQueries.cs" />
     <Compile Include="Query\Login\LoginQueries.cs" />
@@ -49,10 +51,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataSource\ClientMaster\" />
-    <Folder Include="DataSource\Login\" />
     <Folder Include="DataSource\Roles\" />
     <Folder Include="DataSource\TaskMaster\" />
     <Folder Include="DataSource\User\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CA-TechService.Common\CA-TechService.Common.csproj">
+      <Project>{098af134-6396-4d0c-8d98-d7741192b88c}</Project>
+      <Name>CA-TechService.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -82,6 +82,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Images\CA Logo.png" />
+    <Content Include="Images\dashboard.png" />
     <Content Include="packages.config" />
     <Content Include="Pages\Dashboard\UserDashboard.aspx" />
     <Content Include="Pages\Login\UserLogin.aspx" />

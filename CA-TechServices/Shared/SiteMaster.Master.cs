@@ -1,4 +1,5 @@
-﻿using System;
+﻿#region Imports
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,7 @@ using System.Data.SqlClient;
 using System.IO;
 using CA_TechService.Common.Transport.Rules;
 using CA_TechService.Data.DataSource.Login;
-
+#endregion
 namespace CA_TechServices.Shared
 {
     public partial class SiteMaster : System.Web.UI.MasterPage

@@ -5,6 +5,8 @@ C:\Users\Chethan\documents\visual studio 2015\Projects\CA-TechServices\CA-TechSe
 C:\Users\Chethan\documents\visual studio 2015\Projects\CA-TechServices\CA-TechService.Data\obj\Debug\CA-TechService.Data.pdb
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Data\bin\Debug\CA-TechService.Data.dll
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Data\bin\Debug\CA-TechService.Data.pdb
+C:\Users\Chethan\Source\Repos\CA\CA-TechService.Data\bin\Debug\CA-TechService.Common.dll
+C:\Users\Chethan\Source\Repos\CA\CA-TechService.Data\bin\Debug\CA-TechService.Common.pdb
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.csprojResolveAssemblyReference.cache
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.dll
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.pdb

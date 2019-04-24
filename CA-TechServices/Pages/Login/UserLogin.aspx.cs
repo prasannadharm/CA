@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿#region Imports
+using System;
 using CA_TechService.Data.DataSource.Login;
 using CA_TechService.Common.Transport.Login;
-
+#endregion
 
 namespace CA_TechServices.Pages.Login
 {
     public partial class UserLogin : System.Web.UI.Page
     {
+        #region Page_Load
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.IsPostBack)
@@ -21,14 +18,16 @@ namespace CA_TechServices.Pages.Login
                 Session["USER_DETAILS"] = null;
             }
         }
+        #endregion
 
+        #region btnLogin_Click
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             LoginEntity objlogin = new LoginEntity();
             objlogin.EMAIL = txtEmail.Text;
             objlogin.USER_PASSWORD = txtPassword.Text;
             objlogin = new LoginDAO().CheckLogin(objlogin);
-            if (objlogin.RESULT == 1)
+            if (objlogin.RESULT.Equals(1))
             {
                 lblMessage.Text = objlogin.MESSAGE;
                 Session["USER_ID"] = objlogin.USER_ID;
@@ -44,5 +43,6 @@ namespace CA_TechServices.Pages.Login
                 txtPassword.Focus();
             }
         }
+        #endregion
     }
 }

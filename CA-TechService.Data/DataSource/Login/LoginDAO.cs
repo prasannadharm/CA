@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CA_TechService.Common.Transport.Login;
+﻿#region Imports
 using CA_TechService.Common.Security.Encryption;
+using CA_TechService.Common.Transport.Login;
 using CA_TechService.Common.Transport.Rules;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-
+using System.Data.SqlClient;
+#endregion
 namespace CA_TechService.Data.DataSource.Login
 {
     public class LoginDAO
     {
+        #region CheckLogin
         public LoginEntity CheckLogin(LoginEntity objLogin)
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -56,7 +55,9 @@ namespace CA_TechService.Data.DataSource.Login
             }
             return objLogin;
         }
+        #endregion
 
+        #region GetMenuForUser
         public List<UserMenuEntity> GetMenuForUser(int UserID)
         {
             List<UserMenuEntity> objlst = new List<UserMenuEntity>();
@@ -85,5 +86,6 @@ namespace CA_TechService.Data.DataSource.Login
             }
             return objlst;
         }
+        #endregion
     }
 }

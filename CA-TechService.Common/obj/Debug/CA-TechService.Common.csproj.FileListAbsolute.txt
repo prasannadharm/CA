@@ -6,3 +6,4 @@ C:\Users\Chethan\Source\Repos\CA\CA-TechService.Common\bin\Debug\CA-TechService.
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Common\bin\Debug\CA-TechService.Common.pdb
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Common\obj\Debug\CA-TechService.Common.dll
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Common\obj\Debug\CA-TechService.Common.pdb
+C:\Users\Chethan\Source\Repos\CA\CA-TechService.Common\obj\Debug\CA-TechService.Common.csprojResolveAssemblyReference.cache

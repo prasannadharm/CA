@@ -26,22 +26,27 @@ namespace CA_TechServices.Pages.Login
             LoginEntity objlogin = new LoginEntity();
             objlogin.EMAIL = txtEmail.Text;
             objlogin.USER_PASSWORD = txtPassword.Text;
-            objlogin = new LoginDAO().CheckLogin(objlogin);
-            if (objlogin.RESULT.Equals(1))
+            try
             {
-                lblMessage.Text = objlogin.MESSAGE;
-                Session["USER_ID"] = objlogin.USER_ID;
-                Session["USER_DETAILS"] = objlogin;
-                Response.Redirect("../Dashboard/UserDashboard.aspx");
-               
+                objlogin = new LoginDAO().CheckLogin(objlogin);
+                if (objlogin.RESULT.Equals(1))
+                {
+                    lblMessage.Text = objlogin.MESSAGE;
+                    Session["USER_ID"] = objlogin.USER_ID;
+                    Session["USER_DETAILS"] = objlogin;
+                    Response.Redirect("../Dashboard/UserDashboard.aspx");
+
+                }
+                else
+                {
+                    Session["USER_ID"] = null;
+                    Session["USER_DETAILS"] = null;
+                    lblMessage.Text = objlogin.MESSAGE;
+                    txtPassword.Focus();
+                }
             }
-            else
-            {
-                Session["USER_ID"] = null;
-                Session["USER_DETAILS"] = null;
-                lblMessage.Text = objlogin.MESSAGE;
-                txtPassword.Focus();
-            }
+            catch(Exception ex){}
+            
         }
         #endregion
     }

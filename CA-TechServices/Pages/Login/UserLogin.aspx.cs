@@ -2,6 +2,7 @@
 using System;
 using CA_TechService.Data.DataSource.Login;
 using CA_TechService.Common.Transport.Login;
+using CA_TechServices.WebAppHelper;
 #endregion
 
 namespace CA_TechServices.Pages.Login
@@ -13,9 +14,13 @@ namespace CA_TechServices.Pages.Login
         {
             if (!this.IsPostBack)
             {
-                Session["MENU"] = null;
-                Session["USER_ID"] = null;
-                Session["USER_DETAILS"] = null;
+                try
+                {
+                    Session["MENU"] = null;
+                    Session["USER_ID"] = null;
+                    Session["USER_DETAILS"] = null;
+                }
+                catch (Exception ex) { Helper.ExceptionHandling(ex,""); }
             }
         }
         #endregion
@@ -45,7 +50,7 @@ namespace CA_TechServices.Pages.Login
                     txtPassword.Focus();
                 }
             }
-            catch(Exception ex){}
+            catch(Exception ex){ Helper.ExceptionHandling(ex,""); }
             
         }
         #endregion

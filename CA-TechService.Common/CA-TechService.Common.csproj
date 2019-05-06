@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\CA-TechServices\bin\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +48,7 @@
     <Compile Include="Security\Encryption\ICryptographyHelper.cs" />
     <Compile Include="Security\Encryption\PasswordHelper.cs" />
     <Compile Include="Transport\ClientMaster\ClientMaster.cs" />
+    <Compile Include="Transport\Logging\ExceptionInfo.cs" />
     <Compile Include="Transport\Login\LoginEntity.cs" />
     <Compile Include="Transport\Roles\Roles.cs" />
     <Compile Include="Transport\Rules\Rules.cs" />

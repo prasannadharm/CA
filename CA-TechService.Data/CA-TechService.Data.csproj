@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSource\Logging\LogAppDetails.cs" />
     <Compile Include="DataSource\Login\LoginDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\ClientMaster\ClientMasterQueries.cs" />
+    <Compile Include="Query\Logging\LoggingQueries.cs" />
     <Compile Include="Query\Login\LoginQueries.cs" />
     <Compile Include="Query\Roles\RolesQueries.cs" />
     <Compile Include="Query\TaskMaster\TaskMasterQueries.cs" />

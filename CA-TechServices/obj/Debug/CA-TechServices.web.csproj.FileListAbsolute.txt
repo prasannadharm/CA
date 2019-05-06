@@ -18,7 +18,7 @@ C:\Users\Chethan\documents\visual studio 2015\Projects\CA-TechServices\CA-TechSe
 C:\Users\Chethan\documents\visual studio 2015\Projects\CA-TechServices\CA-TechServices\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\Chethan\documents\visual studio 2015\Projects\CA-TechServices\CA-TechServices\obj\Debug\CA-TechServices.dll
 C:\Users\Chethan\documents\visual studio 2015\Projects\CA-TechServices\CA-TechServices\obj\Debug\CA-TechServices.pdb
-C:\Users\Chethan\Source\Repos\CA\CA-TechServices\obj\Debug\CA-TechServices.web.csprojResolveAssemblyReference.cache
+C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\NLog.config
 C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\roslyn\csc.exe
 C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -37,8 +37,11 @@ C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\CA-TechServices.pdb
 C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\CA-TechService.Common.dll
 C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\CA-TechService.Data.dll
 C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\NLog.dll
 C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\CA-TechService.Common.pdb
 C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\CA-TechService.Data.pdb
 C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Chethan\Source\Repos\CA\CA-TechServices\bin\NLog.xml
+C:\Users\Chethan\Source\Repos\CA\CA-TechServices\obj\Debug\CA-TechServices.web.csprojResolveAssemblyReference.cache
 C:\Users\Chethan\Source\Repos\CA\CA-TechServices\obj\Debug\CA-TechServices.dll
 C:\Users\Chethan\Source\Repos\CA\CA-TechServices\obj\Debug\CA-TechServices.pdb

@@ -43,18 +43,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generic\DbStatusEntity.cs" />
+    <Compile Include="Generic\EmailEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Encryption\CryptographyHelper.cs" />
     <Compile Include="Security\Encryption\ICryptographyHelper.cs" />
     <Compile Include="Security\Encryption\PasswordHelper.cs" />
+    <Compile Include="Transport\CityState\CityStateMasterEntity.cs" />
+    <Compile Include="Transport\CityState\StateMasterEntity.cs" />
     <Compile Include="Transport\ClientMaster\ClientMaster.cs" />
+    <Compile Include="Transport\Company\CompanyMasterEntity.cs" />
     <Compile Include="Transport\Logging\ExceptionInfo.cs" />
     <Compile Include="Transport\Login\LoginEntity.cs" />
+    <Compile Include="Transport\Roles\RoleBaseMenuEntity.cs" />
+    <Compile Include="Transport\Roles\RoleMasterEntity.cs" />
     <Compile Include="Transport\Roles\Roles.cs" />
+    <Compile Include="Transport\Roles\RoleSelectedMenuEntity.cs" />
     <Compile Include="Transport\Rules\Rules.cs" />
     <Compile Include="Transport\Rules\UserMenuEntity.cs" />
     <Compile Include="Transport\TaskMaster\TaskMaster.cs" />
-    <Compile Include="Transport\User\User.cs" />
+    <Compile Include="Transport\User\ChangePasswordEntity.cs" />
+    <Compile Include="Transport\User\ForgotPasswordEntity.cs" />
+    <Compile Include="Transport\User\UserMasterEntity.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

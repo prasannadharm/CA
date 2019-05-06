@@ -40,6 +40,24 @@ namespace CA_TechServices.Shared {
         protected global::System.Web.UI.WebControls.Menu Menu1;
         
         /// <summary>
+        /// lblwecome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblwecome;
+        
+        /// <summary>
+        /// lblLoginName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLoginName;
+        
+        /// <summary>
         /// ContentPlaceHolder1 control.
         /// </summary>
         /// <remarks>

@@ -8,3 +8,10 @@ C:\Users\Chethan\Source\Repos\CA\CA-TechService.Common\obj\Debug\CA-TechService.
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Common\obj\Debug\CA-TechService.Common.pdb
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Common\bin\Debug\NLog.dll
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Common\bin\Debug\NLog.xml
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Debug\CA-TechService.Common.dll
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Debug\CA-TechService.Common.pdb
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Debug\NLog.dll
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Debug\NLog.xml
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\obj\Debug\CA-TechService.Common.csprojResolveAssemblyReference.cache
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\obj\Debug\CA-TechService.Common.dll
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\obj\Debug\CA-TechService.Common.pdb

@@ -88,16 +88,32 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dataTables.bootstrap4.min.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\masterpage.css" />
     <Content Include="Images\CA Logo.png" />
     <Content Include="Images\dashboard.png" />
+    <Content Include="Images\logout.png" />
     <Content Include="packages.config" />
+    <Content Include="Pages\CityState\CityState.aspx" />
+    <Content Include="Pages\Company\Company.aspx" />
     <Content Include="Pages\Dashboard\UserDashboard.aspx" />
+    <Content Include="Pages\Login\ChangePassword.aspx" />
+    <Content Include="Pages\Login\ForgotPassword.aspx" />
     <Content Include="Pages\Login\UserLogin.aspx" />
+    <Content Include="Pages\Roles\Roles.aspx" />
+    <Content Include="Pages\User\Users.aspx" />
+    <Content Include="Scripts\app\changepassword.js" />
+    <Content Include="Scripts\app\citystate.js" />
+    <Content Include="Scripts\app\companymaster.js" />
+    <Content Include="Scripts\app\forgotpassword.js" />
+    <Content Include="Scripts\app\rolesmaster.js" />
+    <Content Include="Scripts\app\usermaster.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -129,6 +145,7 @@
     <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -160,6 +177,20 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\CityState\CityState.aspx.cs">
+      <DependentUpon>CityState.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\CityState\CityState.aspx.designer.cs">
+      <DependentUpon>CityState.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Company\Company.aspx.cs">
+      <DependentUpon>Company.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Company\Company.aspx.designer.cs">
+      <DependentUpon>Company.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Dashboard\UserDashboard.aspx.cs">
       <DependentUpon>UserDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -167,12 +198,40 @@
     <Compile Include="Pages\Dashboard\UserDashboard.aspx.designer.cs">
       <DependentUpon>UserDashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Login\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Login\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Login\ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Login\ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Login\UserLogin.aspx.cs">
       <DependentUpon>UserLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\Login\UserLogin.aspx.designer.cs">
       <DependentUpon>UserLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Roles\Roles.aspx.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Roles\Roles.aspx.designer.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\SiteMaster.Master.cs">
@@ -188,10 +247,8 @@
   <ItemGroup>
     <Folder Include="AppStyles\" />
     <Folder Include="Pages\ClientMaster\" />
-    <Folder Include="Pages\Roles\" />
     <Folder Include="Pages\Rules\" />
     <Folder Include="Pages\TaskMaster\" />
-    <Folder Include="Pages\User\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

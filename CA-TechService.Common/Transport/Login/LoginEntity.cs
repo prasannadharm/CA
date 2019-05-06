@@ -5,7 +5,6 @@ namespace CA_TechService.Common.Transport.Login
     public class LoginEntity
     {
         public int USER_ID { get; set; }
-        public string USER_NAME { get; set; }
         public string USER_PASSWORD { get; set; }
         public string NAME { get; set; }
         public string EMAIL { get; set; }

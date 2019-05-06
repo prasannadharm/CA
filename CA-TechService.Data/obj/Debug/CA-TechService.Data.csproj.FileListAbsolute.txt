@@ -10,3 +10,10 @@ C:\Users\Chethan\Source\Repos\CA\CA-TechService.Data\bin\Debug\CA-TechService.Co
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.csprojResolveAssemblyReference.cache
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.dll
 C:\Users\Chethan\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.pdb
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\bin\Debug\CA-TechService.Data.dll
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\bin\Debug\CA-TechService.Data.pdb
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\bin\Debug\CA-TechService.Common.dll
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\bin\Debug\CA-TechService.Common.pdb
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.csprojResolveAssemblyReference.cache
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.dll
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.pdb

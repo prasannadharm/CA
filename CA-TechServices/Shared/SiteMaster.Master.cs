@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.IO;
 using CA_TechService.Common.Transport.Rules;
 using CA_TechService.Data.DataSource.Login;
+using CA_TechService.Common.Transport.Login;
 #endregion
 namespace CA_TechServices.Shared
 {
@@ -28,6 +29,10 @@ namespace CA_TechServices.Shared
                 GetUserMenuFromDB();
                 List<UserMenuEntity> objMenuList = this.GetUserMenuDataFromList(0);
                 PopulateMenu(objMenuList, 0, null);
+                if (Session["USER_DETAILS"] != null)
+                {
+                    lblLoginName.Text = ((LoginEntity)Session["USER_DETAILS"]).EMAIL;
+                }
             }
         }
 

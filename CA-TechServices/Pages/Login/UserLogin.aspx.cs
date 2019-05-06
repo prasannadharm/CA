@@ -16,6 +16,9 @@ namespace CA_TechServices.Pages.Login
             {
                 try
                 {
+                    Session.Abandon();
+                    Session.Clear();
+                    Session.RemoveAll();                   
                     Session["MENU"] = null;
                     Session["USER_ID"] = null;
                     Session["USER_DETAILS"] = null;

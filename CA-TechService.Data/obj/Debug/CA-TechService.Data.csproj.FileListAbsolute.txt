@@ -17,3 +17,10 @@ F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\bin\Debug\CA-TechService.Common.p
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.csprojResolveAssemblyReference.cache
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.dll
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\obj\Debug\CA-TechService.Data.pdb
+G:\CAProject\CA-TechService.Data\bin\Debug\CA-TechService.Data.dll
+G:\CAProject\CA-TechService.Data\bin\Debug\CA-TechService.Data.pdb
+G:\CAProject\CA-TechService.Data\bin\Debug\CA-TechService.Common.dll
+G:\CAProject\CA-TechService.Data\bin\Debug\CA-TechService.Common.pdb
+G:\CAProject\CA-TechService.Data\obj\Debug\CA-TechService.Data.csprojResolveAssemblyReference.cache
+G:\CAProject\CA-TechService.Data\obj\Debug\CA-TechService.Data.dll
+G:\CAProject\CA-TechService.Data\obj\Debug\CA-TechService.Data.pdb

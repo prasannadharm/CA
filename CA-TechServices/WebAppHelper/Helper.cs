@@ -10,6 +10,7 @@ namespace CA_TechServices.WebAppHelper
 {
     public class Helper 
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public static void ExceptionHandling(Exception ex,string customMessage)
         {
             bool logToDB = Constants.isDbLogging;
@@ -26,9 +27,20 @@ namespace CA_TechServices.WebAppHelper
             if(logToDB)
             dataSource.ExceptionLogging(exception);
             else
-            {
-                //to do , implement Nlogging
-            }
+              FileLogging(exception);
+            
+        }
+
+        public static void FileLogging(ExceptionInfo exception)
+        {
+            logger.Error("Application Name : {0} | Programme Name : {1} | Machine Name : {2} | Exception Message : {3} | Exception Source : {4} | Custom Message : {5}",
+                exception.ApplicationName,
+                exception.ProgrammeName,
+                exception.MachineName,
+                exception.ExceptionMessage,
+                exception.ExceptionSource,
+                exception.CustomMessage
+                );
         }
     }
 }

@@ -28,7 +28,7 @@ namespace CA_TechService.Data.DataSource.Logging
                 cmd.Parameters.AddWithValue("@EXCEPTIONSORCE",   objExceptionInfo.ExceptionSource);
                 cmd.Parameters.AddWithValue("@CUSTOMMESSAGE",    objExceptionInfo.CustomMessage);
                 cmd.ExecuteNonQuery();
-                //adapter = new SqlDataAdapter(cmd);
+                
             }
         }
     }

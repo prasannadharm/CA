@@ -1,15 +1,14 @@
-﻿using CA_TechService.Common.Generic;
+﻿#region Imports
+using CA_TechService.Common.Generic;
 using CA_TechService.Common.Transport.Roles;
+using CA_TechService.Data.Query.Roles;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
+#endregion
 namespace CA_TechService.Data.DataSource.Roles
 {
     public class RolesMasterDAO
@@ -262,7 +261,7 @@ namespace CA_TechService.Data.DataSource.Roles
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand("USP_UpdateRolesMenu", con);
+                    SqlCommand cmd = new SqlCommand(RolesQueries.UpdateRolesMenu, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ID", id);
 

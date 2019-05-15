@@ -19,6 +19,6 @@ G:\CAProject\CA-TechService.Common\bin\Debug\CA-TechService.Common.dll
 G:\CAProject\CA-TechService.Common\bin\Debug\CA-TechService.Common.pdb
 G:\CAProject\CA-TechService.Common\bin\Debug\NLog.dll
 G:\CAProject\CA-TechService.Common\bin\Debug\NLog.xml
-G:\CAProject\CA-TechService.Common\obj\Debug\CA-TechService.Common.csprojResolveAssemblyReference.cache
 G:\CAProject\CA-TechService.Common\obj\Debug\CA-TechService.Common.dll
 G:\CAProject\CA-TechService.Common\obj\Debug\CA-TechService.Common.pdb
+G:\CAProject\CA-TechService.Common\obj\Debug\CA-TechService.Common.csprojResolveAssemblyReference.cache

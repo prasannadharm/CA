@@ -1,11 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/SiteMaster.Master" AutoEventWireup="true" CodeBehind="Roles.aspx.cs" Inherits="CA_TechServices.Pages.Roles.Roles" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-      <link href="../../Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="../../Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <script src="../../Scripts/jquery.dataTables.min.js"></script>
-    <script src="../../Scripts/dataTables.bootstrap4.min.js"></script>    
-    
+    <script src="../../Scripts/dataTables.bootstrap4.min.js"></script>
+
     <script src="../../Scripts/app/rolesmaster.js"></script>
     <div class="col-lg-12">
         <div class="panel panel-default">
@@ -71,7 +72,7 @@
 
 
     <!-- For Modal Popup Screen Authorizations Details -->
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="PopupModalAuth">
+     <%-- <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="PopupModalAuth">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -115,6 +116,39 @@
                 </div>
             </div>
         </div>
+    </div>--%>
+    <!-- For Modal Popup  -->
+    <!-- New code for Assigning roles -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="PopupModalAuth">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Screen Authorization for Roles</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="tbl_Roles" class="table table-striped table-bordered" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>Role Name</th>
+                                        <th>Allow User to View</th>
+                                        <th>Allow User for Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl_Roles_tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnSaveAuth" class="btn btn-primary" edit-id="">Save Data</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- For Modal Popup  -->
+
 </asp:Content>

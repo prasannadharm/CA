@@ -14,39 +14,57 @@ $(function () {
     });
 });
 
-function LoadMenuOptions(data) {
-    var optionsTrn = [];
-    var optionsRep = [];
-    var optionsMst = [];
-    var optionsTls = [];
-    for (var i = 0; i < data.d.length; i++) {
-        if (data.d[i].PARENT_MENU_NAME == 'Transaction') {
-            optionsTrn.push('<option value="',
-              data.d[i].MENU_ID, '">',
-              data.d[i].MENU_NAME, '</option>');
-        }
-        else if (data.d[i].PARENT_MENU_NAME == 'Reports') {
-            optionsRep.push('<option value="',
-              data.d[i].MENU_ID, '">',
-              data.d[i].MENU_NAME, '</option>');
-        }
-        else if (data.d[i].PARENT_MENU_NAME == 'Master') {
-            optionsMst.push('<option value="',
-              data.d[i].MENU_ID, '">',
-              data.d[i].MENU_NAME, '</option>');
-        }
-        else if (data.d[i].PARENT_MENU_NAME == 'Tools') {
-            optionsTls.push('<option value="',
-              data.d[i].MENU_ID, '">',
-              data.d[i].MENU_NAME, '</option>');
-        }
-
+function LoadMenuOptions(data)
+{
+    
+    $("#tbl_Roles_tbody").empty()
+    var tableString = "";
+    for (var i = 0; i < data.d.length; i++)
+    {
+        var menuName = data.d[i].MENU_NAME;
+        var menuId = data.d[i].MENU_ID;
+        $('#tbl_Roles_tbody').append(
+         "<tr><td>" + menuName + "</td>"
+                     + "<td><input type='checkbox' id=IsAuthorized_" + menuId + "></td>"
+                     + "<td><input type='checkbox' id=IsAllowAction_" + menuId + "></td>"
+                     + "</tr>");
     }
-    $("#selTransaction").html(optionsTrn.join(''));
-    $("#selReports").html(optionsRep.join(''));
-    $("#selMaster").html(optionsMst.join(''));
-    $("#selTools").html(optionsTls.join(''));
+   
 }
+
+//function LoadMenuOptions(data) {
+//    var optionsTrn = [];
+//    var optionsRep = [];
+//    var optionsMst = [];
+//    var optionsTls = [];
+//    for (var i = 0; i < data.d.length; i++) {
+//        if (data.d[i].PARENT_MENU_NAME == 'Transaction') {
+//            optionsTrn.push('<option value="',
+//              data.d[i].MENU_ID, '">',
+//              data.d[i].MENU_NAME, '</option>');
+//        }
+//        else if (data.d[i].PARENT_MENU_NAME == 'Reports') {
+//            optionsRep.push('<option value="',
+//              data.d[i].MENU_ID, '">',
+//              data.d[i].MENU_NAME, '</option>');
+//        }
+//        else if (data.d[i].PARENT_MENU_NAME == 'Master') {
+//            optionsMst.push('<option value="',
+//              data.d[i].MENU_ID, '">',
+//              data.d[i].MENU_NAME, '</option>');
+//        }
+//        else if (data.d[i].PARENT_MENU_NAME == 'Tools') {
+//            optionsTls.push('<option value="',
+//              data.d[i].MENU_ID, '">',
+//              data.d[i].MENU_NAME, '</option>');
+//        }
+
+//    }
+//    $("#selTransaction").html(optionsTrn.join(''));
+//    $("#selReports").html(optionsRep.join(''));
+//    $("#selMaster").html(optionsMst.join(''));
+//    $("#selTools").html(optionsTls.join(''));
+//}
 
 function getDetails() {
     $.ajax({

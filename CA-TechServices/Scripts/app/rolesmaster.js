@@ -19,52 +19,56 @@ function LoadMenuOptions(data)
     
     $("#tbl_Roles_tbody").empty()
     var tableString = "";
+    var currentParentName;
+    var previousParentName;
+    var parentTrString = "";
     for (var i = 0; i < data.d.length; i++)
     {
         var menuName = data.d[i].MENU_NAME;
         var menuId = data.d[i].MENU_ID;
+        currentParentName = data.d[i].PARENT_MENU_NAME;
+        if(i==0)
+            parentTrString = "<tr><td><label id=label_" + menuId + ">" + data.d[i].PARENT_MENU_NAME + "</label></td><td></td><td></td></tr>"
+        else
+            if (currentParentName != previousParentName)
+                parentTrString = "<tr><td><label id=label_" + menuId + ">" + data.d[i].PARENT_MENU_NAME + "</label></td><td></td><td></td></tr>"
         $('#tbl_Roles_tbody').append(
-         "<tr><td>" + menuName + "</td>"
-                     + "<td><input type='checkbox' id=IsAuthorized_" + menuId + "></td>"
-                     + "<td><input type='checkbox' id=IsAllowAction_" + menuId + "></td>"
+            parentTrString +
+            "<tr><td><label id=label_" + menuId + ">" + menuName + "</label></td>"
+                     + "<td><input type='checkbox' id=IsAuthorized_" + menuId + " class='chkAuthorized'></td>"
+                     + "<td><input type='checkbox' id=IsAllowAction_" + menuId + " class='chkAllowAction'></td>"
                      + "</tr>");
+        previousParentName = currentParentName;
+        parentTrString = "";
     }
-   
+    
 }
+function SelectMenuCheckBox(data)
+{
+    $('.chkAuthorized').prop('checked', false);
+    $('.chkAllowAction').prop('checked', false);
+   
+    for (var i = 0; i < data.d.length; i++)
+    {
+        
+        $('.chkAuthorized').each(function (index, obj) {
+            if ("IsAuthorized_"+data.d[i].MENU_ID == $(this).attr("id"))
+            {
+                $(this).prop('checked', true);
+            }
+        });
+        $('.chkAllowAction').each(function (index, obj) {
+            if ("IsAllowAction_"+data.d[i].MENU_ID  == $(this).attr("id") && data.d[i].IsReadOnly == 1)
+            {
+                $(this).prop('checked', true);
+            }
+            
+        });
+    }
+ }
 
-//function LoadMenuOptions(data) {
-//    var optionsTrn = [];
-//    var optionsRep = [];
-//    var optionsMst = [];
-//    var optionsTls = [];
-//    for (var i = 0; i < data.d.length; i++) {
-//        if (data.d[i].PARENT_MENU_NAME == 'Transaction') {
-//            optionsTrn.push('<option value="',
-//              data.d[i].MENU_ID, '">',
-//              data.d[i].MENU_NAME, '</option>');
-//        }
-//        else if (data.d[i].PARENT_MENU_NAME == 'Reports') {
-//            optionsRep.push('<option value="',
-//              data.d[i].MENU_ID, '">',
-//              data.d[i].MENU_NAME, '</option>');
-//        }
-//        else if (data.d[i].PARENT_MENU_NAME == 'Master') {
-//            optionsMst.push('<option value="',
-//              data.d[i].MENU_ID, '">',
-//              data.d[i].MENU_NAME, '</option>');
-//        }
-//        else if (data.d[i].PARENT_MENU_NAME == 'Tools') {
-//            optionsTls.push('<option value="',
-//              data.d[i].MENU_ID, '">',
-//              data.d[i].MENU_NAME, '</option>');
-//        }
 
-//    }
-//    $("#selTransaction").html(optionsTrn.join(''));
-//    $("#selReports").html(optionsRep.join(''));
-//    $("#selMaster").html(optionsMst.join(''));
-//    $("#selTools").html(optionsTls.join(''));
-//}
+
 
 function getDetails() {
     $.ajax({
@@ -89,13 +93,13 @@ function getDetails() {
             }
             $('#tablemain').append("</tbody>");
             $('#tablemain').DataTable();
-            //data-toggle='modal' data-target='#PopupModal'
+           
         },
         error: function () {
             alert("Error while Showing update data");
         }
 
-        //
+     
     });
 }
 
@@ -105,39 +109,25 @@ $(function () {
 
         var id = $(this).attr("edit-id");
         var arrobj = [];
+        $('.chkAuthorized').each(function (index, obj) {
+            if ($(this).is(':checked')) {
+                var menuId = $(this).attr("id").split("_")[1];
+                var obj1 = {};
+                obj1.ROLE_ID = id;
+                obj1.MENU_ID = menuId;
+                obj1.MENU_NAME = $('#label_' + menuId).html();
+          
+                if ($("#IsAllowAction_" + menuId).is(':checked'))
+                    obj1.ISREADONLY = true
+                else
+                    obj1.ISREADONLY = false
+                arrobj.push(obj1);
 
+            }
 
-        $('#selTransaction > option:selected').each(function () {
-            var obj1 = {};
-            obj1.ROLE_ID = id;
-            obj1.MENU_ID = $(this).val();
-            obj1.MENU_NAME = $(this).text();
-            arrobj.push(obj1);
         });
-
-        $('#selReports > option:selected').each(function () {
-            var obj2 = {};
-            obj2.ROLE_ID = id;
-            obj2.MENU_ID = $(this).val();
-            obj2.MENU_NAME = $(this).text();
-            arrobj.push(obj2);
-        });
-
-        $('#selMaster > option:selected').each(function () {
-            var obj3 = {};
-            obj3.ROLE_ID = id;
-            obj3.MENU_ID = $(this).val();
-            obj3.MENU_NAME = $(this).text();
-            arrobj.push(obj3);
-        });
-
-        $('#selTools > option:selected').each(function () {
-            var obj4 = {};
-            obj4.ROLE_ID = id;
-            obj4.MENU_ID = $(this).val();
-            obj4.MENU_NAME = $(this).text();
-            arrobj.push(obj4);
-        });
+        
+        var test = arrobj;
 
         $.ajax({
             type: "Post",
@@ -318,29 +308,8 @@ $(function () {
             data: '{id: ' + id + '}',
             dataType: "json",
             success: function (data) {
-                for (var i = 0; i < data.d.length; i++) {
-                    $('#selTransaction > option').each(function () {
-                        if (data.d[i].MENU_ID == $(this).val())
-                            $(this).prop('selected', true);
-                    });
-
-                    $('#selReports > option').each(function () {
-                        if (data.d[i].MENU_ID == $(this).val())
-                            $(this).prop('selected', true);
-                    });
-
-                    $('#selMaster > option').each(function () {
-                        if (data.d[i].MENU_ID == $(this).val())
-                            $(this).prop('selected', true);
-                    });
-
-                    $('#selTools > option').each(function () {
-                        if (data.d[i].MENU_ID == $(this).val())
-                            $(this).prop('selected', true);
-                    });
-                }
-
-            },
+                SelectMenuCheckBox(data);
+                },
             error: function () {
                 alert("Error while retrieving data of :" + id);
             }
@@ -392,4 +361,4 @@ $(function () {
         });
     });
 
-});
+    });

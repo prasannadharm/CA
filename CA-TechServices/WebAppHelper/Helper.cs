@@ -1,16 +1,15 @@
-﻿using CA_TechService.Common.Transport.Logging;
+﻿#region Imports
+using CA_TechService.Common.Transport.Logging;
 using CA_TechService.Data.DataSource.Logging;
-using NLog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+#endregion
 namespace CA_TechServices.WebAppHelper
 {
     public class Helper 
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        
+        #region ExceptionHandling
         public static void ExceptionHandling(Exception ex,string customMessage)
         {
             bool logToDB = Constants.isDbLogging;
@@ -42,5 +41,6 @@ namespace CA_TechServices.WebAppHelper
                 exception.CustomMessage
                 );
         }
+        #endregion
     }
 }

@@ -23,7 +23,7 @@ namespace CA_TechService.Data.DataSource.Roles
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand("USP_GetRolesMasterList", con);
+                    SqlCommand cmd = new SqlCommand(RolesQueries.GetRolesMasterList, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     con.Open();
                     adapter = new SqlDataAdapter(cmd);
@@ -56,7 +56,7 @@ namespace CA_TechService.Data.DataSource.Roles
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand("USP_GetBaseMenuList", con);
+                    SqlCommand cmd = new SqlCommand(RolesQueries.GetBaseMenuList, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     con.Open();
                     adapter = new SqlDataAdapter(cmd);
@@ -90,7 +90,7 @@ namespace CA_TechService.Data.DataSource.Roles
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand("USP_GetRolesDetailsbyID", con);
+                    SqlCommand cmd = new SqlCommand(RolesQueries.EditRoles, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ID", id);
                     con.Open();
@@ -124,7 +124,7 @@ namespace CA_TechService.Data.DataSource.Roles
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand("USP_GetRolesMenuDetailsbyID", con);
+                    SqlCommand cmd = new SqlCommand(RolesQueries.GetRolesMenuDetailsbyID, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ID", id);
                     con.Open();
@@ -134,10 +134,10 @@ namespace CA_TechService.Data.DataSource.Roles
                     for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
                     {
                         RoleSelectedMenuEntity obj = new RoleSelectedMenuEntity();
-                        obj.ROLE_ID = ds.Tables[0].Rows[i]["ROLE_ID"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[i]["ROLE_ID"].ToString());
-                        obj.MENU_ID = ds.Tables[0].Rows[i]["MENU_ID"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[i]["MENU_ID"].ToString());
-                        obj.MENU_NAME = ds.Tables[0].Rows[i]["MENU_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["MENU_NAME"].ToString();
-
+                        obj.ROLE_ID     = ds.Tables[0].Rows[i]["ROLE_ID"]     == DBNull.Value ? 0     : Convert.ToInt32(ds.Tables[0].Rows[i]["ROLE_ID"].ToString());
+                        obj.MENU_ID     = ds.Tables[0].Rows[i]["MENU_ID"]     == DBNull.Value ? 0     : Convert.ToInt32(ds.Tables[0].Rows[i]["MENU_ID"].ToString());
+                        obj.MENU_NAME   = ds.Tables[0].Rows[i]["MENU_NAME"]   == DBNull.Value ? ""    : ds.Tables[0].Rows[i]["MENU_NAME"].ToString();
+                        obj.IsReadOnly = ds.Tables[0].Rows[i]["IS_READONLY"] == DBNull.Value ? false : Convert.ToBoolean(ds.Tables[0].Rows[i]["IS_READONLY"]);
                         retlst.Add(obj);
                     }
                 }
@@ -146,9 +146,9 @@ namespace CA_TechService.Data.DataSource.Roles
             {
                 throw ex;
             }
+
             return retlst;
         }
-
 
         public DbStatusEntity UpdateRoles(RoleMasterEntity obj, int id)
         {
@@ -158,7 +158,7 @@ namespace CA_TechService.Data.DataSource.Roles
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand("USP_UpdateRolesMaster", con);
+                    SqlCommand cmd = new SqlCommand(RolesQueries.UpdateRolesMaster, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ID", id);
                     cmd.Parameters.AddWithValue("@NAME", obj.ROLE_NAME);
@@ -193,7 +193,7 @@ namespace CA_TechService.Data.DataSource.Roles
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand("USP_InsertRolesMaster", con);
+                    SqlCommand cmd = new SqlCommand(RolesQueries.InsertRolesMaster, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@NAME", obj.ROLE_NAME);
                     cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);
@@ -227,7 +227,7 @@ namespace CA_TechService.Data.DataSource.Roles
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand("USP_DeleteRolesMaster", con);
+                    SqlCommand cmd = new SqlCommand(RolesQueries.DeleteRolesMaster, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ID", id);
 
@@ -251,7 +251,6 @@ namespace CA_TechService.Data.DataSource.Roles
             }
             return objreturn;
         }
-
 
         public DbStatusEntity UpdateRolesMenu(List<RoleSelectedMenuEntity> obj, int id)
         {

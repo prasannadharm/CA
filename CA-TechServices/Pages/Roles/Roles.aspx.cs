@@ -1,14 +1,14 @@
-﻿using CA_TechService.Common.Generic;
+﻿#region Imports
+using CA_TechService.Common.Generic;
 using CA_TechService.Common.Transport.Roles;
 using CA_TechService.Data.DataSource.Roles;
+using CA_TechServices.WebAppHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Services;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-
+#endregion
 namespace CA_TechServices.Pages.Roles
 {
     public partial class Roles : System.Web.UI.Page
@@ -28,7 +28,7 @@ namespace CA_TechServices.Pages.Roles
             }
             catch (Exception ex)
             {
-                // details.Add(new DbStatusEntity(ex.Message));
+                Helper.ExceptionHandling(ex, "");
             }
             return details.ToArray();
         }
@@ -44,11 +44,12 @@ namespace CA_TechServices.Pages.Roles
             }
             catch (Exception ex)
             {
-                //details.Add(new DbStatusEntity(ex.Message));
+                Helper.ExceptionHandling(ex, "");
             }
             return details.ToArray();
         }
 
+        #region UpdateData
         [WebMethod]
         public static DbStatusEntity[] UpdateData(RoleMasterEntity obj, int id) //Update data in database  
         {
@@ -61,10 +62,12 @@ namespace CA_TechServices.Pages.Roles
             {
                 details.Clear();
                 details.Add(new DbStatusEntity(ex.Message));
+                Helper.ExceptionHandling(ex, "");
             }
             return details.ToArray();
 
         }
+        #endregion
 
         [WebMethod]
         public static DbStatusEntity[] InsertData(RoleMasterEntity obj)
@@ -78,6 +81,7 @@ namespace CA_TechServices.Pages.Roles
             {
                 details.Clear();
                 details.Add(new DbStatusEntity(ex.Message));
+                Helper.ExceptionHandling(ex, "");
             }
             return details.ToArray();
         }
@@ -94,6 +98,7 @@ namespace CA_TechServices.Pages.Roles
             {
                 details.Clear();
                 details.Add(new DbStatusEntity(ex.Message));
+                Helper.ExceptionHandling(ex, "");
             }
             return details.ToArray();
         }
@@ -109,7 +114,7 @@ namespace CA_TechServices.Pages.Roles
             }
             catch (Exception ex)
             {
-                // details.Add(new DbStatusEntity(ex.Message));
+                Helper.ExceptionHandling(ex, "");
             }
             return details.ToArray();
         }
@@ -124,7 +129,7 @@ namespace CA_TechServices.Pages.Roles
             }
             catch (Exception ex)
             {
-                //details.Add(new DbStatusEntity(ex.Message));
+                Helper.ExceptionHandling(ex, "");
             }
             return details.ToArray();
         }
@@ -141,6 +146,7 @@ namespace CA_TechServices.Pages.Roles
             {
                 details.Clear();
                 details.Add(new DbStatusEntity(ex.Message));
+                Helper.ExceptionHandling(ex, "");
             }
             return details.ToArray();
 

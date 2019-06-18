@@ -14,7 +14,7 @@ namespace CA_TechServices.WebAppHelper
         }
         public static string ApplicationName
         {
-            get { return ConfigurationManager.AppSettings["isDbLogging"].ToString(); }
+            get { return ConfigurationManager.AppSettings["ApplicationName"].ToString(); }
         }
     }
 }

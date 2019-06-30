@@ -132,9 +132,9 @@
                             <table id="tbl_Roles" class="table table-striped table-bordered" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th>Role Name</th>
-                                        <th>Allow User to View</th>
-                                        <th>Allow User for Action</th>
+                                        <th>Screen Name</th>
+                                        <th>Access</th>
+                                        <th>Readonly</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbl_Roles_tbody"></tbody>

@@ -4,6 +4,7 @@
     <UseIISExpress>true</UseIISExpress>
     <ToolsVersionPromptShown>3.0</ToolsVersionPromptShown>
     <ProjectView>ShowAllFiles</ProjectView>
+    <NameOfLastUsedPublishProfile>FIle</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

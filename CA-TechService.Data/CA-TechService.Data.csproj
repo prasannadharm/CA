@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSource\CityState\CityStateMasterDAO.cs" />
+    <Compile Include="DataSource\ClientMaster\ClientCategoryMasterDAO.cs" />
+    <Compile Include="DataSource\ClientMaster\ClientGroupMasterDAO.cs" />
     <Compile Include="DataSource\Company\CompanyMasterDAO.cs" />
     <Compile Include="DataSource\EmailServer\EmailServerDAO.cs" />
     <Compile Include="DataSource\EmailServer\SendEmail.cs" />
@@ -61,7 +63,6 @@
     <Compile Include="Query\User\UserQueries.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataSource\ClientMaster\" />
     <Folder Include="DataSource\TaskMaster\" />
   </ItemGroup>
   <ItemGroup>

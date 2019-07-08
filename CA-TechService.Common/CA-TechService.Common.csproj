@@ -53,7 +53,7 @@
     <Compile Include="Transport\CityState\StateMasterEntity.cs" />
     <Compile Include="Transport\ClientMaster\ClientCategoryMasterEntity.cs" />
     <Compile Include="Transport\ClientMaster\ClientGroupMasterEntity.cs" />
-    <Compile Include="Transport\ClientMaster\ClientMaster.cs" />
+    <Compile Include="Transport\ClientMaster\ClientMasterEntity.cs" />
     <Compile Include="Transport\Company\CompanyMasterEntity.cs" />
     <Compile Include="Transport\Logging\ExceptionInfo.cs" />
     <Compile Include="Transport\Login\LoginEntity.cs" />

@@ -98,6 +98,7 @@
     <Content Include="Pages\CityState\CityState.aspx" />
     <Content Include="Pages\ClientMaster\ClientCategory.aspx" />
     <Content Include="Pages\ClientMaster\ClientGroup.aspx" />
+    <Content Include="Pages\ClientMaster\ClientMaster.aspx" />
     <Content Include="Pages\Company\Company.aspx" />
     <Content Include="Pages\Dashboard\UserDashboard.aspx" />
     <Content Include="Pages\Login\ChangePassword.aspx" />
@@ -109,6 +110,7 @@
     <Content Include="Scripts\app\citystate.js" />
     <Content Include="Scripts\app\clientcategory.js" />
     <Content Include="Scripts\app\clientgroup.js" />
+    <Content Include="Scripts\app\clientmaster.js" />
     <Content Include="Scripts\app\companymaster.js" />
     <Content Include="Scripts\app\forgotpassword.js" />
     <Content Include="Scripts\app\rolesmaster.js" />
@@ -202,6 +204,13 @@
     </Compile>
     <Compile Include="Pages\ClientMaster\ClientGroup.aspx.designer.cs">
       <DependentUpon>ClientGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClientMaster\ClientMaster.aspx.cs">
+      <DependentUpon>ClientMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ClientMaster\ClientMaster.aspx.designer.cs">
+      <DependentUpon>ClientMaster.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Company\Company.aspx.cs">
       <DependentUpon>Company.aspx</DependentUpon>

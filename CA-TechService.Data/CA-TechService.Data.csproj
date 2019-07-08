@@ -44,6 +44,7 @@
     <Compile Include="DataSource\CityState\CityStateMasterDAO.cs" />
     <Compile Include="DataSource\ClientMaster\ClientCategoryMasterDAO.cs" />
     <Compile Include="DataSource\ClientMaster\ClientGroupMasterDAO.cs" />
+    <Compile Include="DataSource\ClientMaster\ClientMasterDAO.cs" />
     <Compile Include="DataSource\Company\CompanyMasterDAO.cs" />
     <Compile Include="DataSource\EmailServer\EmailServerDAO.cs" />
     <Compile Include="DataSource\EmailServer\SendEmail.cs" />

@@ -1,4 +1,5 @@
 ﻿using CA_TechService.Common.Transport.CityState;
+using CA_TechService.Common.Transport.ClientMaster;
 using CA_TechService.Common.Transport.Roles;
 using System;
 using System.Collections.Generic;
@@ -112,5 +113,107 @@ namespace CA_TechService.Data.DataSource
             }
             return retlst;
         }
+        
+        public List<CityStateMasterEntity> GetAllCities()
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<CityStateMasterEntity> retlst = new List<CityStateMasterEntity>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetActiveCityList", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        CityStateMasterEntity obj = new CityStateMasterEntity();
+                        obj.ID = Convert.ToInt32(ds.Tables[0].Rows[i]["ID"].ToString());
+                        obj.CITY = ds.Tables[0].Rows[i]["CITY"].ToString();
+                        obj.STATE = ds.Tables[0].Rows[i]["STATE"].ToString();
+                        obj.ACTIVE_STATUS = true;
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
+
+        public List<ClientCategoryMasterEntity> GetActiveClientCategories()
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<ClientCategoryMasterEntity> retlst = new List<ClientCategoryMasterEntity>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetActiveClientCateGoryList", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        ClientCategoryMasterEntity obj = new ClientCategoryMasterEntity();
+                        obj.CLI_CAT_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["CLI_CAT_ID"].ToString());
+                        obj.CLI_CAT_NAME = ds.Tables[0].Rows[i]["CLI_CAT_NAME"].ToString();
+                        obj.ACTIVE_STATUS = true;
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
+
+        public List<ClientGroupMasterEntity> GetActiveClientGroups()
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<ClientGroupMasterEntity> retlst = new List<ClientGroupMasterEntity>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetActiveClientGroupList", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        ClientGroupMasterEntity obj = new ClientGroupMasterEntity();
+                        obj.CLI_GRP_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["CLI_GRP_ID"].ToString());
+                        obj.CLI_GRP_NAME = ds.Tables[0].Rows[i]["CLI_GRP_NAME"].ToString();
+                        obj.ACTIVE_STATUS = true;
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
+
+
     }
 }

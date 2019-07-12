@@ -14,7 +14,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
 {
     public class ClientMasterDAO
     {
-        public List<ClientMasterEntity> GetClientCategoryList()
+        public List<ClientMasterEntity> GetClientList()
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlDataAdapter adapter;
@@ -51,7 +51,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             return retlst;
         }
 
-        public List<ClientMasterEntity> EditClientCategory(int id)
+        public List<ClientMasterEntity> EditClient(int id)
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlDataAdapter adapter;
@@ -126,7 +126,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
         }
 
 
-        public DbStatusEntity UpdateClientCategory(ClientMasterEntity obj, int id)
+        public DbStatusEntity UpdateClient(ClientMasterEntity obj, int id)
         {
             DbStatusEntity objreturn = new DbStatusEntity();
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -189,7 +189,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             return objreturn;
         }
 
-        public DbStatusEntity InsertClientCategory(ClientMasterEntity obj)
+        public DbStatusEntity InsertClient(ClientMasterEntity obj)
         {
             DbStatusEntity objreturn = new DbStatusEntity();
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -252,7 +252,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             return objreturn;
         }
 
-        public DbStatusEntity DeleteClientCategory(int id)
+        public DbStatusEntity DeleteClient(int id)
         {
             DbStatusEntity objreturn = new DbStatusEntity();
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;

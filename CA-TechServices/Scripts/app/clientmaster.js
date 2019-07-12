@@ -6,21 +6,27 @@ function getDetails() {
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        url: "ClientCategory.aspx/GetData",
+        url: "ClientMaster.aspx/GetData",
         data: {},
         dataType: "json",
         success: function (data) {
             $('#griddiv').remove();
             $('#maindiv').append("<div class='table-responsive' id='griddiv'></div>");
             $('#griddiv').append("<table id='tablemain' class='table table-striped table-bordered' style='width: 100%'></table>");
-            $('#tablemain').append("<thead><tr><th>Client Category</th><th>Active</th><th></th><th></th></tr></thead><tbody></tbody>");
+            $('#tablemain').append("<thead><tr><th>Client ID</th><th>File No</th><th>Name</th><th>Mobile</th><th>PAN</th><th>GSTIN</th><th>Active</th><th></th><th></th></tr></thead><tbody></tbody>");
             $('#tablemain tbody').remove();
             $('#tablemain').append("<tbody>");
             for (var i = 0; i < data.d.length; i++) {
                 $('#tablemain').append(
-                    "<tr><td>" + data.d[i].CLI_CAT_NAME + "</td><td>" + "<input type='checkbox' onclick='return false;' " + (data.d[i].ACTIVE_STATUS == true ? "checked='checked'" : "") + "/></td>" +
-                    "<td>" + "<input type='button' class='btn btn-warning btn-sm editButton' data-id='" + data.d[i].CLI_CAT_ID + "' name='submitButton' id='btnEdit' value='Edit' />" + "</td>" +
-                    "<td><input type='button' class='btn btn-danger btn-sm deleteButton' data-id='" + data.d[i].CLI_CAT_ID + "' name='submitButton' id='btnDelete' value='Delete'/> </td></tr>");
+                    "<tr><td>" + data.d[i].C_ID + "</td>" +
+                    "<td>" + data.d[i].FILE_NO + "</td>" +
+                    "<td>" + data.d[i].C_NAME + "</td>" +
+                    "<td>" + data.d[i].MOBILE_NO1 + "</td>" +
+                    "<td>" + data.d[i].PAN + "</td>" +
+                    "<td>" + data.d[i].GSTIN + "</td>" +                    
+                    "<td>" + "<input type='checkbox' onclick='return false;' " + (data.d[i].ACTIVE_STATUS == true ? "checked='checked'" : "") + "/></td>" +
+                    "<td>" + "<input type='button' class='btn btn-warning btn-sm editButton' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnEdit' value='Edit' />" + "</td>" +
+                    "<td><input type='button' class='btn btn-danger btn-sm deleteButton' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnDelete' value='Delete'/> </td></tr>");
             }
             $('#tablemain').append("</tbody>");
             $('#tablemain').DataTable();
@@ -54,7 +60,7 @@ $(function () {
         $.ajax({
             type: "Post",
             contentType: "application/json; charset=utf-8",
-            url: "ClientCategory.aspx/InsertData",
+            url: "ClientMaster.aspx/InsertData",
             data: '{obj: ' + JSON.stringify(obj) + '}',
             dataType: "json",
             success: function (data) {
@@ -86,7 +92,7 @@ $(function () {
             $.ajax({
                 type: "Post",
                 contentType: "application/json; charset=utf-8",
-                url: "ClientCategory.aspx/DeleteData",
+                url: "ClientMaster.aspx/DeleteData",
                 data: '{id: ' + id + '}',
                 dataType: "json",
                 success: function (data) {
@@ -116,7 +122,7 @@ $(function () {
         $('#PopupModal').focus();
         $("#CLI_CAT_NAME1").val('');
         $("#ACTIVE_STATUS1").prop('checked', true);
-        $("div.modal-header h2").html("Add Client Category Details");
+        $("div.modal-header h2").html("Add Client Details");
         $('#CLI_CAT_NAME1').focus();
     });
 
@@ -126,7 +132,7 @@ $(function () {
         $('#PopupModal').modal('show');
         $('#PopupModal').focus();
         $("#CLI_CAT_NAME1").val("");
-        $("div.modal-header h2").html("Edit Client Category Details");
+        $("div.modal-header h2").html("Edit Client Details");
         var id = $(this).attr("data-id");
         console.log(id);
         $("#btnUpdate").attr("edit-id", id);
@@ -134,7 +140,7 @@ $(function () {
         $.ajax({
             type: "Post",
             contentType: "application/json; charset=utf-8",
-            url: "ClientCategory.aspx/EditData",
+            url: "ClientMaster.aspx/EditData",
             data: '{id: ' + id + '}',
             dataType: "json",
             success: function (data) {
@@ -174,7 +180,7 @@ $(function () {
         $.ajax({
             type: "Post",
             contentType: "application/json; charset=utf-8",
-            url: "ClientCategory.aspx/UpdateData",
+            url: "ClientMaster.aspx/UpdateData",
             data: '{obj: ' + JSON.stringify(obj) + ', id : ' + id + '}',
             dataType: "json",
             success: function (data) {

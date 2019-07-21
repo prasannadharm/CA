@@ -105,6 +105,7 @@
     <Content Include="Pages\Login\ForgotPassword.aspx" />
     <Content Include="Pages\Login\UserLogin.aspx" />
     <Content Include="Pages\Roles\Roles.aspx" />
+    <Content Include="Pages\TaskMaster\TaskStageMaster.aspx" />
     <Content Include="Pages\User\Users.aspx" />
     <Content Include="Scripts\app\changepassword.js" />
     <Content Include="Scripts\app\citystate.js" />
@@ -114,6 +115,7 @@
     <Content Include="Scripts\app\companymaster.js" />
     <Content Include="Scripts\app\forgotpassword.js" />
     <Content Include="Scripts\app\rolesmaster.js" />
+    <Content Include="Scripts\app\TaskMaster.js" />
     <Content Include="Scripts\app\usermaster.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -254,6 +256,13 @@
     <Compile Include="Pages\Roles\Roles.aspx.designer.cs">
       <DependentUpon>Roles.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TaskMaster\TaskStageMaster.aspx.cs">
+      <DependentUpon>TaskStageMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\TaskMaster\TaskStageMaster.aspx.designer.cs">
+      <DependentUpon>TaskStageMaster.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\Users.aspx.cs">
       <DependentUpon>Users.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -275,7 +284,6 @@
   <ItemGroup>
     <Folder Include="AppStyles\" />
     <Folder Include="Pages\Rules\" />
-    <Folder Include="Pages\TaskMaster\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

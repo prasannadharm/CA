@@ -52,6 +52,7 @@
     <Compile Include="DataSource\Logging\LogAppDetails.cs" />
     <Compile Include="DataSource\Login\LoginDAO.cs" />
     <Compile Include="DataSource\Roles\RolesMasterDAO.cs" />
+    <Compile Include="DataSource\TaskMaster\TaskStageMasterDAO.cs" />
     <Compile Include="DataSource\User\ChangePasswordDAO.cs" />
     <Compile Include="DataSource\User\ForgotPasswordDAO.cs" />
     <Compile Include="DataSource\User\UserMasterDAO.cs" />
@@ -63,9 +64,7 @@
     <Compile Include="Query\TaskMaster\TaskMasterQueries.cs" />
     <Compile Include="Query\User\UserQueries.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataSource\TaskMaster\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CA-TechService.Common\CA-TechService.Common.csproj">
       <Project>{098af134-6396-4d0c-8d98-d7741192b88c}</Project>

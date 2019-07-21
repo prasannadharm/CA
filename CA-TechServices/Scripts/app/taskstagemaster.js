@@ -5,7 +5,7 @@
 $(function () {
     $("#btnSave").click(function () {
         if ($("#TSK_STG_NAME1").val().trim() == "") {
-            alert("Please enter Task Stage Master.");
+            alert("Please enter Task Stage Name.");
             $("#TSK_STG_NAME1").focus();
             return false;
         }
@@ -86,7 +86,7 @@ $(function () {
         $('#PopupModal').focus();
         $("#TSK_STG_NAME1").val('');
         $("#ACTIVE_STATUS1").prop('checked', true);
-        $("div.modal-header h2").html("Add Task Stage Master Details");
+        $("div.modal-header h2").html("Add Task Stage Details");
         $('#TSK_STG_NAME1').focus();
     });
 
@@ -96,7 +96,7 @@ $(function () {
         $('#PopupModal').modal('show');
         $('#PopupModal').focus();
         $("#TSK_STG_NAME1").val("");
-        $("div.modal-header h2").html("Edit Task Stage Master Details");
+        $("div.modal-header h2").html("Edit Task Stage Details");
         var id = $(this).attr("data-id");
         console.log(id);
         $("#btnUpdate").attr("edit-id", id);
@@ -125,7 +125,7 @@ $(function () {
 
     $("#btnUpdate").click(function () {
         if ($("#TSK_STG_NAME1").val().trim() == "") {
-            alert("Please enter Task stage master.");
+            alert("Please enter Task Stage Name.");
             $("#TSK_STG_NAME1").focus();
             return false;
         }
@@ -182,7 +182,7 @@ function getDetails() {
             $('#griddiv').remove();
             $('#maindiv').append("<div class='table-responsive' id='griddiv'></div>");
             $('#griddiv').append("<table id='tablemain' class='table table-striped table-bordered' style='width: 100%'></table>");
-            $('#tablemain').append("<thead><tr><th>Task Stage Master</th><th>Active</th><th></th><th></th></tr></thead><tbody></tbody>");
+            $('#tablemain').append("<thead><tr><th>Task Stage Name</th><th>Active</th><th></th><th></th></tr></thead><tbody></tbody>");
             $('#tablemain tbody').remove();
             $('#tablemain').append("<tbody>");
             for (var i = 0; i < data.d.length; i++) {

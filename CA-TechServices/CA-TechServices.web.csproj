@@ -116,7 +116,7 @@
     <Content Include="Scripts\app\companymaster.js" />
     <Content Include="Scripts\app\forgotpassword.js" />
     <Content Include="Scripts\app\rolesmaster.js" />
-    <Content Include="Scripts\app\TaskMaster.js" />
+    <Content Include="Scripts\app\taskstagemaster.js" />
     <Content Include="Scripts\app\usermaster.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

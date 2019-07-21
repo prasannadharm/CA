@@ -5,7 +5,7 @@
     <link href="../../Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <script src="../../Scripts/jquery.dataTables.min.js"></script>
     <script src="../../Scripts/dataTables.bootstrap4.min.js"></script>    
-    <script src="../../Scripts/app/TaskMaster.js"></script>
+    <script src="../../Scripts/app/taskstagemaster.js"></script>
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="row">
@@ -23,7 +23,7 @@
                     <table id="tablemain" class="table table-striped table-bordered" style="width: 100%">
                         <thead>
                             <tr>
-                                <th>Name</th>                                
+                                <th>Task Stage Name</th>                                
                                 <th>Active</th>
                                 <th></th>
                                 <th></th>
@@ -41,14 +41,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Edit Task Stage Master Details</h2>
+                    <h2>Edit Task Stage Details</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
                         <div class="form-group col-lg-12">
-                            <label>Task Stage Master</label>
-                            <input type="text" name="TSK_STG_NAME" id="TSK_STG_NAME1" class="form-control" placeholder="Please enter Client Category"/>                            
+                            <label>Task Stage Name</label>
+                            <input type="text" name="TSK_STG_NAME" id="TSK_STG_NAME1" class="form-control" placeholder="Please enter Task Stage Name"/>                            
                         </div>
                         <div class="form-group col-lg-12">
                             <label>Active Status</label>

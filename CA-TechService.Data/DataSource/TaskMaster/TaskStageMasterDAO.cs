@@ -4,25 +4,26 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using CA_TechService.Common.Transport.ClientMaster;
+using CA_TechService.Common.Transport.TaskMaster;
+using CA_TechService.Data.Query.TaskMaster;
 using CA_TechService.Common.Generic;
-using CA_TechService.Data.Query.ClientMaster;
 #endregion
-namespace CA_TechService.Data.DataSource.ClientMaster
+namespace CA_TechService.Data.DataSource.TaskMaster
 {
-    public class ClientCategoryMasterDAO
+    public class TaskStageMasterDAO
     {
-        public List<ClientCategoryMasterEntity> GetClientCategoryList()
+        #region GetTaskStageMasterList
+        public List<TaskStageMasterEntity> GetTaskStageMasterList()
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlDataAdapter adapter;
             DataSet ds = new DataSet();
-            List<ClientCategoryMasterEntity> retlst = new List<ClientCategoryMasterEntity>();
+            List<TaskStageMasterEntity> retlst = new List<TaskStageMasterEntity>();
             try
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand(ClientMasterQueries.GetClientCategoryList, con);
+                    SqlCommand cmd = new SqlCommand(TaskMasterQueries.GetTaskStageMasterList, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     con.Open();
                     adapter = new SqlDataAdapter(cmd);
@@ -30,9 +31,9 @@ namespace CA_TechService.Data.DataSource.ClientMaster
 
                     for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
                     {
-                        ClientCategoryMasterEntity obj = new ClientCategoryMasterEntity();
-                        obj.CLI_CAT_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["CLI_CAT_ID"].ToString());
-                        obj.CLI_CAT_NAME = ds.Tables[0].Rows[i]["CLI_CAT_NAME"].ToString();                      
+                        TaskStageMasterEntity obj = new TaskStageMasterEntity();
+                        obj.TS_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["TS_ID"].ToString());
+                        obj.TS_NAME = ds.Tables[0].Rows[i]["TS_NAME"].ToString();
                         obj.ACTIVE_STATUS = Convert.ToBoolean(ds.Tables[0].Rows[i]["ACTIVE_STATUS"]);
                         retlst.Add(obj);
                     }
@@ -44,18 +45,20 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             }
             return retlst;
         }
+        #endregion
 
-        public List<ClientCategoryMasterEntity> EditClientCategory(int id)
+        #region EditTaskStageMaster
+        public List<TaskStageMasterEntity> EditTaskStageMaster(int id)
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlDataAdapter adapter;
             DataSet ds = new DataSet();
-            List<ClientCategoryMasterEntity> retlst = new List<ClientCategoryMasterEntity>();
+            List<TaskStageMasterEntity> retlst = new List<TaskStageMasterEntity>();
             try
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand(ClientMasterQueries.GetClientCategoryDetailsbyID, con);
+                    SqlCommand cmd = new SqlCommand(TaskMasterQueries.EditTaskStageMaster, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ID", id);
                     con.Open();
@@ -64,9 +67,9 @@ namespace CA_TechService.Data.DataSource.ClientMaster
 
                     for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
                     {
-                        ClientCategoryMasterEntity obj = new ClientCategoryMasterEntity();
-                        obj.CLI_CAT_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["CLI_CAT_ID"].ToString());
-                        obj.CLI_CAT_NAME = ds.Tables[0].Rows[i]["CLI_CAT_NAME"].ToString();
+                        TaskStageMasterEntity obj = new TaskStageMasterEntity();
+                        obj.TS_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["TS_ID"].ToString());
+                        obj.TS_NAME = ds.Tables[0].Rows[i]["TS_NAME"].ToString();
                         obj.ACTIVE_STATUS = Convert.ToBoolean(ds.Tables[0].Rows[i]["ACTIVE_STATUS"]);
                         retlst.Add(obj);
                     }
@@ -78,9 +81,9 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             }
             return retlst;
         }
+        #endregion
 
-
-        public DbStatusEntity UpdateClientCategory(ClientCategoryMasterEntity obj, int id)
+        public DbStatusEntity UpdateTaskStageMaster(TaskStageMasterEntity obj, int id)
         {
             DbStatusEntity objreturn = new DbStatusEntity();
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -88,10 +91,10 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand(ClientMasterQueries.UpdateClientCategoryMaster, con);
+                    SqlCommand cmd = new SqlCommand(TaskMasterQueries.UpdateTaskStageMaster, con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@CLI_CAT_ID", id);
-                    cmd.Parameters.AddWithValue("@CLI_CAT_NAME", obj.CLI_CAT_NAME);                    
+                    cmd.Parameters.AddWithValue("@TS_ID", id);
+                    cmd.Parameters.AddWithValue("@TS_NAME", obj.TS_NAME);
                     cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);
 
                     cmd.Parameters.Add("@RESULT", SqlDbType.Int);
@@ -115,7 +118,8 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             return objreturn;
         }
 
-        public DbStatusEntity InsertClientCategory(ClientCategoryMasterEntity obj)
+        #region InsertTaskStageMaster
+        public DbStatusEntity InsertTaskStageMaster(TaskStageMasterEntity obj)
         {
             DbStatusEntity objreturn = new DbStatusEntity();
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -124,10 +128,10 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand(ClientMasterQueries.InsertClientCategoryMaster, con);
+                    SqlCommand cmd = new SqlCommand(TaskMasterQueries.InsertTaskStageMaster, con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@CLI_CAT_NAME", obj.CLI_CAT_NAME);
-                    cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);                    
+                    cmd.Parameters.AddWithValue("@TS_NAME", obj.TS_NAME);
+                    cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);
 
                     cmd.Parameters.Add("@RESULT", SqlDbType.Int);
                     cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;
@@ -149,8 +153,10 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             }
             return objreturn;
         }
+        #endregion
 
-        public DbStatusEntity DeleteClientCategory(int id)
+        #region DeleteTaskStageMaster
+        public DbStatusEntity DeleteTaskStageMaster(int id)
         {
             DbStatusEntity objreturn = new DbStatusEntity();
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -159,7 +165,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand(ClientMasterQueries.DeleteClientCategoryMaster, con);
+                    SqlCommand cmd = new SqlCommand(TaskMasterQueries.DeleteTaskStageMaster, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ID", id);
 
@@ -183,5 +189,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             }
             return objreturn;
         }
+        #endregion
+
     }
 }

@@ -63,7 +63,7 @@
     <Compile Include="Transport\Roles\RoleSelectedMenuEntity.cs" />
     <Compile Include="Transport\Rules\Rules.cs" />
     <Compile Include="Transport\Rules\UserMenuEntity.cs" />
-    <Compile Include="Transport\TaskMaster\TaskMaster.cs" />
+    <Compile Include="Transport\TaskMaster\TaskStageMasterEntity.cs" />
     <Compile Include="Transport\User\ChangePasswordEntity.cs" />
     <Compile Include="Transport\User\ForgotPasswordEntity.cs" />
     <Compile Include="Transport\User\UserMasterEntity.cs" />

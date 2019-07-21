@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Santhosh G & Associates</title>
+    <link rel="shortcut icon" href="../Images/favicon.ico" type="image/x-icon"/>  
     <link href="../Content/masterpage.css" rel="stylesheet" />
     <link href="../Content/bootstrap.min.css" rel="stylesheet" />
     <script src="../../Scripts/jquery-3.0.0.min.js"></script>

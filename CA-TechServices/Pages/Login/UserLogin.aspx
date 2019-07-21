@@ -5,6 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Santhosh G & Associates</title>
+    <link rel="shortcut icon" href="../../Images/favicon.ico" type="image/x-icon"/>   
+    
     <%--<link href="../../Content/font-awesome.min.css" rel="stylesheet" />--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" />

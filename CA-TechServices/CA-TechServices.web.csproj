@@ -93,6 +93,7 @@
     <Content Include="Content\masterpage.css" />
     <Content Include="Images\CA Logo.png" />
     <Content Include="Images\dashboard.png" />
+    <Content Include="Images\favicon.ico" />
     <Content Include="Images\logout.png" />
     <Content Include="packages.config" />
     <Content Include="Pages\CityState\CityState.aspx" />

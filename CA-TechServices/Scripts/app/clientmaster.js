@@ -1,6 +1,12 @@
-﻿$(document).ready(function () {
+﻿var City = "";
+var City1 = "";
+$(document).ready(function () {
+    document.getElementById("loader").style.display = "block";
+    LoadCombos();
     getDetails();
 });
+
+
 
 function getDetails() {
     $.ajax({
@@ -31,6 +37,7 @@ function getDetails() {
             $('#tablemain').append("</tbody>");
             $('#tablemain').DataTable();
             //data-toggle='modal' data-target='#PopupModal'
+            document.getElementById("loader").style.display = "none";
         },
         error: function () {
             alert("Error while Showing update data");
@@ -38,6 +45,156 @@ function getDetails() {
 
         //
     });
+}
+
+function LoadCombos()
+{
+    document.getElementById("loader").style.display = "block";
+    $.ajax({
+        type: "POST",
+        url: "ClientMaster.aspx/GetStates",
+        data: '{}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: LoadStateCombo
+    });
+    document.getElementById("loader").style.display = "block";
+    $.ajax({
+        type: "POST",
+        url: "ClientMaster.aspx/GetActiveClientGroups",
+        data: '{}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: LoadClientGroupCombo
+    });
+    document.getElementById("loader").style.display = "block";
+    $.ajax({
+        type: "POST",
+        url: "ClientMaster.aspx/GetActiveClientCategories",
+        data: '{}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: LoadClientCategoryCombo
+    });
+}
+
+function LoadStateCombo(data) {
+    var options = [];
+    options.push('<option value="',
+         '', '">',
+         '--Select--', '</option>');
+    for (var i = 0; i < data.d.length; i++) {
+        options.push('<option value="',
+          data.d[i].NAME, '">',
+          data.d[i].NAME, '</option>');
+    }
+    $("#STATE").html(options.join(''));
+    $("#STATE1").html(options.join(''));
+}
+
+//Loading City Combo on State Combo Change (Permanent Address)
+function StateComboChange() {
+    //if ($('#STATE').val() != '') {
+        $.ajax({
+            type: "POST",
+            url: "ClientMaster.aspx/GetCityByState",
+            data: "{str: '" + $('#STATE').val() + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: LoadCityCombo
+        });
+    //}
+    //else {
+    //    $('#CITY')
+    //    .find('option')
+    //    .remove()
+    //    .end()
+    //    .append('<option value="whatever">text</option>')
+    //    .val('whatever');
+    //}
+}
+
+function LoadCityCombo(data) {
+    var options = [];
+    options.push('<option value="',
+         '', '">',
+         '--Select--', '</option>');
+    for (var i = 0; i < data.d.length; i++) {
+        options.push('<option value="',
+          data.d[i].CITY, '">',
+          data.d[i].CITY, '</option>');
+    }
+    $("#CITY").html(options.join(''));
+    if (City.trim() != '') {
+        $("#CITY").val(City).change();
+        City = '';
+    }
+}
+
+//Loading City Combo on State Combo Change (Present Address)
+function StateComboChange1() {
+    //if ($('#STATE1').val() != '') {
+        $.ajax({
+            type: "POST",
+            url: "ClientMaster.aspx/GetCityByState",
+            data: "{str: '" + $('#STATE1').val() + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: LoadCityCombo1
+        });
+    //}
+    //else {
+    //    $('#CITY1')
+    //    .find('option')
+    //    .remove()
+    //    .end()
+    //    .append('<option value="whatever">text</option>')
+    //    .val('whatever');
+    //}
+}
+
+function LoadCityCombo1(data) {
+    var options = [];
+    options.push('<option value="',
+         '', '">',
+         '--Select--', '</option>');
+    for (var i = 0; i < data.d.length; i++) {
+        options.push('<option value="',
+          data.d[i].CITY, '">',
+          data.d[i].CITY, '</option>');
+    }
+    $("#CITY1").html(options.join(''));
+    if (City1.trim() != '') {
+        $("#CITY1").val(City1).change();
+        City1 = '';
+    }
+}
+
+function LoadClientGroupCombo(data) {
+    var options = [];
+    options.push('<option value="',
+         0, '">',
+         '--Select--', '</option>');
+    for (var i = 0; i < data.d.length; i++) {
+        options.push('<option value="',
+          data.d[i].CLI_GRP_ID, '">',
+          data.d[i].CLI_GRP_NAME, '</option>');
+    }
+    $("#CLI_GRP_NAME").html(options.join(''));
+}
+
+function LoadClientCategoryCombo(data) {
+    var options = [];
+    options.push('<option value="',
+       0, '">',
+       '--Select--', '</option>');
+    for (var i = 0; i < data.d.length; i++) {
+        options.push('<option value="',
+          data.d[i].CLI_CAT_ID, '">',
+          data.d[i].CLI_CAT_NAME, '</option>');
+    }
+    $("#CLI_CAT").html(options.join(''));
+    document.getElementById("loader").style.display = "none";
 }
 
 $(function () {
@@ -118,8 +275,10 @@ $(function () {
     $(document).on("click", ".addNewButton", function () {
         $('#btnSave').show();
         $('#btnUpdate').hide();
-        $('#PopupModal').modal('show');
-        $('#PopupModal').focus();
+
+        $('#mainlistingdiv').hide();
+        $('#mainldetaildiv').show();
+
         $("#CLI_CAT_NAME1").val('');
         $("#ACTIVE_STATUS1").prop('checked', true);
         $("div.modal-header h2").html("Add Client Details");
@@ -129,8 +288,8 @@ $(function () {
     $(document).on("click", ".editButton", function () {
         $('#btnSave').hide();
         $('#btnUpdate').show();
-        $('#PopupModal').modal('show');
-        $('#PopupModal').focus();
+        $('#mainlistingdiv').hide();
+        $('#mainldetaildiv').show();
         $("#CLI_CAT_NAME1").val("");
         $("div.modal-header h2").html("Edit Client Details");
         var id = $(this).attr("data-id");
@@ -203,6 +362,11 @@ $(function () {
                 return false;
             }
         });
+    });
+
+    $(document).on("click", ".cancelButton", function () {
+        $('#mainlistingdiv').show();
+        $('#mainldetaildiv').hide();
     });
 
 });

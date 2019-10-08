@@ -82,10 +82,12 @@
     <Content Include="AppScripts\Rules.js" />
     <Content Include="AppScripts\TaskMaster.js" />
     <Content Include="AppScripts\User.js" />
+    <Content Include="Content\ajaxloader.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-select.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dataTables.bootstrap4.min.css" />
@@ -108,6 +110,7 @@
     <Content Include="Pages\Roles\Roles.aspx" />
     <Content Include="Pages\TaskMaster\TaskStageMaster.aspx" />
     <Content Include="Pages\User\Users.aspx" />
+    <Content Include="Scripts\AjaxFileupload.js" />
     <Content Include="Scripts\app\changepassword.js" />
     <Content Include="Scripts\app\citystate.js" />
     <Content Include="Scripts\app\clientcategory.js" />
@@ -118,6 +121,7 @@
     <Content Include="Scripts\app\rolesmaster.js" />
     <Content Include="Scripts\app\taskstagemaster.js" />
     <Content Include="Scripts\app\usermaster.js" />
+    <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -148,6 +152,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\FIle.pubxml" />
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />

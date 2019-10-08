@@ -1,12 +1,38 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/SiteMaster.Master" AutoEventWireup="true" CodeBehind="ClientMaster.aspx.cs" Inherits="CA_TechServices.Pages.ClientMaster.ClientMaster" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <link href="../../Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <style>
+        .filters .dropdown-menu > li > a {
+            display: block;
+            padding: 2px 15px;
+            clear: both;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #000000;
+            white-space: nowrap;
+        }
+
+        .handcursor {
+            cursor: pointer;
+            cursor: hand;
+        }
+    </style>
+
+    <link href="../../Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="../../Content/ajaxloader.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap-select.css" rel="stylesheet" />
+
     <script src="../../Scripts/jquery.dataTables.min.js"></script>
-    <script src="../../Scripts/dataTables.bootstrap4.min.js"></script>    
+    <script src="../../Scripts/dataTables.bootstrap4.min.js"></script>
+    <script src="../../Scripts/AjaxFileupload.js"></script>
+    <script src="../../Scripts/popper.min.js"></script>
+    <script src="../../Scripts/bootstrap-select.min.js"></script>
     <script src="../../Scripts/app/clientmaster.js"></script>
-    <div class="col-lg-12">
+
+    <div id="loader"></div>
+    <div class="col-lg-12" id="mainlistingdiv">
         <div class="panel panel-default">
             <div class="row">
                 <div class="col-6">
@@ -23,7 +49,7 @@
                     <table id="tablemain" class="table table-striped table-bordered" style="width: 100%">
                         <thead>
                             <tr>
-                                <th>Client ID</th>                                
+                                <th>Client ID</th>
                                 <th>File No</th>
                                 <th>Name</th>
                                 <th>Mobile</th>
@@ -41,34 +67,178 @@
             </div>
         </div>
     </div>
-    <!-- For Modal Popup  -->
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="PopupModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Edit Client Details</h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <div class="panel-body">
-                        <div class="form-group col-lg-12">
-                            <label>Client Category</label>
-                            <input type="text" name="CLI_CAT_NAME" id="CLI_CAT_NAME1" class="form-control" placeholder="Please enter Client Category"/>                            
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <label>Active Status</label>
-                            <input type="checkbox" name="ACTIVE_STATUS" id="ACTIVE_STATUS1" style="margin-left: 10px; vertical-align: middle;" />
-                        </div>
 
-                    </div>
+    <!-- For Detail Div  -->
+    <div class="col-lg-12" id="mainldetaildiv" style="display: none">
+        <div class="panel panel-default">
+            <div class="row">
+                <div class="col-12" id="subheaderdiv">
+                    <h2 style='color: blue'>Client Master</h2>
                 </div>
-                <div class="modal-footer">
+            </div>
+
+            <div class="row">
+                <div class="form-group col-6">
+                    <label>Client Name</label>
+                    <input type="text" name="C_NAME" id="C_NAME" class="form-control" placeholder="Please enter Client Name" />
+                </div>
+                <div class="form-group col-3">
+                    <label>Alias Name</label>
+                    <input type="text" name="ALIAS" id="ALIAS" class="form-control" placeholder="Please enter Alias Name" />
+                </div>
+                <div class="form-group col-3">
+                    <label>File No</label>
+                    <input type="text" name="FILE_NO" id="FILE_NO" class="form-control" placeholder="Please enter File No." />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-4">
+                    <label>Father's Name</label>
+                    <input type="text" name="FNAME" id="FNAME" class="form-control" placeholder="Please enter Father's Name." />
+                </div>
+                <div class="form-group col-4">
+                    <label>Gender</label>
+                    <select name="GENDER" id="GENDER" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group col-4">
+                    <label>Husband Name</label>
+                    <input type="text" name="HNAME" id="HNAME" class="form-control" placeholder="Please enter Husband Name." />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-4">
+                    <label>Contact Person</label>
+                    <input type="text" name="CNT_NAME" id="CNT_NAME" class="form-control" placeholder="Please enter Contact Person Name." />
+                </div>
+                <div class="form-group col-4">
+                    <label>Client Group</label>
+                    <select name="CLI_GRP_NAME" id="CLI_GRP_NAME" class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="form-group col-4">
+                    <label>Client Category</label>
+                    <select name="CLI_CAT" id="CLI_CAT" class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-3">
+                    <label>Date of Birth</label>
+                    <input type="text" name="DOB" id="DOB" class="form-control" placeholder="Please enter DOB" />
+                </div>
+                <div class="form-group col-3">
+                    <label>PAN</label>
+                    <input type="text" name="PAN" id="PAN" class="form-control" placeholder="Please enter PAN NO." />
+                </div>
+                <div class="form-group col-3">
+                    <label>Aadhaar</label>
+                    <input type="text" name="AADHAAR" id="AADHAAR" class="form-control" placeholder="Please enter Aadhaar No." />
+                </div>
+                <div class="form-group col-3">
+                    <label>GSTIN</label>
+                    <input type="text" name="GSTIN" id="GSTIN" class="form-control" placeholder="Please enter GSTIN No." />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12">
+                    <label>Permanent Address</label>
+                    <input type="text" name="ADDR" id="ADDR" class="form-control" placeholder="Please enter Address." />
+                </div>                
+            </div>
+
+            <div class="row">
+                <div class="form-group col-4">
+                    <label>State</label>
+                    <select name="STATE" id="STATE" class="form-control" onchange="StateComboChange()">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="form-group col-4">
+                    <label>City</label>
+                    <select name="CITY" id="CITY" class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="form-group col-4">
+                    <label>PIN</label>
+                    <input type="number" name="PIN" id="PIN" class="form-control"/>
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="form-group col-12">
+                    <label>Present Address</label>
+                    <input type="checkbox" name="SAME_AB" id="SAME_AB" value="SAMEAB" style="margin-left: 10px; margin-right: 5px; vertical-align: middle;"/>
+                    <label>Same as Above</label>
+                    <input type="text" name="ADDR1" id="ADDR1" class="form-control" placeholder="Please enter Address." />
+                </div>                
+            </div>
+
+            <div class="row">
+                <div class="form-group col-4">
+                    <label>State</label>
+                    <select name="STATE1" id="STATE1" class="form-control" onchange="StateComboChange1()">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="form-group col-4">
+                    <label>City</label>
+                    <select name="CITY1" id="CITY1" class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="form-group col-4">
+                    <label>PIN</label>
+                    <input type="number" name="PIN1" id="PIN1" class="form-control"/>                    
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-4">
+                    <label>Email ID</label>
+                    <input type="text" name="EMAIL_ID" id="EMAIL_ID" class="form-control" placeholder="Please enter Email Address." />
+                </div>
+                <div class="form-group col-4">
+                    <label>Ward No</label>
+                    <input type="text" name="WARD" id="WARD" class="form-control" placeholder="Please enter Ward No." />
+                </div>
+                <div class="form-group col-4">
+                    <label>Rack No</label>
+                    <input type="text" name="RACK_NO" id="RACK_NO" class="form-control" placeholder="Please enter Rack No." />
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-12">
+                    <label>Alert Message</label>
+                    <input type="checkbox" name="ACTIVE_STATUS" id="ACTIVE_STATUS" value="ACTIVE_STATUS" style="margin-left: 10px; margin-right: 5px; vertical-align: middle;"/>
+                    <label>Active Status</label>
+                    <input type="text" name="Alert_Msg" id="ALERT_MSG" class="form-control" placeholder="Please enter Alert Message." />
+                </div>                
+            </div>
+
+
+            <div class="row">
+                <div class="col-12">                    
                     <button type="button" id="btnSave" class="btn btn-primary">Save Data</button>
-                    <button type="button" id="btnUpdate" class="btn btn-primary" edit-id="" >Update Data</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" id="btnUpdate" class="btn btn-primary" edit-id="">Update Data</button>
+                    <button type="button" id="btnCancel" class="btn btn-danger cancelButton" style="margin-right: 15px">Cancel</button>
+                    <label style="margin-left: 10px">Client ID</label>
+                    <label id="C_ID1" style="color: brown; margin-left: 5px; margin-right: 20px; font-weight: 500">Client ID</label>
                 </div>
             </div>
         </div>
     </div>
-    <!-- For Modal Popup  -->
+    <!-- For Detail Div  -->
 </asp:Content>

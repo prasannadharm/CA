@@ -7,7 +7,9 @@ using System.Web.UI.WebControls;
 using CA_TechService.Common.Generic;
 using CA_TechService.Common.Transport.ClientMaster;
 using CA_TechService.Data.DataSource.ClientMaster;
+using CA_TechService.Common.Transport.CityState;
 using System.Web.Services;
+using CA_TechService.Data.DataSource;
 
 namespace CA_TechServices.Pages.ClientMaster
 {
@@ -93,6 +95,66 @@ namespace CA_TechServices.Pages.ClientMaster
             {
                 details.Clear();
                 details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+        [WebMethod]
+        public static StateMasterEntity[] GetStates() //Show the details of the data after insert in HTML Table
+        {
+            var details = new List<StateMasterEntity>();
+            try
+            {
+                details = new GenericDAO().GetStateList();
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+        [WebMethod]
+        public static CityStateMasterEntity[] GetCityByState(string str) //Show the details of the data after insert in HTML Table
+        {
+            var details = new List<CityStateMasterEntity>();
+            try
+            {
+                details = new GenericDAO().GetCityByState(str);
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+        [WebMethod]
+        public static ClientGroupMasterEntity[] GetActiveClientGroups() //Show the details of the data after insert in HTML Table
+        {
+            var details = new List<ClientGroupMasterEntity>();
+            try
+            {
+                details = new GenericDAO().GetActiveClientGroups();
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+        [WebMethod]
+        public static ClientCategoryMasterEntity[] GetActiveClientCategories() //Show the details of the data after insert in HTML Table
+        {
+            var details = new List<ClientCategoryMasterEntity>();
+            try
+            {
+                details = new GenericDAO().GetActiveClientCategories();
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
             }
             return details.ToArray();
         }

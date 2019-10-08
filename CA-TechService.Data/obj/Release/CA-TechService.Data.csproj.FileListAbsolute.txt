@@ -1,0 +1,7 @@
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\bin\Release\CA-TechService.Data.dll
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\bin\Release\CA-TechService.Data.pdb
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\bin\Release\CA-TechService.Common.dll
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\bin\Release\CA-TechService.Common.pdb
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\obj\Release\CA-TechService.Data.csprojResolveAssemblyReference.cache
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\obj\Release\CA-TechService.Data.dll
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Data\obj\Release\CA-TechService.Data.pdb

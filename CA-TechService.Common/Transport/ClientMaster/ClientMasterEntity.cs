@@ -35,7 +35,7 @@ namespace CA_TechService.Common.Transport.ClientMaster
         public string MOBILE_NO1 { get; set; }
         public string MOBILE_NO2 { get; set; }
         public string EMAIL_ID { get; set; }
-        public DateTime DOB { get; set; }
+        public string DOB { get; set; }
         public string PAN { get; set; }
         public string AADHAAR { get; set; }
         public string GSTIN { get; set; }
@@ -44,7 +44,7 @@ namespace CA_TechService.Common.Transport.ClientMaster
         public int CLI_GRP_ID { get; set; }
         public string CLI_GRP_NAME { get; set; }
         public bool ACTIVE_STATUS { get; set; }
-        public string Alert_Msg { get; set; }
+        public string ALERT_MSG { get; set; }
         public List<ClientCategoryMapping> ClientCategoryList { get; set; }
         public string ClientCategoryStringList { get; set; }
     }

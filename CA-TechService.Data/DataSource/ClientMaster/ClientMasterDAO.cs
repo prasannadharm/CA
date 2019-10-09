@@ -97,22 +97,25 @@ namespace CA_TechService.Data.DataSource.ClientMaster
                         obj.GSTIN = ds.Tables[0].Rows[i]["GSTIN"] != DBNull.Value ? ds.Tables[0].Rows[i]["GSTIN"].ToString() : "";
                         obj.WARD = ds.Tables[0].Rows[i]["WARD"] != DBNull.Value ? ds.Tables[0].Rows[i]["WARD"].ToString() : "";
                         obj.RACK_NO = ds.Tables[0].Rows[i]["RACK_NO"] != DBNull.Value ? ds.Tables[0].Rows[i]["RACK_NO"].ToString() : "";
-                        obj.Alert_Msg = ds.Tables[0].Rows[i]["Alert_Msg"] != DBNull.Value ? ds.Tables[0].Rows[i]["Alert_Msg"].ToString() : "";
+                        obj.ALERT_MSG = ds.Tables[0].Rows[i]["ALERT_MSG"] != DBNull.Value ? ds.Tables[0].Rows[i]["ALERT_MSG"].ToString() : "";
                         obj.CLI_GRP_NAME = ds.Tables[0].Rows[i]["CLI_GRP_NAME"] != DBNull.Value ? ds.Tables[0].Rows[i]["CLI_GRP_NAME"].ToString() : "";
                         obj.CLI_GRP_ID = ds.Tables[0].Rows[i]["CLI_GRP_ID"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[i]["CLI_GRP_ID"].ToString());
-                        obj.DOB = ds.Tables[0].Rows[i]["DOB"] == DBNull.Value ? Convert.ToDateTime("01/01/1990") : Convert.ToDateTime(ds.Tables[0].Rows[i]["DOB"]);
+                        obj.DOB = ds.Tables[0].Rows[i]["DOB"] == DBNull.Value ? "" : Convert.ToString(ds.Tables[0].Rows[i]["DOB"]);
                         obj.ACTIVE_STATUS = Convert.ToBoolean(ds.Tables[0].Rows[i]["ACTIVE_STATUS"]);
 
                         List<ClientCategoryMapping> objmaplst = new List<ClientCategoryMapping>();
+                        string catids = "";
                         for (int j = 0; j <= ds.Tables[1].Rows.Count - 1; j++)
                         {
                             ClientCategoryMapping objnew = new ClientCategoryMapping();
-                            objnew.CLI_CAT_ID = ds.Tables[0].Rows[i]["CLI_CAT_ID"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[i]["CLI_CAT_ID"]);
-                            objnew.C_ID = ds.Tables[0].Rows[i]["C_ID"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[i]["C_ID"]);
-                            objnew.CLI_CAT_NAME = ds.Tables[0].Rows[i]["CLI_CAT_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["CLI_CAT_NAME"].ToString();
+                            objnew.CLI_CAT_ID = ds.Tables[1].Rows[j]["CLI_CAT_ID"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[1].Rows[j]["CLI_CAT_ID"]);
+                            objnew.C_ID = ds.Tables[1].Rows[j]["C_ID"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[1].Rows[j]["C_ID"]);
+                            objnew.CLI_CAT_NAME = ds.Tables[1].Rows[j]["CLI_CAT_NAME"] == DBNull.Value ? "" : ds.Tables[1].Rows[j]["CLI_CAT_NAME"].ToString();
                             objmaplst.Add(objnew);
+                            catids = catids + objnew.CLI_CAT_ID.ToString() + ",";
                         }
-
+                        catids = catids.TrimEnd(',');
+                        obj.ClientCategoryStringList = catids;
                         obj.ClientCategoryList = objmaplst;
                         retlst.Add(obj);
                     }
@@ -164,7 +167,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
                     cmd.Parameters.AddWithValue("@WARD", obj.WARD);
                     cmd.Parameters.AddWithValue("@RACK_NO", obj.RACK_NO);
                     cmd.Parameters.AddWithValue("@CLI_GRP_ID", obj.CLI_GRP_ID);
-                    cmd.Parameters.AddWithValue("@Alert_Msg", obj.Alert_Msg);
+                    cmd.Parameters.AddWithValue("@Alert_Msg", obj.ALERT_MSG);
                     cmd.Parameters.AddWithValue("@ClientCategoryStringList", obj.ClientCategoryStringList);                    
                     cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);
 
@@ -227,7 +230,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
                     cmd.Parameters.AddWithValue("@WARD", obj.WARD);
                     cmd.Parameters.AddWithValue("@RACK_NO", obj.RACK_NO);
                     cmd.Parameters.AddWithValue("@CLI_GRP_ID", obj.CLI_GRP_ID);
-                    cmd.Parameters.AddWithValue("@Alert_Msg", obj.Alert_Msg);
+                    cmd.Parameters.AddWithValue("@Alert_Msg", obj.ALERT_MSG);
                     cmd.Parameters.AddWithValue("@ClientCategoryStringList", obj.ClientCategoryStringList);
                     cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);
 

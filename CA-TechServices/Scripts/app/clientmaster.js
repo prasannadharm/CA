@@ -62,7 +62,7 @@ function getMainGridDetails() {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         url: "ClientMaster.aspx/GetData",
-        data: {},
+        data: '{obj: ' + JSON.stringify(obj) + '}',
         dataType: "json",
         success: function (data) {
             $('#griddiv').remove();

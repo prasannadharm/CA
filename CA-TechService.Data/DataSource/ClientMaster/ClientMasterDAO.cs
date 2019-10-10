@@ -14,7 +14,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
 {
     public class ClientMasterDAO
     {
-        public List<ClientMasterEntity> GetClientList()
+        public List<ClientMasterEntity> GetClientList(ClientMasterSearchEntity ob)
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlDataAdapter adapter;
@@ -26,6 +26,23 @@ namespace CA_TechService.Data.DataSource.ClientMaster
                 {
                     SqlCommand cmd = new SqlCommand("USP_GetClientMasterList", con);
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@C_ID", ob.C_ID);
+                    cmd.Parameters.AddWithValue("@FILE_NO", ob.FILE_NO);
+                    cmd.Parameters.AddWithValue("@C_NAME", ob.C_NAME);
+                    cmd.Parameters.AddWithValue("@GENDER", ob.GENDER);
+                    cmd.Parameters.AddWithValue("@CITY", ob.CITY);
+                    cmd.Parameters.AddWithValue("@STATE", ob.STATE);
+                    cmd.Parameters.AddWithValue("@PH_NO", ob.PH_NO);
+                    cmd.Parameters.AddWithValue("@MOBILE_NO1", ob.MOBILE_NO1);
+                    cmd.Parameters.AddWithValue("@MOBILE_NO2", ob.MOBILE_NO2);
+                    cmd.Parameters.AddWithValue("@EMAIL_ID", ob.EMAIL_ID);                    
+                    cmd.Parameters.AddWithValue("@PAN", ob.PAN);
+                    cmd.Parameters.AddWithValue("@AADHAAR", ob.AADHAAR);
+                    cmd.Parameters.AddWithValue("@GSTIN", ob.GSTIN);
+                    cmd.Parameters.AddWithValue("@WARD", ob.WARD);
+                    cmd.Parameters.AddWithValue("@RACK_NO", ob.RACK_NO);
+                    cmd.Parameters.AddWithValue("@CLI_GRP_LST", ob.CLI_GRP_LST);
+                    cmd.Parameters.AddWithValue("@CLI_CAT_LST", ob.CLI_CAT_LST);
                     con.Open();
                     adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(ds);

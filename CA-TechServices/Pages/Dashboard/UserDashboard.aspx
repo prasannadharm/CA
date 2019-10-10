@@ -31,7 +31,7 @@
             </td>
         </tr>
         <tr>
-            <td>1. Master -> Client Master: (Add, Edit, Delete & Listing Completed) & (Client Search, Doc Upload & Password manager pending)</td>
+            <td>1. Master -> Client Master: (Search, Add, Edit, Delete & Listing Completed) & (Doc Upload & Password manager pending)</td>
         </tr>
         <tr>
             <td>2. Master -> Task Master</td>

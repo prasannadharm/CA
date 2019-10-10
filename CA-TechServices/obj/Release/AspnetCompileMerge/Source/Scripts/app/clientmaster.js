@@ -7,17 +7,62 @@ $(document).ready(function () {
 
     document.getElementById("loader").style.display = "block";
     LoadCombos();
-    getMainGridDetails();
+    
+
+    $("#btnSearch").click(function () {
+        getMainGridDetails();
+    });
+
+    $("#btnClearfilter").click(function () {
+        clearfilter();
+    });
 });
 
 
 
 function getMainGridDetails() {
+    $('#democollapseBtn').collapse('hide');
+
+    var obj = {};    
+    obj.C_NAME = $.trim($("#txt_C_NAME").val());
+    obj.CNT = $("#cmbRows").val();
+
+    obj.C_ID = $.trim($("#txt_C_ID").val());
+    obj.FILE_NO = $.trim($("#txt_FILE_NO").val());
+    obj.PAN = $.trim($("#txt_PAN").val());
+    obj.GSTIN = $.trim($("#txt_GSTIN").val());
+
+    obj.PH_NO = $.trim($('#txt_PHONE').val());
+    obj.MOBILE_NO1 = $.trim($('#txt_MOBILE1').val());
+    obj.MOBILE_NO2 = $.trim($('#txt_MOBILE2').val());
+    obj.AADHAAR = $.trim($("#txt_AADHAAR").val());
+        
+    var CLI_GRP_LST = [];
+    $('#cmb_CLI_GRP > option:selected').each(function () {
+        CLI_GRP_LST.push($(this).val());
+    });
+    obj.CLI_GRP_LST = CLI_GRP_LST.join(',');
+
+    var CLI_CAT_LST = [];
+    $('#cmb_CLI_CAT > option:selected').each(function () {
+        CLI_CAT_LST.push($(this).val());
+    });
+    obj.CLI_CAT_LST = CLI_CAT_LST.join(',');
+
+    obj.WARD = $("#txt_WARD").val();
+    obj.RACK_NO = $("#txt_RACK").val();
+    
+    obj.GENDER = $("#cmb_GENDER").val();
+    obj.STATE = $("#cmb_STATE").val();
+    obj.CITY = $("#cmb_CITY").val();
+    obj.EMAIL_ID = $("#txt_EMAIL").val();
+    
+    
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
         url: "ClientMaster.aspx/GetData",
-        data: {},
+        data: '{obj: ' + JSON.stringify(obj) + '}',
         dataType: "json",
         success: function (data) {
             $('#griddiv').remove();
@@ -41,7 +86,9 @@ function getMainGridDetails() {
 
             }
             $('#tablemain').append("</tbody>");
-            $('#tablemain').DataTable();
+            $('#tablemain').DataTable({
+                "order": [[0, "desc"]]
+            });
             //data-toggle='modal' data-target='#PopupModal'
             document.getElementById("loader").style.display = "none";
         },
@@ -51,6 +98,30 @@ function getMainGridDetails() {
 
         //
     });
+}
+
+function clearfilter() {
+    $('#democollapseBtn').collapse('hide');
+    $("#cmbRows").val(20);
+    $("#txt_C_NAME").val('');
+    $("#txt_C_ID").val('');
+    $("#txt_FILE_NO").val('');
+    $("#txt_PAN").val('');
+    $("#txt_GSTIN").val('');
+    $("#txt_PHONE").val('');
+    $("#txt_MOBILE1").val('');
+    $("#txt_MOBILE2").val('');
+    $("#txt_AADHAAR").val('');
+    $("#cmb_CLI_GRP").val('default').selectpicker("refresh");
+    $("#cmb_CLI_CAT").val('default').selectpicker("refresh");
+    $("#txt_WARD").val('');
+    $("#txt_RACK").val('');
+    $("#cmb_GENDER").val('');
+    $("#cmb_STATE").val('');
+    StateComboChangeF();
+    $("#cmb_CITY").val('');
+    $("#txt_EMAIL").val('');
+    getMainGridDetails();
 }
 
 function LoadCombos()
@@ -63,25 +134,7 @@ function LoadCombos()
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: LoadStateCombo
-    });
-    document.getElementById("loader").style.display = "block";
-    $.ajax({
-        type: "POST",
-        url: "ClientMaster.aspx/GetActiveClientGroups",
-        data: '{}',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: LoadClientGroupCombo
-    });
-    document.getElementById("loader").style.display = "block";
-    $.ajax({
-        type: "POST",
-        url: "ClientMaster.aspx/GetActiveClientCategories",
-        data: '{}',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: LoadClientCategoryCombo
-    });
+    });    
 }
 
 function LoadStateCombo(data) {
@@ -96,6 +149,17 @@ function LoadStateCombo(data) {
     }
     $("#STATE").html(options.join(''));
     $("#STATE1").html(options.join(''));
+    $("#cmb_STATE").html(options.join(''));
+
+    
+    $.ajax({
+        type: "POST",
+        url: "ClientMaster.aspx/GetActiveClientGroups",
+        data: '{}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: LoadClientGroupCombo
+    });    
 }
 
 //Loading City Combo on State Combo Change (Permanent Address)
@@ -176,8 +240,43 @@ function LoadCityCombo1(data) {
     }
 }
 
+function StateComboChangeF() {
+    //if ($('#STATE1').val() != '') {
+    $.ajax({
+        type: "POST",
+        url: "ClientMaster.aspx/GetCityByState",
+        data: "{str: '" + $('#cmb_STATE').val() + "'}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: LoadCityComboF
+    });
+    //}
+    //else {
+    //    $('#CITY1')
+    //    .find('option')
+    //    .remove()
+    //    .end()
+    //    .append('<option value="whatever">text</option>')
+    //    .val('whatever');
+    //}
+}
+
+function LoadCityComboF(data) {
+    var options = [];
+    options.push('<option value="',
+         '', '">',
+         '--Select--', '</option>');
+    for (var i = 0; i < data.d.length; i++) {
+        options.push('<option value="',
+          data.d[i].CITY, '">',
+          data.d[i].CITY, '</option>');
+    }
+    $("#cmb_CITY").html(options.join(''));    
+}
+
 function LoadClientGroupCombo(data) {
     var options = [];
+    var options1 = [];
     options.push('<option value="',
          0, '">',
          '--Select--', '</option>');
@@ -185,8 +284,26 @@ function LoadClientGroupCombo(data) {
         options.push('<option value="',
           data.d[i].CLI_GRP_ID, '">',
           data.d[i].CLI_GRP_NAME, '</option>');
+        options1.push('<option value="',
+          data.d[i].CLI_GRP_ID, '">',
+          data.d[i].CLI_GRP_NAME, '</option>');
     }
     $("#CLI_GRP_NAME").html(options.join(''));
+
+    $("#cmb_CLI_GRP").html(options1.join(''));
+    $("#cmb_CLI_GRP").addClass("selectpicker");
+    $("#cmb_CLI_GRP").addClass("form-control");
+    //$('.selectpicker').selectpicker('');
+
+    document.getElementById("loader").style.display = "block";
+    $.ajax({
+        type: "POST",
+        url: "ClientMaster.aspx/GetActiveClientCategories",
+        data: '{}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: LoadClientCategoryCombo
+    });
 }
 
 function LoadClientCategoryCombo(data) {
@@ -199,14 +316,17 @@ function LoadClientCategoryCombo(data) {
           data.d[i].CLI_CAT_ID, '">',
           data.d[i].CLI_CAT_NAME, '</option>');
     }
-    $("#CLI_CAT").html(options.join(''));
-  
+    $("#CLI_CAT").html(options.join(''));  
     $("#CLI_CAT").addClass("selectpicker");
     $("#CLI_CAT").addClass("form-control");
 
+    $("#cmb_CLI_CAT").html(options.join(''));
+    $("#cmb_CLI_CAT").addClass("selectpicker");
+    $("#cmb_CLI_CAT").addClass("form-control");
+
     $('.selectpicker').selectpicker('');
 
-    document.getElementById("loader").style.display = "none";
+    getMainGridDetails();
 }
 
 function GenederComboChange()
@@ -407,7 +527,8 @@ $(function () {
         $('#mainldetaildiv').show();
 
         ClearDetialViewControls();
-        
+        $("#subheaderdiv").html("<h3 style='color:blue'>Client Master -> Add Client Details</h3>");
+
         $('#C_NAME').focus();
     });
 
@@ -424,7 +545,7 @@ $(function () {
         $('#mainldetaildiv').show();
 
         ClearDetialViewControls();
-      
+        $("#subheaderdiv").html("<h3 style='color:blue'>Client Master -> Edit Client Details</h3>");
         $.ajax({
             type: "Post",
             contentType: "application/json; charset=utf-8",
@@ -433,6 +554,7 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 for (var i = 0; i < data.d.length; i++) {
+                    $("#subheaderdiv").html("<h3 style='color:blue'>Client Master -> Edit Client Details -> Client ID:" + data.d[i].C_ID + "</h3>");
                     $("#C_NAME").val(data.d[i].C_NAME);
                     $("#ALIAS").val(data.d[i].ALIAS);
                     $("#FILE_NO").val(data.d[i].FILE_NO);
@@ -489,8 +611,7 @@ $(function () {
                     $("#C_ID").text(data.d[i].C_ID);                   
                  
                     var array = data.d[i].ClientCategoryStringList.split(",");
-                    $('#CLI_CAT').selectpicker('val', array);
-                   
+                    $('#CLI_CAT').selectpicker('val', array);                    
                 }
                 $('#C_NAME').focus();
                 document.getElementById("loader").style.display = "none";

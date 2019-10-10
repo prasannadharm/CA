@@ -21,12 +21,12 @@ namespace CA_TechServices.Pages.ClientMaster
         }
 
         [WebMethod]
-        public static ClientMasterEntity[] GetData() //Show the details of the data after insert in HTML Table
+        public static ClientMasterEntity[] GetData(ClientMasterSearchEntity obj) //Show the details of the data after insert in HTML Table
         {
             var details = new List<ClientMasterEntity>();
             try
             {
-                details = new ClientMasterDAO().GetClientList();
+                details = new ClientMasterDAO().GetClientList(obj);
             }
             catch (Exception ex)
             {

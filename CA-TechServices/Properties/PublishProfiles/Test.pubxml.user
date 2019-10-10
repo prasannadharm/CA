@@ -28,13 +28,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/16/2019 17:45:43</publishTime>
     </File>
     <File Include="bin/CA-TechService.Common.dll">
-      <publishTime>07/21/2019 20:23:27</publishTime>
+      <publishTime>10/09/2019 05:59:05</publishTime>
     </File>
     <File Include="bin/CA-TechService.Data.dll">
-      <publishTime>07/21/2019 20:23:27</publishTime>
+      <publishTime>10/09/2019 05:59:05</publishTime>
     </File>
     <File Include="bin/CA-TechServices.dll">
-      <publishTime>07/21/2019 20:24:10</publishTime>
+      <publishTime>10/09/2019 05:59:09</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>03/16/2019 17:45:44</publishTime>
@@ -81,6 +81,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
       <publishTime>03/16/2019 17:45:44</publishTime>
     </File>
+    <File Include="Content/ajaxloader.css">
+      <publishTime>05/21/2019 20:34:26</publishTime>
+    </File>
+    <File Include="Content/bootstrap-datepicker3.css">
+      <publishTime>09/21/2019 16:09:02</publishTime>
+    </File>
     <File Include="Content/bootstrap-grid.css">
       <publishTime>03/16/2019 17:45:44</publishTime>
     </File>
@@ -105,6 +111,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/bootstrap-reboot.min.css.map">
       <publishTime>03/16/2019 17:45:44</publishTime>
     </File>
+    <File Include="Content/bootstrap-select.css">
+      <publishTime>05/17/2019 20:50:34</publishTime>
+    </File>
     <File Include="Content/bootstrap.css">
       <publishTime>03/16/2019 17:45:44</publishTime>
     </File>
@@ -123,8 +132,32 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/font-awesome.min.css">
       <publishTime>04/06/2019 21:24:43</publishTime>
     </File>
+    <File Include="Content/images/ui-icons_444444_256x240.png">
+      <publishTime>09/14/2016 17:34:06</publishTime>
+    </File>
+    <File Include="Content/images/ui-icons_555555_256x240.png">
+      <publishTime>09/14/2016 17:34:06</publishTime>
+    </File>
+    <File Include="Content/images/ui-icons_777620_256x240.png">
+      <publishTime>09/14/2016 17:34:06</publishTime>
+    </File>
+    <File Include="Content/images/ui-icons_777777_256x240.png">
+      <publishTime>09/14/2016 17:34:06</publishTime>
+    </File>
+    <File Include="Content/images/ui-icons_cc0000_256x240.png">
+      <publishTime>09/14/2016 17:34:06</publishTime>
+    </File>
+    <File Include="Content/images/ui-icons_ffffff_256x240.png">
+      <publishTime>09/14/2016 17:34:06</publishTime>
+    </File>
+    <File Include="Content/jquery-ui.min.css">
+      <publishTime>09/14/2016 17:34:06</publishTime>
+    </File>
     <File Include="Content/masterpage.css">
       <publishTime>05/06/2019 20:36:57</publishTime>
+    </File>
+    <File Include="Images/barcode.png">
+      <publishTime>09/21/2019 14:55:13</publishTime>
     </File>
     <File Include="Images/CA Logo.png">
       <publishTime>04/02/2019 21:45:03</publishTime>
@@ -132,11 +165,44 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Images/dashboard.png">
       <publishTime>04/09/2019 21:07:00</publishTime>
     </File>
+    <File Include="Images/delete.png">
+      <publishTime>09/21/2019 14:24:13</publishTime>
+    </File>
+    <File Include="Images/download.png">
+      <publishTime>09/26/2019 21:09:50</publishTime>
+    </File>
+    <File Include="Images/edit.png">
+      <publishTime>09/21/2019 14:21:36</publishTime>
+    </File>
     <File Include="Images/favicon.ico">
       <publishTime>07/14/2019 12:45:02</publishTime>
     </File>
+    <File Include="Images/imageview.png">
+      <publishTime>09/22/2019 18:32:21</publishTime>
+    </File>
     <File Include="Images/logout.png">
       <publishTime>05/03/2019 00:33:26</publishTime>
+    </File>
+    <File Include="Images/point.png">
+      <publishTime>09/30/2019 20:09:26</publishTime>
+    </File>
+    <File Include="Images/preview.png">
+      <publishTime>09/22/2019 20:50:48</publishTime>
+    </File>
+    <File Include="Images/print.png">
+      <publishTime>09/22/2019 07:13:40</publishTime>
+    </File>
+    <File Include="Images/report.png">
+      <publishTime>09/30/2019 20:12:31</publishTime>
+    </File>
+    <File Include="Images/select.png">
+      <publishTime>09/23/2019 22:05:47</publishTime>
+    </File>
+    <File Include="Images/upload.png">
+      <publishTime>09/21/2019 14:54:36</publishTime>
+    </File>
+    <File Include="Images/void.png">
+      <publishTime>09/24/2019 20:34:33</publishTime>
     </File>
     <File Include="NLog.config">
       <publishTime>05/06/2019 20:06:40</publishTime>
@@ -154,13 +220,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2019 22:30:18</publishTime>
     </File>
     <File Include="Pages/ClientMaster/ClientMaster.aspx">
-      <publishTime>07/12/2019 07:51:55</publishTime>
+      <publishTime>10/08/2019 22:26:06</publishTime>
     </File>
     <File Include="Pages/Company/Company.aspx">
       <publishTime>05/06/2019 21:23:20</publishTime>
     </File>
     <File Include="Pages/Dashboard/UserDashboard.aspx">
-      <publishTime>04/09/2019 21:06:23</publishTime>
+      <publishTime>10/09/2019 05:57:57</publishTime>
     </File>
     <File Include="Pages/Login/ChangePassword.aspx">
       <publishTime>05/06/2019 22:22:39</publishTime>
@@ -181,7 +247,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/06/2019 22:09:24</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>07/21/2019 20:24:13</publishTime>
+      <publishTime>10/09/2019 05:59:21</publishTime>
+    </File>
+    <File Include="Scripts/AjaxFileupload.js">
+      <publishTime>05/11/2019 20:35:15</publishTime>
     </File>
     <File Include="Scripts/app/changepassword.js">
       <publishTime>05/06/2019 22:21:45</publishTime>
@@ -196,10 +265,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2019 22:28:29</publishTime>
     </File>
     <File Include="Scripts/app/clientmaster.js">
-      <publishTime>07/12/2019 07:51:53</publishTime>
+      <publishTime>10/09/2019 05:55:52</publishTime>
     </File>
     <File Include="Scripts/app/companymaster.js">
-      <publishTime>05/06/2019 21:26:15</publishTime>
+      <publishTime>10/08/2019 18:31:29</publishTime>
     </File>
     <File Include="Scripts/app/forgotpassword.js">
       <publishTime>05/06/2019 20:52:00</publishTime>
@@ -212,6 +281,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/app/usermaster.js">
       <publishTime>05/06/2019 22:10:28</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap-datepicker.min.js">
+      <publishTime>09/21/2019 16:08:41</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap-select.min.js">
+      <publishTime>05/17/2019 20:50:00</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>03/16/2019 17:45:44</publishTime>
@@ -236,6 +311,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/bootstrap.min.js.map">
       <publishTime>03/16/2019 17:45:44</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap4.1.1.bundle.min.js">
+      <publishTime>05/17/2019 21:14:11</publishTime>
     </File>
     <File Include="Scripts/dataTables.bootstrap4.min.js">
       <publishTime>04/21/2019 21:35:53</publishTime>
@@ -282,6 +360,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery-3.0.0.slim.min.map">
       <publishTime>03/16/2019 17:45:44</publishTime>
     </File>
+    <File Include="Scripts/jquery-ui.min.js">
+      <publishTime>09/14/2016 17:34:06</publishTime>
+    </File>
     <File Include="Scripts/jquery.dataTables.min.js">
       <publishTime>04/21/2019 21:35:20</publishTime>
     </File>
@@ -308,6 +389,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/popper.min.js.map">
       <publishTime>03/16/2019 17:45:44</publishTime>
+    </File>
+    <File Include="Scripts/popper2019.min.js">
+      <publishTime>05/14/2019 20:06:56</publishTime>
     </File>
     <File Include="Scripts/README.md">
       <publishTime>03/16/2019 17:45:44</publishTime>
@@ -337,10 +421,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/16/2019 17:45:44</publishTime>
     </File>
     <File Include="Shared/SiteMaster.Master">
-      <publishTime>07/14/2019 18:20:29</publishTime>
+      <publishTime>10/08/2019 19:27:59</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/21/2019 20:24:12</publishTime>
+      <publishTime>10/09/2019 05:59:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

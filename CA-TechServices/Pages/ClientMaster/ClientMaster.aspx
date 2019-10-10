@@ -33,7 +33,7 @@
     <script src="../../Scripts/AjaxFileupload.js"></script>
     <script src="../../Scripts/popper2019.min.js"></script>
     <script src="../../Scripts/bootstrap-select.min.js"></script>
-        
+
     <script src="../../Scripts/bootstrap-datepicker.min.js"></script>
     <script src="../../Scripts/jquery-ui.min.js"></script>
 
@@ -43,11 +43,118 @@
     <div class="col-lg-12" id="mainlistingdiv">
         <div class="panel panel-default">
             <div class="row">
-                <div class="col-6">
+                <div class="col-3">
                     <h2>Client Master</h2>
                 </div>
-                <div class="col-6">
+                <div class="col-9">
+                    <input type="text" name="SEARCH" id="txt_C_NAME" class="form-control" placeholder="Search by Client Name.." style="width: 27%; display: inline; margin-right: 10px;" />
+                    <select name="cmbRows" id="cmbRows" class="form-control" style="width: 110px; display: inline; margin-right: 10px;">
+                        <option value="20">Last 20</option>
+                        <option value="50">Last 50</option>
+                        <option value="100">Last 100</option>
+                        <option value="0">All Clients</option>
+                    </select>
+                    <button type="button" id="btnSearch" class="btn btn-success" style="display: inline; margin-right: 10px; margin-top: -5px">Search</button>
+                    <button type="button" id="btnAdvanced" class="btn btn-primary" style="display: inline; margin-top: -5px; margin-right: 10px" data-toggle="collapse" data-target="#democollapseBtn" aria-expanded="false" aria-controls="democollapseBtn">More Filters</button>
+                    <button type="button" id="btnClearfilter" class="btn btn-danger" style="display: inline; margin-top: -5px; margin-right: 10px">Reset Filters</button>
                     <button type="button" id="btnAddNew" class="btn btn-success addNewButton" style="position: relative; float: right;">Add New</button>
+                </div>
+            </div>
+
+            <div class="collapse" id="democollapseBtn" style="margin-top: 10px; margin-bottom: 10px">
+                <div class="card card-body">
+                    <div class="row">
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>Client ID</label>
+                            <input type="number" id="txt_C_ID" class="form-control" />
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>File No</label>
+                            <input type="text" id="txt_FILE_NO" class="form-control" placeholder="Search by File No." />
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>PAN</label>
+                            <input type="text" id="txt_PAN" class="form-control" placeholder="Search by PAN" />
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>GSTIN</label>
+                            <input type="text" id="txt_GSTIN" class="form-control" placeholder="Search by GSTIN" />
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>Phone</label>
+                            <input type="text" id="txt_PHONE" class="form-control" placeholder="Search by Phone No." />
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>Mobile 1</label>
+                            <input type="text" id="txt_MOBILE1" class="form-control" placeholder="Search by Mobile No." />
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>Mobile 2</label>
+                            <input type="text" id="txt_MOBILE2" class="form-control" placeholder="Search by Mobile No." />
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>Aadhaar</label>
+                            <input type="text" id="txt_AADHAAR" class="form-control" placeholder="Search by Aadhaar No." />
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>Client Group</label>
+                            <select id="cmb_CLI_GRP" multiple data-live-search="true" class="filters">
+                            </select>
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>Client Category</label>
+                            <select id="cmb_CLI_CAT" multiple data-live-search="true" class="filters">
+                            </select>
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>Ward</label>
+                            <input type="text" id="txt_WARD" class="form-control" placeholder="Search by Ward No." />
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>Rack</label>
+                            <input type="text" id="txt_RACK" class="form-control" placeholder="Search by Rack No." />
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>Gender</label>
+                            <select id="cmb_GENDER" class="form-control">
+                                <option value="">--Select--</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>State</label>
+                            <select id="cmb_STATE" class="form-control" onchange="StateComboChangeF()">
+                                <option></option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>City</label>
+                            <select id="cmb_CITY" class="form-control">
+                                <option></option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <label>Email</label>
+                            <input type="text" id="txt_EMAIL" class="form-control" placeholder="Search by Email ID" />
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
@@ -81,7 +188,7 @@
         <div class="panel panel-default">
             <div class="row">
                 <div class="col-12" id="subheaderdiv">
-                    <h2 style='color: blue'>Client Master</h2>
+                    <h3 style='color: blue'>Client Master</h3>
                 </div>
             </div>
 
@@ -131,7 +238,7 @@
                     </select>
                 </div>
                 <div class="form-group col-12 col-md-4 col-lg-4">
-                    <label>Client Category</label>                   
+                    <label>Client Category</label>
                     <select id="CLI_CAT" multiple data-live-search="true" class="filters">
                     </select>
                 </div>
@@ -139,7 +246,7 @@
 
             <div class="row">
                 <div class="form-group col-12 col-md-3 col-lg-3">
-                    <label>Date of Birth</label>                   
+                    <label>Date of Birth</label>
                     <input class="form-control datepicker" id="DOB" name="date" placeholder="DD-MM-YYYY" type="text" style="width: 100%; text-align: center" />
                 </div>
                 <div class="form-group col-12 col-md-3 col-lg-3">
@@ -249,7 +356,7 @@
                     <input type="text" name="Alert_Msg" id="ALERT_MSG" class="form-control" placeholder="Please enter Alert Message." />
                 </div>
             </div>
-           
+
 
             <div class="row">
                 <div class="col-12">

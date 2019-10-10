@@ -2,6 +2,6 @@ F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Release\CA-TechService.Comm
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Release\CA-TechService.Common.pdb
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Release\NLog.dll
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Release\NLog.xml
-F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\obj\Release\CA-TechService.Common.csprojResolveAssemblyReference.cache
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\obj\Release\CA-TechService.Common.dll
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\obj\Release\CA-TechService.Common.pdb
+F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\obj\Release\CA-TechService.Common.csprojResolveAssemblyReference.cache

@@ -174,6 +174,82 @@ namespace CA_TechServices.Pages.ClientMaster
             return details.ToArray();
         }
 
+        [WebMethod]
+        public static ClientCredentialsEntity[] GetClientCredentialsByClientID(long id) //Show the details of the data after insert in HTML Table
+        {
+            var details = new List<ClientCredentialsEntity>();
+            try
+            {
+                details = new ClientMasterDAO().GetClientCredentialsByClientID(id);
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
 
+        [WebMethod]
+        public static ClientCredentialsEntity[] GetClientCredentialsByID(long id) //Show the details of the data after insert in HTML Table
+        {
+            var details = new List<ClientCredentialsEntity>();
+            try
+            {
+                details = new ClientMasterDAO().GetClientCredentialsByID(id);
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+        [WebMethod]
+        public static DbStatusEntity[] DeleteClientCredentials(int id)
+        {
+            var details = new List<DbStatusEntity>();
+            try
+            {
+                details.Add(new ClientMasterDAO().DeleteClientCredentials(id));
+            }
+            catch (Exception ex)
+            {
+                details.Clear();
+                details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+        [WebMethod]
+        public static DbStatusEntity[] InsertClientCredentials(ClientCredentialsEntity obj)
+        {
+            var details = new List<DbStatusEntity>();
+            try
+            {
+                details.Add(new ClientMasterDAO().InsertClientCredentials(obj));
+            }
+            catch (Exception ex)
+            {
+                details.Clear();
+                details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+        [WebMethod]
+        public static DbStatusEntity[] UpdateClientCredentials(ClientCredentialsEntity obj)
+        {
+            var details = new List<DbStatusEntity>();
+            try
+            {
+                details.Add(new ClientMasterDAO().UpdateClientCredentials(obj));
+            }
+            catch (Exception ex)
+            {
+                details.Clear();
+                details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
     }
 }

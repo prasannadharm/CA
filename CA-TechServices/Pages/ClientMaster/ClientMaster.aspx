@@ -164,13 +164,14 @@
                     <table id="tablemain" class="table table-striped table-bordered" style="width: 100%">
                         <thead>
                             <tr>
-                                <th>Client ID</th>
+                                <th>C ID</th>
                                 <th>File No</th>
                                 <th>Name</th>
                                 <th>Mobile</th>
                                 <th>PAN</th>
-                                <th>GSTIN</th>
-                                <th>Active</th>
+                                <th>GSTIN</th>                               
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -372,7 +373,7 @@
     <!-- For Detail Div  -->
 
 
-    <!-- For Modal Popup Screen Authorizations Details -->
+    <!-- For Modal Popup Upload Docs Details -->
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="PopupModalUpload">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -407,9 +408,9 @@
                             </div>
                         </div>
                     </div>
-                </div>                
+                </div>
                 <div class="modal-footer">
-                    <img id="loading" src="../../Images/loading.gif" style="padding-right:10px;display: none;" />
+                    <img id="loading" src="../../Images/loading.gif" style="padding-right: 10px; display: none;" />
                     <button type="button" id="btnUploadDoc" class="btn btn-primary" edit-id="">Upload Document</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
@@ -417,5 +418,72 @@
         </div>
     </div>
     <!-- For Modal Popup  -->
+
+
+    <!-- For Credentials Detail Div  -->
+    <div class="col-lg-12" id="credentailsdiv" style="display: none">
+        <div class="panel panel-default">
+            <div class="row">
+                <div class="col-12" id="credheaderdiv">
+                    <h3 style='color: blue'>Client Credentails</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <label>Site Name</label>
+                    <input type="text" name="SITE_NAME" id="SITE_NAME" class="form-control" placeholder="Please enter Site Name." />
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <label>URL</label>
+                    <input type="text" name="URL" id="URL" class="form-control" placeholder="Please enter Webiste's URL." />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <label>User Name</label>
+                    <input type="text" name="UNAME" id="UNAME" class="form-control" placeholder="Please enter user Name." />
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <label>Password</label>
+                    <input type="text" name="UPASS" id="UPASS" class="form-control" placeholder="Please enter password." />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <label>Remarks</label>
+                    <input type="text" name="REMARKS" id="REMARKS" class="form-control" placeholder="Please enter Remarks." />
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <button type="button" id="btnSaveCred" class="btn btn-primary" data-id="" style="margin-right: 15px;margin-top:32px">Save Data</button>
+                    <button type="button" id="btnUpdateCred" class="btn btn-primary" data-id="" edit-id="" style="margin-right: 15px;margin-top:32px">Update Data</button>
+                    <button type="button" id="btnCancelCred" class="btn btn-danger" style="margin-right: 15px;margin-top:32px">Cancel</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12">
+                    <table id="tablecred" class="table table-striped table-bordered" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Site</th>
+                                <th>URL</th>
+                                <th>User Name</th>
+                                <th>Password</th>
+                                <th>Remarks</th>                                
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- For Detail Div  -->
 
 </asp:Content>

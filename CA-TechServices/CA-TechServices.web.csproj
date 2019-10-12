@@ -109,6 +109,7 @@
     <Content Include="Images\edit.png" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\imageview.png" />
+    <Content Include="Images\key.png" />
     <Content Include="Images\loader.gif" />
     <Content Include="Images\loader1.gif" />
     <Content Include="Images\loading.gif" />

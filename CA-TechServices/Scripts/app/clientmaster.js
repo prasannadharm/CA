@@ -1,5 +1,6 @@
 ﻿var City = "";
 var City1 = "";
+
 $(document).ready(function () {
     var dobday = new Date(1980, 0, 1);
     $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
@@ -7,7 +8,6 @@ $(document).ready(function () {
 
     document.getElementById("loader").style.display = "block";
     LoadCombos();
-
 
     $("#btnSearch").click(function () {
         getMainGridDetails();
@@ -25,7 +25,6 @@ $(document).ready(function () {
         }
     });
 });
-
 
 
 function getMainGridDetails() {
@@ -76,7 +75,7 @@ function getMainGridDetails() {
             $('#griddiv').remove();
             $('#maindiv').append("<div class='table-responsive' id='griddiv'></div>");
             $('#griddiv').append("<table id='tablemain' class='table table-striped table-bordered' style='width: 100%'></table>");
-            $('#tablemain').append("<thead><tr><th>Client ID</th><th>File No</th><th>Name</th><th>Mobile</th><th>PAN</th><th>GSTIN</th><th>Active</th><th></th><th></th><th></th></tr></thead><tbody></tbody>");
+            $('#tablemain').append("<thead><tr><th>C ID</th><th>File No</th><th>Name</th><th>Mobile</th><th>PAN</th><th>GSTIN</th><th></th><th></th><th></th><th></th></tr></thead><tbody></tbody>");
             $('#tablemain tbody').remove();
             $('#tablemain').append("<tbody>");
             for (var i = 0; i < data.d.length; i++) {
@@ -86,11 +85,11 @@ function getMainGridDetails() {
                     "<td style='color:blue'><b>" + data.d[i].C_NAME + "<b></td>" +
                     "<td style='text-align:center;color:green'><b>" + data.d[i].MOBILE_NO1 + "<b></td>" +
                     "<td>" + data.d[i].PAN + "</td>" +
-                    "<td>" + data.d[i].GSTIN + "</td>" +
-                    "<td  style='text-align:center;'>" + "<input type='checkbox' onclick='return false;' " + (data.d[i].ACTIVE_STATUS == true ? "checked='checked'" : "") + "/></td>" +
+                    "<td>" + data.d[i].GSTIN + "</td>" +                    
                     "<td style='text-align:center;'>" + "<img src='../../Images/edit.png' alt='Edit Record' class='editButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnEdit' value='Edit' style='margin-right:5px'/>" + "</td>" +
                     "<td style='text-align:center;'><img src='../../Images/delete.png' alt='Delete Record' class='deleteButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnDelete' value='Delete' style='margin-right:5px;margin-left:5px'/> </td>" +
-                    "<td style='text-align:center;'>" + "<img src='../../Images/upload.png' alt='Upload Image' class='uploadButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnUpload' value='Upload' style='margin-right:5px;margin-left:5px'/>" + "</td></tr>");
+                    "<td style='text-align:center;'>" + "<img src='../../Images/upload.png' alt='Upload Image' class='uploadButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnUpload' value='Upload' style='margin-right:5px;margin-left:5px'/>" + "</td>" +
+                    "<td style='text-align:center;'>" + "<img src='../../Images/key.png' alt='Credentials' class='credentialsButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnCred' value='Credentials' style='margin-right:5px;margin-left:5px'/>" + "</td></tr>");
 
             }
             $('#tablemain').append("</tbody>");
@@ -405,6 +404,113 @@ function chkaddrchanged() {
         $("#CITY1").prop('disabled', false);
         $("#PIN1").prop('disabled', false);
     }
+}
+
+function checkFileExtension(file) {
+    var flag = true;
+    var extension = file.substr((file.lastIndexOf('.') + 1));
+
+    switch (extension) {
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+        case 'JPG':
+        case 'JPEG':
+        case 'PNG':
+            flag = true;
+            break;
+        default:
+            flag = false;
+    }
+
+    return flag;
+}
+
+//get file path from client system
+function getNameFromPath(strFilepath) {
+
+    var objRE = new RegExp(/([^\/\\]+)$/);
+    var strName = objRE.exec(strFilepath);
+
+    if (strName == null) {
+        return null;
+    }
+    else {
+        return strName[0];
+    }
+}
+
+function ShowUploadedFiles() {
+    var clientid = $("#btnUploadDoc").attr("edit-id");
+    $('#txt_docremakrs').val('');
+    $('#tableupload tbody').remove();
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "ClientMaster.aspx/GetClientDocsData",
+        data: '{id: ' + clientid + '}',
+        dataType: "json",
+        success: function (data) {
+            $('#tableupload').append("<tbody>");
+            for (var i = 0; i < data.d.length; i++) {
+                $('#tableupload').append(
+                    "<tr><td>" + data.d[i].ORG_FILE_NAME + "</td>" + "<td>" + data.d[i].REMARKS + "</td>" +
+                    "<td style='text-align:center'><img src='../../Images/delete.png' alt='Delete Record' class='deleteButtonDoc handcursor' data-id='" + data.d[i].PHY_FILE_NAME + "' name='submitButton' id='btnDeleteDoc' value='Delete' style='margin-right:5px;margin-left:5px'/> </td>" +
+                    "<td style='text-align:center'><a class='downloadButton' href='ClientDocsUpload.ashx?action=DOWNLOAD&clientid=" + clientid + "&phy_file_name=" + data.d[i].PHY_FILE_NAME + "&org_file_name=" + data.d[i].ORG_FILE_NAME + "'><img src='../../Images/download.png' alt='Download Record' class='downloadButton handcursor' id='btnDeleteImage' style='margin-right:5px;margin-left:5px'/> </td></a></tr>");
+            }
+            $('#tableupload').append("</tbody>");
+        },
+        error: function () {
+            alert("Error while Showing update data");
+        }
+        //
+    });
+
+}
+
+function getFormattedTimeStamp() {
+    var today = new Date();
+    var y = today.getFullYear();
+    // JavaScript months are 0-based.
+    var m = today.getMonth() + 1;
+    var d = today.getDate();
+    var h = today.getHours();
+    var mi = today.getMinutes();
+    var s = today.getSeconds();
+    var ms = today.getMilliseconds();
+    return y + "-" + m + "-" + d + "-" + h + "-" + mi + "-" + s + "-" + ms;
+}
+
+function loadcredentialsgrid(id) {
+    $('#tablecred tbody').remove();
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "ClientMaster.aspx/GetClientCredentialsByClientID",
+        data: '{id: ' + id + '}',
+        dataType: "json",
+        success: function (data) {
+            $('#tablecred').append("<tbody>");
+            for (var i = 0; i < data.d.length; i++) {
+                $('#tablecred').append(
+                    "<tr><td>" + data.d[i].SITE_NAME + "</td>" +
+                    "<td>" + data.d[i].URL + "</td>" +
+                    "<td>" + data.d[i].UNAME + "</td>" +
+                    "<td>" + data.d[i].UPASS + "</td>" +
+                    "<td>" + data.d[i].REMARKS + "</td>" +
+                    "<td style='text-align:center'><img src='../../Images/edit.png' alt='Edit Record' class='editButtonCred handcursor' data-id='" + data.d[i].ID + "' cdata-id='" + data.d[i].CLIENT_ID + "' name='submitButton' id='btnDeleteCred' value='Delete' style='margin-right:5px;margin-left:5px'/> </td>" +
+                    "<td style='text-align:center'><img src='../../Images/delete.png' alt='Delete Record' class='deleteButtonCred handcursor' data-id='" + data.d[i].ID + "' cdata-id='" + data.d[i].CLIENT_ID + "' name='submitButton' id='btnDeleteCred' value='Delete' style='margin-right:5px;margin-left:5px'/> </td></tr>");
+            }
+            $('#tablecred').append("</tbody>");
+            document.getElementById("loader").style.display = "none";
+            $('#SITE_NAME').focus();
+        },
+        error: function () {
+            alert("Error while Showing update data");
+            document.getElementById("loader").style.display = "none";
+        }
+        //
+    });
 }
 
 $(function () {
@@ -791,79 +897,184 @@ $(function () {
         }
 
     });
-});
 
-function checkFileExtension(file) {
-    var flag = true;
-    var extension = file.substr((file.lastIndexOf('.') + 1));
+    $(document).on("click", ".credentialsButton", function () {
+        document.getElementById("loader").style.display = "block";
+        var id = $(this).attr("data-id");        
+        console.log(id);
+        $("#btnUpdateCred").attr("data-id", id);
+        $("#btnSaveCred").attr("data-id", id);       
 
-    switch (extension) {
-        case 'jpg':
-        case 'jpeg':
-        case 'png':
-        case 'JPG':
-        case 'JPEG':
-        case 'PNG':
-            flag = true;
-            break;
-        default:
-            flag = false;
-    }
+        $('#btnSaveCred').show();
+        $('#btnUpdateCred').hide();
+        $('#mainlistingdiv').hide();
+        $('#credentailsdiv').show();      
+        $("#credheaderdiv").html("<h3 style='color:blue'>Client Credentails -> Client ID : " + id + "</h3>");
+                
+        $('#SITE_NAME').val('');
+        $('#URL').val('');
+        $('#UNAME').val('');
+        $('#UPASS').val('');
+        $('#REMARKS').val('');
 
-    return flag;
-}
-
-//get file path from client system
-function getNameFromPath(strFilepath) {
-
-    var objRE = new RegExp(/([^\/\\]+)$/);
-    var strName = objRE.exec(strFilepath);
-
-    if (strName == null) {
-        return null;
-    }
-    else {
-        return strName[0];
-    }
-}
-
-function ShowUploadedFiles() {
-    var clientid = $("#btnUploadDoc").attr("edit-id");
-    $('#txt_docremakrs').val('');
-    $('#tableupload tbody').remove();
-    $.ajax({
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        url: "ClientMaster.aspx/GetClientDocsData",
-        data: '{id: ' + clientid + '}',
-        dataType: "json",
-        success: function (data) {            
-            $('#tableupload').append("<tbody>");
-            for (var i = 0; i < data.d.length; i++) {
-                $('#tableupload').append(
-                    "<tr><td>" + data.d[i].ORG_FILE_NAME + "</td>" + "<td>" + data.d[i].REMARKS + "</td>" +
-                    "<td style='text-align:center'><img src='../../Images/delete.png' alt='Delete Record' class='deleteButtonDoc handcursor' data-id='" + data.d[i].PHY_FILE_NAME + "' name='submitButton' id='btnDeleteDoc' value='Delete' style='margin-right:5px;margin-left:5px'/> </td>" +
-                    "<td style='text-align:center'><a class='downloadButton' href='ClientDocsUpload.ashx?action=DOWNLOAD&clientid=" + clientid + "&phy_file_name=" + data.d[i].PHY_FILE_NAME + "&org_file_name=" + data.d[i].ORG_FILE_NAME + "'><img src='../../Images/download.png' alt='Download Record' class='downloadButton handcursor' id='btnDeleteImage' style='margin-right:5px;margin-left:5px'/> </td></a></tr>");
-            }
-            $('#tableupload').append("</tbody>");
-        },
-        error: function () {
-            alert("Error while Showing update data");
-        }
-        //
+        loadcredentialsgrid(id);
+        
     });
 
-}
+    $(document).on("click", "#btnCancelCred", function () {       
+        $('#credentailsdiv').hide();
+        $('#mainlistingdiv').show();
+    });
 
-function getFormattedTimeStamp() {
-    var today = new Date();
-    var y = today.getFullYear();
-    // JavaScript months are 0-based.
-    var m = today.getMonth() + 1;
-    var d = today.getDate();
-    var h = today.getHours();
-    var mi = today.getMinutes();
-    var s = today.getSeconds();
-    var ms = today.getMilliseconds();
-    return y + "-" + m + "-" + d + "-" + h + "-" + mi + "-" + s + "-" + ms;
-}
+    $("#btnSaveCred").click(function () {
+
+        if ($("#SITE_NAME").val().trim() == "") {
+            alert("Please enter Site name.");
+            $("#SITE_NAME").focus();
+            return false;
+        }
+
+        if ($("#URL").val().trim() == "") {
+            alert("Please enter Site URL.");
+            $("#URL").focus();
+            return false;
+        }
+
+        var id = $(this).attr("data-id");
+
+        var obj = {};
+        obj.ID = 0;
+        obj.CLIENT_ID = id;
+        obj.SITE_NAME = $("#SITE_NAME").val();
+        obj.URL = $("#URL").val();
+        obj.UNAME = $("#UNAME").val();
+        obj.UPASS = $("#UPASS").val();
+        obj.REMARKS = $("#REMARKS").val(); 
+
+        $.ajax({
+            type: "Post",
+            contentType: "application/json; charset=utf-8",
+            url: "ClientMaster.aspx/InsertClientCredentials",
+            data: '{obj: ' + JSON.stringify(obj) + '}',
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.d.length; i++) {
+                    if (data.d[i].RESULT === 1) {
+                        loadcredentialsgrid(id);
+                        alert(data.d[i].MSG);
+                        $('#SITE_NAME').val('');
+                        $('#URL').val('');
+                        $('#UNAME').val('');
+                        $('#UPASS').val('');
+                        $('#REMARKS').val('');
+                        $("#SITE_NAME").focus();
+                    }
+                    else {
+                        alert(data.d[i].MSG);
+                        $("#SITE_NAME").focus();
+                        return false;
+                    }
+                }
+            },
+            error: function (data) {
+                alert("Error while Adding data of :" + obj.NAME);
+                $("#SITE_NAME").focus();
+                return false;
+            }
+        });
+
+    });
+
+    $("#btnUpdateCred").click(function () {
+
+        if ($("#SITE_NAME").val().trim() == "") {
+            alert("Please enter Site name.");
+            $("#SITE_NAME").focus();
+            return false;
+        }
+
+        if ($("#URL").val().trim() == "") {
+            alert("Please enter Site URL.");
+            $("#URL").focus();
+            return false;
+        }
+
+        var clientid = $(this).attr("data-id");
+        var id = $(this).attr("edit-id");
+
+        var obj = {};
+        obj.ID = id;
+        obj.CLIENT_ID = clientid;
+        obj.SITE_NAME = $("#SITE_NAME").val();
+        obj.URL = $("#URL").val();
+        obj.UNAME = $("#UNAME").val();
+        obj.UPASS = $("#UPASS").val();
+        obj.REMARKS = $("#REMARKS").val();
+
+        $.ajax({
+            type: "Post",
+            contentType: "application/json; charset=utf-8",
+            url: "ClientMaster.aspx/UpdateClientCredentials",
+            data: '{obj: ' + JSON.stringify(obj) + '}',
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.d.length; i++) {
+                    if (data.d[i].RESULT === 1) {
+                        loadcredentialsgrid(clientid);
+                        alert(data.d[i].MSG);
+                        $('#SITE_NAME').val('');
+                        $('#URL').val('');
+                        $('#UNAME').val('');
+                        $('#UPASS').val('');
+                        $('#REMARKS').val('');
+                        $("#SITE_NAME").focus();
+                    }
+                    else {
+                        alert(data.d[i].MSG);
+                        $("#SITE_NAME").focus();
+                        return false;
+                    }
+                }
+            },
+            error: function (data) {
+                alert("Error while Adding data of :" + obj.NAME);
+                $("#SITE_NAME").focus();
+                return false;
+            }
+        });
+
+    });
+
+    $(document).on("click", ".deleteButtonCred", function () {
+        if (confirm("Are you sure you want to delete !") == true) {
+            var id = $(this).attr("data-id");
+            var clientid = $(this).attr("cdata-id");
+            $.ajax({
+                type: "Post",
+                contentType: "application/json; charset=utf-8",
+                url: "ClientMaster.aspx/DeleteClientCredentials",
+                data: '{id: ' + id + '}',
+                dataType: "json",
+                success: function (data) {
+                    for (var i = 0; i < data.d.length; i++) {
+                        if (data.d[i].RESULT === 1) {
+                            loadcredentialsgrid(clientid);
+                            alert(data.d[i].MSG);
+                        }
+                        else {
+                            alert(data.d[i].MSG);
+                            return false;
+                        }
+                    }
+                },
+                error: function (data) {
+                    alert("Error while Deleting data of :" + id);
+                }
+            });
+        }
+
+    });
+});
+
+
+

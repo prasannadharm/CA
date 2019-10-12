@@ -85,4 +85,15 @@ namespace CA_TechService.Common.Transport.ClientMaster
         public string PHY_FILE_NAME { get; set; }
         public string REMARKS { get; set; }        
     }
+
+    public class ClientCredentialsEntity
+    {
+        public long ID { get; set; }
+        public long CLIENT_ID { get; set; }
+        public string SITE_NAME { get; set; }
+        public string URL { get; set; }
+        public string UNAME { get; set; }
+        public string UPASS { get; set; }
+        public string REMARKS { get; set; }
+    }
 }

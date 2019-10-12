@@ -411,5 +411,190 @@ namespace CA_TechService.Data.DataSource.ClientMaster
             return objreturn;
         }
 
+        public DbStatusEntity DeleteClientCredentials(long id)
+        {
+            DbStatusEntity objreturn = new DbStatusEntity();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_DeleteClientCredentials", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", id);                    
+
+                    cmd.Parameters.Add("@RESULT", SqlDbType.Int);
+                    cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@CNT", SqlDbType.Int);
+                    cmd.Parameters["@CNT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@MSG", SqlDbType.NVarChar, 500);
+                    cmd.Parameters["@MSG"].Direction = ParameterDirection.Output;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    objreturn.RESULT = Convert.ToInt32(cmd.Parameters["@RESULT"].Value);
+                    objreturn.CNT = Convert.ToInt32(cmd.Parameters["@CNT"].Value);
+                    objreturn.MSG = Convert.ToString(cmd.Parameters["@MSG"].Value);
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return objreturn;
+        }
+
+        public DbStatusEntity InsertClientCredentials(ClientCredentialsEntity obj)
+        {
+            DbStatusEntity objreturn = new DbStatusEntity();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_InsertClientCredentials", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@CLIENT_ID", obj.CLIENT_ID);
+                    cmd.Parameters.AddWithValue("@SITE_NAME", obj.SITE_NAME);
+                    cmd.Parameters.AddWithValue("@URL", obj.URL);
+                    cmd.Parameters.AddWithValue("@UNAME", obj.UNAME);
+                    cmd.Parameters.AddWithValue("@UPASS", obj.UPASS);
+                    cmd.Parameters.AddWithValue("@REMARKS", obj.REMARKS);
+
+                    cmd.Parameters.Add("@RESULT", SqlDbType.Int);
+                    cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@CNT", SqlDbType.Int);
+                    cmd.Parameters["@CNT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@MSG", SqlDbType.NVarChar, 500);
+                    cmd.Parameters["@MSG"].Direction = ParameterDirection.Output;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    objreturn.RESULT = Convert.ToInt32(cmd.Parameters["@RESULT"].Value);
+                    objreturn.CNT = Convert.ToInt32(cmd.Parameters["@CNT"].Value);
+                    objreturn.MSG = Convert.ToString(cmd.Parameters["@MSG"].Value);
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return objreturn;
+        }
+
+        public DbStatusEntity UpdateClientCredentials(ClientCredentialsEntity obj)
+        {
+            DbStatusEntity objreturn = new DbStatusEntity();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_UpdateClientCredentials", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", obj.ID);
+                    cmd.Parameters.AddWithValue("@CLIENT_ID", obj.CLIENT_ID);
+                    cmd.Parameters.AddWithValue("@SITE_NAME", obj.SITE_NAME);
+                    cmd.Parameters.AddWithValue("@URL", obj.URL);
+                    cmd.Parameters.AddWithValue("@UNAME", obj.UNAME);
+                    cmd.Parameters.AddWithValue("@UPASS", obj.UPASS);
+                    cmd.Parameters.AddWithValue("@REMARKS", obj.REMARKS);
+
+                    cmd.Parameters.Add("@RESULT", SqlDbType.Int);
+                    cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@CNT", SqlDbType.Int);
+                    cmd.Parameters["@CNT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@MSG", SqlDbType.NVarChar, 500);
+                    cmd.Parameters["@MSG"].Direction = ParameterDirection.Output;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    objreturn.RESULT = Convert.ToInt32(cmd.Parameters["@RESULT"].Value);
+                    objreturn.CNT = Convert.ToInt32(cmd.Parameters["@CNT"].Value);
+                    objreturn.MSG = Convert.ToString(cmd.Parameters["@MSG"].Value);
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return objreturn;
+        }
+
+        public List<ClientCredentialsEntity> GetClientCredentialsByClientID(long id)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<ClientCredentialsEntity> retlst = new List<ClientCredentialsEntity>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetClientCredentialsbyClientID", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        ClientCredentialsEntity obj = new ClientCredentialsEntity();
+                        obj.ID = ds.Tables[0].Rows[i]["ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["ID"].ToString());
+                        obj.CLIENT_ID = ds.Tables[0].Rows[i]["CLIENT_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["CLIENT_ID"].ToString());
+                        obj.SITE_NAME = ds.Tables[0].Rows[i]["SITE_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["SITE_NAME"].ToString();
+                        obj.URL = ds.Tables[0].Rows[i]["URL"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["URL"].ToString();
+                        obj.UNAME = ds.Tables[0].Rows[i]["UNAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["UNAME"].ToString();
+                        obj.UPASS = ds.Tables[0].Rows[i]["UPASS"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["UPASS"].ToString();
+                        obj.REMARKS = ds.Tables[0].Rows[i]["REMARKS"] == DBNull.Value ? "" : Convert.ToString(ds.Tables[0].Rows[i]["REMARKS"]);
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
+
+        public List<ClientCredentialsEntity> GetClientCredentialsByID(long id)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<ClientCredentialsEntity> retlst = new List<ClientCredentialsEntity>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetClientCredentialsbyID", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        ClientCredentialsEntity obj = new ClientCredentialsEntity();
+                        obj.ID = ds.Tables[0].Rows[i]["ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["ID"].ToString());
+                        obj.CLIENT_ID = ds.Tables[0].Rows[i]["CLIENT_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["CLIENT_ID"].ToString());
+                        obj.SITE_NAME = ds.Tables[0].Rows[i]["SITE_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["SITE_NAME"].ToString();
+                        obj.URL = ds.Tables[0].Rows[i]["URL"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["URL"].ToString();
+                        obj.UNAME = ds.Tables[0].Rows[i]["UNAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["UNAME"].ToString();
+                        obj.UPASS = ds.Tables[0].Rows[i]["UPASS"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["UPASS"].ToString();
+                        obj.REMARKS = ds.Tables[0].Rows[i]["REMARKS"] == DBNull.Value ? "" : Convert.ToString(ds.Tables[0].Rows[i]["REMARKS"]);
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
     }
 }

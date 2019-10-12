@@ -830,14 +830,14 @@ function getNameFromPath(strFilepath) {
 function ShowUploadedFiles() {
     var clientid = $("#btnUploadDoc").attr("edit-id");
     $('#txt_docremakrs').val('');
+    $('#tableupload tbody').remove();
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
         url: "ClientMaster.aspx/GetClientDocsData",
         data: '{id: ' + clientid + '}',
         dataType: "json",
-        success: function (data) {
-            $('#tableupload tbody').remove();
+        success: function (data) {            
             $('#tableupload').append("<tbody>");
             for (var i = 0; i < data.d.length; i++) {
                 $('#tableupload').append(

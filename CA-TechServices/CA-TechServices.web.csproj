@@ -101,6 +101,7 @@
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\masterpage.css" />
+    <Content Include="documents\client\3_2019-10-12-15-30-19-437.jpeg" />
     <Content Include="Images\barcode.png" />
     <Content Include="Images\CA Logo.png" />
     <Content Include="Images\dashboard.png" />
@@ -174,6 +175,9 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="documents\client\3_2019-10-12-15-26-56-388.xlsx" />
+    <Content Include="documents\client\3_2019-10-12-15-31-52-188.pdf" />
+    <Content Include="documents\client\4_2019-10-12-15-51-45-115.docx" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -321,7 +325,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppStyles\" />
-    <Folder Include="documents\client\" />
     <Folder Include="Pages\Rules\" />
   </ItemGroup>
   <ItemGroup>

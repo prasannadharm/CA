@@ -388,6 +388,18 @@ function ClearDetialViewControls() {
 
 function chkaddrchanged() {
     if ($("#SAME_AB").prop("checked") == true) {
+
+        if ($("#STATE").val() == null || $("#STATE").val() == undefined || $.trim($("#STATE").val()) == '')
+        {
+            alert('Please select State.');
+            $("#STATE").focus();
+            return false;
+        }
+        if ($("#CITY").val() == null || $("#CITY").val() == undefined || $.trim($("#CITY").val()) == '') {
+            alert('Please select City.');
+            $("#CITY").focus();
+            return false;
+        }
         $("#ADDR1").prop('disabled', true);
         $("#STATE1").prop('disabled', true);
         $("#CITY1").prop('disabled', true);
@@ -522,6 +534,52 @@ $(function () {
             return false;
         }
 
+        if ($("#GENDER").val().trim() == "") {
+            alert("Please select Gender.");
+            $("#GENDER").focus();
+            return false;
+        }
+
+        if ($("#STATE").val() == null || $("#STATE").val() == undefined || $.trim($("#STATE").val()) == '') {
+            alert('Please select State.');
+            $("#STATE").focus();
+            return false;
+        }
+        if ($("#CITY").val() == null || $("#CITY").val() == undefined || $.trim($("#CITY").val()) == '') {
+            alert('Please select City.');
+            $("#CITY").focus();
+            return false;
+        }
+
+        if ($("#STATE1").val() == null || $("#STATE1").val() == undefined || $.trim($("#STATE1").val()) == '') {
+            alert('Please select State.');
+            $("#STATE1").focus();
+            return false;
+        }
+        if ($("#CITY1").val() == null || $("#CITY1").val() == undefined || $.trim($("#CITY1").val()) == '') {
+            alert('Please select City.');
+            $("#CITY1").focus();
+            return false;
+        }
+
+        if ($("#CLI_GRP_NAME").val() == null || $("#CLI_GRP_NAME").val() == undefined || $.trim($("#CLI_GRP_NAME").val()) == '' || $("#CLI_GRP_NAME").val() == 0) {
+            alert('Please select Client Group.');
+            $("#CLI_GRP_NAME").focus();
+            return false;
+        }
+
+        var clientCategoryStringList = [];
+        $('#CLI_CAT > option:selected').each(function () {
+            clientCategoryStringList.push($(this).val());
+        });
+
+        if (clientCategoryStringList == undefined || clientCategoryStringList == null || clientCategoryStringList.length <= 0)
+        {
+            alert('Please select atleast one Category.');
+            $("#CLI_CAT").focus();
+            return false;
+        }        
+
         var obj = {};
         obj.C_NAME = $("#C_NAME").val();
         obj.ALIAS = $("#ALIAS").val();
@@ -530,11 +588,7 @@ $(function () {
         obj.GENDER = $("#GENDER").val();
         obj.HNAME = $("#HNAME").val();
         obj.CNT_NAME = $("#CNT_NAME").val();
-        obj.CLI_GRP_ID = $("#CLI_GRP_NAME").val();
-        var clientCategoryStringList = [];
-        $('#CLI_CAT > option:selected').each(function () {
-            clientCategoryStringList.push($(this).val());
-        });
+        obj.CLI_GRP_ID = $("#CLI_GRP_NAME").val();        
         obj.ClientCategoryStringList = clientCategoryStringList.join(',');
         obj.DOB = $("#DOB").val();
         obj.PAN = $("#PAN").val();
@@ -737,6 +791,52 @@ $(function () {
             return false;
         }
 
+        if ($("#GENDER").val().trim() == "") {
+            alert("Please select Gender.");
+            $("#GENDER").focus();
+            return false;
+        }
+
+        if ($("#STATE").val() == null || $("#STATE").val() == undefined || $.trim($("#STATE").val()) == '') {
+            alert('Please select State.');
+            $("#STATE").focus();
+            return false;
+        }
+        if ($("#CITY").val() == null || $("#CITY").val() == undefined || $.trim($("#CITY").val()) == '') {
+            alert('Please select City.');
+            $("#CITY").focus();
+            return false;
+        }
+
+        if ($("#STATE1").val() == null || $("#STATE1").val() == undefined || $.trim($("#STATE1").val()) == '') {
+            alert('Please select State.');
+            $("#STATE1").focus();
+            return false;
+        }
+
+        if ($("#CITY1").val() == null || $("#CITY1").val() == undefined || $.trim($("#CITY1").val()) == '') {
+            alert('Please select City.');
+            $("#CITY1").focus();
+            return false;
+        }
+
+        if ($("#CLI_GRP_NAME").val() == null || $("#CLI_GRP_NAME").val() == undefined || $.trim($("#CLI_GRP_NAME").val()) == '' || $("#CLI_GRP_NAME").val() == 0) {
+            alert('Please select Client Group.');
+            $("#CLI_GRP_NAME").focus();
+            return false;
+        }
+
+        var clientCategoryStringList = [];
+        $('#CLI_CAT > option:selected').each(function () {
+            clientCategoryStringList.push($(this).val());
+        });
+
+        if (clientCategoryStringList == undefined || clientCategoryStringList == null || clientCategoryStringList.length <= 0) {
+            alert('Please select atleast one Category.');
+            $("#CLI_CAT").focus();
+            return false;
+        }
+
         var id = $(this).attr("edit-id");
 
         var obj = {};
@@ -748,11 +848,7 @@ $(function () {
         obj.GENDER = $("#GENDER").val();
         obj.HNAME = $("#HNAME").val();
         obj.CNT_NAME = $("#CNT_NAME").val();
-        obj.CLI_GRP_ID = $("#CLI_GRP_NAME").val();
-        var clientCategoryStringList = [];
-        $('#CLI_CAT > option:selected').each(function () {
-            clientCategoryStringList.push($(this).val());
-        });
+        obj.CLI_GRP_ID = $("#CLI_GRP_NAME").val();        
         obj.ClientCategoryStringList = clientCategoryStringList.join(',');
         obj.DOB = $("#DOB").val();
         obj.PAN = $("#PAN").val();
@@ -1027,6 +1123,8 @@ $(function () {
                         $('#UNAME').val('');
                         $('#UPASS').val('');
                         $('#REMARKS').val('');
+                        $('#btnSaveCred').show();
+                        $('#btnUpdateCred').hide();
                         $("#SITE_NAME").focus();
                     }
                     else {
@@ -1073,6 +1171,43 @@ $(function () {
             });
         }
 
+    });
+
+    $(document).on("click", ".editButtonCred", function () {
+        document.getElementById("loader").style.display = "block";
+
+        var clientid = $(this).attr("cdata-id");
+        var id = $(this).attr("data-id");
+        console.log(id);
+        $("#btnUpdateCred").attr("edit-id", id);
+        $("#btnUpdateCred").attr("data-id", clientid);     
+
+        $('#btnSaveCred').hide();
+        $('#btnUpdateCred').show();
+
+        console.log(id);      
+
+        $.ajax({
+            type: "Post",
+            contentType: "application/json; charset=utf-8",
+            url: "ClientMaster.aspx/GetClientCredentialsByID",
+            data: '{id: ' + id + '}',
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.d.length; i++) {
+                    $("#SITE_NAME").val(data.d[i].SITE_NAME);
+                    $("#URL").val(data.d[i].URL);
+                    $("#UNAME").val(data.d[i].UNAME);
+                    $("#UPASS").val(data.d[i].UPASS);
+                    $("#REMARKS").val(data.d[i].REMARKS);
+                }
+                $('#SITE_NAME').focus();
+                document.getElementById("loader").style.display = "none";
+            },
+            error: function () {
+                alert("Error while retrieving data of :" + id);
+            }
+        });
     });
 });
 

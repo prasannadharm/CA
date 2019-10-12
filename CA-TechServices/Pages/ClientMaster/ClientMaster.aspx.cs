@@ -158,5 +158,22 @@ namespace CA_TechServices.Pages.ClientMaster
             }
             return details.ToArray();
         }
+
+        [WebMethod]
+        public static ClientDocsEntity[] GetClientDocsData(long id) //Show the details of the data after insert in HTML Table
+        {
+            var details = new List<ClientDocsEntity>();
+            try
+            {
+                details = new ClientMasterDAO().GetClientDocs(id);
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+
     }
 }

@@ -109,6 +109,9 @@
     <Content Include="Images\edit.png" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\imageview.png" />
+    <Content Include="Images\loader.gif" />
+    <Content Include="Images\loader1.gif" />
+    <Content Include="Images\loading.gif" />
     <Content Include="Images\logout.png" />
     <Content Include="Images\point.png" />
     <Content Include="Images\preview.png" />
@@ -173,6 +176,7 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Pages\ClientMaster\ClientDocsUpload.ashx" />
     <None Include="Properties\PublishProfiles\FIle.pubxml" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
@@ -229,6 +233,9 @@
     </Compile>
     <Compile Include="Pages\ClientMaster\ClientCategory.aspx.designer.cs">
       <DependentUpon>ClientCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClientMaster\ClientDocsUpload.ashx.cs">
+      <DependentUpon>ClientDocsUpload.ashx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ClientMaster\ClientGroup.aspx.cs">
       <DependentUpon>ClientGroup.aspx</DependentUpon>
@@ -313,6 +320,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppStyles\" />
+    <Folder Include="documents\client\" />
     <Folder Include="Pages\Rules\" />
   </ItemGroup>
   <ItemGroup>

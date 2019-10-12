@@ -77,4 +77,12 @@ namespace CA_TechService.Common.Transport.ClientMaster
         public int CLI_CAT_ID { get; set; }
         public string CLI_CAT_NAME { get; set; }
     }
+
+    public class ClientDocsEntity
+    {
+        public long CLIENT_ID { get; set; }
+        public string ORG_FILE_NAME { get; set; }
+        public string PHY_FILE_NAME { get; set; }
+        public string REMARKS { get; set; }        
+    }
 }

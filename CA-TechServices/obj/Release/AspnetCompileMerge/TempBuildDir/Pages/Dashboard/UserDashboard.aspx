@@ -17,7 +17,7 @@
             </td>
         </tr>
         <tr>
-            <td>1. All Master screens except Client & Task Master</td>
+            <td>1. All Master screens Task Master</td>
         </tr>
         <tr>
             <td>2. User Management Screens</td>
@@ -31,7 +31,7 @@
             </td>
         </tr>
         <tr>
-            <td>1. Master -> Client Master: (Search, Add, Edit, Delete & Listing Completed) & (Doc Upload & Password manager pending)</td>
+            <td>1. Master -> Client Master: (Search, Add, Edit, Delete, Doc Upload, Password manager & Listing Completed) : Pending for Client Review</td>
         </tr>
         <tr>
             <td>2. Master -> Task Master</td>

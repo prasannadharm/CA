@@ -104,11 +104,14 @@
     <Content Include="documents\client\3_2019-10-12-15-30-19-437.jpeg" />
     <Content Include="Images\barcode.png" />
     <Content Include="Images\CA Logo.png" />
+    <Content Include="Images\clients.png" />
     <Content Include="Images\dashboard.png" />
     <Content Include="Images\delete.png" />
+    <Content Include="Images\down.png" />
     <Content Include="Images\download.png" />
     <Content Include="Images\edit.png" />
     <Content Include="Images\favicon.ico" />
+    <Content Include="Images\flow.png" />
     <Content Include="Images\imageview.png" />
     <Content Include="Images\key.png" />
     <Content Include="Images\loader.gif" />
@@ -120,6 +123,7 @@
     <Content Include="Images\print.png" />
     <Content Include="Images\report.png" />
     <Content Include="Images\select.png" />
+    <Content Include="Images\up.png" />
     <Content Include="Images\upload.png" />
     <Content Include="Images\void.png" />
     <Content Include="packages.config" />
@@ -133,6 +137,7 @@
     <Content Include="Pages\Login\ForgotPassword.aspx" />
     <Content Include="Pages\Login\UserLogin.aspx" />
     <Content Include="Pages\Roles\Roles.aspx" />
+    <Content Include="Pages\TaskMaster\TaskMaster.aspx" />
     <Content Include="Pages\TaskMaster\TaskStageMaster.aspx" />
     <Content Include="Pages\User\Users.aspx" />
     <Content Include="Scripts\AjaxFileupload.js" />
@@ -144,6 +149,7 @@
     <Content Include="Scripts\app\companymaster.js" />
     <Content Include="Scripts\app\forgotpassword.js" />
     <Content Include="Scripts\app\rolesmaster.js" />
+    <Content Include="Scripts\app\taskmaster.js" />
     <Content Include="Scripts\app\taskstagemaster.js" />
     <Content Include="Scripts\app\usermaster.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
@@ -297,6 +303,13 @@
     </Compile>
     <Compile Include="Pages\Roles\Roles.aspx.designer.cs">
       <DependentUpon>Roles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TaskMaster\TaskMaster.aspx.cs">
+      <DependentUpon>TaskMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\TaskMaster\TaskMaster.aspx.designer.cs">
+      <DependentUpon>TaskMaster.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\TaskMaster\TaskStageMaster.aspx.cs">
       <DependentUpon>TaskStageMaster.aspx</DependentUpon>

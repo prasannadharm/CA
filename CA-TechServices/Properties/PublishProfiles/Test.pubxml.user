@@ -28,13 +28,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/16/2019 17:45:43</publishTime>
     </File>
     <File Include="bin/CA-TechService.Common.dll">
-      <publishTime>10/10/2019 21:30:50</publishTime>
+      <publishTime>10/12/2019 23:00:09</publishTime>
     </File>
     <File Include="bin/CA-TechService.Data.dll">
-      <publishTime>10/10/2019 21:30:50</publishTime>
+      <publishTime>10/12/2019 23:00:09</publishTime>
     </File>
     <File Include="bin/CA-TechServices.dll">
-      <publishTime>10/10/2019 21:30:53</publishTime>
+      <publishTime>10/12/2019 23:00:12</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>03/16/2019 17:45:44</publishTime>
@@ -156,6 +156,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/masterpage.css">
       <publishTime>05/06/2019 20:36:57</publishTime>
     </File>
+    <File Include="documents/client/3_2019-10-12-15-26-56-388.xlsx">
+      <publishTime>10/12/2019 15:26:56</publishTime>
+    </File>
+    <File Include="documents/client/3_2019-10-12-15-30-19-437.jpeg">
+      <publishTime>10/12/2019 15:30:19</publishTime>
+    </File>
+    <File Include="documents/client/3_2019-10-12-15-31-52-188.pdf">
+      <publishTime>10/12/2019 15:31:52</publishTime>
+    </File>
+    <File Include="documents/client/4_2019-10-12-15-51-45-115.docx">
+      <publishTime>10/12/2019 15:51:45</publishTime>
+    </File>
     <File Include="Images/barcode.png">
       <publishTime>09/21/2019 14:55:13</publishTime>
     </File>
@@ -179,6 +191,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Images/imageview.png">
       <publishTime>09/22/2019 18:32:21</publishTime>
+    </File>
+    <File Include="Images/key.png">
+      <publishTime>10/12/2019 15:48:18</publishTime>
+    </File>
+    <File Include="Images/loader.gif">
+      <publishTime>04/28/2019 22:30:11</publishTime>
+    </File>
+    <File Include="Images/loader1.gif">
+      <publishTime>04/28/2019 22:30:19</publishTime>
+    </File>
+    <File Include="Images/loading.gif">
+      <publishTime>05/23/2012 09:11:40</publishTime>
     </File>
     <File Include="Images/logout.png">
       <publishTime>05/03/2019 00:33:26</publishTime>
@@ -216,17 +240,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Pages/ClientMaster/ClientCategory.aspx">
       <publishTime>07/01/2019 22:30:46</publishTime>
     </File>
+    <File Include="Pages/ClientMaster/ClientDocsUpload.ashx">
+      <publishTime>10/12/2019 15:05:06</publishTime>
+    </File>
     <File Include="Pages/ClientMaster/ClientGroup.aspx">
       <publishTime>07/01/2019 22:30:18</publishTime>
     </File>
     <File Include="Pages/ClientMaster/ClientMaster.aspx">
-      <publishTime>10/10/2019 06:14:35</publishTime>
+      <publishTime>10/12/2019 17:29:47</publishTime>
     </File>
     <File Include="Pages/Company/Company.aspx">
       <publishTime>05/06/2019 21:23:20</publishTime>
     </File>
     <File Include="Pages/Dashboard/UserDashboard.aspx">
-      <publishTime>10/10/2019 21:30:26</publishTime>
+      <publishTime>10/12/2019 22:57:12</publishTime>
     </File>
     <File Include="Pages/Login/ChangePassword.aspx">
       <publishTime>05/06/2019 22:22:39</publishTime>
@@ -247,7 +274,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/06/2019 22:09:24</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/10/2019 21:31:08</publishTime>
+      <publishTime>10/12/2019 23:00:26</publishTime>
     </File>
     <File Include="Scripts/AjaxFileupload.js">
       <publishTime>05/11/2019 20:35:15</publishTime>
@@ -265,7 +292,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2019 22:28:29</publishTime>
     </File>
     <File Include="Scripts/app/clientmaster.js">
-      <publishTime>10/10/2019 21:19:26</publishTime>
+      <publishTime>10/12/2019 22:55:22</publishTime>
     </File>
     <File Include="Scripts/app/companymaster.js">
       <publishTime>10/08/2019 18:31:29</publishTime>
@@ -424,7 +451,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2019 19:27:59</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/10/2019 21:31:07</publishTime>
+      <publishTime>10/12/2019 23:00:24</publishTime>
     </File>
   </ItemGroup>
 </Project>

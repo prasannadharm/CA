@@ -55,6 +55,8 @@
     <Compile Include="Transport\ClientMaster\ClientGroupMasterEntity.cs" />
     <Compile Include="Transport\ClientMaster\ClientMasterEntity.cs" />
     <Compile Include="Transport\Company\CompanyMasterEntity.cs" />
+    <Compile Include="Transport\Generic\ClientSearchEntity.cs" />
+    <Compile Include="Transport\Generic\GenericIdNameEntity.cs" />
     <Compile Include="Transport\Logging\ExceptionInfo.cs" />
     <Compile Include="Transport\Login\LoginEntity.cs" />
     <Compile Include="Transport\Roles\RoleBaseMenuEntity.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="Transport\Roles\RoleSelectedMenuEntity.cs" />
     <Compile Include="Transport\Rules\Rules.cs" />
     <Compile Include="Transport\Rules\UserMenuEntity.cs" />
+    <Compile Include="Transport\TaskMaster\TaskMasterEntity.cs" />
     <Compile Include="Transport\TaskMaster\TaskStageMasterEntity.cs" />
     <Compile Include="Transport\User\ChangePasswordEntity.cs" />
     <Compile Include="Transport\User\ForgotPasswordEntity.cs" />

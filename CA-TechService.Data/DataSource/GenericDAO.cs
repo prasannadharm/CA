@@ -1,5 +1,6 @@
 ﻿using CA_TechService.Common.Transport.CityState;
 using CA_TechService.Common.Transport.ClientMaster;
+using CA_TechService.Common.Transport.Generic;
 using CA_TechService.Common.Transport.Roles;
 using System;
 using System.Collections.Generic;
@@ -214,6 +215,113 @@ namespace CA_TechService.Data.DataSource
             return retlst;
         }
 
+        public List<GenericIdNameEntity> GetActiveTaskStagesList()
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<GenericIdNameEntity> retlst = new List<GenericIdNameEntity>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetActiveTaskStagesList", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        GenericIdNameEntity obj = new GenericIdNameEntity();
+                        obj.ID = ds.Tables[0].Rows[i]["ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["ID"]);
+                        obj.NAME = ds.Tables[0].Rows[i]["NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["NAME"].ToString();                       
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
+
+        public List<GenericIdNameEntity> GetActiveUsersList()
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<GenericIdNameEntity> retlst = new List<GenericIdNameEntity>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetActiveUsersList", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        GenericIdNameEntity obj = new GenericIdNameEntity();
+                        obj.ID = ds.Tables[0].Rows[i]["ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["ID"]);
+                        obj.NAME = ds.Tables[0].Rows[i]["NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["NAME"].ToString();
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
+
+        public List<ClientSearchEntity> GetClientSearchList(string filterby, string filtertext)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<ClientSearchEntity> retlst = new List<ClientSearchEntity>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetClientSearchList", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@FILTERBY", filterby);
+                    cmd.Parameters.AddWithValue("@FILTERTEXT", filtertext);
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        ClientSearchEntity obj = new ClientSearchEntity();
+                        obj.C_ID = ds.Tables[0].Rows[i]["C_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["C_ID"]);
+                        obj.C_NAME = ds.Tables[0].Rows[i]["C_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["C_NAME"].ToString();
+                        obj.FILE_NO = ds.Tables[0].Rows[i]["FILE_NO"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["FILE_NO"].ToString();
+                        obj.PAN = ds.Tables[0].Rows[i]["PAN"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["PAN"].ToString();
+                        obj.AADHAAR = ds.Tables[0].Rows[i]["AADHAAR"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["AADHAAR"].ToString();
+                        obj.GSTIN = ds.Tables[0].Rows[i]["GSTIN"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["GSTIN"].ToString();
+                        obj.CLI_GRP_NAME = ds.Tables[0].Rows[i]["CLI_GRP_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["CLI_GRP_NAME"].ToString();
+                        obj.CLI_CAT_NAME = ds.Tables[0].Rows[i]["CLI_CAT_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["CLI_CAT_NAME"].ToString();
+
+                        obj.PH_NO = ds.Tables[0].Rows[i]["PH_NO"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["PH_NO"].ToString();
+                        obj.MOBILE_NO1 = ds.Tables[0].Rows[i]["MOBILE_NO1"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["MOBILE_NO1"].ToString();
+                        obj.MOBILE_NO2 = ds.Tables[0].Rows[i]["MOBILE_NO2"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["MOBILE_NO2"].ToString();
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
 
     }
 }

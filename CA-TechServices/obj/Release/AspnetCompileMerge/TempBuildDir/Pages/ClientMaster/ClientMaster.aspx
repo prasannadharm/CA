@@ -47,7 +47,7 @@
                     <h2>Client Master</h2>
                 </div>
                 <div class="col-9">
-                    <input type="text" name="SEARCH" id="txt_C_NAME" class="form-control" placeholder="Search by Client Name.." style="width: 27%; display: inline; margin-right: 10px;" />
+                    <input type="text" name="SEARCH" id="txt_C_NAME" class="form-control searchcntrls" placeholder="Search by Client Name.." style="width: 27%; display: inline; margin-right: 10px;" />
                     <select name="cmbRows" id="cmbRows" class="form-control" style="width: 110px; display: inline; margin-right: 10px;">
                         <option value="20">Last 20</option>
                         <option value="50">Last 50</option>
@@ -66,64 +66,64 @@
                     <div class="row">
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>Client ID</label>
-                            <input type="number" id="txt_C_ID" class="form-control" />
+                            <input type="number" id="txt_C_ID" class="form-control searchcntrls" />
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>File No</label>
-                            <input type="text" id="txt_FILE_NO" class="form-control" placeholder="Search by File No." />
+                            <input type="text" id="txt_FILE_NO" class="form-control searchcntrls" placeholder="Search by File No." />
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>PAN</label>
-                            <input type="text" id="txt_PAN" class="form-control" placeholder="Search by PAN" />
+                            <input type="text" id="txt_PAN" class="form-control searchcntrls" placeholder="Search by PAN" />
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>GSTIN</label>
-                            <input type="text" id="txt_GSTIN" class="form-control" placeholder="Search by GSTIN" />
+                            <input type="text" id="txt_GSTIN" class="form-control searchcntrls" placeholder="Search by GSTIN" />
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>Phone</label>
-                            <input type="text" id="txt_PHONE" class="form-control" placeholder="Search by Phone No." />
+                            <input type="text" id="txt_PHONE" class="form-control searchcntrls" placeholder="Search by Phone No." />
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>Mobile 1</label>
-                            <input type="text" id="txt_MOBILE1" class="form-control" placeholder="Search by Mobile No." />
+                            <input type="text" id="txt_MOBILE1" class="form-control searchcntrls" placeholder="Search by Mobile No." />
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>Mobile 2</label>
-                            <input type="text" id="txt_MOBILE2" class="form-control" placeholder="Search by Mobile No." />
+                            <input type="text" id="txt_MOBILE2" class="form-control searchcntrls" placeholder="Search by Mobile No." />
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>Aadhaar</label>
-                            <input type="text" id="txt_AADHAAR" class="form-control" placeholder="Search by Aadhaar No." />
+                            <input type="text" id="txt_AADHAAR" class="form-control searchcntrls" placeholder="Search by Aadhaar No." />
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>Client Group</label>
-                            <select id="cmb_CLI_GRP" multiple data-live-search="true" class="filters">
+                            <select id="cmb_CLI_GRP" multiple data-live-search="true" class="filters searchcntrls">
                             </select>
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>Client Category</label>
-                            <select id="cmb_CLI_CAT" multiple data-live-search="true" class="filters">
+                            <select id="cmb_CLI_CAT" multiple data-live-search="true" class="filters searchcntrls">
                             </select>
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>Ward</label>
-                            <input type="text" id="txt_WARD" class="form-control" placeholder="Search by Ward No." />
+                            <input type="text" id="txt_WARD" class="form-control searchcntrls" placeholder="Search by Ward No." />
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>Rack</label>
-                            <input type="text" id="txt_RACK" class="form-control" placeholder="Search by Rack No." />
+                            <input type="text" id="txt_RACK" class="form-control searchcntrls" placeholder="Search by Rack No." />
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
@@ -137,21 +137,21 @@
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>State</label>
-                            <select id="cmb_STATE" class="form-control" onchange="StateComboChangeF()">
+                            <select id="cmb_STATE" class="form-control searchcntrls" onchange="StateComboChangeF()">
                                 <option></option>
                             </select>
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>City</label>
-                            <select id="cmb_CITY" class="form-control">
+                            <select id="cmb_CITY" class="form-control searchcntrls">
                                 <option></option>
                             </select>
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
                             <label>Email</label>
-                            <input type="text" id="txt_EMAIL" class="form-control" placeholder="Search by Email ID" />
+                            <input type="text" id="txt_EMAIL" class="form-control searchcntrls" placeholder="Search by Email ID" />
                         </div>
 
                     </div>
@@ -164,13 +164,14 @@
                     <table id="tablemain" class="table table-striped table-bordered" style="width: 100%">
                         <thead>
                             <tr>
-                                <th>Client ID</th>
+                                <th>C ID</th>
                                 <th>File No</th>
                                 <th>Name</th>
                                 <th>Mobile</th>
                                 <th>PAN</th>
-                                <th>GSTIN</th>
-                                <th>Active</th>
+                                <th>GSTIN</th>                               
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -370,4 +371,119 @@
         </div>
     </div>
     <!-- For Detail Div  -->
+
+
+    <!-- For Modal Popup Upload Docs Details -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="PopupModalUpload">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Client Documents Upload Area</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <div class="table-responsive" id="griddivupload">
+                            <table id="tableupload" class="table table-striped table-bordered" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>File Name</th>
+                                        <th>Remarks</th>
+                                        <th>Delete</th>
+                                        <th>Download</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <asp:FileUpload ID="fileToUpload" runat="server" ClientIDMode="Static" />
+                            </div>
+                            <div class="form-group col-12">
+                                <label>Remarks</label>
+                                <input type="text" id="txt_docremakrs" class="form-control" placeholder="Please enter Document Remarks." />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <img id="loading" src="../../Images/loading.gif" style="padding-right: 10px; display: none;" />
+                    <button type="button" id="btnUploadDoc" class="btn btn-primary" edit-id="">Upload Document</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- For Modal Popup  -->
+
+
+    <!-- For Credentials Detail Div  -->
+    <div class="col-lg-12" id="credentailsdiv" style="display: none">
+        <div class="panel panel-default">
+            <div class="row">
+                <div class="col-12" id="credheaderdiv">
+                    <h3 style='color: blue'>Client Credentails</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <label>Site Name</label>
+                    <input type="text" name="SITE_NAME" id="SITE_NAME" class="form-control" placeholder="Please enter Site Name." />
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <label>URL</label>
+                    <input type="text" name="URL" id="URL" class="form-control" placeholder="Please enter Webiste's URL." />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <label>User Name</label>
+                    <input type="text" name="UNAME" id="UNAME" class="form-control" placeholder="Please enter user Name." />
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <label>Password</label>
+                    <input type="text" name="UPASS" id="UPASS" class="form-control" placeholder="Please enter password." />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <label>Remarks</label>
+                    <input type="text" name="REMARKS" id="REMARKS" class="form-control" placeholder="Please enter Remarks." />
+                </div>
+                <div class="form-group col-12 col-md-6 col-lg-6">
+                    <button type="button" id="btnSaveCred" class="btn btn-primary" data-id="" style="margin-right: 15px;margin-top:32px">Save Data</button>
+                    <button type="button" id="btnUpdateCred" class="btn btn-primary" data-id="" edit-id="" style="margin-right: 15px;margin-top:32px">Update Data</button>
+                    <button type="button" id="btnCancelCred" class="btn btn-danger" style="margin-right: 15px;margin-top:32px">Cancel</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12">
+                    <table id="tablecred" class="table table-striped table-bordered" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Site</th>
+                                <th>URL</th>
+                                <th>User Name</th>
+                                <th>Password</th>
+                                <th>Remarks</th>                                
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- For Detail Div  -->
+
 </asp:Content>

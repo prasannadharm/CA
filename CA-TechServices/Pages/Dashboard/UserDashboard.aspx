@@ -17,7 +17,7 @@
             </td>
         </tr>
         <tr>
-            <td>1. All Master screens Task Master</td>
+            <td>1. All Master screens except Task Master</td>
         </tr>
         <tr>
             <td>2. User Management Screens</td>
@@ -29,12 +29,9 @@
             <td>
                 <h4>Work In Progress</h4>
             </td>
-        </tr>
+        </tr>        
         <tr>
-            <td>1. Master -> Client Master: (Search, Add, Edit, Delete, Doc Upload, Password manager & Listing Completed) : Pending for Client Review</td>
-        </tr>
-        <tr>
-            <td>2. Master -> Task Master</td>
+            <td>1. Master -> Task Master (Save & Edit Pending)</td>
         </tr>
         <tr>
             <td>

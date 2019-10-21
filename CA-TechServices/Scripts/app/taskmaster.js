@@ -300,6 +300,101 @@ function rebuildclientsubtable() {
     });
 }
 
+function recurringcombochange()
+{   
+    $("#RECURRING_DAYS").prop('disabled', true);
+    $("#RECURRING_START_DAY").prop('disabled', true);
+    $("#RECURRING_END_DATE").prop('disabled', true);
+    if ($('#RECURRING_TYPE').val() == 'Once')
+    {
+
+        $("#RECURRING_DAYS").prop('disabled', true);
+        $("#RECURRING_START_DAY").prop('disabled', true);
+        $("#RECURRING_END_DATE").prop('disabled', true);
+    }
+    else if ($('#RECURRING_TYPE').val() == 'Weekly')
+    {
+        $("#RECURRING_DAYS").val(7);
+        $("#RECURRING_START_DAY").val(1);
+        $("#RECURRING_DAYS").prop('disabled', true);
+        $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_END_DATE").prop('disabled', false);
+    }
+    else if ($('#RECURRING_TYPE').val() == 'Bi-Monthly') {
+        $("#RECURRING_DAYS").val(15);
+        $("#RECURRING_START_DAY").val(1);
+        $("#RECURRING_DAYS").prop('disabled', true);
+        $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_END_DATE").prop('disabled', false);
+    }
+    else if ($('#RECURRING_TYPE').val() == 'Monthly') {
+        $("#RECURRING_DAYS").val(30);
+        $("#RECURRING_START_DAY").val(1);
+        $("#RECURRING_DAYS").prop('disabled', true);
+        $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_END_DATE").prop('disabled', false);
+    }
+    else if ($('#RECURRING_TYPE').val() == 'Quarterly') {
+        $("#RECURRING_DAYS").val(90);
+        $("#RECURRING_START_DAY").val(1);
+        $("#RECURRING_DAYS").prop('disabled', true);
+        $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_END_DATE").prop('disabled', false);
+    }
+    else if ($('#RECURRING_TYPE').val() == 'Bi-Yearly') {
+        $("#RECURRING_DAYS").val(180);
+        $("#RECURRING_START_DAY").val(1);
+        $("#RECURRING_DAYS").prop('disabled', true);
+        $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_END_DATE").prop('disabled', false);
+    }
+    else if ($('#RECURRING_TYPE').val() == 'Yearly') {
+        $("#RECURRING_DAYS").val(365);
+        $("#RECURRING_START_DAY").val(1);
+        $("#RECURRING_DAYS").prop('disabled', true);
+        $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_END_DATE").prop('disabled', false);
+    }
+    else if ($('#RECURRING_TYPE').val() == 'Custom') {
+        $("#RECURRING_DAYS").val(1);
+        $("#RECURRING_START_DAY").val(1);
+        $("#RECURRING_DAYS").prop('disabled', false);
+        $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_END_DATE").prop('disabled', false);
+    }
+}
+
+function clearcontrols()
+{
+    stagescount = 1;
+    stageslstobj = [];
+    stagesobj = {};
+    stagesobj.SLNO = 1;
+    stagesobj.USER = "";
+    stagesobj.STAGE = "";
+    stagesobj.GENID = Math.floor((Math.random() * 10000000) + 1);
+    stageslstobj.push(stagesobj);
+    loadstagescontrols();
+
+    clientlstobj = [];
+    rebuildclientsubtable();
+
+    $('#T_NAME').val('');
+    $('#PRIORITY').val(1);
+    $('#T_DESC').val('');
+    $('#RECURRING_TYPE').val('');
+    $('#RECURRING_DAYS').val(1);
+    $('#RECURRING_START_DAY').val(1);
+    var dobday = new Date(2050, 0, 1);
+    $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+    $('#RECURRING_END_DATE').datepicker('setDate', dobday);
+    $("#ACTIVE_STATUS").prop('checked', true);
+    $('#SEARCHBY').val('NAME');
+    $('#SEARCHTEXT').val('');
+
+    recurringcombochange();
+}
+
 $(function () {
 
     $(document).on("click", ".deleteButton", function () {
@@ -340,15 +435,8 @@ $(function () {
 
         $("#subheaderdiv").html("<h3 style='color:blue'>Task Master -> Add Task Details</h3>");
 
-        stagescount = 1;
-        stageslstobj = [];
-        stagesobj = {};
-        stagesobj.SLNO = 1;
-        stagesobj.USER = "";
-        stagesobj.STAGE = "";
-        stagesobj.GENID = Math.floor((Math.random() * 10000000) + 1);
-        stageslstobj.push(stagesobj);
-        loadstagescontrols();
+        clearcontrols();
+        
         $('#T_NAME').focus();
     });
 

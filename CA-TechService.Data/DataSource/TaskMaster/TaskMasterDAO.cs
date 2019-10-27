@@ -84,7 +84,7 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                             obj1.ACTIVE_STATUS = ds.Tables[0].Rows[i]["ACTIVE_STATUS"] == DBNull.Value ? true : Convert.ToBoolean(ds.Tables[0].Rows[i]["ACTIVE_STATUS"]);
                             objlst1.Add(obj1);                           
                         }
-                        retval.MainList = objlst1;
+                        retval.MainArray = objlst1.ToArray();
 
                         List<TaskMasterSubEntity> objlst2 = new List<TaskMasterSubEntity>();
                         for (int i = 0; i <= ds.Tables[1].Rows.Count - 1; i++)
@@ -99,7 +99,7 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                             obj2.NAME = ds.Tables[1].Rows[i]["NAME"] == DBNull.Value ? "" : ds.Tables[1].Rows[i]["NAME"].ToString();
                             objlst2.Add(obj2);                            
                         }
-                        retval.SubList = objlst2;
+                        retval.SubArray = objlst2.ToArray();
 
                         List<TaskClientMappingEntity> objlst3 = new List<TaskClientMappingEntity>();
                         for (int i = 0; i <= ds.Tables[2].Rows.Count - 1; i++)
@@ -110,9 +110,25 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                             obj3.C_NAME = ds.Tables[2].Rows[i]["C_NAME"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["C_NAME"].ToString();
                             obj3.FILE_NO = ds.Tables[2].Rows[i]["FILE_NO"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["FILE_NO"].ToString();
                             obj3.PAN = ds.Tables[2].Rows[i]["PAN"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["PAN"].ToString();
+                            obj3.AADHAAR = ds.Tables[2].Rows[i]["AADHAAR"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["AADHAAR"].ToString();
+                            obj3.GSTIN = ds.Tables[2].Rows[i]["GSTIN"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["GSTIN"].ToString();
+                            obj3.PH_NO = ds.Tables[2].Rows[i]["PH_NO"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["PH_NO"].ToString();
+                            obj3.MOBILE_NO1 = ds.Tables[2].Rows[i]["MOBILE_NO1"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["MOBILE_NO1"].ToString();
+                            obj3.MOBILE_NO2 = ds.Tables[2].Rows[i]["MOBILE_NO2"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["MOBILE_NO2"].ToString();
+                            obj3.CLI_GRP_NAME = ds.Tables[2].Rows[i]["CLI_GRP_NAME"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["CLI_GRP_NAME"].ToString();
                             objlst3.Add(obj3);                            
                         }
-                        retval.SubList = objlst2;
+                        retval.ClientMapArray = objlst3.ToArray();
+
+                        List<TaskClientCategoryMappingEntity> objlst4 = new List<TaskClientCategoryMappingEntity>();
+                        for (int i = 0; i <= ds.Tables[3].Rows.Count - 1; i++)
+                        {
+                            TaskClientCategoryMappingEntity obj4 = new TaskClientCategoryMappingEntity();
+                            obj4.T_ID = ds.Tables[3].Rows[i]["T_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[3].Rows[i]["T_ID"]);
+                            obj4.CLI_CAT_ID = ds.Tables[3].Rows[i]["CLI_CAT_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[3].Rows[i]["CLI_CAT_ID"]);
+                            objlst4.Add(obj4);
+                        }
+                        retval.ClientCategoryMapArray = objlst4.ToArray();
                     }
                 }
             }
@@ -231,5 +247,132 @@ namespace CA_TechService.Data.DataSource.TaskMaster
             }
             return retlst;
         }
+
+        public DbStatusEntity InsertTaskMaster(TaskMasterParamEntity obj)
+        {
+            DbStatusEntity objreturn = new DbStatusEntity();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_InsertTaskMaster", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@T_NAME", obj.T_NAME);
+                    cmd.Parameters.AddWithValue("@T_DESC", obj.T_DESC);
+                    cmd.Parameters.AddWithValue("@PRIORITY",obj.PRIORITY);
+                    cmd.Parameters.AddWithValue("@RECURRING_TYPE", obj.RECURRING_TYPE);
+                    cmd.Parameters.AddWithValue("@RECURRING_DAYS", obj.RECURRING_DAYS);
+                    cmd.Parameters.AddWithValue("@RECURRING_START_DAY", obj.RECURRING_START_DAY);
+                    cmd.Parameters.AddWithValue("@RECURRING_END_DATE", obj.RECURRING_END_DATE);
+                    cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);
+                    cmd.Parameters.AddWithValue("@MAPPED_CLIENTS", obj.MAPPED_CLIENTS);
+                    cmd.Parameters.AddWithValue("@MAPPED_CLI_CAT", obj.MAPPED_CLI_CAT);
+
+                    DataTable dtsub = new DataTable();
+                    dtsub.Columns.Add("TS_ID", typeof(int));
+                    dtsub.Columns.Add("TS_NAME", typeof(string));
+                    dtsub.Columns.Add("USER_ID", typeof(int));
+                    dtsub.Columns.Add("SL_NO", typeof(int));
+
+                    foreach(TaskMasterSubParamEntity objsub in obj.SUBARR)
+                    {
+                        DataRow dr = dtsub.NewRow();
+                        dr["TS_ID"] = 0;
+                        dr["TS_NAME"] = objsub.STAGE;
+                        dr["USER_ID"] = objsub.USER_ID;
+                        dr["SL_NO"] = objsub.SLNO;
+                        dtsub.Rows.Add(dr);
+                    }
+
+                    SqlParameter sqlParam = cmd.Parameters.AddWithValue("@TVP", dtsub);
+                    sqlParam.SqlDbType = SqlDbType.Structured;                   
+
+                    cmd.Parameters.Add("@RESULT", SqlDbType.Int);
+                    cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@CNT", SqlDbType.Int);
+                    cmd.Parameters["@CNT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@MSG", SqlDbType.NVarChar, 500);
+                    cmd.Parameters["@MSG"].Direction = ParameterDirection.Output;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    objreturn.RESULT = Convert.ToInt32(cmd.Parameters["@RESULT"].Value);
+                    objreturn.CNT = Convert.ToInt32(cmd.Parameters["@CNT"].Value);
+                    objreturn.MSG = Convert.ToString(cmd.Parameters["@MSG"].Value);
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return objreturn;
+        }
+
+        public DbStatusEntity UpdateTaskMaster(TaskMasterParamEntity obj, Int64 id)
+        {
+            DbStatusEntity objreturn = new DbStatusEntity();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_UpdateTaskMaster", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@T_ID", id);
+                    cmd.Parameters.AddWithValue("@T_NAME", obj.T_NAME);
+                    cmd.Parameters.AddWithValue("@T_DESC", obj.T_DESC);
+                    cmd.Parameters.AddWithValue("@PRIORITY", obj.PRIORITY);
+                    cmd.Parameters.AddWithValue("@RECURRING_TYPE", obj.RECURRING_TYPE);
+                    cmd.Parameters.AddWithValue("@RECURRING_DAYS", obj.RECURRING_DAYS);
+                    cmd.Parameters.AddWithValue("@RECURRING_START_DAY", obj.RECURRING_START_DAY);
+                    cmd.Parameters.AddWithValue("@RECURRING_END_DATE", obj.RECURRING_END_DATE);
+                    cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);
+                    cmd.Parameters.AddWithValue("@MAPPED_CLIENTS", obj.MAPPED_CLIENTS);
+                    cmd.Parameters.AddWithValue("@MAPPED_CLI_CAT", obj.MAPPED_CLI_CAT);
+
+                    DataTable dtsub = new DataTable();
+                    dtsub.Columns.Add("TS_ID", typeof(int));
+                    dtsub.Columns.Add("TS_NAME", typeof(string));
+                    dtsub.Columns.Add("USER_ID", typeof(int));
+                    dtsub.Columns.Add("SL_NO", typeof(int));
+
+                    foreach (TaskMasterSubParamEntity objsub in obj.SUBARR)
+                    {
+                        DataRow dr = dtsub.NewRow();
+                        dr["TS_ID"] = 0;
+                        dr["TS_NAME"] = objsub.STAGE;
+                        dr["USER_ID"] = objsub.USER_ID;
+                        dr["SL_NO"] = objsub.SLNO;
+                        dtsub.Rows.Add(dr);
+                    }
+
+                    SqlParameter sqlParam = cmd.Parameters.AddWithValue("@TVP", dtsub);
+                    sqlParam.SqlDbType = SqlDbType.Structured;
+
+                    cmd.Parameters.Add("@RESULT", SqlDbType.Int);
+                    cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@CNT", SqlDbType.Int);
+                    cmd.Parameters["@CNT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@MSG", SqlDbType.NVarChar, 500);
+                    cmd.Parameters["@MSG"].Direction = ParameterDirection.Output;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    objreturn.RESULT = Convert.ToInt32(cmd.Parameters["@RESULT"].Value);
+                    objreturn.CNT = Convert.ToInt32(cmd.Parameters["@CNT"].Value);
+                    objreturn.MSG = Convert.ToString(cmd.Parameters["@MSG"].Value);
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return objreturn;
+        }
+
     }
 }
+

@@ -306,8 +306,7 @@ namespace CA_TechService.Data.DataSource
                         obj.PAN = ds.Tables[0].Rows[i]["PAN"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["PAN"].ToString();
                         obj.AADHAAR = ds.Tables[0].Rows[i]["AADHAAR"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["AADHAAR"].ToString();
                         obj.GSTIN = ds.Tables[0].Rows[i]["GSTIN"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["GSTIN"].ToString();
-                        obj.CLI_GRP_NAME = ds.Tables[0].Rows[i]["CLI_GRP_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["CLI_GRP_NAME"].ToString();
-                        obj.CLI_CAT_NAME = ds.Tables[0].Rows[i]["CLI_CAT_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["CLI_CAT_NAME"].ToString();
+                        obj.CLI_GRP_NAME = ds.Tables[0].Rows[i]["CLI_GRP_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["CLI_GRP_NAME"].ToString();                        
 
                         obj.PH_NO = ds.Tables[0].Rows[i]["PH_NO"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["PH_NO"].ToString();
                         obj.MOBILE_NO1 = ds.Tables[0].Rows[i]["MOBILE_NO1"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["MOBILE_NO1"].ToString();

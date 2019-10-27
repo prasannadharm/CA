@@ -34,7 +34,8 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                         TaskStageMasterEntity obj = new TaskStageMasterEntity();
                         obj.TS_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["TS_ID"].ToString());
                         obj.TS_NAME = ds.Tables[0].Rows[i]["TS_NAME"].ToString();
-                        obj.ACTIVE_STATUS = Convert.ToBoolean(ds.Tables[0].Rows[i]["ACTIVE_STATUS"]);
+                        obj.INVOICE_TYPE = ds.Tables[0].Rows[i]["INVOICE_TYPE"] == DBNull.Value ? false :  Convert.ToBoolean(ds.Tables[0].Rows[i]["INVOICE_TYPE"]);
+                        obj.ACTIVE_STATUS = ds.Tables[0].Rows[i]["ACTIVE_STATUS"] == DBNull.Value ? false : Convert.ToBoolean(ds.Tables[0].Rows[i]["ACTIVE_STATUS"]);
                         retlst.Add(obj);
                     }
                 }
@@ -70,7 +71,8 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                         TaskStageMasterEntity obj = new TaskStageMasterEntity();
                         obj.TS_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["TS_ID"].ToString());
                         obj.TS_NAME = ds.Tables[0].Rows[i]["TS_NAME"].ToString();
-                        obj.ACTIVE_STATUS = Convert.ToBoolean(ds.Tables[0].Rows[i]["ACTIVE_STATUS"]);
+                        obj.INVOICE_TYPE = ds.Tables[0].Rows[i]["INVOICE_TYPE"] == DBNull.Value ? false : Convert.ToBoolean(ds.Tables[0].Rows[i]["INVOICE_TYPE"]);
+                        obj.ACTIVE_STATUS = ds.Tables[0].Rows[i]["ACTIVE_STATUS"] == DBNull.Value ? false : Convert.ToBoolean(ds.Tables[0].Rows[i]["ACTIVE_STATUS"]);
                         retlst.Add(obj);
                     }
                 }
@@ -96,6 +98,7 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                     cmd.Parameters.AddWithValue("@TS_ID", id);
                     cmd.Parameters.AddWithValue("@TS_NAME", obj.TS_NAME);
                     cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);
+                    cmd.Parameters.AddWithValue("@INVOICE_TYPE", obj.INVOICE_TYPE);
 
                     cmd.Parameters.Add("@RESULT", SqlDbType.Int);
                     cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;
@@ -132,6 +135,7 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@TS_NAME", obj.TS_NAME);
                     cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);
+                    cmd.Parameters.AddWithValue("@INVOICE_TYPE", obj.INVOICE_TYPE);
 
                     cmd.Parameters.Add("@RESULT", SqlDbType.Int);
                     cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;

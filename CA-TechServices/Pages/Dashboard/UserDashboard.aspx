@@ -17,7 +17,7 @@
             </td>
         </tr>
         <tr>
-            <td>1. All Master screens except Task Master</td>
+            <td>1. All Master screens.</td>
         </tr>
         <tr>
             <td>2. User Management Screens</td>
@@ -26,12 +26,15 @@
             <td>3. Static website content Part</td>
         </tr>
         <tr>
+            <td>4. Adding Test data to client master</td>
+        </tr>
+        <tr>
             <td>
                 <h4>Work In Progress</h4>
             </td>
         </tr>        
         <tr>
-            <td>1. Master -> Task Master (Save & Edit Pending)</td>
+            <td>1. Transactions - Create Tasks</td>
         </tr>
         <tr>
             <td>

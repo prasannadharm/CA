@@ -11,7 +11,13 @@ $(function () {
         }
 
         var obj = {};
-        obj.TS_NAME = $("#TSK_STG_NAME1").val();
+        obj.TS_NAME = $("#TSK_STG_NAME1").val();        
+        if ($('#INVOICE_TYPE1').is(":checked")) {
+            obj.INVOICE_TYPE = true;
+        }
+        else {
+            obj.INVOICE_TYPE = false;
+        }
         if ($('#ACTIVE_STATUS1').is(":checked")) {
             obj.ACTIVE_STATUS = true;
         }
@@ -86,6 +92,7 @@ $(function () {
         $('#PopupModal').focus();
         $("#TSK_STG_NAME1").val('');
         $("#ACTIVE_STATUS1").prop('checked', true);
+        $("#INVOICE_TYPE1").prop('checked', false);
         $("div.modal-header h2").html("Add Task Stage Details");
         $('#TSK_STG_NAME1').focus();
     });
@@ -114,6 +121,10 @@ $(function () {
                         $("#ACTIVE_STATUS1").prop('checked', true);
                     else
                         $("#ACTIVE_STATUS1").prop('checked', false);
+                    if (data.d[i].INVOICE_TYPE == true)
+                        $("#INVOICE_TYPE1").prop('checked', true);
+                    else
+                        $("#INVOICE_TYPE1").prop('checked', false);
                 }
                 $('#TSK_STG_NAME1').focus();
             },
@@ -134,6 +145,12 @@ $(function () {
         var obj = {};
         obj.TS_ID = id;
         obj.TS_NAME = $("#TSK_STG_NAME1").val();
+        if ($('#INVOICE_TYPE1').is(":checked")) {
+            obj.INVOICE_TYPE = true;
+        }
+        else {
+            obj.INVOICE_TYPE = false;
+        }
         if ($('#ACTIVE_STATUS1').is(":checked")) {
             obj.ACTIVE_STATUS = true;
         }
@@ -182,12 +199,13 @@ function getDetails() {
             $('#griddiv').remove();
             $('#maindiv').append("<div class='table-responsive' id='griddiv'></div>");
             $('#griddiv').append("<table id='tablemain' class='table table-striped table-bordered' style='width: 100%'></table>");
-            $('#tablemain').append("<thead><tr><th>Task Stage Name</th><th>Active</th><th></th><th></th></tr></thead><tbody></tbody>");
+            $('#tablemain').append("<thead><tr><th>Task Stage Name</th><th>Invoice Stage</th><th>Active</th><th></th><th></th></tr></thead><tbody></tbody>");
             $('#tablemain tbody').remove();
             $('#tablemain').append("<tbody>");
             for (var i = 0; i < data.d.length; i++) {
                 $('#tablemain').append(
-                    "<tr><td>" + data.d[i].TS_NAME + "</td><td>" + "<input type='checkbox' onclick='return false;' " + (data.d[i].ACTIVE_STATUS == true ? "checked='checked'" : "") + "/></td>" +
+                    "<tr><td>" + data.d[i].TS_NAME + "</td><td style='text-align:center'>" + "<input type='checkbox' onclick='return false;' " + (data.d[i].INVOICE_TYPE == true ? "checked='checked'" : "") + "/></td>" +
+                    "<td style='text-align:center'>" + "<input type='checkbox' onclick='return false;' " + (data.d[i].ACTIVE_STATUS == true ? "checked='checked'" : "") + "/></td>" +
                     "<td>" + "<input type='button' class='btn btn-warning btn-sm editButton' data-id='" + data.d[i].TS_ID + "' name='submitButton' id='btnEdit' value='Edit' />" + "</td>" +
                     "<td><input type='button' class='btn btn-danger btn-sm deleteButton' data-id='" + data.d[i].TS_ID + "' name='submitButton' id='btnDelete' value='Delete'/> </td></tr>");
             }

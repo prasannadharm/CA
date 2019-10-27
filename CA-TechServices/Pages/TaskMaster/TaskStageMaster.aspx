@@ -24,6 +24,7 @@
                         <thead>
                             <tr>
                                 <th>Task Stage Name</th>                                
+                                <th>Invoice Stage</th>
                                 <th>Active</th>
                                 <th></th>
                                 <th></th>
@@ -49,6 +50,10 @@
                         <div class="form-group col-lg-12">
                             <label>Task Stage Name</label>
                             <input type="text" name="TSK_STG_NAME" id="TSK_STG_NAME1" class="form-control" placeholder="Please enter Task Stage Name"/>                            
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label>Invoice Stage</label>
+                            <input type="checkbox" name="INVOICE_TYPE" id="INVOICE_TYPE1" style="margin-left: 10px; vertical-align: middle;" />
                         </div>
                         <div class="form-group col-lg-12">
                             <label>Active Status</label>

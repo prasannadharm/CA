@@ -43,6 +43,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
                     cmd.Parameters.AddWithValue("@RACK_NO", ob.RACK_NO);
                     cmd.Parameters.AddWithValue("@CLI_GRP_LST", ob.CLI_GRP_LST);
                     cmd.Parameters.AddWithValue("@CLI_CAT_LST", ob.CLI_CAT_LST);
+                    cmd.Parameters.AddWithValue("@CNT", ob.CNT);
                     con.Open();
                     adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(ds);

@@ -132,6 +132,7 @@
                                 <option value="">--Select--</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
+                                <option value="Female">NA</option>
                             </select>
                         </div>
 

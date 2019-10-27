@@ -99,7 +99,8 @@ function getMainGridDetails() {
             //data-toggle='modal' data-target='#PopupModal'
             document.getElementById("loader").style.display = "none";
         },
-        error: function () {
+        error: function (err) {
+            alert(err);
             alert("Error while Showing update data");
         }
 

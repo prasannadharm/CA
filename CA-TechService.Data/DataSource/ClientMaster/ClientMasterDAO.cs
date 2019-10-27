@@ -26,7 +26,7 @@ namespace CA_TechService.Data.DataSource.ClientMaster
                 {
                     SqlCommand cmd = new SqlCommand("USP_GetClientMasterList", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@C_ID", ob.C_ID);
+                    cmd.Parameters.AddWithValue("@C_NO", ob.C_NO);
                     cmd.Parameters.AddWithValue("@FILE_NO", ob.FILE_NO);
                     cmd.Parameters.AddWithValue("@C_NAME", ob.C_NAME);
                     cmd.Parameters.AddWithValue("@GENDER", ob.GENDER);
@@ -51,7 +51,8 @@ namespace CA_TechService.Data.DataSource.ClientMaster
                     for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
                     {
                         ClientMasterEntity obj = new ClientMasterEntity();
-                        obj.C_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["C_ID"].ToString());
+                        obj.C_ID = ds.Tables[0].Rows[i]["C_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["C_ID"]);
+                        obj.C_NO = ds.Tables[0].Rows[i]["C_NO"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["C_NO"]);
                         obj.FILE_NO = ds.Tables[0].Rows[i]["FILE_NO"] != DBNull.Value ? ds.Tables[0].Rows[i]["FILE_NO"].ToString() : "";
                         obj.C_NAME = ds.Tables[0].Rows[i]["C_NAME"] != DBNull.Value ? ds.Tables[0].Rows[i]["C_NAME"].ToString() : "";
                         obj.MOBILE_NO1 = ds.Tables[0].Rows[i]["MOBILE_NO1"] != DBNull.Value ? ds.Tables[0].Rows[i]["MOBILE_NO1"].ToString() : "";
@@ -89,7 +90,8 @@ namespace CA_TechService.Data.DataSource.ClientMaster
                     for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
                     {
                         ClientMasterEntity obj = new ClientMasterEntity();
-                        obj.C_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["C_ID"].ToString());
+                        obj.C_ID = ds.Tables[0].Rows[i]["C_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["C_ID"]);
+                        obj.C_NO = ds.Tables[0].Rows[i]["C_NO"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["C_NO"]);
                         obj.FILE_NO = ds.Tables[0].Rows[i]["FILE_NO"] != DBNull.Value ? ds.Tables[0].Rows[i]["FILE_NO"].ToString() : "";
                         obj.C_NAME = ds.Tables[0].Rows[i]["C_NAME"] != DBNull.Value ? ds.Tables[0].Rows[i]["C_NAME"].ToString() : "";
                         obj.ALIAS = ds.Tables[0].Rows[i]["ALIAS"] != DBNull.Value ? ds.Tables[0].Rows[i]["ALIAS"].ToString() : "";

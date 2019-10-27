@@ -15,6 +15,7 @@ namespace CA_TechService.Common.Transport.ClientMaster
         }
                 
         public Int64  C_ID { get; set; }
+        public Int64 C_NO { get; set; }
         public string FILE_NO { get; set; }
         public string C_NAME { get; set; }
         public string ALIAS { get; set; }
@@ -52,7 +53,7 @@ namespace CA_TechService.Common.Transport.ClientMaster
     public class ClientMasterSearchEntity
     {
         public Int32 CNT { get; set; }
-        public string C_ID { get; set; }
+        public string C_NO { get; set; }
         public string FILE_NO { get; set; }
         public string C_NAME { get; set; }
         public string GENDER { get; set; }

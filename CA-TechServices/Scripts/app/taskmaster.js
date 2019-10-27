@@ -255,7 +255,7 @@ function loadtempsearchclientgrid() {
     $('#tableclientsearch').append("<tbody>");
     for (var i = 0; i < tempclientlstobj.length; i++) {
         $('#tableclientsearch').append(
-            "<tr><td style='text-align:center;color:brown'><b>" + tempclientlstobj[i].C_ID + "</b></td><td>" + tempclientlstobj[i].FILE_NO + "</td><td style='color:blue'>" + tempclientlstobj[i].C_NAME + "</td>" +
+            "<tr><td style='text-align:center;color:brown'><b>" + tempclientlstobj[i].C_NO + "</b></td><td>" + tempclientlstobj[i].FILE_NO + "</td><td style='color:blue'>" + tempclientlstobj[i].C_NAME + "</td>" +
             "<td>" + tempclientlstobj[i].PAN + "</td><td>" + tempclientlstobj[i].AADHAAR + "</td><td>" + tempclientlstobj[i].GSTIN + "</td>" +
             "<td style='text-align: center'><img src='../../Images/select.png' alt='Select Record' class='selectButtonSubis handcursor' data-id='" + tempclientlstobj[i].C_ID + '_' + tempclientlstobj[i].GENID + "' id='btnselectSubIS_" + tempclientlstobj[i].GENID + "' value='Select' style='margin-right:5px;margin-left:5px'/> </td></tr>");
 
@@ -274,6 +274,7 @@ function loadtempsearchclientgrid() {
                 clientobj = {};
                 clientobj.GENID = tempclientlstobj[i].GENID;
                 clientobj.C_ID = tempclientlstobj[i].C_ID;
+                clientobj.C_NO = tempclientlstobj[i].C_NO;
                 clientobj.FILE_NO = tempclientlstobj[i].FILE_NO;
                 clientobj.C_NAME = tempclientlstobj[i].C_NAME;
                 clientobj.PAN = tempclientlstobj[i].PAN;
@@ -299,12 +300,12 @@ function rebuildclientsubtable() {
     $('#griddivDetClientList').remove();
     $('#detdivclientdetails').append("<div class='table-responsive' id='griddivDetClientList'></div>");
     $('#griddivDetClientList').append("<table id='tableDetClientList' class='table table-striped table-bordered' style='width: 100%'></table>");
-    $('#tableDetClientList').append("<thead><tr><th>C ID</th><th>Name</th><th>File No</th><th></th></tr></thead><tbody></tbody>");
+    $('#tableDetClientList').append("<thead><tr><th>C No</th><th>Name</th><th>File No</th><th></th></tr></thead><tbody></tbody>");
     $('#tableDetClientList tbody').remove();
     $('#tableDetClientList').append("<tbody>");
     for (var i = 0; i < clientlstobj.length; i++) {
         $('#tableDetClientList').append(
-            "<tr><td style='text-align:center;color:brown'><b>" + clientlstobj[i].C_ID + "</b></td>" +
+            "<tr><td style='text-align:center;color:brown'><b>" + clientlstobj[i].C_NO + "</b></td>" +
             "<td style='color:blue'><b>" + clientlstobj[i].C_NAME + "<b></td>" +
             "<td style='text-align:center;color:green'>" + clientlstobj[i].FILE_NO + "</td>" +
             "<td style='text-align:center;'><img src='../../Images/delete.png' alt='Delete Record' class='deleteclientButton handcursor' data-id='" + clientlstobj[i].GENID + "' name='submitButton' id='btncliDelete' value='Delete' style='margin-right:5px;margin-left:5px'/> </td></tr>");
@@ -465,6 +466,7 @@ function searchclients() {
                     clientobj = {};
                     clientobj.GENID = Math.floor((Math.random() * 10000000) + 1);
                     clientobj.C_ID = data.d[i].C_ID;
+                    clientobj.C_NO = data.d[i].C_NO;
                     clientobj.FILE_NO = data.d[i].FILE_NO;
                     clientobj.C_NAME = data.d[i].C_NAME;
                     clientobj.PH_NO = data.d[i].PH_NO;
@@ -581,7 +583,7 @@ $(function () {
                 $('#tableStageDetails').append("<tbody>");
                 for (var i = 0; i < data.d.length; i++) {
                     $('#tableStageDetails').append(
-                        "<tr><td style='text-align:center;color:brown'>" + data.d[i].SL_NO + "</td>" +
+                        "<tr><td style='text-align:center;color:brown'><b>" + data.d[i].SL_NO + "</b></td>" +
                         "<td style='color:red'><b>" + data.d[i].TS_NAME + "</b></td>" +
                         "<td style='text-align:center;color:blue'>" + data.d[i].NAME + "</td></tr>");
                 }
@@ -615,12 +617,12 @@ $(function () {
             success: function (data) {                
                 $('#maindivclientdetails').append("<div class='table-responsive' id='griddivClientList'></div>");
                 $('#griddivClientList').append("<table id='tableClientList' class='table table-striped table-bordered' style='width: 100%'></table>");
-                $('#tableClientList').append("<thead><tr><th>C ID</th><th>Name</th><th>File No</th><th>PAN</th></tr></thead><tbody></tbody>");
+                $('#tableClientList').append("<thead><tr><th>C No</th><th>Name</th><th>File No</th><th>PAN</th></tr></thead><tbody></tbody>");
                 $('#tableClientList tbody').remove();
                 $('#tableClientList').append("<tbody>");
                 for (var i = 0; i < data.d.length; i++) {
                     $('#tableClientList').append(
-                        "<tr><td style='text-align:center;color:brown'><b>" + data.d[i].C_ID + "</b></td>" +
+                        "<tr><td style='text-align:center;color:brown'><b>" + data.d[i].C_NO + "</b></td>" +
                         "<td style='color:bluse'>" + data.d[i].C_NAME + "</td>" +
                         "<td style='text-align:center;color:red'>" + data.d[i].FILE_NO + "</td>" +
                         "<td style='color:black'>" + data.d[i].PAN + "</td></tr>");
@@ -980,6 +982,7 @@ $(function () {
                             clientobj = {};
                             clientobj.GENID = Math.floor((Math.random() * 10000000) + 1);
                             clientobj.C_ID = data.d[0].ClientMapArray[i].C_ID;
+                            clientobj.C_NO = data.d[0].ClientMapArray[i].C_NO;
                             clientobj.FILE_NO = data.d[0].ClientMapArray[i].FILE_NO;
                             clientobj.C_NAME = data.d[0].ClientMapArray[i].C_NAME;
                             clientobj.PAN = data.d[0].ClientMapArray[i].PAN;

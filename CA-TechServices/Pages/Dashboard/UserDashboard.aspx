@@ -50,5 +50,8 @@
         <tr>
             <td>3. Dashoard Screen</td>
         </tr>
+        <tr>
+            <td><h5>Press Ctrl + F5 to refresh & view updates on Client & Task Master once</h5></td>
+        </tr>
     </table>
 </asp:Content>

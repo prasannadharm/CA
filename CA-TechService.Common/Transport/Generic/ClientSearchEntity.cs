@@ -9,6 +9,7 @@ namespace CA_TechService.Common.Transport.Generic
     public class ClientSearchEntity
     {
         public Int64 C_ID { get; set; }
+        public Int64 C_NO { get; set; }
         public string FILE_NO { get; set; }
         public string C_NAME { get; set; }
         public string PH_NO { get; set; }

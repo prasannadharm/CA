@@ -107,6 +107,7 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                             TaskClientMappingEntity obj3 = new TaskClientMappingEntity();                          
                             obj3.T_ID = ds.Tables[2].Rows[i]["T_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[2].Rows[i]["T_ID"]);
                             obj3.C_ID = ds.Tables[2].Rows[i]["C_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[2].Rows[i]["C_ID"]);
+                            obj3.C_NO = ds.Tables[2].Rows[i]["C_NO"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[2].Rows[i]["C_NO"]);
                             obj3.C_NAME = ds.Tables[2].Rows[i]["C_NAME"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["C_NAME"].ToString();
                             obj3.FILE_NO = ds.Tables[2].Rows[i]["FILE_NO"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["FILE_NO"].ToString();
                             obj3.PAN = ds.Tables[2].Rows[i]["PAN"] == DBNull.Value ? "" : ds.Tables[2].Rows[i]["PAN"].ToString();
@@ -196,6 +197,7 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                         TaskClientMappingEntity obj = new TaskClientMappingEntity();
                         obj.T_ID = ds.Tables[0].Rows[i]["T_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["T_ID"]);
                         obj.C_ID = ds.Tables[0].Rows[i]["C_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["C_ID"]);
+                        obj.C_NO = ds.Tables[0].Rows[i]["C_NO"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["C_NO"]);
                         obj.C_NAME = ds.Tables[0].Rows[i]["C_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["C_NAME"].ToString();
                         obj.FILE_NO = ds.Tables[0].Rows[i]["C_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["FILE_NO"].ToString();
                         obj.PAN = ds.Tables[0].Rows[i]["C_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["PAN"].ToString();

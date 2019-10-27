@@ -50,6 +50,7 @@ namespace CA_TechService.Common.Transport.TaskMaster
     {
         public Int64 T_ID { get; set; }
         public Int64 C_ID { get; set; }
+        public Int64 C_NO { get; set; }
         public string C_NAME { get; set; }
         public string FILE_NO { get; set; }
         public string PAN { get; set; }

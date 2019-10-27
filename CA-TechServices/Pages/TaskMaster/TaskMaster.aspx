@@ -212,7 +212,7 @@
                             <label>Search By</label>
                             <select id="SEARCHBY" class="form-control">
                                 <option value="NAME">Name</option>
-                                <option value="C_ID">C ID</option>
+                                <option value="C_NO">C NO</option>
                                 <option value="FILE_NO">File No</option>
                                 <option value="PAN">PAN</option>
                                 <option value="AADHAAR">Aadhaar</option>
@@ -240,7 +240,7 @@
                                 <table id="tableDetClientList" class="table table-striped table-bordered" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th>C ID</th>
+                                            <th>C No</th>
                                             <th>Name</th>
                                             <th>File No</th>
                                             <th></th>
@@ -316,7 +316,7 @@
                             <table id="tableClientList" class="table table-striped table-bordered" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th>C ID</th>
+                                        <th>C No</th>
                                         <th>Name</th>
                                         <th>File No</th>
                                         <th>PAN</th>
@@ -350,7 +350,7 @@
                             <table id="tableclientsearch" class="table table-striped table-bordered" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th>C ID</th>
+                                        <th>C No</th>
                                         <th>File No</th>
                                         <th>Name</th>
                                         <th>PAN</th>

@@ -65,8 +65,8 @@
                 <div class="card card-body">
                     <div class="row">
                         <div class="col-6 col-md-4 col-lg-3">
-                            <label>Client ID</label>
-                            <input type="number" id="txt_C_ID" class="form-control searchcntrls" />
+                            <label>Client No</label>
+                            <input type="number" id="txt_C_NO" class="form-control searchcntrls" />
                         </div>
 
                         <div class="col-6 col-md-4 col-lg-3">
@@ -165,8 +165,8 @@
                     <table id="tablemain" class="table table-striped table-bordered" style="width: 100%">
                         <thead>
                             <tr>
-                                <th>C ID</th>
-                                <th>File No</th>
+                                <th>C-No</th>
+                                <th>File-No</th>
                                 <th>Name</th>
                                 <th>Mobile</th>
                                 <th>PAN</th>
@@ -366,8 +366,8 @@
                     <button type="button" id="btnSave" class="btn btn-primary">Save Data</button>
                     <button type="button" id="btnUpdate" class="btn btn-primary" edit-id="">Update Data</button>
                     <button type="button" id="btnCancel" class="btn btn-danger cancelButton" style="margin-right: 15px">Cancel</button>
-                    <label style="margin-left: 10px">Client ID</label>
-                    <label id="C_ID" style="color: brown; margin-left: 5px; margin-right: 20px; font-weight: 500">Client ID</label>
+                    <label style="margin-left: 10px">Client No</label>
+                    <label id="C_NO" style="color: brown; margin-left: 5px; margin-right: 20px; font-weight: 500">Client No</label>
                 </div>
             </div>
         </div>

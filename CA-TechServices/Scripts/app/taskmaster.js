@@ -23,6 +23,15 @@ $(document).ready(function () {
         dataType: "json",
         success: LoadClientCategoryCombo
     });
+
+    $('#SEARCHTEXT').keypress(function (e) {
+        var key = e.which;
+        if (key == 13)  // the enter key code
+        {
+            searchclients();
+        }
+    });
+    
 });
 
 function loadstagescontrols() {
@@ -429,6 +438,63 @@ function LoadClientCategoryCombo(data) {
     $('.selectpicker').selectpicker('');   
 }
 
+function searchclients() {
+    if ($("#SEARCHBY").val().trim() == "") {
+        alert("Please select searchby.");
+        $("#SEARCHBY").focus();
+        return false;
+    }
+
+    if ($("#SEARCHTEXT").val().trim() == "") {
+        alert("Please enter search text.");
+        $("#SEARCHTEXT").focus();
+        return false;
+    }
+    document.getElementById("loader").style.display = "block";
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "TaskMaster.aspx/GetClientSearchList",
+        data: '{filterby: ' + JSON.stringify($("#SEARCHBY").val()) + ',filtertext: ' + JSON.stringify($("#SEARCHTEXT").val()) + '}',
+        dataType: "json",
+        success: function (data) {
+            if (data.d.length > 0) {
+
+                tempclientlstobj = [];
+                for (var i = 0; i < data.d.length; i++) {
+                    clientobj = {};
+                    clientobj.GENID = Math.floor((Math.random() * 10000000) + 1);
+                    clientobj.C_ID = data.d[i].C_ID;
+                    clientobj.FILE_NO = data.d[i].FILE_NO;
+                    clientobj.C_NAME = data.d[i].C_NAME;
+                    clientobj.PH_NO = data.d[i].PH_NO;
+                    clientobj.MOBILE_NO1 = data.d[i].MOBILE_NO1;
+                    clientobj.MOBILE_NO2 = data.d[i].MOBILE_NO2;
+                    clientobj.PAN = data.d[i].PAN;
+                    clientobj.AADHAAR = data.d[i].AADHAAR;
+                    clientobj.GSTIN = data.d[i].GSTIN;
+                    clientobj.CLI_GRP_NAME = data.d[i].CLI_GRP_NAME;
+                    tempclientlstobj.push(clientobj);
+                }
+                loadtempsearchclientgrid();
+                $("#SEARCHTEXT").val('');
+            }
+            else {
+                alert('No data found for the search criteria');
+                $("#SEARCHTEXT").focus();
+            }
+
+            document.getElementById("loader").style.display = "none";
+        },
+        error: function () {
+            alert("Error while Showing update data");
+        }
+
+        //
+    });
+
+}
+
 $(function () {
 
     $(document).on("click", ".deleteButton", function () {
@@ -539,15 +605,14 @@ $(function () {
         var tskname = $(this).attr("data-name");
         console.log(id);
         $("#divclientheader h4").html("Clients Mapped to Task -> " + tskname);
-
+        $('#griddivClientList').remove();
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
             url: "TaskMaster.aspx/GetTaskMasterClientListById",
             data: '{id: ' + id + '}',
             dataType: "json",
-            success: function (data) {
-                $('#griddivClientList').remove();
+            success: function (data) {                
                 $('#maindivclientdetails').append("<div class='table-responsive' id='griddivClientList'></div>");
                 $('#griddivClientList').append("<table id='tableClientList' class='table table-striped table-bordered' style='width: 100%'></table>");
                 $('#tableClientList').append("<thead><tr><th>C ID</th><th>Name</th><th>File No</th><th>PAN</th></tr></thead><tbody></tbody>");
@@ -573,60 +638,7 @@ $(function () {
     });
 
     $(document).on("click", "#btnsearchClient", function () {
-        if ($("#SEARCHBY").val().trim() == "") {
-            alert("Please select searchby.");
-            $("#SEARCHBY").focus();
-            return false;
-        }
-
-        if ($("#SEARCHTEXT").val().trim() == "") {
-            alert("Please enter search text.");
-            $("#SEARCHTEXT").focus();
-            return false;
-        }
-        document.getElementById("loader").style.display = "block";
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: "TaskMaster.aspx/GetClientSearchList",
-            data: '{filterby: ' + JSON.stringify($("#SEARCHBY").val()) + ',filtertext: ' + JSON.stringify($("#SEARCHTEXT").val()) + '}',
-            dataType: "json",
-            success: function (data) {
-                if (data.d.length > 0) {
-
-                    tempclientlstobj = [];
-                    for (var i = 0; i < data.d.length; i++) {
-                        clientobj = {};
-                        clientobj.GENID = Math.floor((Math.random() * 10000000) + 1);
-                        clientobj.C_ID = data.d[i].C_ID;
-                        clientobj.FILE_NO = data.d[i].FILE_NO;
-                        clientobj.C_NAME = data.d[i].C_NAME;
-                        clientobj.PH_NO = data.d[i].PH_NO;
-                        clientobj.MOBILE_NO1 = data.d[i].MOBILE_NO1;
-                        clientobj.MOBILE_NO2 = data.d[i].MOBILE_NO2;
-                        clientobj.PAN = data.d[i].PAN;
-                        clientobj.AADHAAR = data.d[i].AADHAAR;
-                        clientobj.GSTIN = data.d[i].GSTIN;
-                        clientobj.CLI_GRP_NAME = data.d[i].CLI_GRP_NAME;                        
-                        tempclientlstobj.push(clientobj);
-                    }
-                    loadtempsearchclientgrid();
-                    $("#SEARCHTEXT").val('');
-                }
-                else {
-                    alert('No data found for the search criteria');
-                    $("#SEARCHTEXT").focus();
-                }
-
-                document.getElementById("loader").style.display = "none";
-            },
-            error: function () {
-                alert("Error while Showing update data");
-            }
-
-            //
-        });
-
+        searchclients();
     });
 
     $("#btnSave").click(function () {

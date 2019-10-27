@@ -132,7 +132,7 @@
                                 <option value="">--Select--</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
-                                <option value="Female">NA</option>
+                                <option value="NA">NA</option>
                             </select>
                         </div>
 
@@ -220,6 +220,7 @@
                         <option value="">--Select--</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
+                        <option value="NA">NA</option>
                     </select>
                 </div>
                 <div class="form-group col-12 col-md-4 col-lg-4">

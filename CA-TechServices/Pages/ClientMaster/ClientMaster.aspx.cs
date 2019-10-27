@@ -10,6 +10,7 @@ using CA_TechService.Data.DataSource.ClientMaster;
 using CA_TechService.Common.Transport.CityState;
 using System.Web.Services;
 using CA_TechService.Data.DataSource;
+using System.Web.Script.Services;
 
 namespace CA_TechServices.Pages.ClientMaster
 {
@@ -21,6 +22,7 @@ namespace CA_TechServices.Pages.ClientMaster
         }
 
         [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static ClientMasterEntity[] GetData(ClientMasterSearchEntity obj) //Show the details of the data after insert in HTML Table
         {
             var details = new List<ClientMasterEntity>();

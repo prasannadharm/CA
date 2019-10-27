@@ -29,7 +29,7 @@ $(document).ready(function () {
 
 function getMainGridDetails() {
     $('#democollapseBtn').collapse('hide');
-
+    document.getElementById("loader").style.display = "block";
     var obj = {};
     obj.C_NAME = $.trim($("#txt_C_NAME").val());
     obj.CNT = $("#cmbRows").val();
@@ -71,7 +71,7 @@ function getMainGridDetails() {
         url: "ClientMaster.aspx/GetData",
         data: '{obj: ' + JSON.stringify(obj) + '}',
         dataType: "json",
-        success: function (data) {
+        success: function (data) {            
             $('#griddiv').remove();
             $('#maindiv').append("<div class='table-responsive' id='griddiv'></div>");
             $('#griddiv').append("<table id='tablemain' class='table table-striped table-bordered' style='width: 100%'></table>");
@@ -81,16 +81,15 @@ function getMainGridDetails() {
             for (var i = 0; i < data.d.length; i++) {
                 $('#tablemain').append(
                     "<tr><td style='text-align:center;color:brown'><b>" + data.d[i].C_ID + "</b></td>" +
-                    "<td style='text-align:center;'>" + data.d[i].FILE_NO + "</td>" +
+                    "<td>" + data.d[i].FILE_NO + "</td>" +
                     "<td style='color:blue'><b>" + data.d[i].C_NAME + "<b></td>" +
-                    "<td style='text-align:center;color:green'><b>" + data.d[i].MOBILE_NO1 + "<b></td>" +
+                    "<td style='color:green'><b>" + data.d[i].MOBILE_NO1 + "<b></td>" +
                     "<td>" + data.d[i].PAN + "</td>" +
                     "<td>" + data.d[i].GSTIN + "</td>" +                    
                     "<td style='text-align:center;'>" + "<img src='../../Images/edit.png' alt='Edit Record' class='editButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnEdit' value='Edit' style='margin-right:5px'/>" + "</td>" +
                     "<td style='text-align:center;'><img src='../../Images/delete.png' alt='Delete Record' class='deleteButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnDelete' value='Delete' style='margin-right:5px;margin-left:5px'/> </td>" +
                     "<td style='text-align:center;'>" + "<img src='../../Images/upload.png' alt='Upload Image' class='uploadButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnUpload' value='Upload' style='margin-right:5px;margin-left:5px'/>" + "</td>" +
                     "<td style='text-align:center;'>" + "<img src='../../Images/key.png' alt='Credentials' class='credentialsButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnCred' value='Credentials' style='margin-right:5px;margin-left:5px'/>" + "</td></tr>");
-
             }
             $('#tablemain').append("</tbody>");
             $('#tablemain').DataTable({

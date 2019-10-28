@@ -19,7 +19,7 @@
             cursor: hand;
         }
 
-        #addstage {
+        #addstage, #adddoc{
             background-color: #3C3B6E;
             color: #ffffff;
             border-radius: 35px;
@@ -182,6 +182,25 @@
                             <datalist id="lststages">
                             </datalist>
                             <button type="button" value='Add' id='addstage' style="margin-left: 10px">Add Stage</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <h5>Documents Required Details:</h5>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <div id='DocumentsGroup' style="margin-bottom: 5px">
+                                <%--<div id="DocsDiv">                                    
+                                    <label id='lblslnodocs' style='margin-left: 10px; display: inline; text-align: center;font-weight: bold;color:brown'>1</label>
+                                    <input id='txtdocs' class='form-control' style='margin-left: 10px; width: 75%; display: inline; margin-bottom: 5px' placeholder="Enter Document Name."/>
+                                    <img id='btndocsdel' class='btndocsdel handcursor' src='../../Images/delete.png' style='margin-left:8px' />
+                                </div>--%>
+                            </div>                           
+                            <button type="button" value='Add' id='adddoc' style="margin-left: 10px">Add Document</button>
                         </div>
                     </div>
                 </div>

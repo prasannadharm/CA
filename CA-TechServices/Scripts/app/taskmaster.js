@@ -68,7 +68,7 @@ function loaddocscontrols() {
             docslstobj = [];
             for (var i = 0; i < newsubItemsList.length; i++) {
                 docslstobj.push(newsubItemsList[i]);
-                docslstobj[i].SLNO = (i + 1);
+                docslstobj[i].SL_NO = (i + 1);
             }
             loaddocscontrols();
         }

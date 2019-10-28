@@ -5,6 +5,8 @@ var clientlstobj = [];
 var clientobj = {};
 var tempclientlstobj = [];
 var lstuers = [];
+var docslstobj = [];
+var docsobj = {};
 $(document).ready(function () {
     var dobday = new Date(2050, 0, 1);
     $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
@@ -33,6 +35,46 @@ $(document).ready(function () {
     });
     
 });
+
+function loaddocscontrols() {
+    $("#DocumentsGroup").empty();
+    for (var i = 0; i < docslstobj.length; i++) {
+        var newTextBoxDiv = $(document.createElement('div')).attr("id", 'DocsDiv' + docslstobj[i].GENID);
+        newTextBoxDiv.after().html("<label id='lblslnodocs" + docslstobj[i].GENID + "' style='margin-left: 10px; display: inline; text-align: center;font-weight: bold;color:brown'>" + docslstobj[i].SL_NO + "</label>" +
+                                        "<input id='txtdocs" + docslstobj[i].GENID + "' class='form-control txtdocs' style='margin-left: 10px; width: 75%; display: inline; margin-bottom: 5px' placeholder='Enter Document Name.' value='" + docslstobj[i].DOC_NAME + "'data-id='" + docslstobj[i].GENID + "'/>" +
+                                        "<img id='btndocsdel" + docslstobj[i].GENID + "' class='btndocsdel handcursor' src='../../Images/delete.png' style='margin-left:8px' data-id='" + docslstobj[i].GENID + "'/>");
+        newTextBoxDiv.appendTo("#DocumentsGroup");
+    }
+
+    $('.txtdocs').on('input', function () {
+        var id = $(this).attr("data-id");
+        for (var i = 0; i < docslstobj.length; i++) {
+            if (docslstobj[i].GENID == id) {
+                docslstobj[i].DOC_NAME = $(this).val();
+                return false;
+            }
+        }
+    });   
+
+    $(".btndocsdel").click(function () {
+        if (confirm("Are you sure you want to delete !") == true) {
+            var id = $(this).attr("data-id");
+            var newsubItemsList = [];
+            for (var i = 0; i < docslstobj.length; i++) {
+                if (docslstobj[i].GENID != id) {
+                    newsubItemsList.push(docslstobj[i]);
+                }
+            }
+            docslstobj = [];
+            for (var i = 0; i < newsubItemsList.length; i++) {
+                docslstobj.push(newsubItemsList[i]);
+                docslstobj[i].SLNO = (i + 1);
+            }
+            loaddocscontrols();
+        }
+    });
+
+}
 
 function loadstagescontrols() {
     $("#StagesGroup").empty();
@@ -410,6 +452,15 @@ function clearcontrols() {
     clientlstobj = [];
     rebuildclientsubtable();
 
+    docslstobj = [];
+    docsobj = {};
+    docsobj.SL_NO = 1;
+    docsobj.T_ID = 0;
+    docsobj.DOC_NAME = "";
+    docsobj.GENID = Math.floor((Math.random() * 10000000) + 1);
+    docslstobj.push(docsobj);
+    loaddocscontrols();
+
     $('#T_NAME').val('');
     $('#PRIORITY').val(1);
     $('#T_DESC').val('');
@@ -542,8 +593,7 @@ $(function () {
         $('#T_NAME').focus();
     });
 
-    $(document).on("click", "#addstage", function () {
-        
+    $(document).on("click", "#addstage", function () {        
         stagesobj = {};
         stagesobj.SLNO = stageslstobj.length + 1;
         stagesobj.USER_ID = 0;
@@ -552,6 +602,16 @@ $(function () {
         stagesobj.GENID = Math.floor((Math.random() * 10000000) + 1);
         stageslstobj.push(stagesobj);
         loadstagescontrols();
+    });
+
+    $(document).on("click", "#adddoc", function () {
+        docsobj = {};
+        docsobj.SL_NO = docslstobj.length + 1;
+        docsobj.T_ID = 0;
+        docsobj.DOC_NAME = "";
+        docsobj.GENID = Math.floor((Math.random() * 10000000) + 1);
+        docslstobj.push(docsobj);
+        loaddocscontrols();
     });
 
     $(document).on("click", ".cancelButton", function () {
@@ -722,6 +782,14 @@ $(function () {
             }
         }
 
+        for (var i = 0; i < docslstobj.length; i++) {
+            if ($("#txtdocs" + docslstobj[i].GENID).val().trim() == "") {
+                alert("Please enter Document name.");
+                $("#txtdocs" + docslstobj[i].GENID).focus();
+                return false;
+            }
+        }
+
         var obj = {};
         obj.T_NAME = $.trim($("#T_NAME").val());
         obj.T_DESC = $.trim($("#T_DESC").val());
@@ -746,6 +814,8 @@ $(function () {
         obj.MAPPED_CLIENTS = mappedclientList.join(',');
         
         obj.SUBARR = stageslstobj;
+
+        obj.DOCARR = docslstobj;
 
         $.ajax({
             type: "Post",
@@ -854,6 +924,14 @@ $(function () {
             }
         }
 
+        for (var i = 0; i < docslstobj.length; i++) {
+            if ($("#txtdocs" + docslstobj[i].GENID).val().trim() == "") {
+                alert("Please enter Document name.");
+                $("#txtdocs" + docslstobj[i].GENID).focus();
+                return false;
+            }           
+        }
+
         var id = $(this).attr("edit-id");
 
         var obj = {};
@@ -880,6 +958,8 @@ $(function () {
         obj.MAPPED_CLIENTS = mappedclientList.join(',');
 
         obj.SUBARR = stageslstobj;
+
+        obj.DOCARR = docslstobj;
 
         $.ajax({
             type: "Post",
@@ -995,7 +1075,20 @@ $(function () {
                             clientlstobj.push(clientobj);
                         }
                         rebuildclientsubtable();
-                    }                        
+                    }
+
+                    if (data.d[0].TaskDocsArray != null && data.d[0].TaskDocsArray != undefined && data.d[0].TaskDocsArray.length > 0) {
+                        docslstobj = [];
+                        for (var i = 0; i < data.d[0].TaskDocsArray.length; i++) {
+                            docsobj = {};
+                            docsobj.SL_NO = data.d[0].TaskDocsArray[i].SL_NO;                           
+                            docsobj.T_ID = data.d[0].TaskDocsArray[i].T_ID;
+                            docsobj.DOC_NAME = data.d[0].TaskDocsArray[i].DOC_NAME;
+                            docsobj.GENID = Math.floor((Math.random() * 10000000) + 1);
+                            docslstobj.push(docsobj);
+                        }
+                        loaddocscontrols();
+                    }
                 }                    
                 
                 $('#T_NAME').focus();

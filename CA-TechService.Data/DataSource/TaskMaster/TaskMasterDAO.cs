@@ -66,7 +66,7 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                     con.Open();
                     adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(ds);
-                    if (ds.Tables.Count >= 3)
+                    if (ds.Tables.Count >= 4)
                     {
                         List<TaskMasterMainEntity> objlst1 = new List<TaskMasterMainEntity>();
                         for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
@@ -130,6 +130,17 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                             objlst4.Add(obj4);
                         }
                         retval.ClientCategoryMapArray = objlst4.ToArray();
+
+                        List<TaskDocumentEntity> objlst5 = new List<TaskDocumentEntity>();
+                        for (int i = 0; i <= ds.Tables[4].Rows.Count - 1; i++)
+                        {
+                            TaskDocumentEntity obj5 = new TaskDocumentEntity();
+                            obj5.T_ID = ds.Tables[4].Rows[i]["T_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[4].Rows[i]["T_ID"]);
+                            obj5.SL_NO = ds.Tables[4].Rows[i]["SL_NO"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[4].Rows[i]["SL_NO"]);
+                            obj5.DOC_NAME = ds.Tables[4].Rows[i]["DOC_NAME"] == DBNull.Value ? "" : ds.Tables[4].Rows[i]["DOC_NAME"].ToString();
+                            objlst5.Add(obj5);
+                        }
+                        retval.TaskDocsArray = objlst5.ToArray();
                     }
                 }
             }
@@ -289,7 +300,22 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                     }
 
                     SqlParameter sqlParam = cmd.Parameters.AddWithValue("@TVP", dtsub);
-                    sqlParam.SqlDbType = SqlDbType.Structured;                   
+                    sqlParam.SqlDbType = SqlDbType.Structured;
+
+                    DataTable dtdocs = new DataTable();                   
+                    dtdocs.Columns.Add("SL_NO", typeof(int));
+                    dtdocs.Columns.Add("DOC_NAME", typeof(string));                 
+
+                    foreach (TaskDocumentEntity objdoc in obj.DOCARR)
+                    {
+                        DataRow dr = dtdocs.NewRow();
+                        dr["SL_NO"] = objdoc.SL_NO;
+                        dr["DOC_NAME"] = objdoc.DOC_NAME;
+                        dtdocs.Rows.Add(dr);
+                    }
+
+                    SqlParameter sqlParamdoc = cmd.Parameters.AddWithValue("@TVPDOCS", dtdocs);
+                    sqlParamdoc.SqlDbType = SqlDbType.Structured;
 
                     cmd.Parameters.Add("@RESULT", SqlDbType.Int);
                     cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;
@@ -353,6 +379,21 @@ namespace CA_TechService.Data.DataSource.TaskMaster
 
                     SqlParameter sqlParam = cmd.Parameters.AddWithValue("@TVP", dtsub);
                     sqlParam.SqlDbType = SqlDbType.Structured;
+
+                    DataTable dtdocs = new DataTable();
+                    dtdocs.Columns.Add("SL_NO", typeof(int));
+                    dtdocs.Columns.Add("DOC_NAME", typeof(string));
+
+                    foreach (TaskDocumentEntity objdoc in obj.DOCARR)
+                    {
+                        DataRow dr = dtdocs.NewRow();
+                        dr["SL_NO"] = objdoc.SL_NO;
+                        dr["DOC_NAME"] = objdoc.DOC_NAME;
+                        dtdocs.Rows.Add(dr);
+                    }
+
+                    SqlParameter sqlParamdoc = cmd.Parameters.AddWithValue("@TVPDOCS", dtdocs);
+                    sqlParamdoc.SqlDbType = SqlDbType.Structured;
 
                     cmd.Parameters.Add("@RESULT", SqlDbType.Int);
                     cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;

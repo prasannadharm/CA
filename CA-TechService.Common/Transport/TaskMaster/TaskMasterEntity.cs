@@ -14,11 +14,13 @@ namespace CA_TechService.Common.Transport.TaskMaster
             SubArray = null;
             ClientMapArray = null;
             ClientCategoryMapArray = null;
+            TaskDocsArray = null;
         }
         public TaskMasterMainEntity[] MainArray { get; set; }
         public TaskMasterSubEntity[] SubArray { get; set; }
         public TaskClientMappingEntity[] ClientMapArray { get; set; }
         public TaskClientCategoryMappingEntity[] ClientCategoryMapArray { get; set; }
+        public TaskDocumentEntity[] TaskDocsArray { get; set; }
     }
 
     public class TaskMasterMainEntity
@@ -65,8 +67,16 @@ namespace CA_TechService.Common.Transport.TaskMaster
     public class TaskClientCategoryMappingEntity
     {
         public Int64 T_ID { get; set; }
-        public Int64 CLI_CAT_ID { get; set; }       
+        public Int64 CLI_CAT_ID { get; set; }
     }
+
+    public class TaskDocumentEntity
+    {
+        public Int64 T_ID { get; set; }
+        public int SL_NO { get; set; }
+        public string DOC_NAME { get; set; }
+        public string GENID { get; set; }
+    }  
 
     public class TaskMasterParamEntity
     {
@@ -83,6 +93,7 @@ namespace CA_TechService.Common.Transport.TaskMaster
         public string MAPPED_CLIENTS { get; set; }
         public string MAPPED_CLI_CAT { get; set; }
         public TaskMasterSubParamEntity[] SUBARR { get; set; }
+        public TaskDocumentEntity[] DOCARR { get; set; }
     }
 
     public class TaskMasterSubParamEntity

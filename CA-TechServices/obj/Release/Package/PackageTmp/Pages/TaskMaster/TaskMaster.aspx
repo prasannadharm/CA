@@ -89,7 +89,7 @@
     <!-- For Detail Div  -->
     <div class="col-lg-12" id="mainldetaildiv" style="display: none">
         <div class="panel panel-default">
-            <div class="row" style="margin-bottom:20px">
+            <div class="row" style="margin-bottom: 20px">
                 <div class="col-12" id="subheaderdiv">
                     <h3 style='color: blue'>Task Master -> Add Task Details</h3>
                 </div>
@@ -99,7 +99,7 @@
                 <div class="form-group col-12 col-md-6 col-lg-6">
                     <div class="row">
                         <div class="form-group col-12">
-                            <h5>Task details:</h5>
+                            <h5>Task Details:</h5>
                         </div>
                     </div>
 
@@ -163,7 +163,7 @@
 
                     <div class="row">
                         <div class="form-group col-12">
-                            <h5>Task stage details:</h5>
+                            <h5>Task Stage Details:</h5>
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@
                                 <%-- <div id="StagesDiv">                                    
                                     <label id='lblslno' style='margin-left: 10px; display: inline; text-align: center;font-weight: bold;color:brown'>1</label>
                                     <input id='txtstages' list='lststages' class='form-control' style='margin-left: 10px; width: 40%; display: inline; margin-bottom: 5px' placeholder="Select Stage"/>
-                                    <input id='txtusers' list='lstusers' class='form-control' style='margin-left: 10px; width: 25%; display: inline; margin-bottom: 5px' placeholder="Select User"/>
+                                    <select id='cmbusers' class='form-control cmbusers' style='margin-left: 10px; width: 25%; display: inline; margin-bottom: 5px'/>
                                     <img id='btnstageup' class='btnstageup handcursor' src='../../Images/up.png' />
                                     <img id='btnstagedown' class='btnstagedown handcursor' src='../../Images/down.png' />
                                     <img id='btnstaedel' class='btnstagedel handcursor' src='../../Images/delete.png' style='margin-left:8px' />
@@ -181,10 +181,7 @@
                             </div>
                             <datalist id="lststages">
                             </datalist>
-                            <datalist id="lstusers">
-                            </datalist>
                             <button type="button" value='Add' id='addstage' style="margin-left: 10px">Add Stage</button>
-
                         </div>
                     </div>
                 </div>
@@ -193,7 +190,21 @@
                 <div class="form-group col-12 col-md-6 col-lg-6">
                     <div class="row">
                         <div class="form-group col-12">
-                            <h5>Client mapping details:</h5>
+                            <h5>Client Category Mapping Details:</h5>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label>Client Category</label>
+                            <select id="cmb_CLI_CAT" multiple data-live-search="true" class="filters searchcntrls">
+                            </select>
+                        </div>                        
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <h5>Client Mapping Details:</h5>
                         </div>
                     </div>
                     <div class="row">
@@ -201,7 +212,7 @@
                             <label>Search By</label>
                             <select id="SEARCHBY" class="form-control">
                                 <option value="NAME">Name</option>
-                                <option value="C_ID">C ID</option>
+                                <option value="C_NO">C NO</option>
                                 <option value="FILE_NO">File No</option>
                                 <option value="PAN">PAN</option>
                                 <option value="AADHAAR">Aadhaar</option>
@@ -229,7 +240,7 @@
                                 <table id="tableDetClientList" class="table table-striped table-bordered" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th>C ID</th>
+                                            <th>C No</th>
                                             <th>Name</th>
                                             <th>File No</th>
                                             <th></th>
@@ -305,7 +316,7 @@
                             <table id="tableClientList" class="table table-striped table-bordered" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th>C ID</th>
+                                        <th>C No</th>
                                         <th>Name</th>
                                         <th>File No</th>
                                         <th>PAN</th>
@@ -339,13 +350,13 @@
                             <table id="tableclientsearch" class="table table-striped table-bordered" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th>C ID</th>
+                                        <th>C No</th>
                                         <th>File No</th>
                                         <th>Name</th>
                                         <th>PAN</th>
                                         <th>Aadhaar</th>
-                                        <th>GSTIN</th>                                                                       
-                                        <th>Select</th>                                        
+                                        <th>GSTIN</th>
+                                        <th>Select</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -29,12 +29,12 @@ $(document).ready(function () {
 
 function getMainGridDetails() {
     $('#democollapseBtn').collapse('hide');
-
+    document.getElementById("loader").style.display = "block";
     var obj = {};
     obj.C_NAME = $.trim($("#txt_C_NAME").val());
     obj.CNT = $("#cmbRows").val();
 
-    obj.C_ID = $.trim($("#txt_C_ID").val());
+    obj.C_NO = $.trim($("#txt_C_NO").val());
     obj.FILE_NO = $.trim($("#txt_FILE_NO").val());
     obj.PAN = $.trim($("#txt_PAN").val());
     obj.GSTIN = $.trim($("#txt_GSTIN").val());
@@ -71,26 +71,25 @@ function getMainGridDetails() {
         url: "ClientMaster.aspx/GetData",
         data: '{obj: ' + JSON.stringify(obj) + '}',
         dataType: "json",
-        success: function (data) {
+        success: function (data) {            
             $('#griddiv').remove();
             $('#maindiv').append("<div class='table-responsive' id='griddiv'></div>");
             $('#griddiv').append("<table id='tablemain' class='table table-striped table-bordered' style='width: 100%'></table>");
-            $('#tablemain').append("<thead><tr><th>C ID</th><th>File No</th><th>Name</th><th>Mobile</th><th>PAN</th><th>GSTIN</th><th></th><th></th><th></th><th></th></tr></thead><tbody></tbody>");
+            $('#tablemain').append("<thead><tr><th>C-No</th><th>File-No</th><th>Name</th><th>Mobile</th><th>PAN</th><th>GSTIN</th><th></th><th></th><th></th><th></th></tr></thead><tbody></tbody>");
             $('#tablemain tbody').remove();
             $('#tablemain').append("<tbody>");
             for (var i = 0; i < data.d.length; i++) {
                 $('#tablemain').append(
-                    "<tr><td style='text-align:center;color:brown'><b>" + data.d[i].C_ID + "</b></td>" +
-                    "<td style='text-align:center;'>" + data.d[i].FILE_NO + "</td>" +
+                    "<tr><td style='text-align:center;color:brown'><b>" + data.d[i].C_NO + "</b></td>" +
+                    "<td>" + data.d[i].FILE_NO + "</td>" +
                     "<td style='color:blue'><b>" + data.d[i].C_NAME + "<b></td>" +
-                    "<td style='text-align:center;color:green'><b>" + data.d[i].MOBILE_NO1 + "<b></td>" +
+                    "<td style='color:green'><b>" + data.d[i].MOBILE_NO1 + "<b></td>" +
                     "<td>" + data.d[i].PAN + "</td>" +
                     "<td>" + data.d[i].GSTIN + "</td>" +                    
                     "<td style='text-align:center;'>" + "<img src='../../Images/edit.png' alt='Edit Record' class='editButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnEdit' value='Edit' style='margin-right:5px'/>" + "</td>" +
                     "<td style='text-align:center;'><img src='../../Images/delete.png' alt='Delete Record' class='deleteButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnDelete' value='Delete' style='margin-right:5px;margin-left:5px'/> </td>" +
-                    "<td style='text-align:center;'>" + "<img src='../../Images/upload.png' alt='Upload Image' class='uploadButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnUpload' value='Upload' style='margin-right:5px;margin-left:5px'/>" + "</td>" +
-                    "<td style='text-align:center;'>" + "<img src='../../Images/key.png' alt='Credentials' class='credentialsButton handcursor' data-id='" + data.d[i].C_ID + "' name='submitButton' id='btnCred' value='Credentials' style='margin-right:5px;margin-left:5px'/>" + "</td></tr>");
-
+                    "<td style='text-align:center;'>" + "<img src='../../Images/upload.png' alt='Upload Image' class='uploadButton handcursor' data-id='" + data.d[i].C_ID + "' data-no='" + data.d[i].C_NO + "' name='submitButton' id='btnUpload' value='Upload' style='margin-right:5px;margin-left:5px'/>" + "</td>" +
+                    "<td style='text-align:center;'>" + "<img src='../../Images/key.png' alt='Credentials' class='credentialsButton handcursor' data-id='" + data.d[i].C_ID + "' data-no='" + data.d[i].C_NO + "' name='submitButton' id='btnCred' value='Credentials' style='margin-right:5px;margin-left:5px'/>" + "</td></tr>");
             }
             $('#tablemain').append("</tbody>");
             $('#tablemain').DataTable({
@@ -99,7 +98,8 @@ function getMainGridDetails() {
             //data-toggle='modal' data-target='#PopupModal'
             document.getElementById("loader").style.display = "none";
         },
-        error: function () {
+        error: function (err) {
+            alert(err);
             alert("Error while Showing update data");
         }
 
@@ -111,7 +111,7 @@ function clearfilter() {
     $('#democollapseBtn').collapse('hide');
     $("#cmbRows").val(20);
     $("#txt_C_NAME").val('');
-    $("#txt_C_ID").val('');
+    $("#txt_C_NO").val('');
     $("#txt_FILE_NO").val('');
     $("#txt_PAN").val('');
     $("#txt_GSTIN").val('');
@@ -383,7 +383,7 @@ function ClearDetialViewControls() {
     $('#RACK_NO').val('');
     $('#ALERT_MSG').val('');
     $("#ACTIVE_STATUS").prop('checked', true);
-    $('#C_ID').text('');
+    $('#C_NO').text('');
 }
 
 function chkaddrchanged() {
@@ -716,7 +716,7 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 for (var i = 0; i < data.d.length; i++) {
-                    $("#subheaderdiv").html("<h3 style='color:blue'>Client Master -> Edit Client Details -> Client ID:" + data.d[i].C_ID + "</h3>");
+                    $("#subheaderdiv").html("<h3 style='color:blue'>Client Master -> Edit Client Details -> Client No:" + data.d[i].C_NO + "</h3>");
                     $("#C_NAME").val(data.d[i].C_NAME);
                     $("#ALIAS").val(data.d[i].ALIAS);
                     $("#FILE_NO").val(data.d[i].FILE_NO);
@@ -770,7 +770,7 @@ $(function () {
                     $("#WARD").val(data.d[i].WARD);
                     $("#RACK_NO").val(data.d[i].RACK_NO);
                     $("#ALERT_MSG").val(data.d[i].ALERT_MSG);
-                    $("#C_ID").text(data.d[i].C_ID);
+                    $("#C_NO").text(data.d[i].C_NO);
 
                     var array = data.d[i].ClientCategoryStringList.split(",");
                     $('#CLI_CAT').selectpicker('val', array);
@@ -920,8 +920,9 @@ $(function () {
         $('#PopupModalUpload').modal('show');
         $('#PopupModalUpload').focus();
         var id = $(this).attr("data-id");
+        var nos = $(this).attr("data-no");
         console.log(id);
-        $("div.modal-header h4").html("Client Documents Upload Area -> Client ID : " + id);
+        $("div.modal-header h4").html("Client Documents Upload Area -> Client No : " + nos);
         $('#fileToUpload').val("");
         $("#btnUploadDoc").attr("edit-id", id);
         ShowUploadedFiles();
@@ -996,7 +997,8 @@ $(function () {
 
     $(document).on("click", ".credentialsButton", function () {
         document.getElementById("loader").style.display = "block";
-        var id = $(this).attr("data-id");        
+        var id = $(this).attr("data-id");
+        var nos = $(this).attr("data-no");
         console.log(id);
         $("#btnUpdateCred").attr("data-id", id);
         $("#btnSaveCred").attr("data-id", id);       
@@ -1005,7 +1007,7 @@ $(function () {
         $('#btnUpdateCred').hide();
         $('#mainlistingdiv').hide();
         $('#credentailsdiv').show();      
-        $("#credheaderdiv").html("<h3 style='color:blue'>Client Credentails -> Client ID : " + id + "</h3>");
+        $("#credheaderdiv").html("<h3 style='color:blue'>Client Credentails -> Client No : " + nos + "</h3>");
                 
         $('#SITE_NAME').val('');
         $('#URL').val('');

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSource\Bill\BillDAO.cs" />
     <Compile Include="DataSource\CityState\CityStateMasterDAO.cs" />
     <Compile Include="DataSource\ClientMaster\ClientCategoryMasterDAO.cs" />
     <Compile Include="DataSource\ClientMaster\ClientGroupMasterDAO.cs" />

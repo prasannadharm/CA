@@ -127,6 +127,7 @@
     <Content Include="Images\upload.png" />
     <Content Include="Images\void.png" />
     <Content Include="packages.config" />
+    <Content Include="Pages\Bill\Bill.aspx" />
     <Content Include="Pages\CityState\CityState.aspx" />
     <Content Include="Pages\ClientMaster\ClientCategory.aspx" />
     <Content Include="Pages\ClientMaster\ClientGroup.aspx" />
@@ -141,6 +142,7 @@
     <Content Include="Pages\TaskMaster\TaskStageMaster.aspx" />
     <Content Include="Pages\User\Users.aspx" />
     <Content Include="Scripts\AjaxFileupload.js" />
+    <Content Include="Scripts\app\bill.js" />
     <Content Include="Scripts\app\changepassword.js" />
     <Content Include="Scripts\app\citystate.js" />
     <Content Include="Scripts\app\clientcategory.js" />
@@ -231,6 +233,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\Bill\Bill.aspx.cs">
+      <DependentUpon>Bill.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Bill\Bill.aspx.designer.cs">
+      <DependentUpon>Bill.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CityState\CityState.aspx.cs">
       <DependentUpon>CityState.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

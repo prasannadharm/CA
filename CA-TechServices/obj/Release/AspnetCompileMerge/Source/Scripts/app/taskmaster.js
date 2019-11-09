@@ -68,7 +68,7 @@ function loaddocscontrols() {
             docslstobj = [];
             for (var i = 0; i < newsubItemsList.length; i++) {
                 docslstobj.push(newsubItemsList[i]);
-                docslstobj[i].SLNO = (i + 1);
+                docslstobj[i].SL_NO = (i + 1);
             }
             loaddocscontrols();
         }
@@ -1032,7 +1032,7 @@ $(function () {
 
                     }
 
-                    if (data.d[0].MainArray != null && data.d[0].MainArray != undefined && data.d[0].ClientCategoryMapArray.length > 0) {
+                    if (data.d[0].ClientCategoryMapArray != null && data.d[0].ClientCategoryMapArray != undefined && data.d[0].ClientCategoryMapArray.length > 0) {
                         var array = [];
                         for (var i = 0; i < data.d[0].ClientCategoryMapArray.length; i++)
                         {
@@ -1041,7 +1041,7 @@ $(function () {
                         $('#cmb_CLI_CAT').selectpicker('val', array);
                     }
 
-                    if (data.d[0].MainArray != null && data.d[0].MainArray != undefined && data.d[0].SubArray.length > 0) {                        
+                    if (data.d[0].SubArray != null && data.d[0].SubArray != undefined && data.d[0].SubArray.length > 0) {
                         stageslstobj = [];                        
                         for (var i = 0; i < data.d[0].SubArray.length; i++) {                            
                             stagesobj = {};
@@ -1056,7 +1056,7 @@ $(function () {
                         loadstagescontrols();
                     }
 
-                    if (data.d[0].MainArray != null && data.d[0].MainArray != undefined && data.d[0].ClientMapArray.length > 0) {
+                    if (data.d[0].ClientMapArray != null && data.d[0].ClientMapArray != undefined && data.d[0].ClientMapArray.length > 0) {
                         clientlstobj = [];
                         for (var i = 0; i < data.d[0].ClientMapArray.length; i++) {                            
                             clientobj = {};

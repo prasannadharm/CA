@@ -94,5 +94,54 @@ namespace CA_TechServices.Pages.Bill
             }
             return details.ToArray();
         }
+
+        [WebMethod]
+        public static DbStatusEntity[] UpdateData(BillParamEntity obj, Int64 id) //Update data in database  
+        {
+            var details = new List<DbStatusEntity>();
+            try
+            {
+                details.Add(new BillDAO().UpdateBill(obj, id));
+            }
+            catch (Exception ex)
+            {
+                details.Clear();
+                details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+
+        }
+
+        [WebMethod]
+        public static DbStatusEntity[] InsertData(BillParamEntity obj)
+        {
+            var details = new List<DbStatusEntity>();
+            try
+            {
+                details.Add(new BillDAO().InsertBill(obj));
+            }
+            catch (Exception ex)
+            {
+                details.Clear();
+                details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+        [WebMethod]
+        public static DbStatusEntity[] DeleteData(int id)
+        {
+            var details = new List<DbStatusEntity>();
+            try
+            {
+                details.Add(new BillDAO().DeleteBill(id));
+            }
+            catch (Exception ex)
+            {
+                details.Clear();
+                details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
     }
 }

@@ -175,7 +175,7 @@ namespace CA_TechService.Data.DataSource.Bill
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand("USP_InsertTaskMaster", con);
+                    SqlCommand cmd = new SqlCommand("USP_InsertBill", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@C_ID", obj.C_ID);
                     cmd.Parameters.AddWithValue("@C_NO", obj.C_NO);
@@ -207,7 +207,7 @@ namespace CA_TechService.Data.DataSource.Bill
                     dtsub.Columns.Add("IGST_PER", typeof(Double));
                     dtsub.Columns.Add("IGST_AMT", typeof(Double));
                     dtsub.Columns.Add("NET_AMT", typeof(Double));
-                    dtsub.Columns.Add("REMARKS", typeof(Double));                 
+                    dtsub.Columns.Add("REMARKS", typeof(string));                 
 	
 
                     foreach (BillSubEntity objsub in obj.SUBARRAY)
@@ -260,7 +260,7 @@ namespace CA_TechService.Data.DataSource.Bill
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand("USP_UpdateTaskMaster", con);
+                    SqlCommand cmd = new SqlCommand("USP_UpdateBill", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@BILL_ID", id);
                     cmd.Parameters.AddWithValue("@C_ID", obj.C_ID);
@@ -293,7 +293,7 @@ namespace CA_TechService.Data.DataSource.Bill
                     dtsub.Columns.Add("IGST_PER", typeof(Double));
                     dtsub.Columns.Add("IGST_AMT", typeof(Double));
                     dtsub.Columns.Add("NET_AMT", typeof(Double));
-                    dtsub.Columns.Add("REMARKS", typeof(Double));
+                    dtsub.Columns.Add("REMARKS", typeof(string));
 
 
                     foreach (BillSubEntity objsub in obj.SUBARRAY)

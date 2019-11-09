@@ -34,7 +34,7 @@
             </td>
         </tr>        
         <tr>
-            <td>1. Transactions - Create Tasks</td>
+            <td>1. Transactions - Billing (Print & Void is pending rest is completed)</td>
         </tr>
         <tr>
             <td>

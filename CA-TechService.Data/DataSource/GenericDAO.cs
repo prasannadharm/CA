@@ -312,6 +312,8 @@ namespace CA_TechService.Data.DataSource
                         obj.PH_NO = ds.Tables[0].Rows[i]["PH_NO"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["PH_NO"].ToString();
                         obj.MOBILE_NO1 = ds.Tables[0].Rows[i]["MOBILE_NO1"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["MOBILE_NO1"].ToString();
                         obj.MOBILE_NO2 = ds.Tables[0].Rows[i]["MOBILE_NO2"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["MOBILE_NO2"].ToString();
+                        obj.C_DETAILS = ds.Tables[0].Rows[i]["C_DETAILS"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["C_DETAILS"].ToString();
+                        
                         retlst.Add(obj);
                     }
                 }

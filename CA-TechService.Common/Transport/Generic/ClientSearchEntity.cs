@@ -18,6 +18,7 @@ namespace CA_TechService.Common.Transport.Generic
         public string PAN { get; set; }
         public string AADHAAR { get; set; }
         public string GSTIN { get; set; }
-        public string CLI_GRP_NAME { get; set; }        
+        public string CLI_GRP_NAME { get; set; }
+        public string C_DETAILS { get; set; }
     }
 }

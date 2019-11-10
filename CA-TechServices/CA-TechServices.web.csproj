@@ -128,6 +128,7 @@
     <Content Include="Images\void.png" />
     <Content Include="packages.config" />
     <Content Include="Pages\Bill\Bill.aspx" />
+    <Content Include="Pages\Bill\BillSettlement.aspx" />
     <Content Include="Pages\CityState\CityState.aspx" />
     <Content Include="Pages\ClientMaster\ClientCategory.aspx" />
     <Content Include="Pages\ClientMaster\ClientGroup.aspx" />
@@ -239,6 +240,13 @@
     </Compile>
     <Compile Include="Pages\Bill\Bill.aspx.designer.cs">
       <DependentUpon>Bill.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Bill\BillSettlement.aspx.cs">
+      <DependentUpon>BillSettlement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Bill\BillSettlement.aspx.designer.cs">
+      <DependentUpon>BillSettlement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\CityState\CityState.aspx.cs">
       <DependentUpon>CityState.aspx</DependentUpon>

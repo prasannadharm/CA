@@ -41,6 +41,9 @@ namespace CA_TechService.Common.Transport.Bill
         public string DUE_DATE { get; set; }
         public string REMARKS { get; set; }
         public bool VOID_STATUS { get; set; }
+        public string C_DETAILS { get; set; }
+        public string GSTIN { get; set; }
+        public string PAN { get; set; }       
     }
 
     public class BillSubEntity

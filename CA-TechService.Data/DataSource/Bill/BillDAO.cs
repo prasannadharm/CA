@@ -96,7 +96,10 @@ namespace CA_TechService.Data.DataSource.Bill
                             obj1.BAL_AMT = ds.Tables[0].Rows[i]["BAL_AMT"] == DBNull.Value ? 0 : Convert.ToDouble(ds.Tables[0].Rows[i]["BAL_AMT"]);
                             obj1.DUE_DATE = ds.Tables[0].Rows[i]["DUE_DATE"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["DUE_DATE"].ToString();
                             obj1.REMARKS = ds.Tables[0].Rows[i]["REMARKS"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["REMARKS"].ToString();
-                            obj1.VOID_STATUS = ds.Tables[0].Rows[i]["VOID_STATUS"] == DBNull.Value ? true : Convert.ToBoolean(ds.Tables[0].Rows[i]["VOID_STATUS"]);                                 
+                            obj1.VOID_STATUS = ds.Tables[0].Rows[i]["VOID_STATUS"] == DBNull.Value ? true : Convert.ToBoolean(ds.Tables[0].Rows[i]["VOID_STATUS"]);
+                            obj1.C_DETAILS = ds.Tables[0].Rows[i]["C_DETAILS"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["C_DETAILS"].ToString();
+                            obj1.PAN = ds.Tables[0].Rows[i]["PAN"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["PAN"].ToString();
+                            obj1.GSTIN = ds.Tables[0].Rows[i]["GSTIN"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["GSTIN"].ToString();
                             objlst1.Add(obj1);
                         }
                         retval.MAINARRAY = objlst1.ToArray();
@@ -315,6 +318,70 @@ namespace CA_TechService.Data.DataSource.Bill
 
                     SqlParameter sqlParam = cmd.Parameters.AddWithValue("@TVP", dtsub);
                     sqlParam.SqlDbType = SqlDbType.Structured;
+
+                    cmd.Parameters.Add("@RESULT", SqlDbType.Int);
+                    cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@CNT", SqlDbType.Int);
+                    cmd.Parameters["@CNT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@MSG", SqlDbType.NVarChar, 500);
+                    cmd.Parameters["@MSG"].Direction = ParameterDirection.Output;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    objreturn.RESULT = Convert.ToInt32(cmd.Parameters["@RESULT"].Value);
+                    objreturn.CNT = Convert.ToInt32(cmd.Parameters["@CNT"].Value);
+                    objreturn.MSG = Convert.ToString(cmd.Parameters["@MSG"].Value);
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return objreturn;
+        }
+
+        public List<Int64> CheckVoidBillEnrty(long id)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<Int64> retvallst = new List<Int64>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    Int64 retval = 0;
+                    SqlCommand cmd = new SqlCommand("USP_GetBillVoidDetailsbyID", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        retval = ds.Tables[0].Rows[i]["BILL_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["BILL_ID"]);
+                    }
+                    retvallst.Add(retval);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retvallst;
+        }
+
+        public DbStatusEntity VoidBillEntry(Int64 id)
+        {
+            DbStatusEntity objreturn = new DbStatusEntity();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_VoidBillEntry", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", id);
 
                     cmd.Parameters.Add("@RESULT", SqlDbType.Int);
                     cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;

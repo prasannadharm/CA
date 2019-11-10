@@ -143,5 +143,36 @@ namespace CA_TechServices.Pages.Bill
             }
             return details.ToArray();
         }
+
+        [WebMethod]
+        public static Int64[] CheckVoidBillEnrty(Int64 id)
+        {
+            List<Int64> lstvalues = new List<Int64>();
+            try
+            {
+                lstvalues = new BillDAO().CheckVoidBillEnrty(id);
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return lstvalues.ToArray();
+        }
+
+        [WebMethod]
+        public static DbStatusEntity[] VoidData(long id)
+        {
+            var details = new List<DbStatusEntity>();
+            try
+            {
+                details.Add(new BillDAO().VoidBillEntry(id));
+            }
+            catch (Exception ex)
+            {
+                details.Clear();
+                details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
     }
 }

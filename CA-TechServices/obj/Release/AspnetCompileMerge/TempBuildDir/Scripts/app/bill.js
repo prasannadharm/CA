@@ -204,6 +204,396 @@ function isDate(txtDate) {
     return true;
 }
 
+function searchclients() {
+    if ($("#SEARCHBY").val().trim() == "") {
+        alert("Please select searchby.");
+        $("#SEARCHBY").focus();
+        return false;
+    }
+
+    if ($("#SEARCHTEXT").val().trim() == "") {
+        alert("Please enter search text.");
+        $("#SEARCHTEXT").focus();
+        return false;
+    }
+    document.getElementById("loader").style.display = "block";
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "Bill.aspx/GetClientSearchList",
+        data: '{filterby: ' + JSON.stringify($("#SEARCHBY").val()) + ',filtertext: ' + JSON.stringify($("#SEARCHTEXT").val()) + '}',
+        dataType: "json",
+        success: function (data) {
+            if (data.d.length > 0) {
+
+                tempclientlstobj = [];
+                for (var i = 0; i < data.d.length; i++) {
+                    clientobj = {};
+                    clientobj.GENID = Math.floor((Math.random() * 10000000) + 1);
+                    clientobj.C_ID = data.d[i].C_ID;
+                    clientobj.C_NO = data.d[i].C_NO;
+                    clientobj.FILE_NO = data.d[i].FILE_NO;
+                    clientobj.C_NAME = data.d[i].C_NAME;
+                    clientobj.PH_NO = data.d[i].PH_NO;
+                    clientobj.MOBILE_NO1 = data.d[i].MOBILE_NO1;
+                    clientobj.MOBILE_NO2 = data.d[i].MOBILE_NO2;
+                    clientobj.PAN = data.d[i].PAN;
+                    clientobj.AADHAAR = data.d[i].AADHAAR;
+                    clientobj.GSTIN = data.d[i].GSTIN;
+                    clientobj.CLI_GRP_NAME = data.d[i].CLI_GRP_NAME;
+                    clientobj.C_DETAILS = data.d[i].C_DETAILS;
+                    tempclientlstobj.push(clientobj);
+                }
+                loadtempsearchclientgrid();
+                $("#SEARCHTEXT").val('');
+            }
+            else {
+                alert('No data found for the search criteria');
+                $("#SEARCHTEXT").focus();
+            }
+
+            document.getElementById("loader").style.display = "none";
+        },
+        error: function () {
+            alert("Error while Showing update data");
+        }
+
+        //
+    });
+
+}
+
+function loadtempsearchclientgrid() {
+    $('#tableclientsearch tbody').remove();
+    $('#tableclientsearch').append("<tbody>");
+    for (var i = 0; i < tempclientlstobj.length; i++) {
+        $('#tableclientsearch').append(
+            "<tr><td>" + tempclientlstobj[i].FILE_NO + "</td><td style='color:blue'>" + tempclientlstobj[i].C_NAME + "</td>" +
+            "<td>" + tempclientlstobj[i].C_DETAILS + "</td>" +
+            "<td style='text-align: center'><img src='../../Images/select.png' alt='Select Record' class='selectButtonSubis handcursor' data-id='" + tempclientlstobj[i].C_ID + '_' + tempclientlstobj[i].GENID + "' id='btnselectSubIS_" + tempclientlstobj[i].GENID + "' value='Select' style='margin-right:5px;margin-left:5px'/> </td></tr>");
+    }
+    $('#tableclientsearch').append("</tbody>");
+
+    $("div.mhs h4").html("Search results for " + $('#SEARCHBY').val() + " : " + $('#SEARCHTEXT').val());
+
+    $('#PopupModalClientSearch').modal('show');
+    $('#PopupModalClientSearch').focus();
+
+    $(".selectButtonSubis").click(function () {
+        var id = this.id.split("_");
+        for (var i = 0; i < tempclientlstobj.length; i++) {
+            if (tempclientlstobj[i].GENID == id[1]) {
+
+                cname = tempclientlstobj[i].C_NAME;
+                cid = tempclientlstobj[i].C_ID;
+                cno = tempclientlstobj[i].C_NO;
+                fileno = tempclientlstobj[i].FILE_NO;
+                $('#lblclientdetails').text(tempclientlstobj[i].C_DETAILS);
+                $('#C_NAME').val(tempclientlstobj[i].C_NAME);
+                break;
+            }
+        }
+        $('#PopupModalClientSearch').modal('hide');
+        $("#PAYMODE_NAME").focus();
+    });
+
+}
+
+function clearcontrols(addflag) {
+    cname = '';
+    cid = 0;
+    cno = 0;
+    fileno = '';
+    $('#C_NAME').val('');
+    $('#lblclientdetails').text('');
+    $("#SEARCHTEXT").val('');
+
+    sublstobj = [];
+    subobj = {};
+    subobj.SL_NO = 1;
+    subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
+    subobj.DESCP = "";
+    subobj.GROSS_AMT = 0;
+    subobj.SGST_PER = 0;
+    subobj.SGST_AMT = 0;
+    subobj.CGST_PER = 0;
+    subobj.CGST_AMT = 0;
+    subobj.IGST_PER = 0;
+    subobj.IGST_AMT = 0;
+    subobj.NET_AMT = 0;
+    subobj.REMARKS = "";
+    sublstobj.push(subobj);
+    loadsubcontrols();
+
+    grossamt = 0;
+    sgstamt = 0;
+    cgstamt = 0;
+    igstamt = 0;
+    othamt = 0;
+    netamt = 0;
+    $("#GROSS_AMT").val(0);
+    $("#CGST_AMT").val(0);
+    $("#SGST_AMT").val(0);
+    $("#IGST_AMT").val(0);
+    $("#OTH_AMT").val(0);
+    $("#NET_AMT").val(0);
+
+    var date = new Date();
+    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    var plus7days = today.getDate() + 7;
+
+    $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+    $('#BILL_DATE').datepicker('setDate', today);
+    $('#DUE_DATE').datepicker('setDate', plus7days);
+    $("#PAYMODE_NAME").val(0);
+    $('#BILL_NO').val(0);
+
+    if (addflag == 1) {
+        $.ajax({
+            url: "Bill.aspx/GetLatestTrasnsactionNumber",
+            data: '{}',
+            dataType: "json",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                for (var i = 0; i < data.d.length; i++) {
+                    $('#BILL_NO').val(data.d[i].split('-')[0]);
+                    $('#BILL_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[i].split('-')[3] + '-' + data.d[i].split('-')[2] + '-' + data.d[i].split('-')[1]);
+                    var date2 = $('#BILL_DATE').datepicker('getDate');
+                    var nextDayDate = new Date();
+                    nextDayDate.setDate(date2.getDate() + 7);
+                    $('#DUE_DATE').datepicker('setDate', nextDayDate);
+
+                }
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+
+}
+
+function loadsubcontrols() {
+    $("#divservicedetaisdetails").empty();
+    for (var i = 0; i < sublstobj.length; i++) {
+        var newTextBoxDiv = $(document.createElement('div'))
+            .attr("id", 'SubrowsDiv' + sublstobj[i].GENID);
+        newTextBoxDiv.attr('class', 'row');
+        newTextBoxDiv.after().html("<div class='form-group col-3'>" +
+        "<label id='lblslno" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: brown; font-weight: 500; display: inline;margin-right:5px;'>" + sublstobj[i].SL_NO + "</label>" +
+        "<input type='text' id='txtdescp" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control txtdescp' placeholder='Enter Description.' style='width: 88%; display: inline' value='" + sublstobj[i].DESCP + "' />" +
+        "</div>" +
+        "<div class='form-group col-6'>" +
+        "<table style='width: 100%'>" +
+        "<tr>" +
+        "<td style='width: 20%;padding-right:20px'>" +
+        "<input type='number' id='txtgrossamt" + sublstobj[i].GENID + "' class='form-control txtgrossamt' value='" + sublstobj[i].GROSS_AMT + "' style='text-align: center;width:100%;;background-color: white; color: brown; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
+        "</td>" +
+        "<td style='width: 20%'>" +
+        "<input type='number' id='txtsgstper" + sublstobj[i].GENID + "' class='form-control txtsgstper' value='" + sublstobj[i].SGST_PER + "' style='text-align: center; width: 50%; display: inline;background-color: white; color: green; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
+        "<label id='lblsgstamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: blue; font-weight: 500; display: inline; width: 50%;margin-left:5px;'>" + sublstobj[i].SGST_AMT + "</label>" +
+        "</td>" +
+        "<td style='width: 20%'>" +
+        "<input type='number' id='txtcgstper" + sublstobj[i].GENID + "' class='form-control txtcgstper' value='" + sublstobj[i].CGST_PER + "' style='text-align: center; width: 50%; display: inline;background-color: white; color: green; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
+        "<label id='lblcgstamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: blue; font-weight: 500; display: inline; width: 50%;margin-left:5px;'>" + sublstobj[i].CGST_AMT + "</label>" +
+        "</td>" +
+        "<td style='width: 20%'>" +
+        "<input type='number' id='txtigstper" + sublstobj[i].GENID + "' class='form-control txtigstper' value='" + sublstobj[i].IGST_PER + "' style='text-align: center; width: 50%; display: inline;background-color: white; color: green; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
+        "<label id='lbligstamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: blue; font-weight: 500; display: inline; width: 50%;margin-left:5px;'>" + sublstobj[i].IGST_AMT + "</label>" +
+        "</td>" +
+        "<td style='width: 20%'>" +
+        "<input type='number' id='txtnettamt" + sublstobj[i].GENID + "' class='form-control' value='" + sublstobj[i].NET_AMT + "' style='text-align: center;width:100%;background-color: white; color: orangered; font-weight: 500' disabled='disabled' data-id='" + sublstobj[i].GENID + "' />" +
+        "</td>" +
+        "</tr>" +
+        "</table>" +
+        "</div>" +
+        "<div class='form-group col-3'>" +
+        "<input type='text' id='txtremarks" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control txtremarks' placeholder='Enter remarks.' style='display: inline; width: 80%' value='" + sublstobj[i].REMARKS + "' />" +
+        "<img id='btnbillrowdel" + sublstobj[i].GENID + "' class='btnbillrowdel handcursor' src='../../Images/delete.png' style='margin-left: 8px; display: inline;' data-id='" + sublstobj[i].GENID + "' />" +
+        "</div>");
+
+        newTextBoxDiv.appendTo("#divservicedetaisdetails");
+
+    }
+
+    $('.txtgrossamt').on('input', function () {
+        var id = $(this).attr("data-id");
+        for (var i = 0; i < sublstobj.length; i++) {
+            if (sublstobj[i].GENID == id) {
+                sublstobj[i].GROSS_AMT = parseFloat($(this).val()) || 0;
+                sublstobj[i].SGST_AMT = round((sublstobj[i].SGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
+                sublstobj[i].CGST_AMT = round((sublstobj[i].CGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
+                sublstobj[i].IGST_AMT = round((sublstobj[i].IGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
+                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
+
+                $('#lblsgstamt' + sublstobj[i].GENID).text(sublstobj[i].SGST_AMT);
+                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
+                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);
+                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
+                calcamt();
+                return false;
+            }
+        }
+    });
+
+    $('.txtsgstper').on('input', function () {
+        var id = $(this).attr("data-id");
+        for (var i = 0; i < sublstobj.length; i++) {
+            if (sublstobj[i].GENID == id) {
+                sublstobj[i].SGST_PER = parseFloat($(this).val()) || 0;
+                sublstobj[i].IGST_PER = 0;
+                sublstobj[i].SGST_AMT = round((sublstobj[i].SGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
+                sublstobj[i].CGST_AMT = round((sublstobj[i].CGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
+                sublstobj[i].IGST_AMT = 0;
+                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
+
+                $('#lblsgstamt' + sublstobj[i].GENID).text(sublstobj[i].SGST_AMT);
+                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
+                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);
+                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
+                calcamt();
+                return false;
+            }
+        }
+    });
+
+    $('.txtcgstper').on('input', function () {
+        var id = $(this).attr("data-id");
+        for (var i = 0; i < sublstobj.length; i++) {
+            if (sublstobj[i].GENID == id) {
+                sublstobj[i].CGST_PER = parseFloat($(this).val()) || 0;
+                sublstobj[i].CGST_AMT = round((sublstobj[i].CGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
+                sublstobj[i].IGST_PER = 0;
+                sublstobj[i].IGST_AMT = 0;
+                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
+
+                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
+
+                $('#txtigstper' + sublstobj[i].GENID).val(sublstobj[i].IGST_PER);
+                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);
+
+                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
+                calcamt();
+                return false;
+            }
+        }
+    });
+
+    $('.txtigstper').on('input', function () {
+        var id = $(this).attr("data-id");
+        for (var i = 0; i < sublstobj.length; i++) {
+            if (sublstobj[i].GENID == id) {
+                sublstobj[i].IGST_PER = parseFloat($(this).val()) || 0;
+
+                sublstobj[i].CGST_PER = 0;
+                sublstobj[i].SGST_PER = 0;
+                sublstobj[i].SGST_AMT = 0;
+                sublstobj[i].CGST_AMT = 0;
+                sublstobj[i].IGST_AMT = round((sublstobj[i].IGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
+                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
+
+                $('#txtcgstper' + sublstobj[i].GENID).val(sublstobj[i].CGST_PER);
+                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
+
+                $('#txtsgstper' + sublstobj[i].GENID).val(sublstobj[i].SGST_PER);
+                $('#lblsgstamt' + sublstobj[i].GENID).text(sublstobj[i].SGST_AMT);
+
+                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);
+                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
+                calcamt();
+                return false;
+            }
+        }
+    });
+
+    $('.txtdescp').on('input', function () {
+        var id = $(this).attr("data-id");
+        for (var i = 0; i < sublstobj.length; i++) {
+            if (sublstobj[i].GENID == id) {
+                sublstobj[i].DESCP = $(this).val();
+                return false;
+            }
+        }
+    });
+
+    $('.txtremarks').on('input', function () {
+        var id = $(this).attr("data-id");
+        for (var i = 0; i < sublstobj.length; i++) {
+            if (sublstobj[i].GENID == id) {
+                sublstobj[i].REMARKS = $(this).val();
+                return false;
+            }
+        }
+    });
+
+    $(".btnbillrowdel").click(function () {
+        if (confirm("Are you sure you want to delete !") == true) {
+            var id = $(this).attr("data-id");
+            var newsubItemsList = [];
+            for (var i = 0; i < sublstobj.length; i++) {
+                if (sublstobj[i].GENID != id) {
+                    newsubItemsList.push(sublstobj[i]);
+                }
+            }
+            sublstobj = [];
+            for (var i = 0; i < newsubItemsList.length; i++) {
+                sublstobj.push(newsubItemsList[i]);
+                sublstobj[i].SL_NO = (i + 1);
+            }
+            loadsubcontrols();
+            calcamt();
+        }
+    });
+
+    $('input').on("keypress", function (e) {
+        /* ENTER PRESSED*/
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            var inputs = $(this).closest('form').find(':input:visible:enabled');
+            inputs.eq(inputs.index(this) + 1).focus();
+            return false;
+        }
+    });
+
+    if (sublstobj.length > 0) {
+        $('#txtdescp' + sublstobj[sublstobj.length - 1].GENID).focus();
+    }
+}
+
+function calcamt() {
+    othamt = parseFloat($('#OTH_AMT').val()) || 0;
+    grossamt = 0;
+    cgstamt = 0;
+    sgstamt = 0;
+    igstamt = 0;
+    for (var i = 0; i < sublstobj.length; i++) {
+        grossamt = grossamt + parseFloat(sublstobj[i].GROSS_AMT) || 0;
+        sgstamt = sgstamt + parseFloat(sublstobj[i].SGST_AMT) || 0;
+        cgstamt = cgstamt + parseFloat(sublstobj[i].CGST_AMT) || 0;
+        igstamt = igstamt + parseFloat(sublstobj[i].IGST_AMT) || 0;
+    }
+    grossamt = round(grossamt, 2);
+    sgstamt = round(sgstamt, 2);
+    cgstamt = round(cgstamt, 2);
+    igstamt = round(igstamt, 2);
+    netamt = grossamt + cgstamt + sgstamt + igstamt + othamt;
+    netamt = round(netamt, 2);
+    $("#GROSS_AMT").val(grossamt);
+    $("#SGST_AMT").val(sgstamt);
+    $("#CGST_AMT").val(cgstamt);
+    $("#IGST_AMT").val(igstamt);
+    $("#NET_AMT").val(netamt);
+}
+
+function round(value, precision) {
+    var aPrecision = Math.pow(10, precision);
+    return Math.round(value * aPrecision) / aPrecision;
+}
+
 $(function () {
 
     $(document).on("click", ".deleteButton", function () {
@@ -244,16 +634,16 @@ $(function () {
 
         $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Create a new Bill</h3>");
 
-        clearcontrols();
+        clearcontrols(1);
 
         $('#SEARCHTEXT').focus();
     });
-       
+
     $(document).on("click", ".cancelButton", function () {
         $('#mainlistingdiv').show();
         $('#mainldetaildiv').hide();
     });
-       
+
     $(document).on("click", "#btnsearchClient", function () {
         searchclients();
     });
@@ -271,7 +661,14 @@ $(function () {
             $("#PAYMODE_NAME").focus();
             return false;
         }
-       
+
+        if (netamt <= 0)
+        {
+            alert("Bill amount cannot be Zero, Please add atleast one valid service description.");
+            $("#btnaddrow").focus();
+            return false;
+        }
+
         if (sublstobj == undefined || sublstobj == null || sublstobj.length <= 0) {
             alert("Please add atleast one service description.");
             $("#btnaddrow").focus();
@@ -283,8 +680,8 @@ $(function () {
                 alert("Please enter service description.");
                 $("#txtdescp" + sublstobj[i].GENID).focus();
                 return false;
-            }            
-        }     
+            }
+        }
 
         var obj = {};
         obj.C_ID = cid;
@@ -304,7 +701,7 @@ $(function () {
         obj.IGST_AMT = igstamt;
         obj.OTH_AMT = othamt;
         obj.NET_AMT = netamt;
-        obj.SUBARRAY = sublstobj;           
+        obj.SUBARRAY = sublstobj;
 
         $.ajax({
             type: "Post",
@@ -346,6 +743,12 @@ $(function () {
         if ($("#PAYMODE_NAME").val() == null || $("#PAYMODE_NAME").val() == undefined || $.trim($("#PAYMODE_NAME").val()) == '' || $.trim($("#PAYMODE_NAME").val()) == '0' || $.trim($("#PAYMODE_NAME").val()) == 0) {
             alert('Please select Paymode.');
             $("#PAYMODE_NAME").focus();
+            return false;
+        }
+
+        if (netamt <= 0) {
+            alert("Bill amount cannot be Zero, Please add atleast one valid service description.");
+            $("#btnaddrow").focus();
             return false;
         }
 
@@ -422,88 +825,115 @@ $(function () {
         $("#btnUpdate").attr("edit-id", id);
         //alert(id);  //getting the row id 
 
-        $('#btnSave').hide();
-        $('#btnUpdate').show();
-        $('#mainlistingdiv').hide();
-        $('#mainldetaildiv').show();
-
-        clearcontrols();
-        $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Create a new Bill</h3>");
+        var checkid = 0;
         $.ajax({
             type: "Post",
             contentType: "application/json; charset=utf-8",
-            url: "Bill.aspx/EditData",
+            url: "Bill.aspx/CheckVoidBillEnrty",
             data: '{id: ' + id + '}',
             dataType: "json",
             success: function (data) {
                 if (data.d.length > 0) {
-                    if (data.d[0].MAINARRAY != null && data.d[0].MAINARRAY != undefined && data.d[0].MAINARRAY.length > 0) {
-
-                        $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Edit Bill : " + data.d[0].MAINARRAY[0].BILL_NO + "</h3>");
-
-                        cname = data.d[0].MAINARRAY[0].C_NAME;
-                        cno = data.d[0].MAINARRAY[0].C_NO;
-                        cid = data.d[0].MAINARRAY[0].C_ID;
-                        fileno = data.d[0].MAINARRAY[0].FILE_NO;                      
-                        
-                        $("#C_NAME").val(data.d[0].MAINARRAY[0].C_NAME);
-                        $("#BILL_NO").val(data.d[0].MAINARRAY[0].BILL_NO);
-                        $("#PAYMODE_NAME").val(data.d[0].MAINARRAY[0].PAYMODE_ID);
-                        $("#REMARKS").val(data.d[0].MAINARRAY[0].REMARKS);
-                        $('#BILL_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MAINARRAY[0].BILL_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[0]);
-                        $('#DUE_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MAINARRAY[0].DUE_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].DUE_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].DUE_DATE.split('-')[0]);
-                                                
-                        grossamt = data.d[0].MAINARRAY[0].GROSS_AMT;
-                        cgstamt = data.d[0].MAINARRAY[0].CGST_AMT;
-                        sgstamt = data.d[0].MAINARRAY[0].SGST_AMT;
-                        igstamt = data.d[0].MAINARRAY[0].IGST_AMT;
-                        othamt = data.d[0].MAINARRAY[0].OTH_AMT;
-                        netamt = data.d[0].MAINARRAY[0].NET_AMT;
-
-                        $("#GROSS_AMT").val(data.d[0].MAINARRAY[0].GROSS_AMT);
-                        $("#CGST_AMT").val(data.d[0].MAINARRAY[0].CGST_AMT);
-                        $("#SGST_AMT").val(data.d[0].MAINARRAY[0].SGST_AMT);
-                        $("#IGST_AMT").val(data.d[0].MAINARRAY[0].IGST_AMT);
-                        $("#OTH_AMT").val(data.d[0].MAINARRAY[0].OTH_AMT);
-                        $("#NET_AMT").val(data.d[0].MAINARRAY[0].NET_AMT);
-                    }
-
-                    if (data.d[0].SUBARRAY != null && data.d[0].SUBARRAY != undefined && data.d[0].SUBARRAY.length > 0) {
-                        sublstobj = [];
-                        for (var i = 0; i < data.d[0].SUBARRAY.length; i++) {
-                            subobj = {};
-                            subobj.SL_NO = data.d[0].SUBARRAY[i].SL_NO;
-                            subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
-                            subobj.DESCP = data.d[0].SUBARRAY[i].DESCP;
-                            subobj.GROSS_AMT = data.d[0].SUBARRAY[i].GROSS_AMT;
-                            subobj.SGST_PER = data.d[0].SUBARRAY[i].SGST_PER;
-                            subobj.SGST_AMT = data.d[0].SUBARRAY[i].SGST_AMT;
-                            subobj.CGST_PER = data.d[0].SUBARRAY[i].CGST_PER;
-                            subobj.CGST_AMT = data.d[0].SUBARRAY[i].CGST_AMT;
-                            subobj.IGST_PER = data.d[0].SUBARRAY[i].IGST_PER;
-                            subobj.IGST_AMT = data.d[0].SUBARRAY[i].IGST_AMT;
-                            subobj.NET_AMT = data.d[0].SUBARRAY[i].NET_AMT;
-                            subobj.REMARKS = data.d[0].SUBARRAY[i].REMARKS;
-                            sublstobj.push(subobj);
-                        }
-                        loadsubcontrols();
-                        calcamt();
-                    }                   
+                    checkid = data.d[0];
+                }
+                
+                if (checkid != null && checkid != undefined && checkid > 0) {                    
+                    alert('Cannot Edit Voided/Cancelled entry.');
+                    document.getElementById("loader").style.display = "none";
+                    return false;
                 }
 
-                $('#PAYMODE_NAME').focus();
-                document.getElementById("loader").style.display = "none";
+                
+                $.ajax({
+                    type: "Post",
+                    contentType: "application/json; charset=utf-8",
+                    url: "Bill.aspx/EditData",
+                    data: '{id: ' + id + '}',
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.d.length > 0) {
+                            $('#btnSave').hide();
+                            $('#btnUpdate').show();
+                            $('#mainlistingdiv').hide();
+                            $('#mainldetaildiv').show();
+
+                            clearcontrols(0);
+                            $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Create a new Bill</h3>");
+
+                            if (data.d[0].MAINARRAY != null && data.d[0].MAINARRAY != undefined && data.d[0].MAINARRAY.length > 0) {
+
+                                $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Edit Bill : " + data.d[0].MAINARRAY[0].BILL_NO + "</h3>");
+
+                                cname = data.d[0].MAINARRAY[0].C_NAME;
+                                cno = data.d[0].MAINARRAY[0].C_NO;
+                                cid = data.d[0].MAINARRAY[0].C_ID;
+                                fileno = data.d[0].MAINARRAY[0].FILE_NO;
+
+                                $("#C_NAME").val(data.d[0].MAINARRAY[0].C_NAME);
+                                $("#BILL_NO").val(data.d[0].MAINARRAY[0].BILL_NO);
+                                $("#PAYMODE_NAME").val(data.d[0].MAINARRAY[0].PAYMODE_ID);
+                                $("#REMARKS").val(data.d[0].MAINARRAY[0].REMARKS);
+                                $('#BILL_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MAINARRAY[0].BILL_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[0]);
+                                $('#DUE_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MAINARRAY[0].DUE_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].DUE_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].DUE_DATE.split('-')[0]);
+
+                                grossamt = data.d[0].MAINARRAY[0].GROSS_AMT;
+                                cgstamt = data.d[0].MAINARRAY[0].CGST_AMT;
+                                sgstamt = data.d[0].MAINARRAY[0].SGST_AMT;
+                                igstamt = data.d[0].MAINARRAY[0].IGST_AMT;
+                                othamt = data.d[0].MAINARRAY[0].OTH_AMT;
+                                netamt = data.d[0].MAINARRAY[0].NET_AMT;
+
+                                $("#GROSS_AMT").val(data.d[0].MAINARRAY[0].GROSS_AMT);
+                                $("#CGST_AMT").val(data.d[0].MAINARRAY[0].CGST_AMT);
+                                $("#SGST_AMT").val(data.d[0].MAINARRAY[0].SGST_AMT);
+                                $("#IGST_AMT").val(data.d[0].MAINARRAY[0].IGST_AMT);
+                                $("#OTH_AMT").val(data.d[0].MAINARRAY[0].OTH_AMT);
+                                $("#NET_AMT").val(data.d[0].MAINARRAY[0].NET_AMT);
+                                $('#lblclientdetails').text(data.d[0].MAINARRAY[0].C_DETAILS);
+                            }
+
+                            if (data.d[0].SUBARRAY != null && data.d[0].SUBARRAY != undefined && data.d[0].SUBARRAY.length > 0) {
+                                sublstobj = [];
+                                for (var i = 0; i < data.d[0].SUBARRAY.length; i++) {
+                                    subobj = {};
+                                    subobj.SL_NO = data.d[0].SUBARRAY[i].SL_NO;
+                                    subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
+                                    subobj.DESCP = data.d[0].SUBARRAY[i].DESCP;
+                                    subobj.GROSS_AMT = data.d[0].SUBARRAY[i].GROSS_AMT;
+                                    subobj.SGST_PER = data.d[0].SUBARRAY[i].SGST_PER;
+                                    subobj.SGST_AMT = data.d[0].SUBARRAY[i].SGST_AMT;
+                                    subobj.CGST_PER = data.d[0].SUBARRAY[i].CGST_PER;
+                                    subobj.CGST_AMT = data.d[0].SUBARRAY[i].CGST_AMT;
+                                    subobj.IGST_PER = data.d[0].SUBARRAY[i].IGST_PER;
+                                    subobj.IGST_AMT = data.d[0].SUBARRAY[i].IGST_AMT;
+                                    subobj.NET_AMT = data.d[0].SUBARRAY[i].NET_AMT;
+                                    subobj.REMARKS = data.d[0].SUBARRAY[i].REMARKS;
+                                    sublstobj.push(subobj);
+                                }
+                                loadsubcontrols();
+                                calcamt();
+                            }
+                        }
+
+                        //$('#PAYMODE_NAME').focus();
+                        document.getElementById("loader").style.display = "none";
+                    },
+                    error: function () {
+                        alert("Error while retrieving data of :" + id);
+                    }
+                });
             },
             error: function () {
-                alert("Error while retrieving data of :" + id);
+                alert("Error while checking is void data of :" + id);
             }
         });
+
     });
 
     $(document).on("click", "#btnaddrow", function () {
         subobj = {};
         subobj.SL_NO = sublstobj.length + 1;
-        subobj.GENID = Math.floor((Math.random() * 10000000) + 1);        
+        subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
         subobj.DESCP = "";
         subobj.GROSS_AMT = 0;
         subobj.SGST_PER = 0;
@@ -518,391 +948,151 @@ $(function () {
         loadsubcontrols();
     });
 
+    $(document).on("click", ".voidButton", function () {
+        var id = $(this).attr("data-id");
+        var checkid = 0;
+        $.ajax({
+            type: "Post",
+            contentType: "application/json; charset=utf-8",
+            url: "Bill.aspx/CheckVoidBillEnrty",
+            data: '{id: ' + id + '}',
+            dataType: "json",
+            success: function (data) {
+                if (data.d.length > 0) {
+                    checkid = data.d[0];
+                }
+
+                if (checkid != null && checkid != undefined && checkid > 0) {
+                    alert('Cannot Void already Voided entry.');
+                    document.getElementById("loader").style.display = "none";
+                    return false;
+                }
+
+                if (confirm("Are you sure you want to Void/Cancel the entry!") == true) {
+                    $.ajax({
+                        type: "Post",
+                        contentType: "application/json; charset=utf-8",
+                        url: "Bill.aspx/VoidData",
+                        data: '{id: ' + id + '}',
+                        dataType: "json",
+                        success: function (data) {
+                            for (var i = 0; i < data.d.length; i++) {
+                                if (data.d[i].RESULT === 1) {
+                                    getMainGridDetails();
+                                    alert(data.d[i].MSG);
+                                }
+                                else {
+                                    alert(data.d[i].MSG);
+                                    return false;
+                                }
+                            }
+                        },
+                        error: function (data) {
+                            alert("Error while Deleting data of :" + id);
+                        }
+                    });
+                }
+            },
+            error: function () {
+                alert("Error while checking is void data of :" + id);
+            }
+        });
+    });
+
+    $(document).on("click", ".printButton", function () {
+
+        var id = $(this).attr("data-id");
+        console.log(id);
+
+        $('#tablesubprn tbody').remove();
+        $('#tablesubprn').append("<tbody>");
+        $('#tablesubprn').append("</tbody>");
+        $('#lblbillno').text('');
+        $('#lblbilldate').text('');
+        $('#lblfileno').text('');
+        $('#lblpaymode').text('');
+        $('#lblcname').text('');
+        $('#lblcadd').text('');
+        $('#lblcpan').text('');
+        $('#lblcgstin').text('');
+        $('#lblreamrks').text('');
+
+        $('#lblgrossamt').text('');
+        $('#lblcgstamt').text('');
+        $('#lblsgstamt').text('');
+        $('#lbligstamt').text('');
+        $('#lblothamt').text('');
+        $('#lblnetamt').text('');
+
+        $('#trcgstamt').show();
+        $('#trsgstamt').show();
+        $('#trigstamt').show();
+        $('#trothamt').show();
+        $('#trvoid').hide();
+        $.ajax({
+            type: "Post",
+            contentType: "application/json; charset=utf-8",
+            url: "Bill.aspx/EditData",
+            data: '{id: ' + id + '}',
+            dataType: "json",
+            success: function (data) {
+                if (data.d.length > 0) {
+                    $("#lblbillno").text(data.d[0].MAINARRAY[0].BILL_NO);
+                    $('#lblbilldate').text(data.d[0].MAINARRAY[0].BILL_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[0]);
+                    $("#lblfileno").text(data.d[0].MAINARRAY[0].FILE_NO);
+                    $("#lblpaymode").text(data.d[0].MAINARRAY[0].PAYMODE_NAME);
+                    $('#lblcname').text(data.d[0].MAINARRAY[0].C_NAME);
+                    $('#lblcadd').text(data.d[0].MAINARRAY[0].C_DETAILS);
+                    $('#lblcpan').text(data.d[0].MAINARRAY[0].PAN);
+                    $('#lblcgstin').text(data.d[0].MAINARRAY[0].GSTIN);
+                    $('#lblreamrks').text(data.d[0].MAINARRAY[0].REMARKS);
+
+                    $('#lblgrossamt').text(data.d[0].MAINARRAY[0].GROSS_AMT);
+                    $('#lblcgstamt').text(data.d[0].MAINARRAY[0].CGST_AMT);
+                    $('#lblsgstamt').text(data.d[0].MAINARRAY[0].SGST_AMT);
+                    $('#lbligstamt').text(data.d[0].MAINARRAY[0].IGST_AMT);
+                    $('#lblothamt').text(data.d[0].MAINARRAY[0].OTH_AMT);
+                    $('#lblnetamt').text(data.d[0].MAINARRAY[0].NET_AMT);
+
+                    if (data.d[0].MAINARRAY[0].CGST_AMT == 0)
+                        $('#trcgstamt').hide();
+                    if (data.d[0].MAINARRAY[0].SGST_AMT == 0)
+                        $('#trsgstamt').hide();
+                    if (data.d[0].MAINARRAY[0].IGST_AMT == 0)
+                        $('#trigstamt').hide();
+                    if (data.d[0].MAINARRAY[0].OTH_AMT == 0)
+                        $('#trothamt').hide();
+
+                    if (data.d[0].MAINARRAY[0].VOID_STATUS == true)
+                    {
+                        $('#trvoid').show();
+                    }
+                }
+
+                $('#tablesubprn tbody').remove();
+                $('#tablesubprn').append("<tbody>");
+                for (var i = 0; i < data.d[0].SUBARRAY.length; i++) {
+                    $('#tablesubprn').append(
+                        "<tr><td style='border: 1px solid black;text-align:center;color:brown'><b>" + data.d[0].SUBARRAY[i].SL_NO + "</b></td><td style='border: 1px solid black;'>" + data.d[0].SUBARRAY[i].DESCP + "</td><td style='border: 1px solid black;color:blue'>" + data.d[0].SUBARRAY[i].REMARKS + "</td><td style='border: 1px solid black;text-align:center;color:red'><b>" + data.d[0].SUBARRAY[i].NET_AMT + "</b></td></tr>");
+                }
+                $('#tablesubprn').append("</tbody>");
+                $('#printdiv').show();
+                var divToPrint = document.getElementById("printdiv");
+                newWin = window.open("");
+                newWin.document.write(divToPrint.outerHTML);
+                $('#printdiv').hide();
+                newWin.print();
+                //newWin.close();
+
+            },
+            error: function () {
+                alert("Error while retrieving data of :" + id);
+            }
+        });
+
+
+    });
+
 });
 
 
-function searchclients() {
-    if ($("#SEARCHBY").val().trim() == "") {
-        alert("Please select searchby.");
-        $("#SEARCHBY").focus();
-        return false;
-    }
-
-    if ($("#SEARCHTEXT").val().trim() == "") {
-        alert("Please enter search text.");
-        $("#SEARCHTEXT").focus();
-        return false;
-    }
-    document.getElementById("loader").style.display = "block";
-    $.ajax({
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        url: "Bill.aspx/GetClientSearchList",
-        data: '{filterby: ' + JSON.stringify($("#SEARCHBY").val()) + ',filtertext: ' + JSON.stringify($("#SEARCHTEXT").val()) + '}',
-        dataType: "json",
-        success: function (data) {
-            if (data.d.length > 0) {
-
-                tempclientlstobj = [];
-                for (var i = 0; i < data.d.length; i++) {
-                    clientobj = {};
-                    clientobj.GENID = Math.floor((Math.random() * 10000000) + 1);
-                    clientobj.C_ID = data.d[i].C_ID;
-                    clientobj.C_NO = data.d[i].C_NO;
-                    clientobj.FILE_NO = data.d[i].FILE_NO;
-                    clientobj.C_NAME = data.d[i].C_NAME;
-                    clientobj.PH_NO = data.d[i].PH_NO;
-                    clientobj.MOBILE_NO1 = data.d[i].MOBILE_NO1;
-                    clientobj.MOBILE_NO2 = data.d[i].MOBILE_NO2;
-                    clientobj.PAN = data.d[i].PAN;
-                    clientobj.AADHAAR = data.d[i].AADHAAR;
-                    clientobj.GSTIN = data.d[i].GSTIN;
-                    clientobj.CLI_GRP_NAME = data.d[i].CLI_GRP_NAME;
-                    tempclientlstobj.push(clientobj);
-                }
-                loadtempsearchclientgrid();
-                $("#SEARCHTEXT").val('');
-            }
-            else {
-                alert('No data found for the search criteria');
-                $("#SEARCHTEXT").focus();
-            }
-
-            document.getElementById("loader").style.display = "none";
-        },
-        error: function () {
-            alert("Error while Showing update data");
-        }
-
-        //
-    });
-
-}
-
-function loadtempsearchclientgrid() {
-    $('#tableclientsearch tbody').remove();
-    $('#tableclientsearch').append("<tbody>");
-    for (var i = 0; i < tempclientlstobj.length; i++) {
-        $('#tableclientsearch').append(
-            "<tr><td style='text-align:center;color:brown'><b>" + tempclientlstobj[i].C_NO + "</b></td><td>" + tempclientlstobj[i].FILE_NO + "</td><td style='color:blue'>" + tempclientlstobj[i].C_NAME + "</td>" +
-            "<td>" + tempclientlstobj[i].PAN + "</td><td>" + tempclientlstobj[i].AADHAAR + "</td><td>" + tempclientlstobj[i].GSTIN + "</td>" +
-            "<td style='text-align: center'><img src='../../Images/select.png' alt='Select Record' class='selectButtonSubis handcursor' data-id='" + tempclientlstobj[i].C_ID + '_' + tempclientlstobj[i].GENID + "' id='btnselectSubIS_" + tempclientlstobj[i].GENID + "' value='Select' style='margin-right:5px;margin-left:5px'/> </td></tr>");
-
-    }
-    $('#tableclientsearch').append("</tbody>");
-
-    $("div.mhs h4").html("Search results for " + $('#SEARCHBY').val() + " : " + $('#SEARCHTEXT').val());
-
-    $('#PopupModalClientSearch').modal('show');
-    $('#PopupModalClientSearch').focus();
-
-    $(".selectButtonSubis").click(function () {
-        var id = this.id.split("_");
-        for (var i = 0; i < tempclientlstobj.length; i++) {
-            if (tempclientlstobj[i].GENID == id[1]) {
-
-                cname = tempclientlstobj[i].C_NAME;
-                cid = tempclientlstobj[i].C_ID;
-                cno = tempclientlstobj[i].C_NO;
-                fileno = tempclientlstobj[i].FILE_NO;
-                $('#C_NAME').val(tempclientlstobj[i].C_NAME);              
-                break;
-            }
-        }        
-        $('#PopupModalClientSearch').modal('hide');
-        $("#PAYMODE_NAME").focus();
-    });
-
-}
-
-function clearcontrols()
-{
-    cname = '';
-    cid = 0;
-    cno = 0;
-    fileno = '';
-    $('#C_NAME').val('');
-    $("#SEARCHTEXT").val('');
-
-    sublstobj = [];
-    subobj = {};
-    subobj.SL_NO = 1;
-    subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
-    subobj.DESCP = "";
-    subobj.GROSS_AMT = 0;
-    subobj.SGST_PER = 0;
-    subobj.SGST_AMT = 0;
-    subobj.CGST_PER = 0;
-    subobj.CGST_AMT = 0;
-    subobj.IGST_PER = 0;
-    subobj.IGST_AMT = 0;
-    subobj.NET_AMT = 0;
-    subobj.REMARKS = "";
-    sublstobj.push(subobj);
-    loadsubcontrols();
-
-    grossamt = 0;
-    sgstamt = 0;
-    cgstamt = 0;
-    igstamt = 0;
-    othamt = 0;
-    netamt = 0;
-    $("#GROSS_AMT").val(0);
-    $("#CGST_AMT").val(0);
-    $("#SGST_AMT").val(0);
-    $("#IGST_AMT").val(0);
-    $("#OTH_AMT").val(0);
-    $("#NET_AMT").val(0);
-
-    var date = new Date();
-    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    var plus7days = today.getDate() + 7;
-    
-    $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
-    $('#BILL_DATE').datepicker('setDate', today);
-    $('#DUE_DATE').datepicker('setDate', plus7days);
-    $("#PAYMODE_NAME").val(0);
-    $('#BILL_NO').val(0);
-
-    $.ajax({
-        url: "Bill.aspx/GetLatestTrasnsactionNumber",
-        data: '{}',
-        dataType: "json",
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-            for (var i = 0; i < data.d.length; i++) {
-                $('#BILL_NO').val(data.d[i].split('-')[0]);
-                $('#BILL_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[i].split('-')[3] + '-' + data.d[i].split('-')[2] + '-' + data.d[i].split('-')[1]);
-                var date2 = $('#BILL_DATE').datepicker('getDate');
-                var nextDayDate = new Date();
-                nextDayDate.setDate(date2.getDate() + 7);
-                $('#DUE_DATE').datepicker('setDate', nextDayDate);
-              
-            }            
-        },
-        error: function (response) {
-            alert(response.responseText);
-        },
-        failure: function (response) {
-            alert(response.responseText);
-        }
-    });
-
-
-}
-
-function loadsubcontrols()
-{
-    $("#divservicedetaisdetails").empty();
-    for (var i = 0; i < sublstobj.length; i++) {
-        var newTextBoxDiv = $(document.createElement('div'))
-            .attr("id", 'SubrowsDiv' + sublstobj[i].GENID);
-        newTextBoxDiv.attr('class', 'row');
-        newTextBoxDiv.after().html("<div class='form-group col-3'>" +
-        "<label id='lblslno" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: brown; font-weight: 500; display: inline;margin-right:5px;'>" + sublstobj[i].SL_NO + "</label>" +
-        "<input type='text' id='txtdescp" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control txtdescp' placeholder='Enter Description.' style='width: 88%; display: inline' value='" + sublstobj[i].DESCP + "' />" +
-        "</div>" +
-        "<div class='form-group col-6'>" +
-        "<table style='width: 100%'>" +
-        "<tr>" +
-        "<td style='width: 20%;padding-right:20px'>" +
-        "<input type='number' id='txtgrossamt" + sublstobj[i].GENID + "' class='form-control txtgrossamt' value='" + sublstobj[i].GROSS_AMT + "' style='text-align: center;width:100%;;background-color: white; color: brown; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
-        "</td>" +
-        "<td style='width: 20%'>" +
-        "<input type='number' id='txtsgstper" + sublstobj[i].GENID + "' class='form-control txtsgstper' value='" + sublstobj[i].SGST_PER + "' style='text-align: center; width: 50%; display: inline;background-color: white; color: green; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
-        "<label id='lblsgstamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: blue; font-weight: 500; display: inline; width: 50%;margin-left:5px;'>" + sublstobj[i].SGST_AMT + "</label>" +
-        "</td>" +
-        "<td style='width: 20%'>" +
-        "<input type='number' id='txtcgstper" + sublstobj[i].GENID + "' class='form-control txtcgstper' value='" + sublstobj[i].CGST_PER + "' style='text-align: center; width: 50%; display: inline;background-color: white; color: green; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
-        "<label id='lblcgstamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: blue; font-weight: 500; display: inline; width: 50%;margin-left:5px;'>" + sublstobj[i].CGST_AMT + "</label>" +
-        "</td>" +
-        "<td style='width: 20%'>" +
-        "<input type='number' id='txtigstper" + sublstobj[i].GENID + "' class='form-control txtigstper' value='" + sublstobj[i].IGST_PER + "' style='text-align: center; width: 50%; display: inline;background-color: white; color: green; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
-        "<label id='lbligstamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: blue; font-weight: 500; display: inline; width: 50%;margin-left:5px;'>" + sublstobj[i].IGST_AMT + "</label>" +
-        "</td>" +
-        "<td style='width: 20%'>" +
-        "<input type='number' id='txtnettamt" + sublstobj[i].GENID + "' class='form-control' value='" + sublstobj[i].NET_AMT + "' style='text-align: center;width:100%;background-color: white; color: orangered; font-weight: 500' disabled='disabled' data-id='" + sublstobj[i].GENID + "' />" +
-        "</td>" +
-        "</tr>" +
-        "</table>" +
-        "</div>" +
-        "<div class='form-group col-3'>" +
-        "<input type='text' id='txtremarks" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control txtremarks' placeholder='Enter remarks.' style='display: inline; width: 80%' value='" + sublstobj[i].REMARKS + "' />" +
-        "<img id='btnbillrowdel" + sublstobj[i].GENID + "' class='btnbillrowdel handcursor' src='../../Images/delete.png' style='margin-left: 8px; display: inline;' data-id='" + sublstobj[i].GENID + "' />" +
-        "</div>");
-
-        newTextBoxDiv.appendTo("#divservicedetaisdetails"); 
-
-    }
-
-    $('.txtgrossamt').on('input', function () {
-        var id = $(this).attr("data-id");
-        for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].GROSS_AMT = parseFloat($(this).val()) || 0;
-                sublstobj[i].SGST_AMT = round((sublstobj[i].SGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].CGST_AMT = round((sublstobj[i].CGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].IGST_AMT = round((sublstobj[i].IGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
-
-                $('#lblsgstamt' + sublstobj[i].GENID).text(sublstobj[i].SGST_AMT);
-                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
-                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);
-                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
-                calcamt();
-                return false;
-            }
-        }
-    });
-
-    $('.txtsgstper').on('input', function () {
-        var id = $(this).attr("data-id");
-        for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].SGST_PER = parseFloat($(this).val()) || 0;
-                sublstobj[i].IGST_PER = 0;
-                sublstobj[i].SGST_AMT = round((sublstobj[i].SGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].CGST_AMT = round((sublstobj[i].CGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].IGST_AMT = 0;
-                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
-
-                $('#lblsgstamt' + sublstobj[i].GENID).text(sublstobj[i].SGST_AMT);
-                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
-                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);
-                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
-                calcamt();
-                return false;
-            }
-        }
-    });
-
-    $('.txtcgstper').on('input', function () {
-        var id = $(this).attr("data-id");
-        for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].CGST_PER = parseFloat($(this).val()) || 0;                
-                sublstobj[i].CGST_AMT = round((sublstobj[i].CGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].IGST_PER = 0;
-                sublstobj[i].IGST_AMT = 0;
-                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
-
-                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
-                
-                $('#txtigstper' + sublstobj[i].GENID).val(sublstobj[i].IGST_PER);
-                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);             
-                
-                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
-                calcamt();
-                return false;
-            }
-        }
-    });
-
-    $('.txtigstper').on('input', function () {
-        var id = $(this).attr("data-id");
-        for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].IGST_PER = parseFloat($(this).val()) || 0;
-
-                sublstobj[i].CGST_PER = 0;
-                sublstobj[i].SGST_PER = 0;
-                sublstobj[i].SGST_AMT = 0;
-                sublstobj[i].CGST_AMT = 0;
-                sublstobj[i].IGST_AMT = round((sublstobj[i].IGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
-
-                $('#txtcgstper' + sublstobj[i].GENID).val(sublstobj[i].CGST_PER);
-                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
-
-                $('#txtsgstper' + sublstobj[i].GENID).val(sublstobj[i].SGST_PER);
-                $('#lblsgstamt' + sublstobj[i].GENID).text(sublstobj[i].SGST_AMT);
-                
-                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);
-                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
-                calcamt();
-                return false;
-            }
-        }
-    });
-
-    $('.txtdescp').on('input', function () {
-        var id = $(this).attr("data-id");
-        for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].DESCP = $(this).val();
-                return false;
-            }
-        }
-    });
-
-    $('.txtremarks').on('input', function () {
-        var id = $(this).attr("data-id");
-        for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].REMARKS = $(this).val();
-                return false;
-            }
-        }
-    });
-
-    $(".btnbillrowdel").click(function () {
-        if (confirm("Are you sure you want to delete !") == true) {
-            var id = $(this).attr("data-id");
-            var newsubItemsList = [];
-            for (var i = 0; i < sublstobj.length; i++) {
-                if (sublstobj[i].GENID != id) {
-                    newsubItemsList.push(sublstobj[i]);
-                }
-            }
-            sublstobj = [];
-            for (var i = 0; i < newsubItemsList.length; i++) {
-                sublstobj.push(newsubItemsList[i]);
-                sublstobj[i].SL_NO = (i + 1);
-            }
-            loadsubcontrols();
-            calcamt();
-        }
-    });
-
-    $('input').on("keypress", function (e) {
-        /* ENTER PRESSED*/
-        if (e.keyCode == 13) {            
-            e.preventDefault();
-            var inputs = $(this).closest('form').find(':input:visible:enabled');
-            inputs.eq(inputs.index(this) + 1).focus();
-            return false;
-        }
-    });
-}
-
-function calcamt()
-{
-    othamt = parseFloat($('#OTH_AMT').val()) || 0;
-    grossamt = 0;
-    cgstamt = 0;
-    sgstamt = 0;
-    igstamt = 0;
-    for (var i = 0; i < sublstobj.length; i++) {
-        grossamt = grossamt + parseFloat(sublstobj[i].GROSS_AMT) || 0;
-        sgstamt = sgstamt + parseFloat(sublstobj[i].SGST_AMT) || 0;
-        cgstamt = cgstamt + parseFloat(sublstobj[i].CGST_AMT) || 0;
-        igstamt = igstamt + parseFloat(sublstobj[i].IGST_AMT) || 0;
-    }
-    grossamt = round(grossamt, 2);
-    sgstamt = round(sgstamt, 2);
-    cgstamt = round(cgstamt, 2);
-    igstamt = round(igstamt, 2);
-    netamt = grossamt + cgstamt + sgstamt + igstamt + othamt;
-    netamt = round(netamt, 2);
-    $("#GROSS_AMT").val(grossamt);
-    $("#SGST_AMT").val(sgstamt);
-    $("#CGST_AMT").val(cgstamt);
-    $("#IGST_AMT").val(igstamt);
-    $("#NET_AMT").val(netamt);
-}
-
-function round(value, precision) {
-    var aPrecision = Math.pow(10, precision);
-    return Math.round(value * aPrecision) / aPrecision;
-}

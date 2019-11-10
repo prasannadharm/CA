@@ -50,6 +50,7 @@
     <Compile Include="Security\Encryption\ICryptographyHelper.cs" />
     <Compile Include="Security\Encryption\PasswordHelper.cs" />
     <Compile Include="Transport\Bill\BillEntity.cs" />
+    <Compile Include="Transport\Bill\BsEntity.cs" />
     <Compile Include="Transport\CityState\CityStateMasterEntity.cs" />
     <Compile Include="Transport\CityState\StateMasterEntity.cs" />
     <Compile Include="Transport\ClientMaster\ClientCategoryMasterEntity.cs" />

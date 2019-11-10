@@ -28,13 +28,16 @@
         <tr>
             <td>4. Adding Test data to client master</td>
         </tr>
+         <tr>
+            <td style="color:brown">5. Transactions - Billing  is completed (*New)</td>
+        </tr>
         <tr>
             <td>
                 <h4>Work In Progress</h4>
             </td>
         </tr>        
         <tr>
-            <td>1. Transactions - Billing (Print & Void is pending rest is completed)</td>
+            <td>1. Transactions - Bill Settlement (Base design in progress)</td>
         </tr>
         <tr>
             <td>

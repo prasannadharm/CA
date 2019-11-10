@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSource\Bill\BillDAO.cs" />
+    <Compile Include="DataSource\Bill\BSDAO.cs" />
     <Compile Include="DataSource\CityState\CityStateMasterDAO.cs" />
     <Compile Include="DataSource\ClientMaster\ClientCategoryMasterDAO.cs" />
     <Compile Include="DataSource\ClientMaster\ClientGroupMasterDAO.cs" />

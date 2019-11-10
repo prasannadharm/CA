@@ -7,12 +7,7 @@ var fileno = '';
 var sublstobj = [];
 var subobj = {};
 
-var grossamt = 0;
-var sgstamt = 0;
-var cgstamt = 0;
-var igstamt = 0;
-var othamt = 0;
-var netamt = 0;
+var bsamt = 0;
 
 $(document).ready(function () {
     $("#masterdiv").removeClass("container");
@@ -23,7 +18,7 @@ $(document).ready(function () {
     $('#dtpTo').datepicker('setDate', today);
 
     $.ajax({
-        url: "Bill.aspx/GetLatestTrasnsactionNumber",
+        url: "BillSettlement.aspx/GetLatestTrasnsactionNumber",
         data: '{}',
         dataType: "json",
         type: "POST",
@@ -45,7 +40,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "POST",
-        url: "Bill.aspx/GetActivePaymodeList",
+        url: "BillSettlement.aspx/GetActivePaymodeList",
         data: '{}',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -79,13 +74,7 @@ $(document).ready(function () {
             searchclients();
         }
     });
-
-    //Vaule change in other text box
-    $('#OTH_AMT').on('input', function () {
-        othamt = parseFloat($(this).val()) || 0;
-        netamt = grossamt + cgstamt + sgstamt + igstamt + othamt;
-        $("#NET_AMT").val(netamt);
-    });
+    
 })
 
 function LoadPayModeCombo(data) {
@@ -135,30 +124,29 @@ function getMainGridDetails() {
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        url: "Bill.aspx/GetData",
+        url: "BillSettlement.aspx/GetData",
         data: '{fromdate: ' + JSON.stringify($("#dtpFrom").val()) + ', todate: ' + JSON.stringify($("#dtpTo").val()) + '}',
         dataType: "json",
         success: function (data) {
             $('#griddiv').remove();
             $('#maindiv').append("<div class='table-responsive' id='griddiv'></div>");
             $('#griddiv').append("<table id='tablemain' class='table table-striped table-bordered' style='width: 100%'></table>");
-            $('#tablemain').append("<thead><tr><th>Bill No</th><th>Date</th><th>C No</th><th>File No</th><th>Client</th><th>Paymode</th><th>Amount</th><th>Void</th><th></th><th></th><th></th><th></th></tr></thead><tbody></tbody>");
+            $('#tablemain').append("<thead><tr><th>No</th><th>Date</th><th>C No</th><th>File No</th><th>Client</th><th>Paymode</th><th>Amount</th><th>Void</th><th></th><th></th><th></th></tr></thead><tbody></tbody>");
             $('#tablemain tbody').remove();
             $('#tablemain').append("<tbody>");
             for (var i = 0; i < data.d.length; i++) {
                 $('#tablemain').append(
-                    "<tr><td style='text-align:center;color:brown'><b>" + data.d[i].BILL_NO + "</b></td>" +
-                    "<td>" + data.d[i].BILL_DATE + "</td>" +
+                    "<tr><td style='text-align:center;color:brown'><b>" + data.d[i].BS_NO + "</b></td>" +
+                    "<td>" + data.d[i].BS_DATE + "</td>" +
                     "<td style='center;'>" + data.d[i].C_NO + "</td>" +
                     "<td style='center;'>" + data.d[i].FILE_NO + "</td>" +
                     "<td style='color:blue'><b>" + data.d[i].C_NAME + "</b></td>" +
                     "<td>" + data.d[i].PAYMODE_NAME + "</td>" +
-                    "<td style='text-align:center;color:red'><b>" + data.d[i].NET_AMT + "</b></td>" +
-                    "<td style='text-align:center;'>" + "<input type='checkbox' onclick='return false;' " + (data.d[i].VOID_STATUS == true ? "checked='checked'" : "") + "/></td>" +
-                    "<td><img src='../../Images/edit.png' alt='Edit Record' class='editButton handcursor' data-id='" + data.d[i].BILL_ID + "' name='submitButton' id='btnEdit' value='Edit' style='margin-right:5px'/>" + "</td>" +
-                    "<td><img src='../../Images/delete.png' alt='Delete Record' class='deleteButton handcursor' data-id='" + data.d[i].BILL_ID + "' name='submitButton' id='btnDelete' value='Delete' style='margin-right:5px;margin-left:5px'/> </td>" +
-                    "<td><img src='../../Images/void.png' alt='Void / Cancel Record' class='voidButton handcursor' data-id='" + data.d[i].BILL_ID + "' name='submitButton' id='btnVoid' value='Void' style='margin-right:5px;margin-left:5px'/> </td>" +
-                    "<td><img src='../../Images/print.png' alt='Print Record' class='printButton handcursor' data-id='" + data.d[i].BILL_ID + "' id='btnPrint' value='Print' style='margin-right:5px;margin-left:5px'/> </td></tr>");
+                    "<td style='text-align:center;color:red'><b>" + data.d[i].BS_AMT + "</b></td>" +
+                    "<td style='text-align:center;'>" + "<input type='checkbox' onclick='return false;' " + (data.d[i].VOID_STATUS == true ? "checked='checked'" : "") + "/></td>" +                    
+                    "<td><img src='../../Images/delete.png' alt='Delete Record' class='deleteButton handcursor' data-id='" + data.d[i].BS_ID + "' name='submitButton' id='btnDelete' value='Delete' style='margin-right:5px;margin-left:5px'/> </td>" +
+                    "<td><img src='../../Images/void.png' alt='Void / Cancel Record' class='voidButton handcursor' data-id='" + data.d[i].BS_ID + "' name='submitButton' id='btnVoid' value='Void' style='margin-right:5px;margin-left:5px'/> </td>" +
+                    "<td><img src='../../Images/print.png' alt='Print Record' class='printButton handcursor' data-id='" + data.d[i].BS_ID + "' id='btnPrint' value='Print' style='margin-right:5px;margin-left:5px'/> </td></tr>");
             }
             $('#tablemain').append("</tbody>");
             $('#tablemain').DataTable({
@@ -220,7 +208,7 @@ function searchclients() {
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        url: "Bill.aspx/GetClientSearchList",
+        url: "BillSettlement.aspx/GetClientSearchList",
         data: '{filterby: ' + JSON.stringify($("#SEARCHBY").val()) + ',filtertext: ' + JSON.stringify($("#SEARCHTEXT").val()) + '}',
         dataType: "json",
         success: function (data) {
@@ -325,19 +313,9 @@ function clearcontrols(addflag) {
     sublstobj.push(subobj);
     loadsubcontrols();
 
-    grossamt = 0;
-    sgstamt = 0;
-    cgstamt = 0;
-    igstamt = 0;
-    othamt = 0;
-    netamt = 0;
-    $("#GROSS_AMT").val(0);
-    $("#CGST_AMT").val(0);
-    $("#SGST_AMT").val(0);
-    $("#IGST_AMT").val(0);
-    $("#OTH_AMT").val(0);
-    $("#NET_AMT").val(0);
-
+    bsamt = 0;
+    $("#BS_AMT").val(0);
+    
     var date = new Date();
     var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     var plus7days = today.getDate() + 7;
@@ -350,7 +328,7 @@ function clearcontrols(addflag) {
 
     if (addflag == 1) {
         $.ajax({
-            url: "Bill.aspx/GetLatestTrasnsactionNumber",
+            url: "BillSettlement.aspx/GetLatestTrasnsactionNumber",
             data: '{}',
             dataType: "json",
             type: "POST",
@@ -438,97 +416,7 @@ function loadsubcontrols() {
                 return false;
             }
         }
-    });
-
-    $('.txtsgstper').on('input', function () {
-        var id = $(this).attr("data-id");
-        for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].SGST_PER = parseFloat($(this).val()) || 0;
-                sublstobj[i].IGST_PER = 0;
-                sublstobj[i].SGST_AMT = round((sublstobj[i].SGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].CGST_AMT = round((sublstobj[i].CGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].IGST_AMT = 0;
-                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
-
-                $('#lblsgstamt' + sublstobj[i].GENID).text(sublstobj[i].SGST_AMT);
-                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
-                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);
-                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
-                calcamt();
-                return false;
-            }
-        }
-    });
-
-    $('.txtcgstper').on('input', function () {
-        var id = $(this).attr("data-id");
-        for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].CGST_PER = parseFloat($(this).val()) || 0;
-                sublstobj[i].CGST_AMT = round((sublstobj[i].CGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].IGST_PER = 0;
-                sublstobj[i].IGST_AMT = 0;
-                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
-
-                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
-
-                $('#txtigstper' + sublstobj[i].GENID).val(sublstobj[i].IGST_PER);
-                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);
-
-                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
-                calcamt();
-                return false;
-            }
-        }
-    });
-
-    $('.txtigstper').on('input', function () {
-        var id = $(this).attr("data-id");
-        for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].IGST_PER = parseFloat($(this).val()) || 0;
-
-                sublstobj[i].CGST_PER = 0;
-                sublstobj[i].SGST_PER = 0;
-                sublstobj[i].SGST_AMT = 0;
-                sublstobj[i].CGST_AMT = 0;
-                sublstobj[i].IGST_AMT = round((sublstobj[i].IGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
-
-                $('#txtcgstper' + sublstobj[i].GENID).val(sublstobj[i].CGST_PER);
-                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
-
-                $('#txtsgstper' + sublstobj[i].GENID).val(sublstobj[i].SGST_PER);
-                $('#lblsgstamt' + sublstobj[i].GENID).text(sublstobj[i].SGST_AMT);
-
-                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);
-                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
-                calcamt();
-                return false;
-            }
-        }
-    });
-
-    $('.txtdescp').on('input', function () {
-        var id = $(this).attr("data-id");
-        for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].DESCP = $(this).val();
-                return false;
-            }
-        }
-    });
-
-    $('.txtremarks').on('input', function () {
-        var id = $(this).attr("data-id");
-        for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].REMARKS = $(this).val();
-                return false;
-            }
-        }
-    });
+    });   
 
     $(".btnbillrowdel").click(function () {
         if (confirm("Are you sure you want to delete !") == true) {
@@ -565,28 +453,12 @@ function loadsubcontrols() {
 }
 
 function calcamt() {
-    othamt = parseFloat($('#OTH_AMT').val()) || 0;
-    grossamt = 0;
-    cgstamt = 0;
-    sgstamt = 0;
-    igstamt = 0;
+    bsamt = 0;
     for (var i = 0; i < sublstobj.length; i++) {
-        grossamt = grossamt + parseFloat(sublstobj[i].GROSS_AMT) || 0;
-        sgstamt = sgstamt + parseFloat(sublstobj[i].SGST_AMT) || 0;
-        cgstamt = cgstamt + parseFloat(sublstobj[i].CGST_AMT) || 0;
-        igstamt = igstamt + parseFloat(sublstobj[i].IGST_AMT) || 0;
+        bsamt = bsamt + parseFloat(sublstobj[i].GROSS_AMT) || 0;
     }
-    grossamt = round(grossamt, 2);
-    sgstamt = round(sgstamt, 2);
-    cgstamt = round(cgstamt, 2);
-    igstamt = round(igstamt, 2);
-    netamt = grossamt + cgstamt + sgstamt + igstamt + othamt;
-    netamt = round(netamt, 2);
-    $("#GROSS_AMT").val(grossamt);
-    $("#SGST_AMT").val(sgstamt);
-    $("#CGST_AMT").val(cgstamt);
-    $("#IGST_AMT").val(igstamt);
-    $("#NET_AMT").val(netamt);
+    bsamt = round(bsamt, 2);
+    $("#BS_AMT").val(bsamt);    
 }
 
 function round(value, precision) {
@@ -602,7 +474,7 @@ $(function () {
             $.ajax({
                 type: "Post",
                 contentType: "application/json; charset=utf-8",
-                url: "Bill.aspx/DeleteData",
+                url: "BillSettlement.aspx/DeleteData",
                 data: '{id: ' + id + '}',
                 dataType: "json",
                 success: function (data) {
@@ -632,7 +504,7 @@ $(function () {
         $('#mainlistingdiv').hide();
         $('#mainldetaildiv').show();
 
-        $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Create a new Bill</h3>");
+        $("#subheaderdiv").html("<h3 style='color:blue'>Bill Settlement -> Create a new Bill Settlement</h3>");
 
         clearcontrols(1);
 
@@ -650,90 +522,6 @@ $(function () {
 
     $("#btnSave").click(function () {
 
-        if ($("#C_NAME").val().trim() == "") {
-            alert("Please Select Client name.");
-            $("#C_NAME").focus();
-            return false;
-        }
-
-        if ($("#PAYMODE_NAME").val() == null || $("#PAYMODE_NAME").val() == undefined || $.trim($("#PAYMODE_NAME").val()) == '' || $.trim($("#PAYMODE_NAME").val()) == '0' || $.trim($("#PAYMODE_NAME").val()) == 0) {
-            alert('Please select Paymode.');
-            $("#PAYMODE_NAME").focus();
-            return false;
-        }
-
-        if (netamt <= 0)
-        {
-            alert("Bill amount cannot be Zero, Please add atleast one valid service description.");
-            $("#btnaddrow").focus();
-            return false;
-        }
-
-        if (sublstobj == undefined || sublstobj == null || sublstobj.length <= 0) {
-            alert("Please add atleast one service description.");
-            $("#btnaddrow").focus();
-            return false;
-        }
-
-        for (var i = 0; i < sublstobj.length; i++) {
-            if ($("#txtdescp" + sublstobj[i].GENID).val().trim() == "") {
-                alert("Please enter service description.");
-                $("#txtdescp" + sublstobj[i].GENID).focus();
-                return false;
-            }
-        }
-
-        var obj = {};
-        obj.C_ID = cid;
-        obj.C_NO = cno;
-        obj.FILE_NO = fileno;
-        obj.C_NAME = cname;
-        obj.BILL_DATE = $("#BILL_DATE").val();
-        obj.DUE_DATE = $("#DUE_DATE").val();
-        obj.REMARKS = $("#REMARKS").val();
-        obj.TASK_ID = 0;
-        obj.TASK_NO = 0;
-        obj.PAYMODE_ID = $("#PAYMODE_NAME").val();
-        obj.PAYMODE_NAME = $("#PAYMODE_NAME option:selected").text();
-        obj.GROSS_AMT = grossamt;
-        obj.SGST_AMT = sgstamt;
-        obj.CGST_AMT = cgstamt;
-        obj.IGST_AMT = igstamt;
-        obj.OTH_AMT = othamt;
-        obj.NET_AMT = netamt;
-        obj.SUBARRAY = sublstobj;
-
-        $.ajax({
-            type: "Post",
-            contentType: "application/json; charset=utf-8",
-            url: "Bill.aspx/InsertData",
-            data: '{obj: ' + JSON.stringify(obj) + '}',
-            dataType: "json",
-            success: function (data) {
-                for (var i = 0; i < data.d.length; i++) {
-                    if (data.d[i].RESULT === 1) {
-                        getMainGridDetails();
-                        alert(data.d[i].MSG);
-                        $('#mainlistingdiv').show();
-                        $('#mainldetaildiv').hide();
-                    }
-                    else {
-                        alert(data.d[i].MSG);
-                        $("#C_NAME").focus();
-                        return false;
-                    }
-                }
-            },
-            error: function (data) {
-                alert("Error while Adding data of :" + obj.NAME);
-                $("#C_NAME").focus();
-                return false;
-            }
-        });
-
-    });
-
-    $("#btnUpdate").click(function () {
         if ($("#C_NAME").val().trim() == "") {
             alert("Please Select Client name.");
             $("#C_NAME").focus();
@@ -766,10 +554,7 @@ $(function () {
             }
         }
 
-        var id = $(this).attr("edit-id");
-
         var obj = {};
-        obj.BILL_ID = id;
         obj.C_ID = cid;
         obj.C_NO = cno;
         obj.FILE_NO = fileno;
@@ -792,8 +577,8 @@ $(function () {
         $.ajax({
             type: "Post",
             contentType: "application/json; charset=utf-8",
-            url: "Bill.aspx/UpdateData",
-            data: '{obj: ' + JSON.stringify(obj) + ', id : ' + id + '}',
+            url: "BillSettlement.aspx/InsertData",
+            data: '{obj: ' + JSON.stringify(obj) + '}',
             dataType: "json",
             success: function (data) {
                 for (var i = 0; i < data.d.length; i++) {
@@ -811,124 +596,14 @@ $(function () {
                 }
             },
             error: function (data) {
-                alert("Error while Updating data of :" + id);
+                alert("Error while Adding data of :" + obj.NAME);
                 $("#C_NAME").focus();
                 return false;
             }
         });
-    });
-
-    $(document).on("click", ".editButton", function () {
-        document.getElementById("loader").style.display = "block";
-        var id = $(this).attr("data-id");
-        console.log(id);
-        $("#btnUpdate").attr("edit-id", id);
-        //alert(id);  //getting the row id 
-
-        var checkid = 0;
-        $.ajax({
-            type: "Post",
-            contentType: "application/json; charset=utf-8",
-            url: "Bill.aspx/CheckVoidBillEnrty",
-            data: '{id: ' + id + '}',
-            dataType: "json",
-            success: function (data) {
-                if (data.d.length > 0) {
-                    checkid = data.d[0];
-                }
-                
-                if (checkid != null && checkid != undefined && checkid > 0) {                    
-                    alert('Cannot Edit Voided/Cancelled entry.');
-                    document.getElementById("loader").style.display = "none";
-                    return false;
-                }
-
-                
-                $.ajax({
-                    type: "Post",
-                    contentType: "application/json; charset=utf-8",
-                    url: "Bill.aspx/EditData",
-                    data: '{id: ' + id + '}',
-                    dataType: "json",
-                    success: function (data) {
-                        if (data.d.length > 0) {
-                            $('#btnSave').hide();
-                            $('#btnUpdate').show();
-                            $('#mainlistingdiv').hide();
-                            $('#mainldetaildiv').show();
-
-                            clearcontrols(0);
-                            $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Create a new Bill</h3>");
-
-                            if (data.d[0].MAINARRAY != null && data.d[0].MAINARRAY != undefined && data.d[0].MAINARRAY.length > 0) {
-
-                                $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Edit Bill : " + data.d[0].MAINARRAY[0].BILL_NO + "</h3>");
-
-                                cname = data.d[0].MAINARRAY[0].C_NAME;
-                                cno = data.d[0].MAINARRAY[0].C_NO;
-                                cid = data.d[0].MAINARRAY[0].C_ID;
-                                fileno = data.d[0].MAINARRAY[0].FILE_NO;
-
-                                $("#C_NAME").val(data.d[0].MAINARRAY[0].C_NAME);
-                                $("#BILL_NO").val(data.d[0].MAINARRAY[0].BILL_NO);
-                                $("#PAYMODE_NAME").val(data.d[0].MAINARRAY[0].PAYMODE_ID);
-                                $("#REMARKS").val(data.d[0].MAINARRAY[0].REMARKS);
-                                $('#BILL_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MAINARRAY[0].BILL_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[0]);
-                                $('#DUE_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MAINARRAY[0].DUE_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].DUE_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].DUE_DATE.split('-')[0]);
-
-                                grossamt = data.d[0].MAINARRAY[0].GROSS_AMT;
-                                cgstamt = data.d[0].MAINARRAY[0].CGST_AMT;
-                                sgstamt = data.d[0].MAINARRAY[0].SGST_AMT;
-                                igstamt = data.d[0].MAINARRAY[0].IGST_AMT;
-                                othamt = data.d[0].MAINARRAY[0].OTH_AMT;
-                                netamt = data.d[0].MAINARRAY[0].NET_AMT;
-
-                                $("#GROSS_AMT").val(data.d[0].MAINARRAY[0].GROSS_AMT);
-                                $("#CGST_AMT").val(data.d[0].MAINARRAY[0].CGST_AMT);
-                                $("#SGST_AMT").val(data.d[0].MAINARRAY[0].SGST_AMT);
-                                $("#IGST_AMT").val(data.d[0].MAINARRAY[0].IGST_AMT);
-                                $("#OTH_AMT").val(data.d[0].MAINARRAY[0].OTH_AMT);
-                                $("#NET_AMT").val(data.d[0].MAINARRAY[0].NET_AMT);
-                                $('#lblclientdetails').text(data.d[0].MAINARRAY[0].C_DETAILS);
-                            }
-
-                            if (data.d[0].SUBARRAY != null && data.d[0].SUBARRAY != undefined && data.d[0].SUBARRAY.length > 0) {
-                                sublstobj = [];
-                                for (var i = 0; i < data.d[0].SUBARRAY.length; i++) {
-                                    subobj = {};
-                                    subobj.SL_NO = data.d[0].SUBARRAY[i].SL_NO;
-                                    subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
-                                    subobj.DESCP = data.d[0].SUBARRAY[i].DESCP;
-                                    subobj.GROSS_AMT = data.d[0].SUBARRAY[i].GROSS_AMT;
-                                    subobj.SGST_PER = data.d[0].SUBARRAY[i].SGST_PER;
-                                    subobj.SGST_AMT = data.d[0].SUBARRAY[i].SGST_AMT;
-                                    subobj.CGST_PER = data.d[0].SUBARRAY[i].CGST_PER;
-                                    subobj.CGST_AMT = data.d[0].SUBARRAY[i].CGST_AMT;
-                                    subobj.IGST_PER = data.d[0].SUBARRAY[i].IGST_PER;
-                                    subobj.IGST_AMT = data.d[0].SUBARRAY[i].IGST_AMT;
-                                    subobj.NET_AMT = data.d[0].SUBARRAY[i].NET_AMT;
-                                    subobj.REMARKS = data.d[0].SUBARRAY[i].REMARKS;
-                                    sublstobj.push(subobj);
-                                }
-                                loadsubcontrols();
-                                calcamt();
-                            }
-                        }
-
-                        //$('#PAYMODE_NAME').focus();
-                        document.getElementById("loader").style.display = "none";
-                    },
-                    error: function () {
-                        alert("Error while retrieving data of :" + id);
-                    }
-                });
-            },
-            error: function () {
-                alert("Error while checking is void data of :" + id);
-            }
-        });
 
     });
+       
 
     $(document).on("click", "#btnaddrow", function () {
         subobj = {};
@@ -954,7 +629,7 @@ $(function () {
         $.ajax({
             type: "Post",
             contentType: "application/json; charset=utf-8",
-            url: "Bill.aspx/CheckVoidBillEnrty",
+            url: "BillSettlement.aspx/CheckVoidBSEnrty",
             data: '{id: ' + id + '}',
             dataType: "json",
             success: function (data) {
@@ -972,7 +647,7 @@ $(function () {
                     $.ajax({
                         type: "Post",
                         contentType: "application/json; charset=utf-8",
-                        url: "Bill.aspx/VoidData",
+                        url: "BillSettlement.aspx/VoidData",
                         data: '{id: ' + id + '}',
                         dataType: "json",
                         success: function (data) {
@@ -1032,7 +707,7 @@ $(function () {
         $.ajax({
             type: "Post",
             contentType: "application/json; charset=utf-8",
-            url: "Bill.aspx/EditData",
+            url: "BillSettlement.aspx/EditData",
             data: '{id: ' + id + '}',
             dataType: "json",
             success: function (data) {
@@ -1063,8 +738,7 @@ $(function () {
                     if (data.d[0].MAINARRAY[0].OTH_AMT == 0)
                         $('#trothamt').hide();
 
-                    if (data.d[0].MAINARRAY[0].VOID_STATUS == true)
-                    {
+                    if (data.d[0].MAINARRAY[0].VOID_STATUS == true) {
                         $('#trvoid').show();
                     }
                 }
@@ -1094,5 +768,3 @@ $(function () {
     });
 
 });
-
-

@@ -144,6 +144,7 @@
     <Content Include="Pages\User\Users.aspx" />
     <Content Include="Scripts\AjaxFileupload.js" />
     <Content Include="Scripts\app\bill.js" />
+    <Content Include="Scripts\app\billsettlement.js" />
     <Content Include="Scripts\app\changepassword.js" />
     <Content Include="Scripts\app\citystate.js" />
     <Content Include="Scripts\app\clientcategory.js" />

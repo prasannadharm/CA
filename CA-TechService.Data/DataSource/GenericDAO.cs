@@ -379,7 +379,7 @@ namespace CA_TechService.Data.DataSource
             }
             return lstvalues;
         }
-        public List<GenericIdNameEntity> GetActivePaymodeList()
+        public List<GenericIdNameEntity> GetActivePaymodeList(string str="")
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlDataAdapter adapter;
@@ -391,6 +391,7 @@ namespace CA_TechService.Data.DataSource
                 {
                     SqlCommand cmd = new SqlCommand("USP_GetActivePaymodeList", con);
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@STR", str);
                     con.Open();
                     adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(ds);

@@ -158,11 +158,11 @@
                     <div class="row">
                         <div class="form-group col-2">
                             <label>Bill No</label>
-                            <input type="number" id="BILL_NO" class="form-control" value="1" style="text-align: center; color: forestgreen;font-weight:500" />
+                            <input type="number" id="BILL_NO" class="form-control" value="1" style="text-align: center; color: forestgreen; font-weight: 500" />
                         </div>
                         <div class="form-group col-3">
                             <label>Bill Date</label>
-                            <input class="form-control datepicker" id="BILL_DATE" name="date" placeholder="DD-MM-YYYY" type="text" style="width: 100%; text-align: center; color: forestgreen;font-weight:500" />
+                            <input class="form-control datepicker" id="BILL_DATE" name="date" placeholder="DD-MM-YYYY" type="text" style="width: 100%; text-align: center; color: forestgreen; font-weight: 500" />
                         </div>
                         <div class="form-group col-4">
                             <label>Paymode</label>
@@ -178,6 +178,15 @@
                         <div class="form-group col-12 col-md-12 col-lg-12">
                             <label>Remarks</label>
                             <input type="text" id="REMARKS" class="form-control" placeholder="Please enter Remarks." />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-12">
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label>Client Details:</label>
+                            <label id="lblclientdetails" style="color:brown">Client</label>
                         </div>
                     </div>
                 </div>
@@ -323,13 +332,10 @@
                         <div class="table-responsive" id="gridclientsearchdiv">
                             <table id="tableclientsearch" class="table table-striped table-bordered" style="width: 100%">
                                 <thead>
-                                    <tr>
-                                        <th>C No</th>
+                                    <tr>                                        
                                         <th>File No</th>
                                         <th>Name</th>
-                                        <th>PAN</th>
-                                        <th>Aadhaar</th>
-                                        <th>GSTIN</th>
+                                        <th>Details</th>                                        
                                         <th>Select</th>
                                     </tr>
                                 </thead>
@@ -347,5 +353,265 @@
         </div>
     </div>
     <!-- For Modal Popup  -->
+
+     <!-- For Print Popup  -->
+    <div class="col-lg-12" id="printdiv" style="display: none">
+        <div class="panel panel-default">
+            <div class="row">
+                <div class="col-12" style="text-align:center">
+                    <img src="../../Images/CA%20Logo.png" />
+                    <h2 style='color: blue'>Invoice</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:20%">
+                            <label>Invoice No</label>
+                        </td>
+                        <td style="width:1%">
+                            <label> : </label>
+                        </td>
+                        <td style="width:39%">
+                            <label id="lblbillno" style="font-weight:bold;"></label>
+                        </td>
+                        <td style="width:20%">
+                            <label>Invoice Date</label>
+                        </td>
+                        <td style="width:1%">
+                            <label> : </label>
+                        </td>
+                        <td style="width:39%">
+                            <label id="lblbilldate" style="font-weight:bold;"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>File No</label>
+                        </td>
+                        <td>
+                            <label> : </label>
+                        </td>
+                        <td>
+                            <label id="lblfileno" style="font-weight:bold;"></label>
+                        </td>
+                        <td>
+                            <label>Paymode</label>
+                        </td>
+                        <td>
+                            <label> : </label>
+                        </td>
+                        <td>
+                            <label id="lblpaymode" style="font-weight:bold;"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Client</label>
+                        </td>
+                        <td>
+                            <label> : </label>
+                        </td>
+                        <td colspan="4">
+                            <label id="lblcname" style="font-weight:bold;"></label>
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Address</label>
+                        </td>
+                        <td>
+                            <label> : </label>
+                        </td>
+                        <td colspan="4">
+                            <label id="lblcadd"></label>
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>PAN</label>
+                        </td>
+                        <td>
+                            <label> : </label>
+                        </td>
+                        <td>
+                            <label id="lblcpan" style="font-weight:bold;"></label>
+                        </td>                        
+                        <td>
+                            <label>GSTIN</label>
+                        </td>
+                        <td>
+                            <label> : </label>
+                        </td>
+                        <td>
+                            <label id="lblcgstin" style="font-weight:bold;"></label>
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Remarks</label>
+                        </td>
+                        <td>
+                            <label> : </label>
+                        </td>
+                        <td colspan="3">
+                            <label id="lblreamrks"></label>
+                        </td>                        
+                    </tr>
+                </table>
+            </div>
+
+            <div class="row" id="trvoid">
+                <div class="form-group col-12" style="text-align:center">
+                    <h3 style='color: red'>*****  Invoice Cancelled  *****</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12">
+                    <h3 style='color: brown'>Service Details</h3>
+                </div>
+            </div>
+
+            <div class="table-responsive" id="gridsubdivprn">
+                <table id="tablesubprn" style="width: 100%;border-collapse: collapse">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid black;">Sl No</th>
+                            <th style="border: 1px solid black;">Service Name</th>
+                            <th style="border: 1px solid black;">Description</th>
+                            <th style="border: 1px solid black;">Amount</th>                                                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="row">
+                <table style="width:100%;margin-top:15px">
+                    <tr id="trgramt">
+                        <td style="width:20%">
+                            
+                        </td>
+                        <td style="width:1%">
+                            
+                        </td>
+                        <td style="width:39%">
+                            
+                        </td>
+                        <td style="width:30%; text-align:right">
+                            <label>Gross Amount</label>
+                        </td>
+                        <td style="width:1%">
+                            <label> : </label>
+                        </td>
+                        <td style="width:19%; text-align:right">
+                            <label id="lblgrossamt" style="color:brown;font-weight:500;"></label>
+                        </td>
+                    </tr>                
+                    <tr id="trcgstamt">
+                        <td style="width:20%">
+                            
+                        </td>
+                        <td style="width:1%">
+                            
+                        </td>
+                        <td style="width:39%">
+                            
+                        </td>
+                        <td style="width:30%; text-align:right">
+                            <label>CGST Amount</label>
+                        </td>
+                        <td style="width:1%">
+                            <label> : </label>
+                        </td>
+                        <td style="width:19%; text-align:right">
+                            <label id="lblcgstamt" style="color:blue;font-weight:500;"></label>
+                        </td>
+                    </tr>
+                    <tr id="trsgstamt">
+                        <td style="width:20%">
+                            
+                        </td>
+                        <td style="width:1%">
+                            
+                        </td>
+                        <td style="width:39%">
+                            
+                        </td>
+                        <td style="width:30%; text-align:right">
+                            <label>SGST Amount</label>
+                        </td>
+                        <td style="width:1%">
+                            <label> : </label>
+                        </td>
+                        <td style="width:19%; text-align:right">
+                            <label id="lblsgstamt" style="color:blue;font-weight:500;"></label>
+                        </td>
+                    </tr>
+                    <tr id="trigstamt">
+                        <td style="width:20%">
+                            
+                        </td>
+                        <td style="width:1%">
+                            
+                        </td>
+                        <td style="width:39%">
+                            
+                        </td>
+                        <td style="width:30%; text-align:right">
+                            <label>IGST Amount</label>
+                        </td>
+                        <td style="width:1%">
+                            <label> : </label>
+                        </td>
+                        <td style="width:19%; text-align:right">
+                            <label id="lbligstamt" style="color:blue;font-weight:500;"></label>
+                        </td>
+                    </tr>
+                    <tr id="trothamt">
+                        <td style="width:20%">
+                            
+                        </td>
+                        <td style="width:1%">
+                            
+                        </td>
+                        <td style="width:39%">
+                            
+                        </td>
+                        <td style="width:30%; text-align:right">
+                            <label>Other Amount</label>
+                        </td>
+                        <td style="width:1%">
+                            <label> : </label>
+                        </td>
+                        <td style="width:19%; text-align:right">
+                            <label id="lblothamt" style="color:red;font-weight:500;"></label>
+                        </td>
+                    </tr>
+                    <tr id="trnetamt">
+                        <td style="width:50%" colspan="3">
+                            <label style="font-weight:bold;">For Santhosh G & Associates</label>
+                        </td>                        
+                        <td style="width:30%; text-align:right">
+                            <label>Invoice Amount</label>
+                        </td>
+                        <td style="width:1%">
+                            <label> : </label>
+                        </td>
+                        <td style="width:19%; text-align:right">
+                            <label id="lblnetamt" style="color:brown;font-weight:bold;"></label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- For Print Popup  -->
+
 
 </asp:Content>

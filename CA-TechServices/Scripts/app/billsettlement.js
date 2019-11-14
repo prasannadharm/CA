@@ -316,7 +316,18 @@ function clearcontrols(addflag) {
     
 
     sublstobj = [];
-    subobj = {};       
+    subobj = {};
+    subobj.SL_NO = 1;
+    subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
+    subobj.BILL_ID = 0;
+    subobj.BILL_NO = 0;
+    subobj.BILL_DATE = "";
+    subobj.BILL_AMT = 0;
+    subobj.PAID_AMT = 0;
+    subobj.BAL_AMT = 0;
+    subobj.BS_AMT = 0;
+    sublstobj.push(subobj);
+
     loadsubcontrols();
 
     bsamt = 0;
@@ -399,7 +410,13 @@ function loadsubcontrols() {
             return false;
         }
         for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {                
+            if (sublstobj[i].GENID == id) {
+                if (amt > (parseFloat($("#txtbalamt" + sublstobj[i].GENID).val()) || 0))
+                {
+                    alert('Amount cannot be greater than balance amount.')
+                    $("#txtbsamt" + sublstobj[i].GENID).val($("#txtbalamt" + sublstobj[i].GENID).val());
+                    amt = parseFloat($("#txtbalamt" + sublstobj[i].GENID).val()) || 0;
+                }
                 sublstobj[i].BS_AMT = amt;
                 calcamt();
                 return false;

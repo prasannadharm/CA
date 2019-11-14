@@ -166,6 +166,16 @@ function LoadStateCombo(data) {
         dataType: "json",
         success: LoadClientGroupCombo
     });
+
+    $('input').on("keypress", function (e) {
+        /* ENTER PRESSED*/
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            var inputs = $(this).closest('form').find(':input:visible:enabled');
+            inputs.eq(inputs.index(this) + 1).focus();
+            return false;
+        }
+    });
 }
 
 //Loading City Combo on State Combo Change (Permanent Address)

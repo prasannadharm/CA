@@ -33,6 +33,16 @@ $(document).ready(function () {
             searchclients();
         }
     });
+
+    $('input').on("keypress", function (e) {
+        /* ENTER PRESSED*/
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            var inputs = $(this).closest('form').find(':input:visible:enabled');
+            inputs.eq(inputs.index(this) + 1).focus();
+            return false;
+        }
+    });
     
 });
 
@@ -74,6 +84,15 @@ function loaddocscontrols() {
         }
     });
 
+    $('input').on("keypress", function (e) {
+        /* ENTER PRESSED*/
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            var inputs = $(this).closest('form').find(':input:visible:enabled');
+            inputs.eq(inputs.index(this) + 1).focus();
+            return false;
+        }
+    });
 }
 
 function loadstagescontrols() {
@@ -96,7 +115,6 @@ function loadstagescontrols() {
             $("#cmbusers" + stageslstobj[i].GENID).val(0);
         else
             $("#cmbusers" + stageslstobj[i].GENID).val(stageslstobj[i].USER_ID);
-
     }
 
     $('.txtstages').on('input', function () {
@@ -190,6 +208,16 @@ function loadstagescontrols() {
         }
         resortstageslist();
         loadstagescontrols();
+    });
+
+    $('input').on("keypress", function (e) {
+        /* ENTER PRESSED*/
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            var inputs = $(this).closest('form').find(':input:visible:enabled');
+            inputs.eq(inputs.index(this) + 1).focus();
+            return false;
+        }
     });
 }
 
@@ -602,6 +630,8 @@ $(function () {
         stagesobj.GENID = Math.floor((Math.random() * 10000000) + 1);
         stageslstobj.push(stagesobj);
         loadstagescontrols();
+
+        $("#txtstages" + stageslstobj[stageslstobj.length - 1].GENID).focus();
     });
 
     $(document).on("click", "#adddoc", function () {
@@ -612,6 +642,7 @@ $(function () {
         docsobj.GENID = Math.floor((Math.random() * 10000000) + 1);
         docslstobj.push(docsobj);
         loaddocscontrols();
+        $("#txtdocs" + docslstobj[docslstobj.length - 1].GENID).focus();
     });
 
     $(document).on("click", ".cancelButton", function () {
@@ -997,12 +1028,7 @@ $(function () {
         $("#btnUpdate").attr("edit-id", id);
         //alert(id);  //getting the row id 
 
-        $('#btnSave').hide();
-        $('#btnUpdate').show();
-        $('#mainlistingdiv').hide();
-        $('#mainldetaildiv').show();
-
-        clearcontrols();
+       
         $("#subheaderdiv").html("<h3 style='color:blue'>Task Master -> Edit Task Details</h3>");
         $.ajax({
             type: "Post",
@@ -1014,6 +1040,13 @@ $(function () {
                 if (data.d.length > 0) {
                     if (data.d[0].MainArray != null && data.d[0].MainArray != undefined && data.d[0].MainArray.length > 0)
                     {
+                        $('#btnSave').hide();
+                        $('#btnUpdate').show();
+                        $('#mainlistingdiv').hide();
+                        $('#mainldetaildiv').show();
+
+                        clearcontrols();
+
                         $("#subheaderdiv").html("<h3 style='color:blue'>Task Master -> Edit Task Details -> Task : " + data.d[0].MainArray[0].T_NAME + "</h3>");
                         $("#T_NAME").val(data.d[0].MainArray[0].T_NAME);
 

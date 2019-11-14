@@ -80,4 +80,5 @@ namespace CA_TechService.Common.Transport.Bill
         public double BS_AMT { get; set; }        
         public string GENID { get; set; }       
     }
+        
 }

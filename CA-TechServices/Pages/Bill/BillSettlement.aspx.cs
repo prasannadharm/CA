@@ -64,21 +64,7 @@ namespace CA_TechServices.Pages.Bill
             }
             return details.ToArray();
         }
-
-        [WebMethod]
-        public static ClientSearchEntity[] GetClientSearchList(string filterby, string filtertext)
-        {
-            var details = new List<ClientSearchEntity>();
-            try
-            {
-                details = new GenericDAO().GetClientSearchList(filterby, filtertext);
-            }
-            catch (Exception ex)
-            {
-                // details.Add(new DbStatusEntity(ex.Message));
-            }
-            return details.ToArray();
-        }        
+               
 
         [WebMethod]
         public static DbStatusEntity[] InsertData(BSParamEntity obj)
@@ -158,5 +144,35 @@ namespace CA_TechServices.Pages.Bill
             return details.ToArray();
         }
 
+        [WebMethod]
+        public static PendingBillClients[] GetPendingBillsCustomers()
+        {
+            var details = new List<PendingBillClients>();
+            try
+            {
+                details = new GenericDAO().GetPendingBillsCustomers();
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+
+        [WebMethod]
+        public static PendingBillsByClient[] GetPendingBillsbyClientID(Int64 id)
+        {
+            var details = new List<PendingBillsByClient>();
+            try
+            {
+                details = new GenericDAO().GetPendingBillsbyClientID(id);
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
     }
 }

@@ -411,5 +411,80 @@ namespace CA_TechService.Data.DataSource
             }
             return retlst;
         }
+        public List<PendingBillClients> GetPendingBillsCustomers()
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<PendingBillClients> retlst = new List<PendingBillClients>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetPendingBillsCustomers", con);
+                    cmd.CommandType = CommandType.StoredProcedure;                   
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        PendingBillClients obj = new PendingBillClients();
+                        obj.C_ID = ds.Tables[0].Rows[i]["C_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["C_ID"]);
+                        obj.C_NO = ds.Tables[0].Rows[i]["C_NO"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["C_NO"]);
+                        obj.FILE_NO = ds.Tables[0].Rows[i]["FILE_NO"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["FILE_NO"].ToString();
+                        obj.C_NAME = ds.Tables[0].Rows[i]["C_NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["C_NAME"].ToString();
+                        obj.C_DETAILS = ds.Tables[0].Rows[i]["C_DETAILS"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["C_DETAILS"].ToString();
+                        obj.NET_AMT = ds.Tables[0].Rows[i]["NET_AMT"] == DBNull.Value ? 0 : Convert.ToDouble(ds.Tables[0].Rows[i]["NET_AMT"]);
+                        obj.BAL_AMT = ds.Tables[0].Rows[i]["BAL_AMT"] == DBNull.Value ? 0 : Convert.ToDouble(ds.Tables[0].Rows[i]["BAL_AMT"]);
+                        obj.BILL_COUNT = ds.Tables[0].Rows[i]["BILL_COUNT"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[i]["BILL_COUNT"]);
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
+
+        public List<PendingBillsByClient> GetPendingBillsbyClientID(Int64 id)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<PendingBillsByClient> retlst = new List<PendingBillsByClient>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetPendingBillsbyClientID", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        PendingBillsByClient obj = new PendingBillsByClient();
+                        obj.BILL_ID = ds.Tables[0].Rows[i]["BILL_ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["BILL_ID"]);
+                        obj.BILL_NO = ds.Tables[0].Rows[i]["BILL_NO"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["BILL_NO"]);
+                        obj.BILL_DATE = ds.Tables[0].Rows[i]["BILL_DATE"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["BILL_DATE"].ToString();
+                        obj.BILL_AMT = ds.Tables[0].Rows[i]["BILL_AMT"] == DBNull.Value ? 0 : Convert.ToDouble(ds.Tables[0].Rows[i]["BILL_AMT"]);
+                        obj.PAID_AMT = ds.Tables[0].Rows[i]["PAID_AMT"] == DBNull.Value ? 0 : Convert.ToDouble(ds.Tables[0].Rows[i]["PAID_AMT"]);
+                        obj.BAL_AMT = ds.Tables[0].Rows[i]["BAL_AMT"] == DBNull.Value ? 0 : Convert.ToDouble(ds.Tables[0].Rows[i]["BAL_AMT"]);
+                        obj.BS_AMT = ds.Tables[0].Rows[i]["BS_AMT"] == DBNull.Value ? 0 : Convert.ToDouble(ds.Tables[0].Rows[i]["BS_AMT"]);
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
     }
 }

@@ -65,15 +65,7 @@ $(document).ready(function () {
 
     $("#btnSearch").click(function () {
         getMainGridDetails();
-    })
-
-    $('#SEARCHTEXT').keypress(function (e) {
-        var key = e.which;
-        if (key == 13)  // the enter key code
-        {
-            searchclients();
-        }
-    });
+    })  
     
 })
 
@@ -192,28 +184,17 @@ function isDate(txtDate) {
     return true;
 }
 
-function searchclients() {
-    if ($("#SEARCHBY").val().trim() == "") {
-        alert("Please select searchby.");
-        $("#SEARCHBY").focus();
-        return false;
-    }
-
-    if ($("#SEARCHTEXT").val().trim() == "") {
-        alert("Please enter search text.");
-        $("#SEARCHTEXT").focus();
-        return false;
-    }
+function fetchclients() {
+    
     document.getElementById("loader").style.display = "block";
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        url: "BillSettlement.aspx/GetClientSearchList",
-        data: '{filterby: ' + JSON.stringify($("#SEARCHBY").val()) + ',filtertext: ' + JSON.stringify($("#SEARCHTEXT").val()) + '}',
+        url: "BillSettlement.aspx/GetPendingBillsCustomers",
+        data: '{}',
         dataType: "json",
         success: function (data) {
             if (data.d.length > 0) {
-
                 tempclientlstobj = [];
                 for (var i = 0; i < data.d.length; i++) {
                     clientobj = {};
@@ -221,23 +202,17 @@ function searchclients() {
                     clientobj.C_ID = data.d[i].C_ID;
                     clientobj.C_NO = data.d[i].C_NO;
                     clientobj.FILE_NO = data.d[i].FILE_NO;
-                    clientobj.C_NAME = data.d[i].C_NAME;
-                    clientobj.PH_NO = data.d[i].PH_NO;
-                    clientobj.MOBILE_NO1 = data.d[i].MOBILE_NO1;
-                    clientobj.MOBILE_NO2 = data.d[i].MOBILE_NO2;
-                    clientobj.PAN = data.d[i].PAN;
-                    clientobj.AADHAAR = data.d[i].AADHAAR;
-                    clientobj.GSTIN = data.d[i].GSTIN;
-                    clientobj.CLI_GRP_NAME = data.d[i].CLI_GRP_NAME;
+                    clientobj.C_NAME = data.d[i].C_NAME;                   
                     clientobj.C_DETAILS = data.d[i].C_DETAILS;
+                    clientobj.NET_AMT = data.d[i].NET_AMT;
+                    clientobj.BAL_AMT = data.d[i].BAL_AMT;
+                    clientobj.BILL_COUNT = data.d[i].BILL_COUNT;
                     tempclientlstobj.push(clientobj);
                 }
-                loadtempsearchclientgrid();
-                $("#SEARCHTEXT").val('');
+                loadclientfetchgrid();                
             }
             else {
-                alert('No data found for the search criteria');
-                $("#SEARCHTEXT").focus();
+                alert('No Pending Bills data found.');              
             }
 
             document.getElementById("loader").style.display = "none";
@@ -251,18 +226,21 @@ function searchclients() {
 
 }
 
-function loadtempsearchclientgrid() {
+function loadclientfetchgrid() {
     $('#tableclientsearch tbody').remove();
     $('#tableclientsearch').append("<tbody>");
     for (var i = 0; i < tempclientlstobj.length; i++) {
-        $('#tableclientsearch').append(
-            "<tr><td>" + tempclientlstobj[i].FILE_NO + "</td><td style='color:blue'>" + tempclientlstobj[i].C_NAME + "</td>" +
+        $('#tableclientsearch').append(            
+            "<tr><td style='color:blue'>" + tempclientlstobj[i].C_NAME + "</td>" +
             "<td>" + tempclientlstobj[i].C_DETAILS + "</td>" +
-            "<td style='text-align: center'><img src='../../Images/select.png' alt='Select Record' class='selectButtonSubis handcursor' data-id='" + tempclientlstobj[i].C_ID + '_' + tempclientlstobj[i].GENID + "' id='btnselectSubIS_" + tempclientlstobj[i].GENID + "' value='Select' style='margin-right:5px;margin-left:5px'/> </td></tr>");
+            "<td style='text-align:center;color:brown' ><b>" + tempclientlstobj[i].BILL_COUNT + "</b></td>" +
+            "<td style='text-align:center;color:blue' ><b>" + tempclientlstobj[i].NET_AMT + "</b></td>" +
+            "<td style='text-align:center;color:red' ><b>" + tempclientlstobj[i].BAL_AMT + "</b></td>" +
+            "<td style='text-align:center'><img src='../../Images/select.png' alt='Select Record' class='selectButtonSubis handcursor' data-id='" + tempclientlstobj[i].C_ID + '_' + tempclientlstobj[i].GENID + "' id='btnselectSubIS_" + tempclientlstobj[i].GENID + "' value='Select' style='margin-right:5px;margin-left:5px'/> </td></tr>");
     }
     $('#tableclientsearch').append("</tbody>");
 
-    $("div.mhs h4").html("Search results for " + $('#SEARCHBY').val() + " : " + $('#SEARCHTEXT').val());
+    $("div.mhs h4").html("Pending Bills details Clientwise:");
 
     $('#PopupModalClientSearch').modal('show');
     $('#PopupModalClientSearch').focus();
@@ -278,11 +256,52 @@ function loadtempsearchclientgrid() {
                 fileno = tempclientlstobj[i].FILE_NO;
                 $('#lblclientdetails').text(tempclientlstobj[i].C_DETAILS);
                 $('#C_NAME').val(tempclientlstobj[i].C_NAME);
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "BillSettlement.aspx/GetPendingBillsbyClientID",
+                    data: '{id: ' + JSON.stringify(cid) + '}',
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.d.length > 0) {
+                            sublstobj = [];
+                            for (var i = 0; i < data.d.length; i++) {
+                                subobj = {};
+                                subobj.SL_NO = i + 1;
+                                subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
+                                subobj.BILL_ID = data.d[i].BILL_ID;
+                                subobj.BILL_NO = data.d[i].BILL_NO;
+                                subobj.BILL_DATE = data.d[i].BILL_DATE;
+                                subobj.BILL_AMT = data.d[i].BILL_AMT;
+                                subobj.PAID_AMT = data.d[i].PAID_AMT;
+                                subobj.BAL_AMT = data.d[i].BAL_AMT;
+                                subobj.BS_AMT = data.d[i].BS_AMT;
+                                sublstobj.push(subobj);
+                            }
+                            loadsubcontrols();
+                            calcamt();
+                            $('#PopupModalClientSearch').modal('hide');
+                            $("#PAYMODE_NAME").focus();
+                        }
+                        else {
+                            alert('No Pending Bills data found for selected Client.');
+                        }
+
+                        document.getElementById("loader").style.display = "none";
+                    },
+                    error: function () {
+                        alert("Error while Showing update data");
+                    }
+
+                    //
+                });
+
                 break;
             }
         }
-        $('#PopupModalClientSearch').modal('hide');
-        $("#PAYMODE_NAME").focus();
+
+        
     });
 
 }
@@ -294,37 +313,23 @@ function clearcontrols(addflag) {
     fileno = '';
     $('#C_NAME').val('');
     $('#lblclientdetails').text('');
-    $("#SEARCHTEXT").val('');
+    
 
     sublstobj = [];
-    subobj = {};
-    subobj.SL_NO = 1;
-    subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
-    subobj.DESCP = "";
-    subobj.GROSS_AMT = 0;
-    subobj.SGST_PER = 0;
-    subobj.SGST_AMT = 0;
-    subobj.CGST_PER = 0;
-    subobj.CGST_AMT = 0;
-    subobj.IGST_PER = 0;
-    subobj.IGST_AMT = 0;
-    subobj.NET_AMT = 0;
-    subobj.REMARKS = "";
-    sublstobj.push(subobj);
+    subobj = {};       
     loadsubcontrols();
 
     bsamt = 0;
     $("#BS_AMT").val(0);
     
     var date = new Date();
-    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    var plus7days = today.getDate() + 7;
+    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());   
 
     $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
-    $('#BILL_DATE').datepicker('setDate', today);
-    $('#DUE_DATE').datepicker('setDate', plus7days);
+    $('#BS_DATE').datepicker('setDate', today);
+    
     $("#PAYMODE_NAME").val(0);
-    $('#BILL_NO').val(0);
+    $('#BS_NO').val(0);
 
     if (addflag == 1) {
         $.ajax({
@@ -335,13 +340,9 @@ function clearcontrols(addflag) {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 for (var i = 0; i < data.d.length; i++) {
-                    $('#BILL_NO').val(data.d[i].split('-')[0]);
-                    $('#BILL_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[i].split('-')[3] + '-' + data.d[i].split('-')[2] + '-' + data.d[i].split('-')[1]);
-                    var date2 = $('#BILL_DATE').datepicker('getDate');
-                    var nextDayDate = new Date();
-                    nextDayDate.setDate(date2.getDate() + 7);
-                    $('#DUE_DATE').datepicker('setDate', nextDayDate);
-
+                    $('#BS_NO').val(data.d[i].split('-')[0]);
+                    $('#BS_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[i].split('-')[3] + '-' + data.d[i].split('-')[2] + '-' + data.d[i].split('-')[1]);
+                    
                 }
             },
             error: function (response) {
@@ -361,57 +362,45 @@ function loadsubcontrols() {
         var newTextBoxDiv = $(document.createElement('div'))
             .attr("id", 'SubrowsDiv' + sublstobj[i].GENID);
         newTextBoxDiv.attr('class', 'row');
-        newTextBoxDiv.after().html("<div class='form-group col-3'>" +
-        "<label id='lblslno" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: brown; font-weight: 500; display: inline;margin-right:5px;'>" + sublstobj[i].SL_NO + "</label>" +
-        "<input type='text' id='txtdescp" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control txtdescp' placeholder='Enter Description.' style='width: 88%; display: inline' value='" + sublstobj[i].DESCP + "' />" +
+
+        newTextBoxDiv.after().html("<div class='form-group col-1'>" +
+        "<input type='number' id='txtbillno" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control' value='" + sublstobj[i].BILL_NO + "' style='text-align: center;font-weight:bold;color:brown;background-color: white;' disabled='disabled'/>" +
         "</div>" +
-        "<div class='form-group col-6'>" +
-        "<table style='width: 100%'>" +
-        "<tr>" +
-        "<td style='width: 20%;padding-right:20px'>" +
-        "<input type='number' id='txtgrossamt" + sublstobj[i].GENID + "' class='form-control txtgrossamt' value='" + sublstobj[i].GROSS_AMT + "' style='text-align: center;width:100%;;background-color: white; color: brown; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
-        "</td>" +
-        "<td style='width: 20%'>" +
-        "<input type='number' id='txtsgstper" + sublstobj[i].GENID + "' class='form-control txtsgstper' value='" + sublstobj[i].SGST_PER + "' style='text-align: center; width: 50%; display: inline;background-color: white; color: green; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
-        "<label id='lblsgstamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: blue; font-weight: 500; display: inline; width: 50%;margin-left:5px;'>" + sublstobj[i].SGST_AMT + "</label>" +
-        "</td>" +
-        "<td style='width: 20%'>" +
-        "<input type='number' id='txtcgstper" + sublstobj[i].GENID + "' class='form-control txtcgstper' value='" + sublstobj[i].CGST_PER + "' style='text-align: center; width: 50%; display: inline;background-color: white; color: green; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
-        "<label id='lblcgstamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: blue; font-weight: 500; display: inline; width: 50%;margin-left:5px;'>" + sublstobj[i].CGST_AMT + "</label>" +
-        "</td>" +
-        "<td style='width: 20%'>" +
-        "<input type='number' id='txtigstper" + sublstobj[i].GENID + "' class='form-control txtigstper' value='" + sublstobj[i].IGST_PER + "' style='text-align: center; width: 50%; display: inline;background-color: white; color: green; font-weight: 500' data-id='" + sublstobj[i].GENID + "' />" +
-        "<label id='lbligstamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' style='text-align: center; color: blue; font-weight: 500; display: inline; width: 50%;margin-left:5px;'>" + sublstobj[i].IGST_AMT + "</label>" +
-        "</td>" +
-        "<td style='width: 20%'>" +
-        "<input type='number' id='txtnettamt" + sublstobj[i].GENID + "' class='form-control' value='" + sublstobj[i].NET_AMT + "' style='text-align: center;width:100%;background-color: white; color: orangered; font-weight: 500' disabled='disabled' data-id='" + sublstobj[i].GENID + "' />" +
-        "</td>" +
-        "</tr>" +
-        "</table>" +
+        "<div class='form-group col-2'>" +
+        "<input type='text' id='txtbilldate" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control' value='" + sublstobj[i].BILL_DATE + "' style='text-align: center;font-weight:bold;color:black;background-color: white;' disabled='disabled'/>" +
         "</div>" +
-        "<div class='form-group col-3'>" +
-        "<input type='text' id='txtremarks" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control txtremarks' placeholder='Enter remarks.' style='display: inline; width: 80%' value='" + sublstobj[i].REMARKS + "' />" +
-        "<img id='btnbillrowdel" + sublstobj[i].GENID + "' class='btnbillrowdel handcursor' src='../../Images/delete.png' style='margin-left: 8px; display: inline;' data-id='" + sublstobj[i].GENID + "' />" +
-        "</div>");
+        "<div class='form-group col-2'>" +
+        "<input type='text' id='txtbillamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control' value='" + sublstobj[i].BILL_AMT + "' style='text-align: center;font-weight:bold;color:blue;background-color: white;' disabled='disabled'/>" +
+        "</div>" +
+        "<div class='form-group col-2'>" +
+        "<input type='text' id='txtpaidamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control' value='" + sublstobj[i].PAID_AMT + "' style='text-align: center;font-weight:bold;color:green;background-color: white;' disabled='disabled'/>" +
+        "</div>" +
+        "<div class='form-group col-2'>" +
+        "<input type='text' id='txtbalamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control' value='" + sublstobj[i].BAL_AMT + "' style='text-align: center;font-weight:bold;color:red;background-color: white;' disabled='disabled'/>" +
+        "</div>" +
+        "<div class='form-group col-2'>" +
+        "<input type='text' id='txtbsamt" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='form-control txtbsamt' value='" + sublstobj[i].BS_AMT + "' style='text-align: center;font-weight:bold;color:deeppink;background-color: white;' />" +
+        "</div>" +
+        "<div class='form-group col-1'>" +
+        "<img id='btnbillrowdel" + sublstobj[i].GENID + "' data-id='" + sublstobj[i].GENID + "' class='btnbillrowdel handcursor' src='../../Images/delete.png' style='margin-left: 8px;'/>" +
+        "</div>");       
+       
 
         newTextBoxDiv.appendTo("#divservicedetaisdetails");
 
     }
 
-    $('.txtgrossamt').on('input', function () {
+    $('.txtbsamt').on('input', function () {
         var id = $(this).attr("data-id");
+        var amt = parseFloat($(this).val()) || 0;
+        if (amt < 0 || $(this).val() == NaN)
+        {
+            $(this).val(0);
+            return false;
+        }
         for (var i = 0; i < sublstobj.length; i++) {
-            if (sublstobj[i].GENID == id) {
-                sublstobj[i].GROSS_AMT = parseFloat($(this).val()) || 0;
-                sublstobj[i].SGST_AMT = round((sublstobj[i].SGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].CGST_AMT = round((sublstobj[i].CGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].IGST_AMT = round((sublstobj[i].IGST_PER / 100.0) * sublstobj[i].GROSS_AMT, 2);
-                sublstobj[i].NET_AMT = round(sublstobj[i].GROSS_AMT + sublstobj[i].SGST_AMT + sublstobj[i].CGST_AMT + sublstobj[i].IGST_AMT, 2);
-
-                $('#lblsgstamt' + sublstobj[i].GENID).text(sublstobj[i].SGST_AMT);
-                $('#lblcgstamt' + sublstobj[i].GENID).text(sublstobj[i].CGST_AMT);
-                $('#lbligstamt' + sublstobj[i].GENID).text(sublstobj[i].IGST_AMT);
-                $('#txtnettamt' + sublstobj[i].GENID).val(sublstobj[i].NET_AMT);
+            if (sublstobj[i].GENID == id) {                
+                sublstobj[i].BS_AMT = amt;
                 calcamt();
                 return false;
             }
@@ -455,7 +444,7 @@ function loadsubcontrols() {
 function calcamt() {
     bsamt = 0;
     for (var i = 0; i < sublstobj.length; i++) {
-        bsamt = bsamt + parseFloat(sublstobj[i].GROSS_AMT) || 0;
+        bsamt = bsamt + parseFloat(sublstobj[i].BS_AMT) || 0;
     }
     bsamt = round(bsamt, 2);
     $("#BS_AMT").val(bsamt);    
@@ -516,8 +505,8 @@ $(function () {
         $('#mainldetaildiv').hide();
     });
 
-    $(document).on("click", "#btnsearchClient", function () {
-        searchclients();
+    $(document).on("click", "#btnfetch", function () {
+        fetchclients();
     });
 
     $("#btnSave").click(function () {
@@ -603,25 +592,7 @@ $(function () {
         });
 
     });
-       
-
-    $(document).on("click", "#btnaddrow", function () {
-        subobj = {};
-        subobj.SL_NO = sublstobj.length + 1;
-        subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
-        subobj.DESCP = "";
-        subobj.GROSS_AMT = 0;
-        subobj.SGST_PER = 0;
-        subobj.SGST_AMT = 0;
-        subobj.CGST_PER = 0;
-        subobj.CGST_AMT = 0;
-        subobj.IGST_PER = 0;
-        subobj.IGST_AMT = 0;
-        subobj.NET_AMT = 0;
-        subobj.REMARKS = "";
-        sublstobj.push(subobj);
-        loadsubcontrols();
-    });
+      
 
     $(document).on("click", ".voidButton", function () {
         var id = $(this).attr("data-id");

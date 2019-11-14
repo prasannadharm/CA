@@ -59,6 +59,7 @@
     <Compile Include="Transport\Company\CompanyMasterEntity.cs" />
     <Compile Include="Transport\Generic\ClientSearchEntity.cs" />
     <Compile Include="Transport\Generic\GenericIdNameEntity.cs" />
+    <Compile Include="Transport\Generic\PendingBillClients.cs" />
     <Compile Include="Transport\Logging\ExceptionInfo.cs" />
     <Compile Include="Transport\Login\LoginEntity.cs" />
     <Compile Include="Transport\Roles\RoleBaseMenuEntity.cs" />

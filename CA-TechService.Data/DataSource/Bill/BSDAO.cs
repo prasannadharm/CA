@@ -119,16 +119,19 @@ namespace CA_TechService.Data.DataSource.Bill
 
                     foreach (BSsubEntity objsub in obj.SUBARRAY)
                     {
-                        DataRow dr = dtsub.NewRow();
-                        dr["SL_NO"] = objsub.SL_NO;
-                        dr["BILL_ID"] = objsub.BILL_ID;
-                        dr["BILL_NO"] = objsub.BILL_NO;
-                        dr["BILL_DATE"] = objsub.BILL_DATE;
-                        dr["BILL_AMT"] = objsub.BILL_AMT;
-                        dr["PAID_AMT"] = objsub.PAID_AMT;
-                        dr["BAL_AMT"] = objsub.BAL_AMT;
-                        dr["BS_AMT"] = objsub.BS_AMT;                       
-                        dtsub.Rows.Add(dr);
+                        if (objsub.BS_AMT > 0)
+                        {
+                            DataRow dr = dtsub.NewRow();
+                            dr["SL_NO"] = objsub.SL_NO;
+                            dr["BILL_ID"] = objsub.BILL_ID;
+                            dr["BILL_NO"] = objsub.BILL_NO;
+                            dr["BILL_DATE"] = objsub.BILL_DATE;
+                            dr["BILL_AMT"] = objsub.BILL_AMT;
+                            dr["PAID_AMT"] = objsub.PAID_AMT;
+                            dr["BAL_AMT"] = objsub.BAL_AMT;
+                            dr["BS_AMT"] = objsub.BS_AMT;
+                            dtsub.Rows.Add(dr);
+                        }
                     }
 
                     SqlParameter sqlParam = cmd.Parameters.AddWithValue("@TVP", dtsub);
@@ -227,7 +230,7 @@ namespace CA_TechService.Data.DataSource.Bill
             {
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-                    SqlCommand cmd = new SqlCommand("USP_GetBillDetailsbyID", con);
+                    SqlCommand cmd = new SqlCommand("USP_GetBillSettlementDetailsbyID", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ID", id);
                     con.Open();

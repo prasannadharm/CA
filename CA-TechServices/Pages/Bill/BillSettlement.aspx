@@ -303,7 +303,7 @@
             <div class="row">
                 <div class="col-12" style="text-align: center">
                     <img src="../../Images/CA%20Logo.png" />
-                    <h2 style='color: blue'>Invoice</h2>
+                    <h2 style='color: blue'>Receipt Voucher</h2>
                 </div>
             </div>
 
@@ -311,22 +311,22 @@
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 20%">
-                            <label>Invoice No</label>
+                            <label>Voucher No</label>
                         </td>
                         <td style="width: 1%">
                             <label>: </label>
                         </td>
                         <td style="width: 39%">
-                            <label id="lblbillno" style="font-weight: bold;"></label>
+                            <label id="lblbsno" style="font-weight: bold;"></label>
                         </td>
                         <td style="width: 20%">
-                            <label>Invoice Date</label>
+                            <label>Voucher Date</label>
                         </td>
                         <td style="width: 1%">
                             <label>: </label>
                         </td>
                         <td style="width: 39%">
-                            <label id="lblbilldate" style="font-weight: bold;"></label>
+                            <label id="lblbsdate" style="font-weight: bold;"></label>
                         </td>
                     </tr>
                     <tr>
@@ -413,7 +413,7 @@
 
             <div class="row">
                 <div class="form-group col-12">
-                    <h3 style='color: brown'>Service Details</h3>
+                    <h3 style='color: brown'>Bill Details</h3>
                 </div>
             </div>
 
@@ -421,10 +421,10 @@
                 <table id="tablesubprn" style="width: 100%; border-collapse: collapse">
                     <thead>
                         <tr>
-                            <th style="border: 1px solid black;">Sl No</th>
-                            <th style="border: 1px solid black;">Service Name</th>
-                            <th style="border: 1px solid black;">Description</th>
-                            <th style="border: 1px solid black;">Amount</th>
+                            <th style="border: 1px solid black;">Bill No</th>
+                            <th style="border: 1px solid black;">Bill Date</th>
+                            <th style="border: 1px solid black;">Bill Amount</th>
+                            <th style="border: 1px solid black;">Paid Amt</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -435,74 +435,9 @@
 
             <div class="row">
                 <table style="width: 100%; margin-top: 15px">
-                    <tr id="trgramt">
-                        <td style="width: 20%"></td>
-                        <td style="width: 1%"></td>
-                        <td style="width: 39%"></td>
-                        <td style="width: 30%; text-align: right">
-                            <label>Gross Amount</label>
-                        </td>
-                        <td style="width: 1%">
-                            <label>: </label>
-                        </td>
-                        <td style="width: 19%; text-align: right">
-                            <label id="lblgrossamt" style="color: brown; font-weight: 500;"></label>
-                        </td>
-                    </tr>
-                    <tr id="trcgstamt">
-                        <td style="width: 20%"></td>
-                        <td style="width: 1%"></td>
-                        <td style="width: 39%"></td>
-                        <td style="width: 30%; text-align: right">
-                            <label>CGST Amount</label>
-                        </td>
-                        <td style="width: 1%">
-                            <label>: </label>
-                        </td>
-                        <td style="width: 19%; text-align: right">
-                            <label id="lblcgstamt" style="color: blue; font-weight: 500;"></label>
-                        </td>
-                    </tr>
-                    <tr id="trsgstamt">
-                        <td style="width: 20%"></td>
-                        <td style="width: 1%"></td>
-                        <td style="width: 39%"></td>
-                        <td style="width: 30%; text-align: right">
-                            <label>SGST Amount</label>
-                        </td>
-                        <td style="width: 1%">
-                            <label>: </label>
-                        </td>
-                        <td style="width: 19%; text-align: right">
-                            <label id="lblsgstamt" style="color: blue; font-weight: 500;"></label>
-                        </td>
-                    </tr>
-                    <tr id="trigstamt">
-                        <td style="width: 20%"></td>
-                        <td style="width: 1%"></td>
-                        <td style="width: 39%"></td>
-                        <td style="width: 30%; text-align: right">
-                            <label>IGST Amount</label>
-                        </td>
-                        <td style="width: 1%">
-                            <label>: </label>
-                        </td>
-                        <td style="width: 19%; text-align: right">
-                            <label id="lbligstamt" style="color: blue; font-weight: 500;"></label>
-                        </td>
-                    </tr>
-                    <tr id="trothamt">
-                        <td style="width: 20%"></td>
-                        <td style="width: 1%"></td>
-                        <td style="width: 39%"></td>
-                        <td style="width: 30%; text-align: right">
-                            <label>Other Amount</label>
-                        </td>
-                        <td style="width: 1%">
-                            <label>: </label>
-                        </td>
-                        <td style="width: 19%; text-align: right">
-                            <label id="lblothamt" style="color: red; font-weight: 500;"></label>
+                    <tr>
+                        <td colspan="6" style="height:50px">
+
                         </td>
                     </tr>
                     <tr id="trnetamt">
@@ -510,13 +445,13 @@
                             <label style="font-weight: bold;">For Santhosh G & Associates</label>
                         </td>
                         <td style="width: 30%; text-align: right">
-                            <label>Invoice Amount</label>
+                            <label>Total Amount</label>
                         </td>
                         <td style="width: 1%">
                             <label>: </label>
                         </td>
-                        <td style="width: 19%; text-align: right">
-                            <label id="lblnetamt" style="color: brown; font-weight: bold;"></label>
+                        <td style="width: 19%; text-align: center">
+                            <label id="lblbsamt" style="color: brown; font-weight: bold;"></label>
                         </td>
                     </tr>
                 </table>

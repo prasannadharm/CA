@@ -540,44 +540,36 @@ $(function () {
             return false;
         }
 
-        if (netamt <= 0) {
-            alert("Bill amount cannot be Zero, Please add atleast one valid service description.");
-            $("#btnaddrow").focus();
+        if (bsamt <= 0) {
+            alert("Settlement amount cannot be Zero, Please add atleast one valid entry.");
+            $("#btnfetch").focus();
             return false;
         }
 
         if (sublstobj == undefined || sublstobj == null || sublstobj.length <= 0) {
-            alert("Please add atleast one service description.");
-            $("#btnaddrow").focus();
+            alert("Please add atleast one Bill settlement value.");
+            $("#btnfetch").focus();
             return false;
         }
 
-        for (var i = 0; i < sublstobj.length; i++) {
-            if ($("#txtdescp" + sublstobj[i].GENID).val().trim() == "") {
-                alert("Please enter service description.");
-                $("#txtdescp" + sublstobj[i].GENID).focus();
-                return false;
-            }
-        }
+        //for (var i = 0; i < sublstobj.length; i++) {
+        //    if ($("#txtdescp" + sublstobj[i].GENID).val().trim() == "") {
+        //        alert("Please enter service description.");
+        //        $("#txtdescp" + sublstobj[i].GENID).focus();
+        //        return false;
+        //    }
+        //}
 
         var obj = {};
         obj.C_ID = cid;
         obj.C_NO = cno;
         obj.FILE_NO = fileno;
         obj.C_NAME = cname;
-        obj.BILL_DATE = $("#BILL_DATE").val();
-        obj.DUE_DATE = $("#DUE_DATE").val();
+        obj.BS_DATE = $("#BS_DATE").val();        
         obj.REMARKS = $("#REMARKS").val();
-        obj.TASK_ID = 0;
-        obj.TASK_NO = 0;
         obj.PAYMODE_ID = $("#PAYMODE_NAME").val();
         obj.PAYMODE_NAME = $("#PAYMODE_NAME option:selected").text();
-        obj.GROSS_AMT = grossamt;
-        obj.SGST_AMT = sgstamt;
-        obj.CGST_AMT = cgstamt;
-        obj.IGST_AMT = igstamt;
-        obj.OTH_AMT = othamt;
-        obj.NET_AMT = netamt;
+        obj.BS_AMT = bsamt;
         obj.SUBARRAY = sublstobj;
 
         $.ajax({
@@ -670,8 +662,8 @@ $(function () {
         $('#tablesubprn tbody').remove();
         $('#tablesubprn').append("<tbody>");
         $('#tablesubprn').append("</tbody>");
-        $('#lblbillno').text('');
-        $('#lblbilldate').text('');
+        $('#lblbsno').text('');
+        $('#lblbsdate').text('');
         $('#lblfileno').text('');
         $('#lblpaymode').text('');
         $('#lblcname').text('');
@@ -680,17 +672,8 @@ $(function () {
         $('#lblcgstin').text('');
         $('#lblreamrks').text('');
 
-        $('#lblgrossamt').text('');
-        $('#lblcgstamt').text('');
-        $('#lblsgstamt').text('');
-        $('#lbligstamt').text('');
-        $('#lblothamt').text('');
-        $('#lblnetamt').text('');
+        $('#lblbsamt').text('');
 
-        $('#trcgstamt').show();
-        $('#trsgstamt').show();
-        $('#trigstamt').show();
-        $('#trothamt').show();
         $('#trvoid').hide();
         $.ajax({
             type: "Post",
@@ -700,8 +683,8 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 if (data.d.length > 0) {
-                    $("#lblbillno").text(data.d[0].MAINARRAY[0].BILL_NO);
-                    $('#lblbilldate').text(data.d[0].MAINARRAY[0].BILL_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[0]);
+                    $("#lblbsno").text(data.d[0].MAINARRAY[0].BS_NO);
+                    $('#lblbsdate').text(data.d[0].MAINARRAY[0].BS_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].BS_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].BS_DATE.split('-')[0]);
                     $("#lblfileno").text(data.d[0].MAINARRAY[0].FILE_NO);
                     $("#lblpaymode").text(data.d[0].MAINARRAY[0].PAYMODE_NAME);
                     $('#lblcname').text(data.d[0].MAINARRAY[0].C_NAME);
@@ -710,22 +693,8 @@ $(function () {
                     $('#lblcgstin').text(data.d[0].MAINARRAY[0].GSTIN);
                     $('#lblreamrks').text(data.d[0].MAINARRAY[0].REMARKS);
 
-                    $('#lblgrossamt').text(data.d[0].MAINARRAY[0].GROSS_AMT);
-                    $('#lblcgstamt').text(data.d[0].MAINARRAY[0].CGST_AMT);
-                    $('#lblsgstamt').text(data.d[0].MAINARRAY[0].SGST_AMT);
-                    $('#lbligstamt').text(data.d[0].MAINARRAY[0].IGST_AMT);
-                    $('#lblothamt').text(data.d[0].MAINARRAY[0].OTH_AMT);
-                    $('#lblnetamt').text(data.d[0].MAINARRAY[0].NET_AMT);
-
-                    if (data.d[0].MAINARRAY[0].CGST_AMT == 0)
-                        $('#trcgstamt').hide();
-                    if (data.d[0].MAINARRAY[0].SGST_AMT == 0)
-                        $('#trsgstamt').hide();
-                    if (data.d[0].MAINARRAY[0].IGST_AMT == 0)
-                        $('#trigstamt').hide();
-                    if (data.d[0].MAINARRAY[0].OTH_AMT == 0)
-                        $('#trothamt').hide();
-
+                    $('#lblbsamt').text(data.d[0].MAINARRAY[0].BS_AMT);
+                                        
                     if (data.d[0].MAINARRAY[0].VOID_STATUS == true) {
                         $('#trvoid').show();
                     }
@@ -735,7 +704,7 @@ $(function () {
                 $('#tablesubprn').append("<tbody>");
                 for (var i = 0; i < data.d[0].SUBARRAY.length; i++) {
                     $('#tablesubprn').append(
-                        "<tr><td style='border: 1px solid black;text-align:center;color:brown'><b>" + data.d[0].SUBARRAY[i].SL_NO + "</b></td><td style='border: 1px solid black;'>" + data.d[0].SUBARRAY[i].DESCP + "</td><td style='border: 1px solid black;color:blue'>" + data.d[0].SUBARRAY[i].REMARKS + "</td><td style='border: 1px solid black;text-align:center;color:red'><b>" + data.d[0].SUBARRAY[i].NET_AMT + "</b></td></tr>");
+                        "<tr><td style='border: 1px solid black;text-align:center;color:brown'><b>" + data.d[0].SUBARRAY[i].BILL_NO + "</b></td><td style='border: 1px solid black;text-align:center;'>" + data.d[0].SUBARRAY[i].BILL_DATE + "</td><td style='border: 1px solid black;color:blue;text-align:center'>" + data.d[0].SUBARRAY[i].BILL_AMT + "</td><td style='border: 1px solid black;text-align:center;color:red'><b>" + data.d[0].SUBARRAY[i].BS_AMT + "</b></td></tr>");
                 }
                 $('#tablesubprn').append("</tbody>");
                 $('#printdiv').show();

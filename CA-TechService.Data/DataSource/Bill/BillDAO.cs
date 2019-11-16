@@ -404,5 +404,36 @@ namespace CA_TechService.Data.DataSource.Bill
             return objreturn;
         }
 
+        public List<Int64> CheckBillSettledEnrty(long id)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<Int64> retvallst = new List<Int64>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    Int64 retval = 0;
+                    SqlCommand cmd = new SqlCommand("USP_GetBillSettledDetailsbyID", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        retval = ds.Tables[0].Rows[i]["BS_NO"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["BS_NO"]);
+                    }
+                    retvallst.Add(retval);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retvallst;
+        }
+
     }
 }

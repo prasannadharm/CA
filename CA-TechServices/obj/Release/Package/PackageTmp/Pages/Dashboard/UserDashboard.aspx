@@ -32,12 +32,15 @@
             <td style="color:brown">5. Transactions - Billing  is completed (*New)</td>
         </tr>
         <tr>
+            <td style="color:brown">6. Transactions - Bill Settlement  is completed (*New)</td>
+        </tr>
+        <tr>
             <td>
                 <h4>Work In Progress</h4>
             </td>
         </tr>        
         <tr>
-            <td>1. Transactions - Bill Settlement (Base design in progress)</td>
+            <td>1. Transactions - Bill & Bill Settlement data load testing in progress</td>
         </tr>
         <tr>
             <td>

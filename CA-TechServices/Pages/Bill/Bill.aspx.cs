@@ -174,5 +174,20 @@ namespace CA_TechServices.Pages.Bill
             }
             return details.ToArray();
         }
+
+        [WebMethod]
+        public static Int64[] CheckBillSettledEnrty(Int64 id)
+        {
+            List<Int64> lstvalues = new List<Int64>();
+            try
+            {
+                lstvalues = new BillDAO().CheckBillSettledEnrty(id);
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return lstvalues.ToArray();
+        }
     }
 }

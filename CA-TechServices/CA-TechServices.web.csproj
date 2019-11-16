@@ -141,6 +141,8 @@
     <Content Include="Pages\Roles\Roles.aspx" />
     <Content Include="Pages\TaskMaster\TaskMaster.aspx" />
     <Content Include="Pages\TaskMaster\TaskStageMaster.aspx" />
+    <Content Include="Pages\Task\CreateTask.aspx" />
+    <Content Include="Pages\Task\MyTasks.aspx" />
     <Content Include="Pages\User\Users.aspx" />
     <Content Include="Scripts\AjaxFileupload.js" />
     <Content Include="Scripts\app\bill.js" />
@@ -335,6 +337,20 @@
     </Compile>
     <Compile Include="Pages\TaskMaster\TaskStageMaster.aspx.designer.cs">
       <DependentUpon>TaskStageMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Task\CreateTask.aspx.cs">
+      <DependentUpon>CreateTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Task\CreateTask.aspx.designer.cs">
+      <DependentUpon>CreateTask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Task\MyTasks.aspx.cs">
+      <DependentUpon>MyTasks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Task\MyTasks.aspx.designer.cs">
+      <DependentUpon>MyTasks.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\Users.aspx.cs">
       <DependentUpon>Users.aspx</DependentUpon>

@@ -150,14 +150,16 @@
                         </div>
 
                         <div class="form-group col-4 col-md-4 col-lg-4">
-                            <label>Ends On</label>
-                            <input class="form-control datepicker" id="RECURRING_END_DATE" name="date" placeholder="DD-MM-YYYY" type="text" style="width: 100%; text-align: center" />
+                            <label>Starts From</label>
+                            <input class="form-control datepicker" id="RECURRING_START_DATE" name="date" placeholder="DD-MM-YYYY" type="text" style="width: 100%; text-align: center" />
                         </div>
 
                         <div class="form-group col-4 col-md-4 col-lg-4">
-                            <input type="checkbox" name="ACTIVE_STATUS" id="ACTIVE_STATUS" value="ACTIVE_STATUS" style="margin-left: 10px; margin-right: 5px; vertical-align: middle; padding-top: 30px" />
-                            <label style="padding-top: 30px">Active</label>
-                        </div>
+                            <label>Ends On</label>
+                            <input type="checkbox" name="ACTIVE_STATUS" id="ACTIVE_STATUS" value="ACTIVE_STATUS" style="margin-left: 10px; margin-right: 5px;vertical-align: middle;" />
+                            <label>Active</label>
+                            <input class="form-control datepicker" id="RECURRING_END_DATE" name="date" placeholder="DD-MM-YYYY" type="text" style="width: 100%; text-align: center" />
+                        </div>                        
                     </div>
 
 

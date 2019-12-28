@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using CA_TechService.Common.Transport.TaskMaster;
-using CA_TechService.Data.Query.TaskMaster;
+using CA_TechService.Common.Transport.Task;
 using CA_TechService.Common.Generic;
 #endregion
-namespace CA_TechService.Data.DataSource.TaskMaster
+namespace CA_TechService.Data.DataSource.Task
 {
-    class TaskTrnCreateTaskDAO
+    public class TaskTrnCreateTaskDAO
     {
         public List<TaskTrnCreateListEntity> GetTaskTrnCreatedList(string fromdate, string todate)
         {

@@ -153,6 +153,7 @@
     <Content Include="Scripts\app\clientgroup.js" />
     <Content Include="Scripts\app\clientmaster.js" />
     <Content Include="Scripts\app\companymaster.js" />
+    <Content Include="Scripts\app\createtasks.js" />
     <Content Include="Scripts\app\forgotpassword.js" />
     <Content Include="Scripts\app\rolesmaster.js" />
     <Content Include="Scripts\app\taskmaster.js" />

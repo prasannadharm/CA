@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CA_TechService.Common.Transport.TaskMaster
+namespace CA_TechService.Common.Transport.Task
 {
     public class TaskTrnEntity
     {

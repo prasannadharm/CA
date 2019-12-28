@@ -12,7 +12,6 @@ F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Debug\CA-TechService.Common
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Debug\CA-TechService.Common.pdb
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Debug\NLog.dll
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\bin\Debug\NLog.xml
-F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\obj\Debug\CA-TechService.Common.csprojResolveAssemblyReference.cache
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\obj\Debug\CA-TechService.Common.dll
 F:\GIT-TFS\Source\Repos\CA\CA-TechService.Common\obj\Debug\CA-TechService.Common.pdb
 G:\CAProject\CA-TechService.Common\bin\Debug\CA-TechService.Common.dll

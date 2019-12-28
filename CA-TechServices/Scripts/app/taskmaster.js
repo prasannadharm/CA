@@ -11,6 +11,8 @@ $(document).ready(function () {
     var dobday = new Date(2050, 0, 1);
     $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
     $('#RECURRING_END_DATE').datepicker('setDate', dobday);
+    dobday = new Date(new Date().getFullYear(), 0, 1);
+    $('#RECURRING_START_DATE').datepicker('setDate', dobday);
 
     document.getElementById("loader").style.display = "block";
     getMainGridDetails();
@@ -403,6 +405,7 @@ function rebuildclientsubtable() {
 function recurringcombochange() {
     $("#RECURRING_DAYS").prop('disabled', true);
     $("#RECURRING_START_DAY").prop('disabled', true);
+    $("#RECURRING_START_DATE").prop('disabled', true);
     $("#RECURRING_END_DATE").prop('disabled', true);
     if ($('#RECURRING_TYPE').val() == 'Once') {
         $("#RECURRING_DAYS").val(1);
@@ -410,8 +413,11 @@ function recurringcombochange() {
         var dobday = new Date(2050, 0, 1);
         $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
         $('#RECURRING_END_DATE').datepicker('setDate', dobday);
+        dobday = new Date(new Date().getFullYear(), 0, 1);
+        $('#RECURRING_START_DATE').datepicker('setDate', dobday);
         $("#RECURRING_DAYS").prop('disabled', true);
         $("#RECURRING_START_DAY").prop('disabled', true);
+        $("#RECURRING_START_DATE").prop('disabled', true);
         $("#RECURRING_END_DATE").prop('disabled', true);
     }
     else if ($('#RECURRING_TYPE').val() == 'Weekly') {
@@ -419,6 +425,7 @@ function recurringcombochange() {
         $("#RECURRING_START_DAY").val(1);
         $("#RECURRING_DAYS").prop('disabled', true);
         $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_START_DATE").prop('disabled', false);
         $("#RECURRING_END_DATE").prop('disabled', false);
     }
     else if ($('#RECURRING_TYPE').val() == 'Bi-Monthly') {
@@ -426,6 +433,7 @@ function recurringcombochange() {
         $("#RECURRING_START_DAY").val(1);
         $("#RECURRING_DAYS").prop('disabled', true);
         $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_START_DATE").prop('disabled', false);
         $("#RECURRING_END_DATE").prop('disabled', false);
     }
     else if ($('#RECURRING_TYPE').val() == 'Monthly') {
@@ -433,6 +441,7 @@ function recurringcombochange() {
         $("#RECURRING_START_DAY").val(1);
         $("#RECURRING_DAYS").prop('disabled', true);
         $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_START_DATE").prop('disabled', false);
         $("#RECURRING_END_DATE").prop('disabled', false);
     }
     else if ($('#RECURRING_TYPE').val() == 'Quarterly') {
@@ -440,6 +449,7 @@ function recurringcombochange() {
         $("#RECURRING_START_DAY").val(1);
         $("#RECURRING_DAYS").prop('disabled', true);
         $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_START_DATE").prop('disabled', false);
         $("#RECURRING_END_DATE").prop('disabled', false);
     }
     else if ($('#RECURRING_TYPE').val() == 'Bi-Yearly') {
@@ -447,6 +457,7 @@ function recurringcombochange() {
         $("#RECURRING_START_DAY").val(1);
         $("#RECURRING_DAYS").prop('disabled', true);
         $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_START_DATE").prop('disabled', false);
         $("#RECURRING_END_DATE").prop('disabled', false);
     }
     else if ($('#RECURRING_TYPE').val() == 'Yearly') {
@@ -454,6 +465,7 @@ function recurringcombochange() {
         $("#RECURRING_START_DAY").val(1);
         $("#RECURRING_DAYS").prop('disabled', true);
         $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_START_DATE").prop('disabled', false);
         $("#RECURRING_END_DATE").prop('disabled', false);
     }
     else if ($('#RECURRING_TYPE').val() == 'Custom') {
@@ -461,6 +473,7 @@ function recurringcombochange() {
         $("#RECURRING_START_DAY").val(1);
         $("#RECURRING_DAYS").prop('disabled', false);
         $("#RECURRING_START_DAY").prop('disabled', false);
+        $("#RECURRING_START_DATE").prop('disabled', false);
         $("#RECURRING_END_DATE").prop('disabled', false);
     }
 }
@@ -498,6 +511,8 @@ function clearcontrols() {
     var dobday = new Date(2050, 0, 1);
     $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
     $('#RECURRING_END_DATE').datepicker('setDate', dobday);
+    dobday = new Date(new Date().getFullYear(), 0, 1);
+    $('#RECURRING_START_DATE').datepicker('setDate', dobday);
     $("#ACTIVE_STATUS").prop('checked', true);
     $('#SEARCHBY').val('NAME');
     $('#SEARCHTEXT').val('');
@@ -775,6 +790,12 @@ $(function () {
                 return false;
             }
 
+            if ($("#RECURRING_START_DATE").val() == null || $("#RECURRING_START_DATE").val() == undefined || $.trim($("#RECURRING_START_DATE").val()) == '') {
+                alert('Please select Task start date.');
+                $("#RECURRING_START_DATE").focus();
+                return false;
+            }
+
             if ($("#RECURRING_END_DATE").val() == null || $("#RECURRING_END_DATE").val() == undefined || $.trim($("#RECURRING_END_DATE").val()) == '') {
                 alert('Please select Task end date.');
                 $("#RECURRING_END_DATE").focus();
@@ -828,6 +849,7 @@ $(function () {
         obj.RECURRING_TYPE = $("#RECURRING_TYPE").val();
         obj.RECURRING_DAYS = $("#RECURRING_DAYS").val();
         obj.RECURRING_START_DAY = $("#RECURRING_START_DAY").val();
+        obj.RECURRING_START_DATE = $("#RECURRING_START_DATE").val();
         obj.RECURRING_END_DATE = $("#RECURRING_END_DATE").val();
         if ($('#ACTIVE_STATUS').is(":checked")) {
             obj.ACTIVE_STATUS = true;
@@ -917,6 +939,12 @@ $(function () {
                 return false;
             }
 
+            if ($("#RECURRING_START_DATE").val() == null || $("#RECURRING_START_DATE").val() == undefined || $.trim($("#RECURRING_START_DATE").val()) == '') {
+                alert('Please select Task start date.');
+                $("#RECURRING_START_DATE").focus();
+                return false;
+            }
+
             if ($("#RECURRING_END_DATE").val() == null || $("#RECURRING_END_DATE").val() == undefined || $.trim($("#RECURRING_END_DATE").val()) == '') {
                 alert('Please select Task end date.');
                 $("#RECURRING_END_DATE").focus();
@@ -973,6 +1001,7 @@ $(function () {
         obj.RECURRING_TYPE = $("#RECURRING_TYPE").val();
         obj.RECURRING_DAYS = $("#RECURRING_DAYS").val();
         obj.RECURRING_START_DAY = $("#RECURRING_START_DAY").val();
+        obj.RECURRING_START_DATE = $("#RECURRING_START_DATE").val();
         obj.RECURRING_END_DATE = $("#RECURRING_END_DATE").val();
         if ($('#ACTIVE_STATUS').is(":checked")) {
             obj.ACTIVE_STATUS = true;
@@ -1055,7 +1084,8 @@ $(function () {
                         $("#RECURRING_TYPE").val(data.d[0].MainArray[0].RECURRING_TYPE);
                         recurringcombochange();
                         $("#RECURRING_DAYS").val(data.d[0].MainArray[0].RECURRING_DAYS);
-                        $("#RECURRING_START_DAY").val(data.d[0].MainArray[0].RECURRING_START_DAY);                        
+                        $("#RECURRING_START_DAY").val(data.d[0].MainArray[0].RECURRING_START_DAY);
+                        $('#RECURRING_START_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MainArray[0].RECURRING_START_DATE.split('-')[2] + '-' + data.d[0].MainArray[0].RECURRING_START_DATE.split('-')[1] + '-' + data.d[0].MainArray[0].RECURRING_START_DATE.split('-')[0]);
                         $('#RECURRING_END_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MainArray[0].RECURRING_END_DATE.split('-')[2] + '-' + data.d[0].MainArray[0].RECURRING_END_DATE.split('-')[1] + '-' + data.d[0].MainArray[0].RECURRING_END_DATE.split('-')[0]);
 
                         if (data.d[0].MainArray[0].ACTIVE_STATUS == true)

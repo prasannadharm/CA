@@ -324,6 +324,7 @@ namespace CA_TechService.Data.DataSource
             }
             return retlst;
         }
+
         public List<string> GetCurrentDate()
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -351,6 +352,7 @@ namespace CA_TechService.Data.DataSource
             }
             return lstvalues;
         }
+
         public List<string> GetLatestTrasnsactionNumber(string str)
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -379,6 +381,7 @@ namespace CA_TechService.Data.DataSource
             }
             return lstvalues;
         }
+
         public List<GenericIdNameEntity> GetActivePaymodeList(string str="")
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -411,6 +414,7 @@ namespace CA_TechService.Data.DataSource
             }
             return retlst;
         }
+
         public List<PendingBillClients> GetPendingBillsCustomers()
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -476,6 +480,70 @@ namespace CA_TechService.Data.DataSource
                         obj.PAID_AMT = ds.Tables[0].Rows[i]["PAID_AMT"] == DBNull.Value ? 0 : Convert.ToDouble(ds.Tables[0].Rows[i]["PAID_AMT"]);
                         obj.BAL_AMT = ds.Tables[0].Rows[i]["BAL_AMT"] == DBNull.Value ? 0 : Convert.ToDouble(ds.Tables[0].Rows[i]["BAL_AMT"]);
                         obj.BS_AMT = ds.Tables[0].Rows[i]["BS_AMT"] == DBNull.Value ? 0 : Convert.ToDouble(ds.Tables[0].Rows[i]["BS_AMT"]);
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
+
+        public List<GenericIdNameEntity> GetActiveTasksList()
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<GenericIdNameEntity> retlst = new List<GenericIdNameEntity>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetActiveTasksList", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        GenericIdNameEntity obj = new GenericIdNameEntity();
+                        obj.ID = ds.Tables[0].Rows[i]["ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["ID"]);
+                        obj.NAME = ds.Tables[0].Rows[i]["NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["NAME"].ToString();
+                        retlst.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retlst;
+        }
+
+        public List<GenericIdNameEntity> GetActiveClientListforDropdown()
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            List<GenericIdNameEntity> retlst = new List<GenericIdNameEntity>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_GetActiveClientListForDropdown", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(ds);
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        GenericIdNameEntity obj = new GenericIdNameEntity();
+                        obj.ID = ds.Tables[0].Rows[i]["ID"] == DBNull.Value ? 0 : Convert.ToInt64(ds.Tables[0].Rows[i]["ID"]);
+                        obj.NAME = ds.Tables[0].Rows[i]["NAME"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["NAME"].ToString();
                         retlst.Add(obj);
                     }
                 }

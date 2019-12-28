@@ -40,7 +40,7 @@
             </td>
         </tr>        
         <tr>
-            <td>1. Transactions - Bill & Bill Settlement data load testing in progress</td>
+            <td>1. Transactions - Create Task</td>
         </tr>
         <tr>
             <td>

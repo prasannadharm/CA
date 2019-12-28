@@ -28,13 +28,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/16/2019 17:45:43</publishTime>
     </File>
     <File Include="bin/CA-TechService.Common.dll">
-      <publishTime>11/14/2019 21:44:06</publishTime>
+      <publishTime>11/16/2019 16:09:23</publishTime>
     </File>
     <File Include="bin/CA-TechService.Data.dll">
-      <publishTime>11/14/2019 21:44:06</publishTime>
+      <publishTime>11/16/2019 16:09:23</publishTime>
     </File>
     <File Include="bin/CA-TechServices.dll">
-      <publishTime>11/14/2019 21:44:11</publishTime>
+      <publishTime>11/16/2019 16:09:27</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>03/16/2019 17:45:44</publishTime>
@@ -271,7 +271,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/06/2019 21:23:20</publishTime>
     </File>
     <File Include="Pages/Dashboard/UserDashboard.aspx">
-      <publishTime>11/14/2019 21:42:54</publishTime>
+      <publishTime>11/16/2019 16:08:47</publishTime>
     </File>
     <File Include="Pages/Login/ChangePassword.aspx">
       <publishTime>05/06/2019 22:22:39</publishTime>
@@ -285,6 +285,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Pages/Roles/Roles.aspx">
       <publishTime>06/30/2019 17:14:37</publishTime>
     </File>
+    <File Include="Pages/Task/CreateTask.aspx">
+      <publishTime>11/16/2019 16:05:58</publishTime>
+    </File>
+    <File Include="Pages/Task/MyTasks.aspx">
+      <publishTime>11/16/2019 16:05:41</publishTime>
+    </File>
     <File Include="Pages/TaskMaster/TaskMaster.aspx">
       <publishTime>10/28/2019 22:27:14</publishTime>
     </File>
@@ -295,13 +301,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/06/2019 22:09:24</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/14/2019 21:44:22</publishTime>
+      <publishTime>11/16/2019 16:09:52</publishTime>
     </File>
     <File Include="Scripts/AjaxFileupload.js">
       <publishTime>05/11/2019 20:35:15</publishTime>
     </File>
     <File Include="Scripts/app/bill.js">
-      <publishTime>11/10/2019 18:25:41</publishTime>
+      <publishTime>11/16/2019 15:52:52</publishTime>
     </File>
     <File Include="Scripts/app/billsettlement.js">
       <publishTime>11/14/2019 21:40:46</publishTime>
@@ -481,7 +487,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/29/2019 21:48:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/14/2019 21:44:20</publishTime>
+      <publishTime>11/16/2019 16:09:51</publishTime>
     </File>
   </ItemGroup>
 </Project>

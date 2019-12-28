@@ -33,6 +33,7 @@ namespace CA_TechService.Common.Transport.TaskMaster
         public string RECURRING_TYPE { get; set; }
         public Int32 RECURRING_DAYS { get; set; }
         public Int32 RECURRING_START_DAY { get; set; }
+        public string RECURRING_START_DATE { get; set; }
         public string RECURRING_END_DATE { get; set; }
         public bool ACTIVE_STATUS { get; set; }
     }
@@ -88,6 +89,7 @@ namespace CA_TechService.Common.Transport.TaskMaster
         public string RECURRING_TYPE { get; set; }
         public Int32 RECURRING_DAYS { get; set; }
         public Int32 RECURRING_START_DAY { get; set; }
+        public string RECURRING_START_DATE { get; set; }
         public string RECURRING_END_DATE { get; set; }
         public bool ACTIVE_STATUS { get; set; }
         public string MAPPED_CLIENTS { get; set; }

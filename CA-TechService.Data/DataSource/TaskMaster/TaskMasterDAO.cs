@@ -80,6 +80,7 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                             obj1.RECURRING_TYPE = ds.Tables[0].Rows[i]["RECURRING_TYPE"] == DBNull.Value ? "" : ds.Tables[0].Rows[i]["RECURRING_TYPE"].ToString();                           
                             obj1.RECURRING_DAYS = ds.Tables[0].Rows[i]["RECURRING_DAYS"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[i]["RECURRING_DAYS"]);
                             obj1.RECURRING_START_DAY = ds.Tables[0].Rows[i]["RECURRING_START_DAY"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[i]["RECURRING_START_DAY"]);
+                            obj1.RECURRING_START_DATE = ds.Tables[0].Rows[i]["RECURRING_START_DATE"] == DBNull.Value ? "" : Convert.ToString(ds.Tables[0].Rows[i]["RECURRING_START_DATE"]);
                             obj1.RECURRING_END_DATE = ds.Tables[0].Rows[i]["RECURRING_END_DATE"] == DBNull.Value ? "" : Convert.ToString(ds.Tables[0].Rows[i]["RECURRING_END_DATE"]);
                             obj1.ACTIVE_STATUS = ds.Tables[0].Rows[i]["ACTIVE_STATUS"] == DBNull.Value ? true : Convert.ToBoolean(ds.Tables[0].Rows[i]["ACTIVE_STATUS"]);
                             objlst1.Add(obj1);                           
@@ -278,6 +279,7 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                     cmd.Parameters.AddWithValue("@RECURRING_TYPE", obj.RECURRING_TYPE);
                     cmd.Parameters.AddWithValue("@RECURRING_DAYS", obj.RECURRING_DAYS);
                     cmd.Parameters.AddWithValue("@RECURRING_START_DAY", obj.RECURRING_START_DAY);
+                    cmd.Parameters.AddWithValue("@RECURRING_START_DATE", obj.RECURRING_START_DATE);
                     cmd.Parameters.AddWithValue("@RECURRING_END_DATE", obj.RECURRING_END_DATE);
                     cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);
                     cmd.Parameters.AddWithValue("@MAPPED_CLIENTS", obj.MAPPED_CLIENTS);
@@ -356,6 +358,7 @@ namespace CA_TechService.Data.DataSource.TaskMaster
                     cmd.Parameters.AddWithValue("@RECURRING_TYPE", obj.RECURRING_TYPE);
                     cmd.Parameters.AddWithValue("@RECURRING_DAYS", obj.RECURRING_DAYS);
                     cmd.Parameters.AddWithValue("@RECURRING_START_DAY", obj.RECURRING_START_DAY);
+                    cmd.Parameters.AddWithValue("@RECURRING_START_DATE", obj.RECURRING_START_DATE);
                     cmd.Parameters.AddWithValue("@RECURRING_END_DATE", obj.RECURRING_END_DATE);
                     cmd.Parameters.AddWithValue("@ACTIVE_STATUS", obj.ACTIVE_STATUS);
                     cmd.Parameters.AddWithValue("@MAPPED_CLIENTS", obj.MAPPED_CLIENTS);

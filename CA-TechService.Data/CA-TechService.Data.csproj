@@ -56,6 +56,7 @@
     <Compile Include="DataSource\Roles\RolesMasterDAO.cs" />
     <Compile Include="DataSource\TaskMaster\TaskMasterDAO.cs" />
     <Compile Include="DataSource\TaskMaster\TaskStageMasterDAO.cs" />
+    <Compile Include="DataSource\TaskMaster\TaskTrnCreateTaskDAO.cs" />
     <Compile Include="DataSource\User\ChangePasswordDAO.cs" />
     <Compile Include="DataSource\User\ForgotPasswordDAO.cs" />
     <Compile Include="DataSource\User\UserMasterDAO.cs" />

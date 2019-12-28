@@ -662,8 +662,7 @@ $(function () {
             return false;
         }
 
-        if (netamt <= 0)
-        {
+        if (netamt <= 0) {
             alert("Bill amount cannot be Zero, Please add atleast one valid service description.");
             $("#btnaddrow").focus();
             return false;
@@ -826,6 +825,7 @@ $(function () {
         //alert(id);  //getting the row id 
 
         var checkid = 0;
+        var settlementno = 0;
         $.ajax({
             type: "Post",
             contentType: "application/json; charset=utf-8",
@@ -836,90 +836,111 @@ $(function () {
                 if (data.d.length > 0) {
                     checkid = data.d[0];
                 }
-                
-                if (checkid != null && checkid != undefined && checkid > 0) {                    
+
+                if (checkid != null && checkid != undefined && checkid > 0) {
                     alert('Cannot Edit Voided/Cancelled entry.');
                     document.getElementById("loader").style.display = "none";
                     return false;
                 }
 
-                
                 $.ajax({
                     type: "Post",
                     contentType: "application/json; charset=utf-8",
-                    url: "Bill.aspx/EditData",
+                    url: "Bill.aspx/CheckBillSettledEnrty",
                     data: '{id: ' + id + '}',
                     dataType: "json",
                     success: function (data) {
                         if (data.d.length > 0) {
-                            $('#btnSave').hide();
-                            $('#btnUpdate').show();
-                            $('#mainlistingdiv').hide();
-                            $('#mainldetaildiv').show();
-
-                            clearcontrols(0);
-                            $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Create a new Bill</h3>");
-
-                            if (data.d[0].MAINARRAY != null && data.d[0].MAINARRAY != undefined && data.d[0].MAINARRAY.length > 0) {
-
-                                $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Edit Bill : " + data.d[0].MAINARRAY[0].BILL_NO + "</h3>");
-
-                                cname = data.d[0].MAINARRAY[0].C_NAME;
-                                cno = data.d[0].MAINARRAY[0].C_NO;
-                                cid = data.d[0].MAINARRAY[0].C_ID;
-                                fileno = data.d[0].MAINARRAY[0].FILE_NO;
-
-                                $("#C_NAME").val(data.d[0].MAINARRAY[0].C_NAME);
-                                $("#BILL_NO").val(data.d[0].MAINARRAY[0].BILL_NO);
-                                $("#PAYMODE_NAME").val(data.d[0].MAINARRAY[0].PAYMODE_ID);
-                                $("#REMARKS").val(data.d[0].MAINARRAY[0].REMARKS);
-                                $('#BILL_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MAINARRAY[0].BILL_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[0]);
-                                $('#DUE_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MAINARRAY[0].DUE_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].DUE_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].DUE_DATE.split('-')[0]);
-
-                                grossamt = data.d[0].MAINARRAY[0].GROSS_AMT;
-                                cgstamt = data.d[0].MAINARRAY[0].CGST_AMT;
-                                sgstamt = data.d[0].MAINARRAY[0].SGST_AMT;
-                                igstamt = data.d[0].MAINARRAY[0].IGST_AMT;
-                                othamt = data.d[0].MAINARRAY[0].OTH_AMT;
-                                netamt = data.d[0].MAINARRAY[0].NET_AMT;
-
-                                $("#GROSS_AMT").val(data.d[0].MAINARRAY[0].GROSS_AMT);
-                                $("#CGST_AMT").val(data.d[0].MAINARRAY[0].CGST_AMT);
-                                $("#SGST_AMT").val(data.d[0].MAINARRAY[0].SGST_AMT);
-                                $("#IGST_AMT").val(data.d[0].MAINARRAY[0].IGST_AMT);
-                                $("#OTH_AMT").val(data.d[0].MAINARRAY[0].OTH_AMT);
-                                $("#NET_AMT").val(data.d[0].MAINARRAY[0].NET_AMT);
-                                $('#lblclientdetails').text(data.d[0].MAINARRAY[0].C_DETAILS);
-                            }
-
-                            if (data.d[0].SUBARRAY != null && data.d[0].SUBARRAY != undefined && data.d[0].SUBARRAY.length > 0) {
-                                sublstobj = [];
-                                for (var i = 0; i < data.d[0].SUBARRAY.length; i++) {
-                                    subobj = {};
-                                    subobj.SL_NO = data.d[0].SUBARRAY[i].SL_NO;
-                                    subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
-                                    subobj.DESCP = data.d[0].SUBARRAY[i].DESCP;
-                                    subobj.GROSS_AMT = data.d[0].SUBARRAY[i].GROSS_AMT;
-                                    subobj.SGST_PER = data.d[0].SUBARRAY[i].SGST_PER;
-                                    subobj.SGST_AMT = data.d[0].SUBARRAY[i].SGST_AMT;
-                                    subobj.CGST_PER = data.d[0].SUBARRAY[i].CGST_PER;
-                                    subobj.CGST_AMT = data.d[0].SUBARRAY[i].CGST_AMT;
-                                    subobj.IGST_PER = data.d[0].SUBARRAY[i].IGST_PER;
-                                    subobj.IGST_AMT = data.d[0].SUBARRAY[i].IGST_AMT;
-                                    subobj.NET_AMT = data.d[0].SUBARRAY[i].NET_AMT;
-                                    subobj.REMARKS = data.d[0].SUBARRAY[i].REMARKS;
-                                    sublstobj.push(subobj);
-                                }
-                                loadsubcontrols();
-                                calcamt();
-                            }
+                            settlementno = data.d[0];
                         }
 
-                        //$('#PAYMODE_NAME').focus();
-                        document.getElementById("loader").style.display = "none";
+                        if (settlementno != null && settlementno != undefined && settlementno > 0) {
+                            alert('Cannot Edit Bill settled entry, BS No: ' + settlementno);
+                            document.getElementById("loader").style.display = "none";
+                            return false;
+                        }
+
+                        $.ajax({
+                            type: "Post",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Bill.aspx/EditData",
+                            data: '{id: ' + id + '}',
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.d.length > 0) {
+                                    $('#btnSave').hide();
+                                    $('#btnUpdate').show();
+                                    $('#mainlistingdiv').hide();
+                                    $('#mainldetaildiv').show();
+
+                                    clearcontrols(0);
+                                    $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Create a new Bill</h3>");
+
+                                    if (data.d[0].MAINARRAY != null && data.d[0].MAINARRAY != undefined && data.d[0].MAINARRAY.length > 0) {
+
+                                        $("#subheaderdiv").html("<h3 style='color:blue'>Billing -> Edit Bill : " + data.d[0].MAINARRAY[0].BILL_NO + "</h3>");
+
+                                        cname = data.d[0].MAINARRAY[0].C_NAME;
+                                        cno = data.d[0].MAINARRAY[0].C_NO;
+                                        cid = data.d[0].MAINARRAY[0].C_ID;
+                                        fileno = data.d[0].MAINARRAY[0].FILE_NO;
+
+                                        $("#C_NAME").val(data.d[0].MAINARRAY[0].C_NAME);
+                                        $("#BILL_NO").val(data.d[0].MAINARRAY[0].BILL_NO);
+                                        $("#PAYMODE_NAME").val(data.d[0].MAINARRAY[0].PAYMODE_ID);
+                                        $("#REMARKS").val(data.d[0].MAINARRAY[0].REMARKS);
+                                        $('#BILL_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MAINARRAY[0].BILL_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].BILL_DATE.split('-')[0]);
+                                        $('#DUE_DATE').datepicker({ dateFormat: 'dd-mm-yy' }).datepicker('setDate', data.d[0].MAINARRAY[0].DUE_DATE.split('-')[2] + '-' + data.d[0].MAINARRAY[0].DUE_DATE.split('-')[1] + '-' + data.d[0].MAINARRAY[0].DUE_DATE.split('-')[0]);
+
+                                        grossamt = data.d[0].MAINARRAY[0].GROSS_AMT;
+                                        cgstamt = data.d[0].MAINARRAY[0].CGST_AMT;
+                                        sgstamt = data.d[0].MAINARRAY[0].SGST_AMT;
+                                        igstamt = data.d[0].MAINARRAY[0].IGST_AMT;
+                                        othamt = data.d[0].MAINARRAY[0].OTH_AMT;
+                                        netamt = data.d[0].MAINARRAY[0].NET_AMT;
+
+                                        $("#GROSS_AMT").val(data.d[0].MAINARRAY[0].GROSS_AMT);
+                                        $("#CGST_AMT").val(data.d[0].MAINARRAY[0].CGST_AMT);
+                                        $("#SGST_AMT").val(data.d[0].MAINARRAY[0].SGST_AMT);
+                                        $("#IGST_AMT").val(data.d[0].MAINARRAY[0].IGST_AMT);
+                                        $("#OTH_AMT").val(data.d[0].MAINARRAY[0].OTH_AMT);
+                                        $("#NET_AMT").val(data.d[0].MAINARRAY[0].NET_AMT);
+                                        $('#lblclientdetails').text(data.d[0].MAINARRAY[0].C_DETAILS);
+                                    }
+
+                                    if (data.d[0].SUBARRAY != null && data.d[0].SUBARRAY != undefined && data.d[0].SUBARRAY.length > 0) {
+                                        sublstobj = [];
+                                        for (var i = 0; i < data.d[0].SUBARRAY.length; i++) {
+                                            subobj = {};
+                                            subobj.SL_NO = data.d[0].SUBARRAY[i].SL_NO;
+                                            subobj.GENID = Math.floor((Math.random() * 10000000) + 1);
+                                            subobj.DESCP = data.d[0].SUBARRAY[i].DESCP;
+                                            subobj.GROSS_AMT = data.d[0].SUBARRAY[i].GROSS_AMT;
+                                            subobj.SGST_PER = data.d[0].SUBARRAY[i].SGST_PER;
+                                            subobj.SGST_AMT = data.d[0].SUBARRAY[i].SGST_AMT;
+                                            subobj.CGST_PER = data.d[0].SUBARRAY[i].CGST_PER;
+                                            subobj.CGST_AMT = data.d[0].SUBARRAY[i].CGST_AMT;
+                                            subobj.IGST_PER = data.d[0].SUBARRAY[i].IGST_PER;
+                                            subobj.IGST_AMT = data.d[0].SUBARRAY[i].IGST_AMT;
+                                            subobj.NET_AMT = data.d[0].SUBARRAY[i].NET_AMT;
+                                            subobj.REMARKS = data.d[0].SUBARRAY[i].REMARKS;
+                                            sublstobj.push(subobj);
+                                        }
+                                        loadsubcontrols();
+                                        calcamt();
+                                    }
+                                }
+
+                                //$('#PAYMODE_NAME').focus();
+                                document.getElementById("loader").style.display = "none";
+                            },
+                            error: function () {
+                                alert("Error while retrieving data of :" + id);
+                            }
+                        });
                     },
                     error: function () {
-                        alert("Error while retrieving data of :" + id);
+                        alert("Error while Checking Bill setllement data data of :" + id);
                     }
                 });
             },
@@ -1063,8 +1084,7 @@ $(function () {
                     if (data.d[0].MAINARRAY[0].OTH_AMT == 0)
                         $('#trothamt').hide();
 
-                    if (data.d[0].MAINARRAY[0].VOID_STATUS == true)
-                    {
+                    if (data.d[0].MAINARRAY[0].VOID_STATUS == true) {
                         $('#trvoid').show();
                     }
                 }

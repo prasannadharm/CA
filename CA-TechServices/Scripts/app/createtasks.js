@@ -48,8 +48,18 @@ $(document).ready(function () {
     $("#btnSearch").click(function () {
         getMainGridDetails();
     })
-})
 
+    $("#btnSearchPendingTasks").click(function () {
+        getPendingTaskDetails();
+    })
+
+    $("#btnskippending").click(function () {
+        $('#tasksdetailsmaindiv').show();
+        $('#pendingtasksdivmain').hide();
+    })
+    
+    LoadClientFilterCombo();
+})
 
 function getMainGridDetails() {
 
@@ -114,13 +124,14 @@ function getMainGridDetails() {
             $('#tablemain').DataTable({
                 "order": [[0, "desc"]]
             });
+            document.getElementById("loader").style.display = "none";
         },
         error: function (request, status, error) {
             alert(request.responseText);
             alert("Error while Showing update data");
         }
     });
-    document.getElementById("loader").style.display = "none";
+    //document.getElementById("loader").style.display = "none";
 }
 
 function isDate(txtDate) {
@@ -153,3 +164,182 @@ function isDate(txtDate) {
     }
     return true;
 }
+
+function LoadClientFilterCombo() {
+    var options = []; 
+    $.ajax({
+        url: "CreateTask.aspx/GetActiveClientListforDropdown",
+        data: '{}',
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            for (var i = 0; i < data.d.length; i++) {
+                options.push('<option value="',
+                  data.d[i].ID, '">',
+                  data.d[i].NAME, '</option>');
+            }
+
+            $("#cmb_Client_Filter").html(options.join(''));
+            $("#cmb_Client_Filter").addClass("selectpicker");
+            $("#cmb_Client_Filter").addClass("form-control");
+            LoadTaskFilterCombo();
+        },
+        error: function (response) {
+            alert(response.responseText);
+        },
+        failure: function (response) {
+            alert(response.responseText);
+        }
+    });
+    //$('.selectpicker').selectpicker('');    
+}
+
+function LoadTaskFilterCombo() {
+    var options = [];
+    $.ajax({
+        url: "CreateTask.aspx/GetActiveTasksList",
+        data: '{}',
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            for (var i = 0; i < data.d.length; i++) {
+                options.push('<option value="',
+                  data.d[i].ID, '">',
+                  data.d[i].NAME, '</option>');
+            }
+
+            $("#cmb_Task_Filter").html(options.join(''));
+            $("#cmb_Task_Filter").addClass("selectpicker");
+            $("#cmb_Task_Filter").addClass("form-control");
+            LoadClientCategoryFilterCombo();
+        },
+        error: function (response) {
+            alert(response.responseText);
+        },
+        failure: function (response) {
+            alert(response.responseText);
+        }
+    });
+    //$('.selectpicker').selectpicker('');    
+}
+
+function LoadClientCategoryFilterCombo() {
+    var options = [];
+    $.ajax({
+        url: "CreateTask.aspx/GetActiveClientCategories",
+        data: '{}',
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            for (var i = 0; i < data.d.length; i++) {
+                options.push('<option value="',
+                  data.d[i].CLI_CAT_ID, '">',
+                  data.d[i].CLI_CAT_NAME, '</option>');
+            }
+
+            $("#cmb_Cli_Cat_Filter").html(options.join(''));
+            $("#cmb_Cli_Cat_Filter").addClass("selectpicker");
+            $("#cmb_Cli_Cat_Filter").addClass("form-control");
+            $('.selectpicker').selectpicker('');
+        },
+        error: function (response) {
+            alert(response.responseText);
+        },
+        failure: function (response) {
+            alert(response.responseText);
+        }
+    });   
+}
+
+function getPendingTaskDetails() {
+
+    var clientCategoryStringList = [];
+    $('#cmb_Cli_Cat_Filter > option:selected').each(function () {
+        clientCategoryStringList.push($(this).val());
+    });
+
+    var clientStringList = [];
+    $('#cmb_Client_Filter > option:selected').each(function () {
+        clientStringList.push($(this).val());
+    });
+
+    var taskStringList = [];
+    $('#cmb_Task_Filter > option:selected').each(function () {
+        taskStringList.push($(this).val());
+    });
+
+    if ((clientCategoryStringList == undefined || clientCategoryStringList == null || clientCategoryStringList.length <= 0)
+        && (clientStringList == undefined || clientStringList == null || clientStringList.length <= 0)
+        && (taskStringList == undefined || taskStringList == null || taskStringList.length <= 0)) {
+        alert('Please select atleast one filter criteria.');
+        $("#cmb_Task_Filter").focus();
+        return false;
+    }
+
+
+    document.getElementById("loader").style.display = "block";
+
+    var obj = {};
+    obj.DateFrom = $("#dtpFrom").val();
+    obj.DateTo = $("#dtpTo").val();
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "CreateTask.aspx/GetPendingTaskData",
+        data: '{TIDSTR: ' + JSON.stringify(taskStringList.join(',')) + ', CIDSTR: ' + JSON.stringify(clientStringList.join(',')) + ', CLICATIDSTR: ' + JSON.stringify(clientCategoryStringList.join(',')) + '}',
+        dataType: "json",
+        success: function (data) {
+            $('#gridpendingtaskdiv').remove();
+            $('#pendingtaskdiv').append("<div class='table-responsive' id='gridpendingtaskdiv'></div>");
+            $('#gridpendingtaskdiv').append("<table id='tablependingtask' class='table table-striped table-bordered' style='width: 100%'></table>");
+            $('#tablependingtask').append("<thead><tr><th>Task Name</th><th>Priority</th><th>Frequency</th><th>Sch On</th><th>Client</th><th>C No</th><th>File No</th><th>PAN</th><th></th></tr></thead><tbody></tbody>");
+            $('#tablependingtask tbody').remove();
+            $('#tablependingtask').append("<tbody>");
+            for (var i = 0; i < data.d.length; i++) {
+                $('#tablependingtask').append(
+                    "<tr><td style='color:brown'><b>" + data.d[i].T_NAME + "</b></td>" +
+                    "<td style='text-align:center;'><b>" + data.d[i].PRIORITY + "</b></td>" +
+                    "<td>" + data.d[i].RECURRING_TYPE + "</td>" +
+                    "<td style='color:red'><b>" + data.d[i].TASK_SCH_DATE + "</b></td>" +
+                    "<td style='color:blue'><b>" + data.d[i].C_NAME + "</b></td>" +
+                    "<td style='center;'><b>" + data.d[i].C_NO + "</b></td>" +
+                    "<td style='center;'>" + data.d[i].FILE_NO + "</td>" +
+                    "<td>" + data.d[i].PAN + "</td>" +
+                    "<td><img src='../../Images/select.png' alt='Select Record' class='selectButton handcursor' data-id='" + data.d[i].T_ID + "' name='submitButton' id='btnSelect' value='Select' style='margin-right:5px;margin-left:5px'/> </td></tr>");
+            }
+            $('#tablependingtask').append("</tbody>");
+            $('#tablependingtask').DataTable({
+                "order": [[3, "asc"]]
+            });
+            document.getElementById("loader").style.display = "none";
+        },
+        error: function (request, status, error) {
+            alert(request.responseText);
+            alert("Error while Showing update data");
+        }
+    });
+    
+}
+
+$(function () {
+    $(document).on("click", ".addNewButton", function () {
+        $('#btnSave').show();
+        $('#btnUpdate').hide();
+
+        $('#mainlistingdiv').hide();
+        $('#mainldetaildiv').show();
+
+        $("#subheaderdiv").html("<h3 style='color:blue'>Tasks -> Create Task</h3>");
+
+        //clearcontrols(1);
+
+        $('#tasksdetailsmaindiv').hide();
+        $('#pendingtasksdivmain').show();
+        
+    });
+
+});

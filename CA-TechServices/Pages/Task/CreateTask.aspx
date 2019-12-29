@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/SiteMaster.Master" AutoEventWireup="true" CodeBehind="CreateTask.aspx.cs" Inherits="CA_TechServices.Pages.Task.CreateTask" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -99,7 +100,7 @@
                                 <th>Void</th>
                                 <th></th>
                                 <th></th>
-                                <th></th>                                
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,5 +111,78 @@
         </div>
     </div>
 
+
+    <!-- For Detail Div  -->
+    <div class="col-lg-12" id="mainldetaildiv" style="display: none">
+        <div class="panel panel-default" id="pendingtasksdivmain" style="display: none">
+            <div class="row" style="margin-bottom: 20px">
+                <div class="col-12">
+                    <h3 style='color: blue'>Create Task -> Search Pending Task</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 col-md-3 col-lg-3">
+                    <label>Task Name</label>
+                    <select id="cmb_Task_Filter" multiple data-live-search="true" class="filters">
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-3">
+                    <label>Client Category</label>
+                    <select id="cmb_Cli_Cat_Filter" multiple data-live-search="true" class="filters">
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-3">
+                    <label>Client</label>
+                    <select id="cmb_Client_Filter" multiple data-live-search="true" class="filters">
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-3">
+                    <button type="button" id="btnSearchPendingTasks" class="btn btn-success" style="display: inline; margin-right: 10px; margin-top: 30px">Search</button>
+                    <button type="button" id="btnskippending" class="btn btn-primary" style="display: inline; margin-top: -5px; margin-right: 10px; margin-top:30px">Skip</button>                    
+                </div>
+            </div>
+
+            <div class="panel-body" id="pendingtaskdiv" style="margin-top:20px">
+                <div class="table-responsive" id="gridpendingtaskdiv">
+                    <table id="tablependingtask" class="table table-striped table-bordered" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Task Name</th>
+                                <th>Priority</th>
+                                <th>Frequency</th>
+                                <th>Sch On</th>
+                                <th>Client</th>
+                                <th>C No</th>
+                                <th>File No</th>
+                                <th>PAN</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-default" id="tasksdetailsmaindiv" style="display: none">
+            <div class="row" style="margin-bottom: 20px">
+                <div class="col-12" id="subheaderdiv">
+                    <h3 style='color: blue'>Create Task</h3>
+                </div>
+            </div>
+
+            <div class="row">
+            </div>
+        </div>
+
+
+    </div>
+    <!-- For Detail Div  -->
 
 </asp:Content>

@@ -65,10 +65,11 @@ namespace CA_TechService.Data.DataSource.Task
                 {
                     SqlCommand cmd = new SqlCommand("USP_GetPendingTaskForInitialization", con);
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 0;
                     cmd.Parameters.AddWithValue("@TIDSTR", TIDSTR);
                     cmd.Parameters.AddWithValue("@CIDSTR", CIDSTR);
                     cmd.Parameters.AddWithValue("@CLICATIDSTR", CLICATIDSTR);
-                    con.Open();
+                    con.Open();                    
                     adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(ds);
 

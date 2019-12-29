@@ -11,6 +11,7 @@ using CA_TechService.Data.DataSource;
 using CA_TechService.Common.Transport.Generic;
 using CA_TechService.Common.Transport.Task;
 using CA_TechService.Data.DataSource.Task;
+using CA_TechService.Common.Transport.ClientMaster;
 
 namespace CA_TechServices.Pages.Task
 {
@@ -49,6 +50,81 @@ namespace CA_TechServices.Pages.Task
                 // details.Add(new DbStatusEntity(ex.Message));
             }
             return lstvalues.ToArray();
+        }
+
+        [WebMethod]
+        public static string[] GetTaskSchDates(Int64 id)
+        {
+            List<string> lstvalues = new List<string>();
+            try
+            {
+                lstvalues = new TaskTrnCreateTaskDAO().GetTaskSchDateForTask(id);
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return lstvalues.ToArray();
+        }
+
+        [WebMethod]
+        public static ClientCategoryMasterEntity[] GetActiveClientCategories() //Show the details of the data after insert in HTML Table
+        {
+            var details = new List<ClientCategoryMasterEntity>();
+            try
+            {
+                details = new GenericDAO().GetActiveClientCategories();
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+        [WebMethod]
+        public static GenericIdNameEntity[] GetActiveTasksList()
+        {
+            var details = new List<GenericIdNameEntity>();
+            try
+            {
+                details = new GenericDAO().GetActiveTasksList();
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+        [WebMethod]
+        public static GenericIdNameEntity[] GetActiveClientListforDropdown()
+        {
+            var details = new List<GenericIdNameEntity>();
+            try
+            {
+                details = new GenericDAO().GetActiveClientListforDropdown();
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
+
+        [WebMethod]
+        public static TaskTrnPendingForInitializeEntity[] GetPendingTaskData(string TIDSTR, string CIDSTR, string CLICATIDSTR)
+        {
+            var details = new List<TaskTrnPendingForInitializeEntity>();
+            try
+            {
+                details = new TaskTrnCreateTaskDAO().GetTaskTrnPendingTaskForInitailization(TIDSTR, CIDSTR, CLICATIDSTR);
+            }
+            catch (Exception ex)
+            {
+                // details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
         }
 
 

@@ -122,11 +122,26 @@ namespace CA_TechServices.Pages.Task
             }
             catch (Exception ex)
             {
-                // details.Add(new DbStatusEntity(ex.Message));
+                // details.Add(new DbStatusEntity(ex.Message)); 
             }
             return details.ToArray();
         }
 
-
+        [WebMethod]
+        public static DbStatusEntity[] InsertTaskAbortData(Int64 T_ID, Int64 C_ID, string SCH_ON)
+        {
+            var details = new List<DbStatusEntity>();
+            try
+            {
+                HttpContext context = HttpContext.Current;
+                details.Add(new TaskTrnCreateTaskDAO().InsertTaskAbortTrn(T_ID, C_ID, SCH_ON, Convert.ToInt64(context.Session["USER_ID"].ToString())));
+            }
+            catch (Exception ex)
+            {
+                details.Clear();
+                details.Add(new DbStatusEntity(ex.Message));
+            }
+            return details.ToArray();
+        }
     }
 }

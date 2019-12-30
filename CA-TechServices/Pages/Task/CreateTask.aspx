@@ -113,7 +113,7 @@
 
 
     <!-- For Detail Div  -->
-    <div class="col-lg-12" id="mainldetaildiv" style="display: none">
+    <div class="col-lg-12" id="maindetaildiv" style="display: none">
         <div class="panel panel-default" id="pendingtasksdivmain" style="display: none">
             <div class="row" style="margin-bottom: 20px">
                 <div class="col-12">
@@ -142,11 +142,11 @@
 
                 <div class="col-6 col-md-3 col-lg-3">
                     <button type="button" id="btnSearchPendingTasks" class="btn btn-success" style="display: inline; margin-right: 10px; margin-top: 30px">Search</button>
-                    <button type="button" id="btnskippending" class="btn btn-primary" style="display: inline; margin-top: -5px; margin-right: 10px; margin-top:30px">Skip</button>                    
+                    <button type="button" id="btnskippending" class="btn btn-primary" style="display: inline; margin-top: -5px; margin-right: 10px; margin-top: 30px">Skip</button>
                 </div>
             </div>
 
-            <div class="panel-body" id="pendingtaskdiv" style="margin-top:20px">
+            <div class="panel-body" id="pendingtaskdiv" style="margin-top: 20px">
                 <div class="table-responsive" id="gridpendingtaskdiv">
                     <table id="tablependingtask" class="table table-striped table-bordered" style="width: 100%">
                         <thead>
@@ -159,6 +159,7 @@
                                 <th>C No</th>
                                 <th>File No</th>
                                 <th>PAN</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -177,7 +178,38 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div id="createtaskstabsdiv">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#divtabtasks">Task Details</a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#divtabnotes">Notes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#divtabdocs">Documents</a>
+                    </li>                    
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div id="divtabtasks" class="tab-pane active">
+                        <br>
+                        <h3>Task Detasil</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>                   
+                    <div id="divtabnotes" class="tab-pane fade">
+                        <br>
+                        <h3>Notes</h3>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    </div>  
+                     <div id="divtabdocs" class="tab-pane fade">
+                        <br>
+                        <h3>Documents Required</h3>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>                 
+                </div>
             </div>
         </div>
 

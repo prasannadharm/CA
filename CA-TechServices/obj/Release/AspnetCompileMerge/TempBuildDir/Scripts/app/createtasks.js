@@ -296,7 +296,7 @@ function getPendingTaskDetails() {
             $('#gridpendingtaskdiv').remove();
             $('#pendingtaskdiv').append("<div class='table-responsive' id='gridpendingtaskdiv'></div>");
             $('#gridpendingtaskdiv').append("<table id='tablependingtask' class='table table-striped table-bordered' style='width: 100%'></table>");
-            $('#tablependingtask').append("<thead><tr><th>Task Name</th><th>Priority</th><th>Frequency</th><th>Sch On</th><th>Client</th><th>C No</th><th>File No</th><th>PAN</th><th></th><th></th></tr></thead><tbody></tbody>");
+            $('#tablependingtask').append("<thead><tr><th>Task Name</th><th>Priority</th><th>Frequency</th><th>Sch On</th><th>Client</th><th>C No</th><th>File No</th><th>PAN</th><th></th></tr></thead><tbody></tbody>");
             $('#tablependingtask tbody').remove();
             $('#tablependingtask').append("<tbody>");
             for (var i = 0; i < data.d.length; i++) {
@@ -309,8 +309,7 @@ function getPendingTaskDetails() {
                     "<td style='center;'><b>" + data.d[i].C_NO + "</b></td>" +
                     "<td style='center;'>" + data.d[i].FILE_NO + "</td>" +
                     "<td>" + data.d[i].PAN + "</td>" +
-                    "<td><img src='../../Images/select.png' alt='Select Record' class='selectpendingtaskButton handcursor' data-id='" + data.d[i].T_ID + "_" + data.d[i].C_ID + "_" + data.d[i].TASK_SCH_DATE + "' name='submitButton' id='btnSelectPendingTask' value='Select' style='margin-right:5px;margin-left:5px'/> </td>" +
-                    "<td><img src='../../Images/void.png' alt='Select Record' class='voidpendingtaskButton handcursor' data-id='" + data.d[i].T_ID + "_" + data.d[i].C_ID + "_" + data.d[i].TASK_SCH_DATE + "' name='submitButton' id='btnVoidPendingTask' value='Void' style='margin-right:5px;margin-left:5px'/> </td></tr>");
+                    "<td><img src='../../Images/select.png' alt='Select Record' class='selectButton handcursor' data-id='" + data.d[i].T_ID + "' name='submitButton' id='btnSelect' value='Select' style='margin-right:5px;margin-left:5px'/> </td></tr>");
             }
             $('#tablependingtask').append("</tbody>");
             $('#tablependingtask').DataTable({
@@ -332,7 +331,7 @@ $(function () {
         $('#btnUpdate').hide();
 
         $('#mainlistingdiv').hide();
-        $('#maindetaildiv').show();
+        $('#mainldetaildiv').show();
 
         $("#subheaderdiv").html("<h3 style='color:blue'>Tasks -> Create Task</h3>");
 
@@ -341,37 +340,6 @@ $(function () {
         $('#tasksdetailsmaindiv').hide();
         $('#pendingtasksdivmain').show();
         
-    });
-
-    $(document).on("click", ".voidpendingtaskButton", function () {
-        if (confirm("Are you sure you want to cancel this pending Task!") == true) {
-            var id = $(this).attr("data-id");
-            //alert(id);
-            var arr = id.split('_');            
-            $.ajax({
-                type: "Post",
-                contentType: "application/json; charset=utf-8",
-                url: "CreateTask.aspx/InsertTaskAbortData",
-                data: '{T_ID: ' + JSON.stringify(arr[0]) + ', C_ID: ' + JSON.stringify(arr[1]) + ', SCH_ON: '+ JSON.stringify(arr[2]) + '}',
-                dataType: "json",
-                success: function (data) {
-                    for (var i = 0; i < data.d.length; i++) {
-                        if (data.d[i].RESULT === 1) {
-                            getPendingTaskDetails();
-                            alert(data.d[i].MSG);
-                        }
-                        else {
-                            alert(data.d[i].MSG);
-                            return false;
-                        }
-                    }
-                },
-                error: function (data) {
-                    alert("Error while Deleting data of :" + id);
-                }
-            });
-        }
-
     });
 
 });

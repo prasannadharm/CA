@@ -802,6 +802,16 @@ $(function () {
                 return false;
             }
 
+            var fit_start_time = $("#RECURRING_START_DATE").val(); //2013-09-5
+            fit_start_time = fit_start_time.substring(6, 10) + '-' + fit_start_time.substring(3, 5) + '-' + fit_start_time.substring(0, 2);
+            var fit_end_time = $("#RECURRING_END_DATE").val(); //2013-09-10
+            fit_end_time = fit_end_time.substring(6, 10) + '-' + fit_end_time.substring(3, 5) + '-' + fit_end_time.substring(0, 2);
+
+            if (Date.parse(fit_start_time) > Date.parse(fit_end_time)) {
+                alert("Date from must be lesser than Date to.");
+                $("#RECURRING_START_DATE").focus();
+                return false;
+            }
         }
 
         var clientCategoryStringList = [];
@@ -948,6 +958,17 @@ $(function () {
             if ($("#RECURRING_END_DATE").val() == null || $("#RECURRING_END_DATE").val() == undefined || $.trim($("#RECURRING_END_DATE").val()) == '') {
                 alert('Please select Task end date.');
                 $("#RECURRING_END_DATE").focus();
+                return false;
+            }
+
+            var fit_start_time = $("#RECURRING_START_DATE").val(); //2013-09-5
+            fit_start_time = fit_start_time.substring(6, 10) + '-' + fit_start_time.substring(3, 5) + '-' + fit_start_time.substring(0, 2);
+            var fit_end_time = $("#RECURRING_END_DATE").val(); //2013-09-10
+            fit_end_time = fit_end_time.substring(6, 10) + '-' + fit_end_time.substring(3, 5) + '-' + fit_end_time.substring(0, 2);
+
+            if (Date.parse(fit_start_time) > Date.parse(fit_end_time)) {
+                alert("Date from must be lesser than Date to.");
+                $("#RECURRING_START_DATE").focus();
                 return false;
             }
 

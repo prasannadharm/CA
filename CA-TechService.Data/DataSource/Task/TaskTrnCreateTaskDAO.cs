@@ -130,5 +130,42 @@ namespace CA_TechService.Data.DataSource.Task
             return retlst;
         }
 
+        public DbStatusEntity InsertTaskAbortTrn(Int64 T_ID, Int64 C_ID, string SCH_ON, Int64 userid)
+        {
+            DbStatusEntity objreturn = new DbStatusEntity();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_InsertTaskAbortTrn", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@C_ID", C_ID);
+                    cmd.Parameters.AddWithValue("@TM_ID", T_ID);
+                    cmd.Parameters.AddWithValue("@SCH_ON", SCH_ON);
+                    cmd.Parameters.AddWithValue("@USER_ID", userid);
+
+                    cmd.Parameters.Add("@RESULT", SqlDbType.Int);
+                    cmd.Parameters["@RESULT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@CNT", SqlDbType.Int);
+                    cmd.Parameters["@CNT"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@MSG", SqlDbType.NVarChar, 500);
+                    cmd.Parameters["@MSG"].Direction = ParameterDirection.Output;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    objreturn.RESULT = Convert.ToInt32(cmd.Parameters["@RESULT"].Value);
+                    objreturn.CNT = Convert.ToInt32(cmd.Parameters["@CNT"].Value);
+                    objreturn.MSG = Convert.ToString(cmd.Parameters["@MSG"].Value);
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return objreturn;
+        }
+
     }
 }

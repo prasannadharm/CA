@@ -19,7 +19,17 @@
             cursor: hand;
         }
 
-        #addrow {
+        #addrow, #addstage {
+            background-color: #3C3B6E;
+            color: #ffffff;
+            border-radius: 35px;
+            height: 40px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border: 0px;
+        }
+
+        #btnClientDetails, #btnSearchClient {
             background-color: #3C3B6E;
             color: #ffffff;
             border-radius: 35px;
@@ -143,6 +153,7 @@
                 <div class="col-6 col-md-3 col-lg-3">
                     <button type="button" id="btnSearchPendingTasks" class="btn btn-success" style="display: inline; margin-right: 10px; margin-top: 30px">Search</button>
                     <button type="button" id="btnskippending" class="btn btn-primary" style="display: inline; margin-top: -5px; margin-right: 10px; margin-top: 30px">Skip</button>
+                    <button type="button" id="btnCancelPending" class="btn btn-danger cancelButton" style="margin-right: 10px; margin-top: 30px;">Cancel</button>
                 </div>
             </div>
 
@@ -173,8 +184,11 @@
 
         <div class="panel panel-default" id="tasksdetailsmaindiv" style="display: none">
             <div class="row" style="margin-bottom: 20px">
-                <div class="col-12" id="subheaderdiv">
+                <div class="col-10" id="subheaderdiv">
                     <h3 style='color: blue'>Create Task</h3>
+                </div>
+                <div class="col-2">
+                    <button type="button" id="btnCancelDetailTop" class="btn btn-danger cancelButton" style="margin-right: 10px;">Cancel</button>
                 </div>
             </div>
 
@@ -183,32 +197,123 @@
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#divtabtasks">Task Details</a>
-                    </li>                    
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#divtabnotes">Notes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#divtabdocs">Documents</a>
-                    </li>                    
+                    </li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div id="divtabtasks" class="tab-pane active">
                         <br>
-                        <h3>Task Detasil</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>                   
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <h5>Task Details:</h5>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-6 col-lg-6">
+                                        <label>Task No</label>
+                                        <input type="number" name="TASKNO" id="TASK_NO" class="form-control" value="1" style="text-align: center" />
+                                    </div>
+
+                                    <div class="form-group col-12 col-md-6 col-lg-6">
+                                        <label>Task Date</label>
+                                        <input class="form-control datepicker" id="TASK_DATE" name="date" placeholder="DD-MM-YYYY" type="text" style="width: 100%; text-align: center" />
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-9 col-lg-9">
+                                        <label>Task Name</label>
+                                        <input type="text" name="T_NAME" id="T_NAME" class="form-control" placeholder="Please enter Task Name" />
+                                    </div>
+                                    <div class="form-group col-12 col-md-3 col-lg-3">
+                                        <label>Priority</label>
+                                        <input type="number" name="PRIORITY" id="PRIORITY" class="form-control" value="1" style="text-align: center" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-12 col-lg-12">
+                                        <label>Descritpion</label>
+                                        <input type="text" name="T_DESC" id="T_DESC" class="form-control" placeholder="Please enter Description." />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <h5>Client Details:</h5>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-4 col-lg-4">
+                                        <label>C No</label>
+                                        <input type="text" name="C_NO" id="C_NO" class="form-control" placeholder="Please select Client" />
+                                    </div>
+                                    <div class="form-group col-12 col-md-5 col-lg-5">
+                                        <label>File No</label>
+                                        <input type="text" name="FILE_NO" id="FILE_NO" class="form-control" placeholder="Please select Client" />
+                                    </div>
+                                    <div class="form-group col-12 col-md-3 col-lg-3">
+                                        <button type="button" id="btnSearchClient" class="btn btn-success" style="display: inline; margin-right: 10px; margin-top: 30px">Search client</button>
+                                    </div>
+                                    <div class="form-group col-12 col-md-9 col-lg-9">
+                                        <label>Client Name</label>
+                                        <input type="text" name="C_NAME" id="C_NAME" class="form-control" placeholder="Please select Client" />
+                                    </div>
+                                    <div class="form-group col-12 col-md-3 col-lg-3">
+                                        <button type="button" id="btnClientDetails" class="btn btn-success" style="display: inline; margin-right: 10px; margin-top: 30px">Client Details</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <h5>Task Stage Details:</h5>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <div id='StagesGroup' style="margin-bottom: 5px">
+                                            <%-- <div id="StagesDiv">                                    
+                                    <label id='lblslno' style='margin-left: 10px; display: inline; text-align: center;font-weight: bold;color:brown'>1</label>
+                                    <input id='txtstages' list='lststages' class='form-control' style='margin-left: 10px; width: 40%; display: inline; margin-bottom: 5px' placeholder="Select Stage"/>
+                                    <select id='cmbusers' class='form-control cmbusers' style='margin-left: 10px; width: 25%; display: inline; margin-bottom: 5px'/>
+                                    <img id='btnstageup' class='btnstageup handcursor' src='../../Images/up.png' />
+                                    <img id='btnstagedown' class='btnstagedown handcursor' src='../../Images/down.png' />
+                                    <img id='btnstaedel' class='btnstagedel handcursor' src='../../Images/delete.png' style='margin-left:8px' />
+                                </div>--%>
+                                        </div>
+                                        <datalist id="lststages">
+                                        </datalist>
+                                        <button type="button" value='Add' id='addstage' style="margin-left: 10px">Add Stage</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div id="divtabnotes" class="tab-pane fade">
                         <br>
                         <h3>Notes</h3>
                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                    </div>  
-                     <div id="divtabdocs" class="tab-pane fade">
+                    </div>
+                    <div id="divtabdocs" class="tab-pane fade">
                         <br>
                         <h3>Documents Required</h3>
                         <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>                 
+                    </div>
                 </div>
             </div>
         </div>

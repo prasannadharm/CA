@@ -57,6 +57,13 @@ $(document).ready(function () {
         $('#tasksdetailsmaindiv').show();
         $('#pendingtasksdivmain').hide();
     })
+
+    $(document).on("click", ".cancelButton", function () {
+        $('#mainlistingdiv').show();
+        $('#maindetaildiv').hide();
+        $('#tasksdetailsmaindiv').hide();
+        $('#pendingtasksdivmain').hide();
+    });
     
     LoadClientFilterCombo();
 })
@@ -326,6 +333,33 @@ function getPendingTaskDetails() {
     
 }
 
+function clearpendingtaskscontrols()
+{
+    $('#cmb_Task_Filter > option:selected').each(function () {
+        $("#cmb_Task_Filter").val('default').selectpicker("refresh");
+        return false;
+    });
+    
+    $('#cmb_Cli_Cat_Filter > option:selected').each(function () {
+        $("#cmb_Cli_Cat_Filter").val('default').selectpicker("refresh");
+        return false;
+    });
+
+    $('#cmb_Client_Filter > option:selected').each(function () {
+        $("#cmb_Client_Filter").val('default').selectpicker("refresh");
+        return false;
+    });
+   
+
+    $('#gridpendingtaskdiv').remove();
+    $('#pendingtaskdiv').append("<div class='table-responsive' id='gridpendingtaskdiv'></div>");
+    $('#gridpendingtaskdiv').append("<table id='tablependingtask' class='table table-striped table-bordered' style='width: 100%'></table>");
+    $('#tablependingtask').append("<thead><tr><th>Task Name</th><th>Priority</th><th>Frequency</th><th>Sch On</th><th>Client</th><th>C No</th><th>File No</th><th>PAN</th><th></th><th></th></tr></thead><tbody></tbody>");
+    $('#tablependingtask tbody').remove();
+    $('#tablependingtask').append("<tbody>");
+    $('#tablependingtask').append("</tbody>");
+}
+
 $(function () {
     $(document).on("click", ".addNewButton", function () {
         $('#btnSave').show();
@@ -336,7 +370,7 @@ $(function () {
 
         $("#subheaderdiv").html("<h3 style='color:blue'>Tasks -> Create Task</h3>");
 
-        //clearcontrols(1);
+        clearpendingtaskscontrols();      
 
         $('#tasksdetailsmaindiv').hide();
         $('#pendingtasksdivmain').show();
